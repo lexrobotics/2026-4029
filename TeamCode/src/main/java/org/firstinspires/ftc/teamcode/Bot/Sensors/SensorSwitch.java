@@ -19,9 +19,5 @@ public class SensorSwitch {
 
     public boolean getStatus(){
         return inverted == !sensor.getState();
-        // F == !T eq true
-        // F == !F eq false
-        // T == !T eq false
-        // T == !F eq true
     }
 }

@@ -73,7 +73,11 @@ public class Setup {
     }
     private void addMechanisms(){
         mechStates.put("drivetrain", new HardwareStates(true));
-        mechStates.put("intakeMotor", new HardwareStates(true));
+        mechStates.put("IntakeMotor", new HardwareStates(true));
+        mechStates.put("OuttakeSlides", new HardwareStates(true));
+        mechStates.put("OuttakeClaw", new HardwareStates(true));
+        mechStates.put("OuttakeWrist", new HardwareStates(true));
+        mechStates.put("IntakeSlides", new HardwareStates(true));
     }
 
     private void addSensors(){
