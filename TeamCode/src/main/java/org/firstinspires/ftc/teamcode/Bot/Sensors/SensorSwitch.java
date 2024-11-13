@@ -3,12 +3,13 @@ package org.firstinspires.ftc.teamcode.Bot.Sensors;
 import static org.firstinspires.ftc.teamcode.Bot.Setup.hardwareMap;
 
 import com.qualcomm.robotcore.hardware.DigitalChannel;
+import com.qualcomm.robotcore.hardware.HardwareMap;
 
 
 public class SensorSwitch {
     private DigitalChannel sensor;
     private boolean inverted;
-    public SensorSwitch(String name, boolean invert){
+    public SensorSwitch(String name, boolean invert, HardwareMap hardwareMap){
         sensor = hardwareMap.get(DigitalChannel.class, name);
         inverted = invert;
     }

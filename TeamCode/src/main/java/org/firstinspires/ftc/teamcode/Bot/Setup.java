@@ -81,8 +81,10 @@ public class Setup {
     }
 
     private void addSensors(){
-        sensorStates.put("webcam", new HardwareStates(true));
-        sensorStates.put("outtakeSlidesSwitch", new HardwareStates(true));
+        sensorStates.put("webcam", new HardwareStates(false));
+        sensorStates.put("OuttakeSlidesSwitch", new HardwareStates(true));
+        sensorStates.put("IntakeSlidesSwitch", new HardwareStates(true));
+
     }
 
     public void disableMechanism(String mechanismName){

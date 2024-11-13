@@ -16,6 +16,7 @@ import org.firstinspires.ftc.teamcode.Bot.Mechanisms.OuttakeWrist;
 import org.firstinspires.ftc.teamcode.Bot.Mechanisms.RunToPosMotorExample;
 import org.firstinspires.ftc.teamcode.Bot.Mechanisms.ServoExample;
 import org.firstinspires.ftc.teamcode.Bot.Mechanisms.SmartClaw;
+import org.firstinspires.ftc.teamcode.Bot.Sensors.SensorSwitch;
 import org.firstinspires.ftc.teamcode.Bot.Sensors.Sensors;
 import org.firstinspires.ftc.teamcode.Bot.InitStates.HardwareStates;
 import org.firstinspires.ftc.teamcode.PedroPathing.localization.Pose;
@@ -26,6 +27,7 @@ public class Bot implements Robot{
     public Drivetrain drivetrain;
     public Mechanism motorMech, servoMech, slideMech, outtakeWrist, outtakeClaw, outtakeSlides, intakeSlides;
     public Sensors sensors;
+    public SensorSwitch outtakeSlidesSwitch, intakeSlidesSwitch;
 
     public Bot(HashMap<String, HardwareStates> hardwareStates, HashMap<String, HardwareStates> sensorStates){
         /*
@@ -33,33 +35,36 @@ public class Bot implements Robot{
          */
         telemetry.addLine("BOTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTT");
         if(hardwareStates.get("intakeMotor").isEnabled){
-            motorMech = new Mechanism("intakeMotor"); //todo, replace
+            motorMech = new Mechanism("IntakeMotor"); //todo, replace
         } else {
-            motorMech = new Mechanism("intakeMotor");
+            motorMech = new Mechanism("IntakeMotor");
         }
 
-
-        if(hardwareStates.get("outtakeClaw").isEnabled){
+        if(hardwareStates.get("OuttakeClaw").isEnabled){
             outtakeClaw = new OuttakeClaw();
         } else {
             outtakeClaw = new Mechanism("OuttakeClaw");
         }
-        if(hardwareStates.get("outtakeClaw").isEnabled){
+        if(hardwareStates.get("OuttakeWrist").isEnabled){
             outtakeWrist = new OuttakeWrist();
         } else {
             outtakeWrist = new Mechanism("OuttakeWrist");
         }
-        if(hardwareStates.get("outtakeClaw").isEnabled){
+        if(hardwareStates.get("OuttakeSlides").isEnabled){
             outtakeSlides = new OuttakeSlidesSmart();
         } else {
             outtakeSlides = new Mechanism("OuttakeSlides");
         }
-        if(hardwareStates.get("outtakeClaw").isEnabled){
+        if(hardwareStates.get("IntakeSlides").isEnabled){
             intakeSlides = new IntakeSlidesSmart();
         } else {
             intakeSlides = new Mechanism("IntakeSlides");
         }
-        drivetrain = new Drivetrain();
+        if(hardwareStates.get("drivetrain").isEnabled){
+            drivetrain = new Drivetrain();
+        } else {
+            drivetrain = null;
+        }
         init();
 
     }
@@ -82,6 +87,10 @@ public class Bot implements Robot{
         timer.reset();
 //        motorMech.init(0);
         initDrivetrain(new Pose2d());
+        outtakeClaw.init(0);
+        outtakeWrist.init(0);
+        outtakeSlides.init(0);
+        intakeSlides.init(0);
 //        servoMech.init(0);
 //        slideMech.init(0);
 //        drivetrain.init();

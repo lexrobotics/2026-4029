@@ -9,6 +9,7 @@ import org.firstinspires.ftc.robotcore.external.navigation.DistanceUnit;
 import org.firstinspires.ftc.teamcode.Bot.Sensors.SensorColor;
 import org.firstinspires.ftc.teamcode.Bot.Sensors.SensorDistance;
 import org.firstinspires.ftc.teamcode.Bot.Sensors.SensorSwitch;
+import org.firstinspires.ftc.teamcode.Bot.Setup;
 
 public class Sensors {
     private static SensorColor[] colors;
@@ -47,7 +48,7 @@ public class Sensors {
         } else if(type == DistanceSensor.class){
             distances[position] = new SensorDistance(name);
         } else if(type == DigitalChannel.class){
-            switches[position] = new SensorSwitch(name, standardInvertSwitches);
+            switches[position] = new SensorSwitch(name, standardInvertSwitches, Setup.hardwareMap);
         }
     }
 

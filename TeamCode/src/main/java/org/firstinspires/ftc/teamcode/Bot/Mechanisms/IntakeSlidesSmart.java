@@ -12,7 +12,7 @@ public class IntakeSlidesSmart extends IntakeSlides{
 
     @Override
     public void init(double target){
-        sensorSwitch = new SensorSwitch("OuttakeSlidesSwitch", false);
+        sensorSwitch = new SensorSwitch("IntakeSlidesSwitch", false, Setup.hardwareMap);
         lastState = sensorSwitch.getStatus();
         super.init(target);
     }
