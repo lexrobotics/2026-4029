@@ -6,6 +6,7 @@ import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import org.firstinspires.ftc.teamcode.Bot.Bot;
 import org.firstinspires.ftc.teamcode.Bot.Mechanisms.IntakeSlides;
 import org.firstinspires.ftc.teamcode.Bot.Mechanisms.OuttakeClaw;
+import org.firstinspires.ftc.teamcode.Bot.Mechanisms.OuttakeSlides;
 import org.firstinspires.ftc.teamcode.Bot.Mechanisms.OuttakeWrist;
 import org.firstinspires.ftc.teamcode.Bot.Sensors.IMUStatic;
 import org.firstinspires.ftc.teamcode.Bot.Setup;
@@ -25,25 +26,35 @@ public class MechTest extends LinearOpMode {
         waitForStart();
         while(opModeIsActive()){
             if(-gamepad1.left_stick_y > 0.01){
+                telemetry.addLine("IS:MA");
                 bot.intakeSlides.setTarget(IntakeSlides.MAX);
             } else if(-gamepad1.left_stick_y < -0.01){
+                telemetry.addLine("IS:MI");
                 bot.intakeSlides.setTarget(IntakeSlides.MIN);
             }
             if(-gamepad1.right_stick_y > 0.01){
-                bot.intakeSlides.setTarget(IntakeSlides.MAX);
+                telemetry.addLine("OS:MA");
+                bot.outtakeSlides.setTarget(OuttakeSlides.MAX);
             } else if(-gamepad1.right_stick_y < -0.01){
-                bot.intakeSlides.setTarget(IntakeSlides.MIN);
+                telemetry.addLine("OS:MI");
+                bot.outtakeSlides.setTarget(OuttakeSlides.MIN);
             }
             if(gamepad1.y){
+                telemetry.addLine("OW:MA");
                 bot.outtakeWrist.setTarget(OuttakeWrist.MAX);
             } else {
+                telemetry.addLine("OW:MI");
                 bot.outtakeWrist.setTarget(OuttakeWrist.MIN);
             }
             if(gamepad1.b){
+                telemetry.addLine("GR:GR");
                 bot.outtakeClaw.setTarget(OuttakeClaw.GRIP);
             } else {
+                telemetry.addLine("GR:MI");
                 bot.outtakeClaw.setTarget(OuttakeClaw.MIN);
             }
+            telemetry.update();
+            bot.update();
         }
     }
 }

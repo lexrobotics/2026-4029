@@ -11,6 +11,7 @@ import org.firstinspires.ftc.teamcode.Bot.Mechanisms.IntakeSlides;
 import org.firstinspires.ftc.teamcode.Bot.Mechanisms.IntakeSlidesSmart;
 import org.firstinspires.ftc.teamcode.Bot.Mechanisms.MotorExample;
 import org.firstinspires.ftc.teamcode.Bot.Mechanisms.OuttakeClaw;
+import org.firstinspires.ftc.teamcode.Bot.Mechanisms.OuttakeSlides;
 import org.firstinspires.ftc.teamcode.Bot.Mechanisms.OuttakeSlidesSmart;
 import org.firstinspires.ftc.teamcode.Bot.Mechanisms.OuttakeWrist;
 import org.firstinspires.ftc.teamcode.Bot.Mechanisms.RunToPosMotorExample;
@@ -53,6 +54,7 @@ public class Bot implements Robot{
         if(hardwareStates.get("OuttakeSlides").isEnabled){
             outtakeSlides = new OuttakeSlidesSmart();
         } else {
+            telemetry.addLine("NO SLIDES, OUT, LOL");
             outtakeSlides = new Mechanism("OuttakeSlides");
         }
         if(hardwareStates.get("IntakeSlides").isEnabled){
@@ -113,10 +115,14 @@ public class Bot implements Robot{
         /*
         Updates mechanisms
         */
-        motorMech.update();
-        servoMech.update();
-        slideMech.update();
+//        motorMech.update();
+//        servoMech.update();
+//        slideMech.update();
 //        drivetrain.update();
+        outtakeWrist.update();
+        outtakeClaw.update();
+        outtakeSlides.update();
+        intakeSlides.update();
     }
 
     @Override
