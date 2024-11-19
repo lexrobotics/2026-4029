@@ -7,6 +7,7 @@ import com.qualcomm.robotcore.util.ElapsedTime;
 
 import org.firstinspires.ftc.teamcode.Bot.Drivetrain.Drivetrain;
 import org.firstinspires.ftc.teamcode.Bot.Mechanisms.AbstractMechanisms.Mechanism;
+import org.firstinspires.ftc.teamcode.Bot.Mechanisms.IntakeMotor;
 import org.firstinspires.ftc.teamcode.Bot.Mechanisms.IntakeSlides;
 //import org.firstinspires.ftc.teamcode.Bot.Mechanisms.IntakeSlidesSmart;
 import org.firstinspires.ftc.teamcode.Bot.Mechanisms.MotorExample;
@@ -28,7 +29,7 @@ import java.util.HashMap;
 
 public class Bot implements Robot{
     public Drivetrain drivetrain;
-    public Mechanism motorMech, servoMech, slideMech, outtakeWrist, outtakeClaw, outtakeSlides, intakeSlides, v4b, winch;
+    public Mechanism motorMech, servoMech, slideMech, outtakeWrist, outtakeClaw, outtakeSlides, intakeSlides, v4b, winch, intake;
     public Sensors sensors;
     public SensorSwitch outtakeSlidesSwitch, intakeSlidesSwitch;
 
@@ -51,6 +52,11 @@ public class Bot implements Robot{
             v4b = new V4B();
         } else {
             v4b = new Mechanism("V4B");
+        }
+        if(hardwareStates.get("IntakeMotor").isEnabled){
+            intake = new IntakeMotor();
+        } else {
+            intake = new Mechanism("Intake");
         }
 
         if(hardwareStates.get("OuttakeClaw").isEnabled){

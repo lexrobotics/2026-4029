@@ -80,6 +80,7 @@ public class Setup {
         mechStates.put("IntakeSlides", new HardwareStates(true));
         mechStates.put("V4B", new HardwareStates(true));
         mechStates.put("Winch", new HardwareStates(true));
+        mechStates.put("Intake", new HardwareStates(true));
     }
 
     private void addSensors(){

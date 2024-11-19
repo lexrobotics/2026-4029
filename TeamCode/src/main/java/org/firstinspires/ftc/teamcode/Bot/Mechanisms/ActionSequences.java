@@ -46,7 +46,8 @@ public class ActionSequences {
     }
     public void ManualOuttakeSlides(double joystick){
         bot.outtakeSlides.setVelocity(0.5);
-        joystick = Math.signum(-joystick)*Math.pow(1,Math.abs(-joystick) * 2);
+//        joystick = Math.signum(-joystick)*Math.pow(1,Math.abs(-joystick) * 2);
+        joystick = Math.signum(-joystick)*(Math.pow(2,Math.abs(-joystick) * 2) - 1);
         bot.outtakeSlides.setTarget(Range.clip(bot.outtakeSlides.getCurrentPosition() + MANUAL_OUTTAKE_SLIDES_INCREMENT*(joystick), 0, OuttakeSlides.MAX));
     }
     public void OuttakeRest(boolean drop){
@@ -67,9 +68,16 @@ public class ActionSequences {
     public void IntakeRest(){
         bot.intakeSlides.setTarget(IntakeSlides.RST);
     }
+    public void Intake(boolean on){
+        bot.intake.setVelocity(on? IntakeMotor.FORWARD_MAX: IntakeMotor.MIN_SPEED);
+    }
+    public void ReverseIntake(boolean on){
+        bot.intake.setVelocity(on? IntakeMotor.REVERSE_MAX: IntakeMotor.MIN_SPEED);
+    }
     public void ManualIntakeSlides(double joystick){
         bot.intakeSlides.setVelocity(0.5);
-        bot.intakeSlides.setTarget(Range.clip(bot.intakeSlides.getCurrentPosition() + MANUAL_OUTTAKE_SLIDES_INCREMENT*(Math.signum(-joystick)*Math.pow(1,Math.abs(-joystick) * 2)), 0, IntakeSlides.MAX));
+//        bot.intakeSlides.setTarget(Range.clip(bot.intakeSlides.getCurrentPosition() + MANUAL_OUTTAKE_SLIDES_INCREMENT*(Math.signum(-joystick)*Math.pow(1,Math.abs(-joystick) * 2)), 0, IntakeSlides.MAX));
+        bot.intakeSlides.setTarget(Range.clip(bot.intakeSlides.getCurrentPosition() + MANUAL_OUTTAKE_SLIDES_INCREMENT*(Math.signum(-joystick)*(Math.pow(2,Math.abs(-joystick) * 2)) - 1), 0, IntakeSlides.MAX));
     }
     public void AttemptTransfer(Outtake OutState, Intake InState){
         if(OutState == Outtake.REST && InState == Intake.REST){
@@ -77,6 +85,7 @@ public class ActionSequences {
             bot.outtakeClaw.setTarget(OuttakeClaw.GRIP);
         }
     }
+
     public void Winch1(){
         bot.winch.setTarget(Winch.H1);
     }
