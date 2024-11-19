@@ -9,7 +9,7 @@ import com.qualcomm.robotcore.hardware.HardwareMap;
 public class SensorSwitch {
     private DigitalChannel sensor;
     private boolean inverted;
-    public SensorSwitch(String name, boolean invert, HardwareMap hardwareMap){
+    public SensorSwitch(String name, boolean invert){
         sensor = hardwareMap.get(DigitalChannel.class, name);
         inverted = invert;
     }

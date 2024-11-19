@@ -8,7 +8,7 @@ import com.qualcomm.robotcore.util.ElapsedTime;
 import org.firstinspires.ftc.teamcode.Bot.Drivetrain.Drivetrain;
 import org.firstinspires.ftc.teamcode.Bot.Mechanisms.AbstractMechanisms.Mechanism;
 import org.firstinspires.ftc.teamcode.Bot.Mechanisms.IntakeSlides;
-import org.firstinspires.ftc.teamcode.Bot.Mechanisms.IntakeSlidesSmart;
+//import org.firstinspires.ftc.teamcode.Bot.Mechanisms.IntakeSlidesSmart;
 import org.firstinspires.ftc.teamcode.Bot.Mechanisms.MotorExample;
 import org.firstinspires.ftc.teamcode.Bot.Mechanisms.OuttakeClaw;
 import org.firstinspires.ftc.teamcode.Bot.Mechanisms.OuttakeSlides;
@@ -17,6 +17,8 @@ import org.firstinspires.ftc.teamcode.Bot.Mechanisms.OuttakeWrist;
 import org.firstinspires.ftc.teamcode.Bot.Mechanisms.RunToPosMotorExample;
 import org.firstinspires.ftc.teamcode.Bot.Mechanisms.ServoExample;
 import org.firstinspires.ftc.teamcode.Bot.Mechanisms.SmartClaw;
+import org.firstinspires.ftc.teamcode.Bot.Mechanisms.V4B;
+import org.firstinspires.ftc.teamcode.Bot.Mechanisms.Winch;
 import org.firstinspires.ftc.teamcode.Bot.Sensors.SensorSwitch;
 import org.firstinspires.ftc.teamcode.Bot.Sensors.Sensors;
 import org.firstinspires.ftc.teamcode.Bot.InitStates.HardwareStates;
@@ -26,7 +28,7 @@ import java.util.HashMap;
 
 public class Bot implements Robot{
     public Drivetrain drivetrain;
-    public Mechanism motorMech, servoMech, slideMech, outtakeWrist, outtakeClaw, outtakeSlides, intakeSlides;
+    public Mechanism motorMech, servoMech, slideMech, outtakeWrist, outtakeClaw, outtakeSlides, intakeSlides, v4b, winch;
     public Sensors sensors;
     public SensorSwitch outtakeSlidesSwitch, intakeSlidesSwitch;
 
@@ -35,10 +37,20 @@ public class Bot implements Robot{
         Bot constructor creates all mechanisms in Mechanism objects if they are enabled
          */
         telemetry.addLine("BOTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTT");
-        if(hardwareStates.get("intakeMotor").isEnabled){
+        if(hardwareStates.get("IntakeMotor").isEnabled){
             motorMech = new Mechanism("IntakeMotor"); //todo, replace
         } else {
             motorMech = new Mechanism("IntakeMotor");
+        }
+        if(hardwareStates.get("Winch").isEnabled){
+            winch = new Winch();
+        } else {
+            winch = new Mechanism("Winch");
+        }
+        if(hardwareStates.get("V4B").isEnabled){
+            v4b = new V4B();
+        } else {
+            v4b = new Mechanism("V4B");
         }
 
         if(hardwareStates.get("OuttakeClaw").isEnabled){
@@ -54,11 +66,11 @@ public class Bot implements Robot{
         if(hardwareStates.get("OuttakeSlides").isEnabled){
             outtakeSlides = new OuttakeSlidesSmart();
         } else {
-            telemetry.addLine("NO SLIDES, OUT, LOL");
+            telemetry.addLine("NO SLIDES, OUT");
             outtakeSlides = new Mechanism("OuttakeSlides");
         }
         if(hardwareStates.get("IntakeSlides").isEnabled){
-            intakeSlides = new IntakeSlidesSmart();
+            intakeSlides = new IntakeSlides();
         } else {
             intakeSlides = new Mechanism("IntakeSlides");
         }
@@ -90,9 +102,11 @@ public class Bot implements Robot{
 //        motorMech.init(0);
         initDrivetrain(new Pose2d());
         outtakeClaw.init(0);
-        outtakeWrist.init(0);
+        outtakeWrist.init(0.5);
         outtakeSlides.init(0);
         intakeSlides.init(0);
+        v4b.init(0.5);
+        winch.init(0);
 //        servoMech.init(0);
 //        slideMech.init(0);
 //        drivetrain.init();
@@ -123,6 +137,8 @@ public class Bot implements Robot{
         outtakeClaw.update();
         outtakeSlides.update();
         intakeSlides.update();
+        v4b.update();
+        winch.update();
     }
 
     @Override
@@ -131,6 +147,8 @@ public class Bot implements Robot{
         servoMech.telemetry();
         slideMech.telemetry();
         drivetrain.telemetry();
+        v4b.telemetry();
+        winch.telemetry();
     }
 
     @Override

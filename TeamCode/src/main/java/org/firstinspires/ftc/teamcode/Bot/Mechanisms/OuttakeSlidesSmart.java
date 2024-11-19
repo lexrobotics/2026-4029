@@ -13,7 +13,7 @@ public class OuttakeSlidesSmart extends OuttakeSlides{
 
     @Override
     public void init(double target){
-        sensorSwitch = new SensorSwitch("OuttakeSlidesSwitch", false, Setup.hardwareMap);
+        sensorSwitch = new SensorSwitch("OuttakeSlidesSwitch", true);
         lastState = sensorSwitch.getStatus();
         super.init(target);
     }
@@ -39,6 +39,7 @@ public class OuttakeSlidesSmart extends OuttakeSlides{
         }else {
             motor.setTargetPosition((int)targetPos);
         }
+//        motor.setTargetPosition((int)targetPos);
         motor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
         motor.setPower(velocity);
     }

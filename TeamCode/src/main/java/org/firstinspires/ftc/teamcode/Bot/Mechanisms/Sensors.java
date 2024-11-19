@@ -48,7 +48,7 @@ public class Sensors {
         } else if(type == DistanceSensor.class){
             distances[position] = new SensorDistance(name);
         } else if(type == DigitalChannel.class){
-            switches[position] = new SensorSwitch(name, standardInvertSwitches, Setup.hardwareMap);
+            switches[position] = new SensorSwitch(name, standardInvertSwitches);
         }
     }
 

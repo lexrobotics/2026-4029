@@ -78,6 +78,8 @@ public class Setup {
         mechStates.put("OuttakeClaw", new HardwareStates(true));
         mechStates.put("OuttakeWrist", new HardwareStates(true));
         mechStates.put("IntakeSlides", new HardwareStates(true));
+        mechStates.put("V4B", new HardwareStates(true));
+        mechStates.put("Winch", new HardwareStates(true));
     }
 
     private void addSensors(){

@@ -10,6 +10,9 @@ public class V4B extends ServoMechanism {
     }
     public static final double MAX = 1;
     public static final double MIN = 0;
+    public static final double HOR = 0;
+    public static final double BUC2 = 0;
+    public static final double RST = 0;
 
     @Override
     public void setTarget(double target) {
