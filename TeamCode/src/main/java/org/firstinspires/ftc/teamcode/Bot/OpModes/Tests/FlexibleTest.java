@@ -8,24 +8,18 @@ import com.qualcomm.robotcore.util.Range;
 import org.firstinspires.ftc.teamcode.Bot.Mechanisms.AbstractMechanisms.Mechanism;
 import org.firstinspires.ftc.teamcode.Bot.Mechanisms.IntakeMotor;
 import org.firstinspires.ftc.teamcode.Bot.Mechanisms.IntakeSlides;
-import org.firstinspires.ftc.teamcode.Bot.Mechanisms.IntakeSlidesSmart;
-import org.firstinspires.ftc.teamcode.Bot.Mechanisms.MotorExample;
 import org.firstinspires.ftc.teamcode.Bot.Mechanisms.OuttakeClaw;
-import org.firstinspires.ftc.teamcode.Bot.Mechanisms.OuttakeSlides;
 import org.firstinspires.ftc.teamcode.Bot.Mechanisms.OuttakeSlidesSmart;
 import org.firstinspires.ftc.teamcode.Bot.Mechanisms.OuttakeWrist;
-import org.firstinspires.ftc.teamcode.Bot.Mechanisms.ServoExample;
 import org.firstinspires.ftc.teamcode.Bot.Mechanisms.V4B;
 import org.firstinspires.ftc.teamcode.Bot.Setup;
-
-import java.util.Set;
 
 @TeleOp(name = "flexible test")
 public class FlexibleTest extends LinearOpMode {
     Setup setup;
 
     Mechanism mechanism;
-    Mechanism intakeSlides = new IntakeSlidesSmart(), intakeMotor = new IntakeMotor(), outtakeClaw = new OuttakeClaw(), outtakeSlides = new OuttakeSlidesSmart(), outtakeWrist = new OuttakeWrist(), v4b = new V4B();
+    Mechanism intakeSlides = new IntakeSlides(), intakeMotor = new IntakeMotor(), outtakeClaw = new OuttakeClaw(), outtakeSlides = new OuttakeSlidesSmart(), outtakeWrist = new OuttakeWrist(), v4b = new V4B();
 
 
     Mechanism[] mechanisms;

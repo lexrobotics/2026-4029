@@ -1,8 +1,16 @@
-package org.firstinspires.ftc.teamcode.Bot.Mechanisms;
+package org.firstinspires.ftc.teamcode.Bot.States;
 
 import com.qualcomm.robotcore.util.Range;
 
 import org.firstinspires.ftc.teamcode.Bot.Bot;
+import org.firstinspires.ftc.teamcode.Bot.Mechanisms.IntakeMotor;
+import org.firstinspires.ftc.teamcode.Bot.Mechanisms.IntakeSlides;
+import org.firstinspires.ftc.teamcode.Bot.Mechanisms.OuttakeClaw;
+import org.firstinspires.ftc.teamcode.Bot.Mechanisms.OuttakeSlides;
+import org.firstinspires.ftc.teamcode.Bot.Mechanisms.OuttakeSlidesSmart;
+import org.firstinspires.ftc.teamcode.Bot.Mechanisms.OuttakeWrist;
+import org.firstinspires.ftc.teamcode.Bot.Mechanisms.V4B;
+import org.firstinspires.ftc.teamcode.Bot.Mechanisms.Winch;
 
 public class ActionSequences {
     private Bot bot;
@@ -79,8 +87,8 @@ public class ActionSequences {
 //        bot.intakeSlides.setTarget(Range.clip(bot.intakeSlides.getCurrentPosition() + MANUAL_OUTTAKE_SLIDES_INCREMENT*(Math.signum(-joystick)*Math.pow(1,Math.abs(-joystick) * 2)), 0, IntakeSlides.MAX));
         bot.intakeSlides.setTarget(Range.clip(bot.intakeSlides.getCurrentPosition() + MANUAL_OUTTAKE_SLIDES_INCREMENT*(Math.signum(-joystick)*(Math.pow(2,Math.abs(-joystick) * 2)) - 1), 0, IntakeSlides.MAX));
     }
-    public void AttemptTransfer(Outtake OutState, Intake InState){
-        if(OutState == Outtake.REST && InState == Intake.REST){
+    public void AttemptTransfer(OuttakeStates OutState, IntakeStates InState){
+        if(OutState == OuttakeStates.REST && InState == IntakeStates.REST){
             bot.outtakeWrist.setTarget(OuttakeWrist.TRA);
             bot.outtakeClaw.setTarget(OuttakeClaw.GRIP);
         }

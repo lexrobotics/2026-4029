@@ -34,8 +34,8 @@ public class Setup {
     }
     public static HardwareMap hardwareMap;
     public static Telemetry telemetry;
-    private static LinearOpMode opMode;
-    private static OpModeType opModeType;
+    public static LinearOpMode opMode;
+    public static OpModeType opModeType;
     public static FtcDashboard dashboard;
 
     public static HashMap<String, HardwareStates> mechStates = new HashMap<>();
