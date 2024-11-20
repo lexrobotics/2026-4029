@@ -1,5 +1,7 @@
 package org.firstinspires.ftc.teamcode.Bot.Mechanisms.AbstractMechanisms;
 
+import androidx.annotation.NonNull;
+
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
@@ -12,6 +14,7 @@ public class Mechanism {
     protected ElapsedTime timer;
     protected double zero = 0;
     protected double timeLimit;
+    protected boolean initialized = false;
 
     public Mechanism(String name) {
         this.name = name;
@@ -19,6 +22,7 @@ public class Mechanism {
     }
     public void init(double target){
         setTarget(target);
+        initialized = true;
     }
     public void init(double target, DcMotor.ZeroPowerBehavior zeroPowerBehavior){
         setTarget(target);
@@ -50,5 +54,14 @@ public class Mechanism {
 
     public boolean isBusy(){
         return !(currentPos==targetPos);
+    }
+
+    @NonNull
+    public String toString(){
+        return name;
+    }
+
+    public boolean wasInitialized(){
+        return initialized;
     }
 }
