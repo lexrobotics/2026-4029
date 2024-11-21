@@ -9,11 +9,11 @@ import org.firstinspires.ftc.teamcode.Bot.Sensors.IMUStatic;
 import org.firstinspires.ftc.teamcode.Bot.Setup;
 
 public class AutoCyclingColor extends LinearOpMode {
-    Setup setup;
-    Bot bot;
-    IMUStatic imu;
-    AutoSequences autoSequences;
-    ElapsedTime timer;
+    private Setup setup;
+    private Bot bot;
+    private IMUStatic imu;
+    private AutoSequences autoSequences;
+    private ElapsedTime timer;
     @Override
     public void runOpMode(){
         setup = new Setup(hardwareMap, telemetry, true, this, Setup.OpModeType.AUTO, Setup.Team.Q1);

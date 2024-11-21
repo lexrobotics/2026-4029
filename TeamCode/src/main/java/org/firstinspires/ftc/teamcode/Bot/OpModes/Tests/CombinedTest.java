@@ -12,31 +12,49 @@ import com.qualcomm.robotcore.util.Range;
 @TeleOp
 public class CombinedTest extends LinearOpMode {
 
+
+    private boolean wasA;
+    private boolean wasY;
+    private boolean wasX;
+    private boolean wasB;
     private int mode = 1;
 
     private double servoTargetPosition;
-    private final double multiplier = 0.001;
+    private final double multiplier = 0.0001;
     private int servoMode = 1;
     //    private int countTest = 0;
 //    private int aCountTest = 0;
 //    private int modeN1Time = 0;
-    private final int numServos = 1;
+
+    private final int numServos = 2;
+
     private Servo[] servo;
     private ServoController controller;
     private int currentServo = 0;
 
-    private int altCounter = 0;
-
     private final int motorIncrement = 10000;
     private int motorMode = 1;
+
     private final int numMotors = 1;
+
     private double motorVelocity = 1;
     private double motorTargetPosition;
     private DcMotor[] motor;
     private int currentMotor = 0;
+    private double LJY;
+    private double RJY;
+    private enum state{
+        RUN,
+        RIGHT,
+        LEFT,
+        REST
+    }
+    private state currentState = state.REST;
 
     @Override
     public void runOpMode(){
+
+
 
         servo = new Servo[numServos];
         for(int i = 0; i<servo.length; i++) {
@@ -56,73 +74,117 @@ public class CombinedTest extends LinearOpMode {
         telemetry.update();
 
         waitForStart();
-
+        int countTest = 0; //todo REMOVE THIS LIL
         while(opModeIsActive()){
 
-//            countTest+=1;
+            countTest+=1;
 
-            if(gamepad1.y){
-                if(altCounter<1000) {
-                    mode *= -1;
-                    motorMode = 1;
-                    servoMode = 1;
-                    altCounter=0;
-                }
-                altCounter++;
+            LJY = gamepad1.left_stick_y;
+            RJY = -gamepad1.right_stick_y;
+
+            if(gamepad1.a && !wasA){
+                currentState = state.RUN;
+                wasA = true;
+            } else if(gamepad1.right_bumper){
+                currentState = state.RIGHT;
+            } else if(gamepad1.left_bumper){
+                currentState = state.LEFT;
+            } else {
+                currentState = state.REST;
             }
-            else if(!gamepad1.y && !gamepad1.x){
-                altCounter=0;
+
+            if(!gamepad1.a){
+                wasA = false;
+            }
+            if(Math.abs(LJY)<0.05){
+                LJY = 0;
+            }
+            if(Math.abs(RJY)<0.05){
+                RJY = 0;
+            }
+            if(!gamepad1.x){
+                wasX = false;
             }
 
-            telemetry.addData("CurrentMode", mode);
 
+            if(!gamepad1.y){
+                wasY = false;
+            } if(gamepad1.y && !wasY){
+                mode *= -1;
+                motorMode = 1;
+                servoMode = 1;
+                wasY = true;
+            }
+
+            if(mode == 1){
+                telemetry.addData("CurrentMode", "Motors");
+            } else {
+                telemetry.addData("CurrentMode", "Servos");
+            }
             if(mode == 1){
 
 //                Motor Mode
-                if(gamepad1.x){
-                    if(altCounter > 1000) {
-                        motorMode *= -1;
-                        altCounter = 0;
-                    }
-                    altCounter++;
+//                if(!gamepad1.x){
+//                    wasX = true;
+//                }
+                if(gamepad1.x && !wasX){
+                    motorMode *= -1;
+                    wasX = true;
                 }
 
 //                Current Motor
-                if(gamepad1.left_bumper){
+                if(currentState == state.LEFT){
                     currentMotor -=1;
-                    currentMotor %= numMotors;
+                    if(currentMotor<0){
+                        currentMotor = numMotors-1;
+                    }
                 }
-                if(gamepad1.right_bumper){
-                    currentMotor -=1;
+                if(currentState == state.RIGHT){
+                    currentMotor +=1;
                     currentMotor %= numMotors;
                 }
 
 //                Velocity
-                if (gamepad1.right_stick_y < -0.4) {
+                if (RJY > 0.4) {
+                    if(motorVelocity == 0){
+                        motorVelocity = 0.15;
+                    }
                     motorVelocity = Range.clip(motorVelocity * (1 / 0.999), -1, 1);
                 }
-                if (gamepad1.right_stick_y > 0.4) {
+                if (RJY < -0.4) {
+                    if(motorVelocity == 0){
+                        motorVelocity = 0.06;
+                    }
                     motorVelocity = motorVelocity * 0.999;
+                }
+                if(gamepad1.dpad_down){
+                    motorVelocity = 0;
                 }
 
 //                Target Position
-                if(Math.abs(gamepad1.left_stick_y) > 0.05){
-                    motorTargetPosition -= gamepad1.left_stick_y/motorIncrement;
+                motorTargetPosition += -gamepad1.left_stick_y/motorIncrement;
+
+//                Direction
+                if(!gamepad1.b){
+                    wasB = false;
+                }
+                if(gamepad1.b && !wasB){
+                    motorVelocity *= -1;
+                    wasB = true;
                 }
 
 //                Run
                 if(motorMode == 1){
-                    if(gamepad1.a){
+                    if(currentState == state.RUN) {
 
-                            motor[currentMotor].setTargetPosition((int)motorTargetPosition);
-                            motor[currentMotor].setMode(DcMotor.RunMode.RUN_TO_POSITION);
-                            motor[currentMotor].setPower(motorVelocity);
-
+                        motor[currentMotor].setTargetPosition((int) motorTargetPosition);
+                        motor[currentMotor].setMode(DcMotor.RunMode.RUN_TO_POSITION);
+                        motor[currentMotor].setPower(motorVelocity);
+                        wasA = true;
                     } else {
                         motor[currentMotor].setPower(0);
                     }
-                }
-                else{
+                } else{
                     motor[currentMotor].setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
                     motor[currentMotor].setPower(motorVelocity);
                 }
@@ -130,46 +192,52 @@ public class CombinedTest extends LinearOpMode {
 //                Telemetry
                 telemetry.addData("Velocity", motorVelocity);
                 telemetry.addData("TargetPosition", motorTargetPosition);
-                telemetry.addData("MotorMode", motorMode);
                 telemetry.addData("CurrentMotor", currentMotor);
                 telemetry.addData("NumberOfMotors", numMotors);
+                if(motorMode == 1){
+                    telemetry.addData("MotorMode", "Manual");
+                } else{
+                    telemetry.addData("MotorMode", "Continuous");
+                }
 
 
             } else {
 
 //                Servo Mode
-                if(gamepad1.x){
-                    if(altCounter > 1000) {
-                        servoMode *= -1;
-                        altCounter = 0;
-                    }
-                    altCounter++;
+//                if(!gamepad1.x){
+//                    wasX = false;
+//                }
+                if(gamepad1.x && !wasX){
+                    servoMode *= -1;
+                    wasX = true;
                 }
 
 //                Current Servo
-                if(gamepad1.left_bumper){
+                if(currentState == state.LEFT){
                     currentServo -=1;
-                    currentServo %= numServos;
+                    if(currentServo<0) {
+                        currentServo = numServos-1;
+                    }
+                    servoTargetPosition = servo[currentServo].getPosition();
                 }
-                if(gamepad1.right_bumper){
-                    currentServo -=1;
+                if(currentState == state.RIGHT){
+                    currentServo +=1;
                     currentServo %= numServos;
+                    servoTargetPosition = servo[currentServo].getPosition();
                 }
 
 //                Target Position
-                if(Math.abs(gamepad1.left_stick_y) > 0.05){
-                    servoTargetPosition += gamepad1.left_stick_y*multiplier;
-                    if(servoTargetPosition > 1){
-                        servoTargetPosition = 1;
-                    }
-                    else if(servoTargetPosition < 0){
-                        servoTargetPosition = 0;
-                    }
+                servoTargetPosition += gamepad1.left_stick_y*0.001;
+                if(servoTargetPosition > 1){
+                    servoTargetPosition = 1;
+                }
+                else if(servoTargetPosition < 0){
+                    servoTargetPosition = 0;
                 }
 
 //                Run
                 if(servoMode == 1) {
-                    if (gamepad1.a) {
+                    if (currentState == state.RUN) {
                         servo[currentServo].setPosition(servoTargetPosition);
 //                    aCountTest+=1;
                     }
@@ -184,11 +252,16 @@ public class CombinedTest extends LinearOpMode {
 //            telemetry.addData("modeN1Time", modeN1Time);
                 telemetry.addData("TargetPosition", servoTargetPosition*100 + "%");
                 telemetry.addData("CurrentPosition", servo[currentServo].getPosition());
-                telemetry.addData("CurrentMode", servoMode);
+                telemetry.addData("CurrentServo", currentServo);
+                if(servoMode == 1){
+                    telemetry.addData("ServoMode", "Manual");
+                } else{
+                    telemetry.addData("ServoMode", "Continuous");
+                }
 
             }
 
-//            telemetry.addData("CountTest", countTest);
+            telemetry.addData("CountTest", countTest);
 
             telemetry.update();
         }

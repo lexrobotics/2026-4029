@@ -8,9 +8,9 @@ import org.firstinspires.ftc.teamcode.Bot.Setup;
 
 public class AutoCyclingYellow extends LinearOpMode {
 
-    Setup setup;
-    Bot bot;
-    IMUStatic imu;
+    private Setup setup;
+    private Bot bot;
+    private IMUStatic imu;
     @Override
     public void runOpMode(){
         setup = new Setup(hardwareMap, telemetry, true, this, Setup.OpModeType.AUTO, Setup.Team.Q1);
