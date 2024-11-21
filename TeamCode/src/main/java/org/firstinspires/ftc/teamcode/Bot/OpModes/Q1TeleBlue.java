@@ -26,6 +26,7 @@ public class Q1TeleBlue extends LinearOpMode {
     private double spin;
     private OuttakeStates outtakeStates;
     private IntakeStates intakeStates;
+
     @Override
     public void runOpMode() throws InterruptedException {
         setup = new Setup(hardwareMap, telemetry, true, this, Setup.OpModeType.AUTO, Setup.Team.Q1);
@@ -79,6 +80,11 @@ public class Q1TeleBlue extends LinearOpMode {
     }
 
     public void driver2() {
-
+//        Outtake to Net, Outtake for Specimen, Intake w/o extending, Intake w/ extended Noodler
+//        sampleOuttake button = gamepad1.?
+//        specimenOuttake button = gamepad1.?
+//        unextendedIntake button = gamepad1.?
+//        extendedIntake button = gamepad1.?
+//
     }
 }
