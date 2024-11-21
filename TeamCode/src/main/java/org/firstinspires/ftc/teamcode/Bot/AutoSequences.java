@@ -22,6 +22,11 @@ public class AutoSequences {
         timer = new ElapsedTime();
     }
         //BOTH SIDES
+     public void parkFromStart(){
+        actionSequences.OuttakeRest(true);
+        //path
+        update();
+    }
     public void scoreSpecimen(){
         //path to specimen
         actionSequences.Specimen2();
@@ -41,6 +46,11 @@ public class AutoSequences {
         cyclenum++;
         update();
     }
+    public void parkFromSpecimenColor(){
+        actionSequences.OuttakeRest(true);
+        //path
+        update();
+    }
 
     public void pushToHuman(){
         //path
@@ -53,6 +63,11 @@ public class AutoSequences {
     }
 
     //YELLOW SIDE
+    public void parkFromSpecimenYellow(){
+        actionSequences.OuttakeRest(true);
+        //path
+        update();
+    }
     public void intakeYellowSample(){
         actionSequences.OuttakeRest(true);
         if(cyclenum == 0){
