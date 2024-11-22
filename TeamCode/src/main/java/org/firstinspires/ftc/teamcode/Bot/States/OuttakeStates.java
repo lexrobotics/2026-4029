@@ -1,6 +1,12 @@
 package org.firstinspires.ftc.teamcode.Bot.States;
 
 public enum OuttakeStates {
-    REST
+    REST,
+    BU1,
+    BU2,
+    RU1,
+    RU2,
+    MANUAL,
+    MOVING
 }
 

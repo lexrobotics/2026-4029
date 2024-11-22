@@ -1,5 +1,9 @@
 package org.firstinspires.ftc.teamcode.Bot.States;
 
 public enum IntakeStates {
-    REST
+    REST,
+    POS1,
+    POS2,
+    MANUAL,
+    MOVING
 }

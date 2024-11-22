@@ -22,6 +22,16 @@ public class ActionSequences {
         return bot;
     }
 
+    public void IntakeMotor(int vel){
+        bot.intake.setVelocity(vel);
+    }
+    public void V4BAngled(){
+        bot.v4b.setTarget(V4B.ANG);
+    }
+    public void V4BRest(){
+        bot.v4b.setTarget(V4B.RST);
+    }
+
     public void Bucket1(){
         bot.outtakeSlides.setVelocity(1);
         bot.outtakeSlides.setTarget(OuttakeSlidesSmart.BUC1);
