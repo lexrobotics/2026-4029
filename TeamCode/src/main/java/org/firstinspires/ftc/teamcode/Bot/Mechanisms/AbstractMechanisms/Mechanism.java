@@ -56,6 +56,10 @@ public class Mechanism {
         return !(currentPos==targetPos);
     }
 
+    public void reverse(boolean reverse){
+
+    }
+
     @NonNull
     public String toString(){
         return name;
