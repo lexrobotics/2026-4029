@@ -24,7 +24,7 @@ public class AutoTesting extends LinearOpMode {
         Follower follower = new Follower(hardwareMap);
         waitForStart();
 
-        follower.followPath(drivetrain.BLInitToScoreClip());
+//        follower.followPath(drivetrain.BLInitToScoreClip());
         while(opModeIsActive()) {
             if(gamepad1.right_bumper) follower.update();
         }

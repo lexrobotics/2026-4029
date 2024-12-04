@@ -53,7 +53,7 @@ public class DriveTeleOp extends LinearOpMode {
         y = Math.abs(gamepad1.left_stick_y)>0.04 ? -gamepad1.left_stick_y : 0;
         spin = Math.abs(gamepad1.right_stick_x) > 0.04 ? gamepad1.right_stick_x : 0;
 
-        bot.setTargetVectors(x, y, spin);
+        bot.setTeleOpTargets(x, y, spin);
     }
     void driveUsingPeP(){
         bot.setTeleOpTargets(-gamepad1.left_stick_x, gamepad1.left_stick_y, gamepad1.right_stick_x);

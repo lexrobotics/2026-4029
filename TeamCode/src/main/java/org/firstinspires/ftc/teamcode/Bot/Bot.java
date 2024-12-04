@@ -70,7 +70,7 @@ public class Bot implements Robot{
             outtakeWrist = new Mechanism("OuttakeWrist");
         }
         if(hardwareStates.get("OuttakeSlides").isEnabled){
-            outtakeSlides = new OuttakeSlidesSmart();
+            outtakeSlides = new OuttakeSlides();//TODO add smart mode
         } else {
             telemetry.addLine("NO SLIDES, OUT");
             outtakeSlides = new Mechanism("OuttakeSlides");
@@ -115,7 +115,7 @@ public class Bot implements Robot{
         winch.init(0);
 //        servoMech.init(0);
 //        slideMech.init(0);
-//        drivetrain.init();
+        drivetrain.init(new Pose2d());
     }
     public void init(Pose2d startPos){
         /*
@@ -138,7 +138,7 @@ public class Bot implements Robot{
 //        motorMech.update();
 //        servoMech.update();
 //        slideMech.update();
-//        drivetrain.update();
+        drivetrain.update();
         outtakeWrist.update();
         outtakeClaw.update();
         outtakeSlides.update();
@@ -162,7 +162,7 @@ public class Bot implements Robot{
         return motorMech.isBusy() || servoMech.isBusy() || slideMech.isBusy();
     }
     public void setTargetVectors(double x, double y, double theta){
-        drivetrain.setTargetVectors(x,y,theta);
+//        drivetrain.setTargetVectors(x,y,theta);
     }
     public void setTeleOpTargets(double left_stick_x, double left_stick_y, double right_stick_x){
         drivetrain.setTeleOpTargets(left_stick_x, left_stick_y, right_stick_x);

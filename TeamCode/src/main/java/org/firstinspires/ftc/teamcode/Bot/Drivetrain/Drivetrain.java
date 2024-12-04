@@ -27,19 +27,19 @@ import org.firstinspires.ftc.robotcore.external.navigation.Orientation;
 import org.firstinspires.ftc.robotcore.external.navigation.Quaternion;
 import org.firstinspires.ftc.teamcode.Bot.Sensors.IMUStatic;
 import org.firstinspires.ftc.teamcode.Bot.Setup;
-import org.firstinspires.ftc.teamcode.PedroPathing.follower.Follower;
-import org.firstinspires.ftc.teamcode.PedroPathing.localization.Pose;
-import org.firstinspires.ftc.teamcode.PedroPathing.localization.ThreeWheelLocalizer;
-import org.firstinspires.ftc.teamcode.PedroPathing.pathGeneration.BezierCurve;
-import org.firstinspires.ftc.teamcode.PedroPathing.pathGeneration.MathFunctions;
+//import org.firstinspires.ftc.teamcode.PedroPathing.follower.Follower;
+//import org.firstinspires.ftc.teamcode.PedroPathing.localization.Pose;
+//import org.firstinspires.ftc.teamcode.PedroPathing.localization.ThreeWheelLocalizer;
+//import org.firstinspires.ftc.teamcode.PedroPathing.pathGeneration.BezierCurve;
+//import org.firstinspires.ftc.teamcode.PedroPathing.pathGeneration.MathFunctions;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import org.firstinspires.ftc.teamcode.PedroPathing.pathGeneration.Path;
-import org.firstinspires.ftc.teamcode.PedroPathing.pathGeneration.PathChain;
-import org.firstinspires.ftc.teamcode.PedroPathing.pathGeneration.Point;
-import org.firstinspires.ftc.teamcode.PedroPathing.pathGeneration.Vector;
+//import org.firstinspires.ftc.teamcode.PedroPathing.pathGeneration.Path;
+//import org.firstinspires.ftc.teamcode.PedroPathing.pathGeneration.PathChain;
+//import org.firstinspires.ftc.teamcode.PedroPathing.pathGeneration.Point;
+//import org.firstinspires.ftc.teamcode.PedroPathing.pathGeneration.Vector;
 import org.firstinspires.ftc.teamcode.trajectorysequence.TrajectorySequenceBuilder;
 
 public class Drivetrain {
@@ -50,7 +50,7 @@ public class Drivetrain {
         POWER,
         POWER_APRIL_TAG
     }
-    protected DriveState state = DriveState.TRAJECTORY_RR;
+    protected DriveState state = DriveState.POWER;
 
     private static final TrajectoryVelocityConstraint VEL_CONSTRAINT = getVelocityConstraint(DriveConstants.MAX_VEL, DriveConstants.MAX_ANG_VEL, DriveConstants.TRACK_WIDTH);
     private static final TrajectoryAccelerationConstraint ACCEL_CONSTRAINT = getAccelerationConstraint(DriveConstants.MAX_ACCEL);
@@ -60,59 +60,62 @@ public class Drivetrain {
     protected SampleMecanumDrive drive;
 
     public Pose2d currentPos;
-    public Vector targetDriveVector;
-    public Vector targetHeadingVector;
+//    public Vector targetDriveVector;
+//    public Vector targetHeadingVector;
     public double[] teleOpTargets;
-    protected Follower follower;
+//    protected Follower follower;
     private IMUStatic imu;
     protected double imuOffset;
 
 
     public Drivetrain(){
+        teleOpTargets = new double[3];
     }
 
     public void init(Pose2d startPose) {
         currentPos = startPose;
-        follower = new Follower(Setup.hardwareMap, false);
-        follower.setStartingPose(new Pose(startPose.getX(), startPose.getY(), startPose.getHeading()));
-        targetDriveVector = new Vector();
-        targetHeadingVector = new Vector();
+        drive = new SampleMecanumDrive(Setup.hardwareMap);
+        drive.setPoseEstimate(startPose);
+//        follower = new Follower(Setup.hardwareMap, false);
+//        follower.setStartingPose(new Pose(startPose.getX(), startPose.getY(), startPose.getHeading()));
+//        targetDriveVector = new Vector();
+//        targetHeadingVector = new Vector();
         teleOpTargets = new double[3];
         imu = new IMUStatic();
-        telemetry.addLine("Follower: " + follower.driveError);
+//        telemetry.addLine("Follower: " + follower.driveError);
     }
 
     public void update(boolean usePeP){
         if(usePeP){
-            follower.setMovementVectors(follower.getCentripetalForceCorrection(), targetHeadingVector, targetDriveVector);
-            follower.update();
+//            follower.setMovementVectors(follower.getCentripetalForceCorrection(), targetHeadingVector, targetDriveVector);
+//            follower.update();
         }else{
             double x = teleOpTargets[0];
             double y = teleOpTargets[1];
             double spin = teleOpTargets[2];
-            follower.setMotorPowers(Range.clip(y + x, -1, 1) + spin,
-                    Range.clip(y - x, -1, 1) + spin,
-                    Range.clip(y + x, -1, 1) - spin,
-                    Range.clip(y - x, -1, 1) - spin);
+////            follower.setMotorPowers(Range.clip(y + x, -1, 1) + spin,
+//                    Range.clip(y - x, -1, 1) + spin,
+//                    Range.clip(y + x, -1, 1) - spin,
+//                    Range.clip(y - x, -1, 1) - spin);
         }
     }
     public void update() {
-        currentPos = drive.getPoseEstimate();
-        if (state == DriveState.TRAJECTORY_RR) {
-            drive.update();
-        } else if (state == DriveState.POWER_RR) {
-            Vector2d input = new Vector2d(
-                    teleOpTargets[1],
-                    -teleOpTargets[0]
-            ).rotated(-currentPos.getHeading());
-            drive.setWeightedDrivePower(
-                    new Pose2d(
-                            input.getX(),
-                            input.getY(),
-                            -teleOpTargets[2]
-                    )
-            );
-        } else if (state == DriveState.POWER) { // spin may be (+) instead of (-)
+////        currentPos = drive.getPoseEstimate();
+//        if (state == DriveState.TRAJECTORY_RR) {
+//            drive.update();
+//        } else if (state == DriveState.POWER_RR) {
+//            Vector2d input = new Vector2d(
+//                    teleOpTargets[1],
+//                    -teleOpTargets[0]
+//            ).rotated(-currentPos.getHeading());
+//            drive.setWeightedDrivePower(
+//                    new Pose2d(
+//                            input.getX(),
+//                            input.getY(),
+//                            -teleOpTargets[2]
+//                    )
+//            );
+//        } else if (state == DriveState.POWER) { // spin may be (+) instead of (-)
             double x = teleOpTargets[0];
             double y = teleOpTargets[1];
             double spin = teleOpTargets[2];
@@ -120,67 +123,53 @@ public class Drivetrain {
                     Range.clip(y - x, -1, 1) + spin,
                     Range.clip(y + x, -1, 1) - spin,
                     Range.clip(y - x, -1, 1) - spin);
-        }else if (state == DriveState.POWER_APRIL_TAG) { // spin may be (-) instead of (+)
-            double x = teleOpTargets[0];
-            double y = teleOpTargets[1];
-            double yaw = teleOpTargets[2];
-
-            double leftFrontPower    =  x -y -yaw;
-            double rightFrontPower   =  x +y +yaw;
-            double leftBackPower     =  x +y -yaw;
-            double rightBackPower    =  x -y +yaw;
-
-            double max = Math.max(Math.abs(leftFrontPower), Math.abs(rightFrontPower));
-            max = Math.max(max, Math.abs(leftBackPower));
-            max = Math.max(max, Math.abs(rightBackPower));
-
-            if (max > 1.0) {
-                leftFrontPower /= max;
-                rightFrontPower /= max;
-                leftBackPower /= max;
-                rightBackPower /= max;
-            }
-
-            drive.setMotorPowers( leftFrontPower,
-                    leftBackPower,
-                    rightBackPower,
-                    rightFrontPower);
-        }
+//        }else if (state == DriveState.POWER_APRIL_TAG) { // spin may be (-) instead of (+)
+//            double x = teleOpTargets[0];
+//            double y = teleOpTargets[1];
+//            double yaw = teleOpTargets[2];
+//
+//            double leftFrontPower    =  x -y -yaw;
+//            double rightFrontPower   =  x +y +yaw;
+//            double leftBackPower     =  x +y -yaw;
+//            double rightBackPower    =  x -y +yaw;
+//
+//            double max = Math.max(Math.abs(leftFrontPower), Math.abs(rightFrontPower));
+//            max = Math.max(max, Math.abs(leftBackPower));
+//            max = Math.max(max, Math.abs(rightBackPower));
+//
+//            if (max > 1.0) {
+//                leftFrontPower /= max;
+//                rightFrontPower /= max;
+//                leftBackPower /= max;
+//                rightBackPower /= max;
+//            }
+//
+//            drive.setMotorPowers( leftFrontPower,
+//                    leftBackPower,
+//                    rightBackPower,
+//                    rightFrontPower);
+//        }
     }
 
     public void telemetry(){
         telemetry.addData("Drivetrain currentPos", currentPos);
     }
 
-    public void setTargetVectors(double x, double y, double turn){
-        double theta = (imu.getYaw(AngleUnit.RADIANS));
-        x = MathFunctions.clamp(x,0,1);
-        y = MathFunctions.clamp(y,0,1);
-        double[] coordinates = CartesianToPolar(x,y);
-        coordinates[1] += theta;
-        targetDriveVector.setMagnitude(coordinates[0]);
-        targetDriveVector.setTheta(coordinates[1]);
-//        targetDriveVector.setOrthogonalComponents(-y, -x);
-//        targetDriveVector.setMagnitude(MathFunctions.clamp(targetDriveVector.getMagnitude(), 0, 1));
-//        targetDriveVector.rotateVector(follower.getPose().getHeading());
-        targetHeadingVector.setComponents(turn, follower.getPose().getHeading());
-    }
+//    public void setTargetVectors(double x, double y, double turn){
+//        double theta = (imu.getYaw(AngleUnit.RADIANS));
+//        x = MathFunctions.clamp(x,0,1);
+//        y = MathFunctions.clamp(y,0,1);
+//        double[] coordinates = CartesianToPolar(x,y);
+//        coordinates[1] += theta;
+//        targetDriveVector.setMagnitude(coordinates[0]);
+//        targetDriveVector.setTheta(coordinates[1]);
+////        targetDriveVector.setOrthogonalComponents(-y, -x);
+////        targetDriveVector.setMagnitude(MathFunctions.clamp(targetDriveVector.getMagnitude(), 0, 1));
+////        targetDriveVector.rotateVector(follower.getPose().getHeading());
+//        targetHeadingVector.setComponents(turn, follower.getPose().getHeading());
+//    }
     public void setTeleOpTargets(double x, double y, double theta){
-        double target_x = Math.abs(x)>0.04 ? x : 0;
-        double target_y = Math.abs(y)>0.04 ? -y : 0;
-        double target_spin = Math.abs(theta) > 0.04 ? theta : 0;
-        double translateMag = Math.sqrt(x*x + y*y);
-        double angle = Math.atan2(y, x);
-
-        angle += (-this.getHeadingIMU() + imuOffset);
-
-
-        target_x = Math.cos(angle) * translateMag;
-        target_y = Math.sin(angle) * translateMag;
-
-        teleOpTargets[0] = target_x;
-        teleOpTargets[1] = target_y;
-        teleOpTargets[2] = target_spin;
+        this.teleOpTargets = new double[]{x, y, theta};
     }
 
 
@@ -192,12 +181,12 @@ public class Drivetrain {
 //    }
 
 
-    public double getHeadingIMU() {return imu.getYaw(AngleUnit.RADIANS);}
+    public double getHeadingIMU() {return drive.getRawExternalHeading();}
     public void resetIMU(){imu.resetYaw();}
 
-    public PathChain BLInitToScoreClip(){
-        return new PathChain(new Path(new BezierCurve(new Point(13.6,83.5,0), new Point(13.6,96.3,1), new Point(62.4,123.6,2), new Point(62.4,100.2,3))));
-    }
+//    public PathChain BLInitToScoreClip(){
+//        return new PathChain(new Path(new BezierCurve(new Point(13.6,83.5,0), new Point(13.6,96.3,1), new Point(62.4,123.6,2), new Point(62.4,100.2,3))));
+//    }
 
     public TrajectorySequenceBuilder buildTrajectorySequence(Pose2d startPose) {
         return new TrajectorySequenceBuilder(
