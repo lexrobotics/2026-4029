@@ -73,19 +73,19 @@ public class Setup {
     }
     private void addMechanisms(){
         mechStates.put("drivetrain", new HardwareStates(true));
-        mechStates.put("IntakeMotor", new HardwareStates(true));
-        mechStates.put("OuttakeSlides", new HardwareStates(true));
-        mechStates.put("OuttakeClaw", new HardwareStates(true));
-        mechStates.put("OuttakeWrist", new HardwareStates(true));
-        mechStates.put("IntakeSlides", new HardwareStates(true));
-        mechStates.put("V4B", new HardwareStates(true));
-        mechStates.put("Winch", new HardwareStates(true));
-        mechStates.put("Intake", new HardwareStates(true));
+        mechStates.put("IntakeMotor", new HardwareStates(false));
+        mechStates.put("OuttakeSlides", new HardwareStates(false));
+        mechStates.put("OuttakeClaw", new HardwareStates(false));
+        mechStates.put("OuttakeWrist", new HardwareStates(false));
+        mechStates.put("IntakeSlides", new HardwareStates(false));
+        mechStates.put("V4B", new HardwareStates(false));
+        mechStates.put("Winch", new HardwareStates(false));
+        mechStates.put("Intake", new HardwareStates(false));
     }
 
     private void addSensors(){
         sensorStates.put("webcam", new HardwareStates(true));
-        sensorStates.put("outtakeSlidesSwitch", new HardwareStates(true));
+        sensorStates.put("outtakeSlidesSwitch", new HardwareStates(false));
     }
 
     public void disableMechanism(String mechanismName){

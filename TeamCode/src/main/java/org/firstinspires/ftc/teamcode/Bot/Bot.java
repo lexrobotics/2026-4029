@@ -70,7 +70,7 @@ public class Bot implements Robot{
             outtakeWrist = new Mechanism("OuttakeWrist");
         }
         if(hardwareStates.get("OuttakeSlides").isEnabled){
-            outtakeSlides = new OuttakeSlidesSmart();
+            outtakeSlides = new OuttakeSlides();
         } else {
             telemetry.addLine("NO SLIDES, OUT");
             outtakeSlides = new Mechanism("OuttakeSlides");
@@ -95,9 +95,6 @@ public class Bot implements Robot{
 //            telemetry.addLine("");
         }
     }
-    public void drivetrainUpdate(boolean usePeP){
-        drivetrain.update(usePeP);
-    }
     @Override
     public void init(){
         /*
@@ -105,40 +102,29 @@ public class Bot implements Robot{
         */
         ElapsedTime timer = new ElapsedTime();
         timer.reset();
-//        motorMech.init(0);
-        initDrivetrain(new Pose2d());
         outtakeClaw.init(0);
         outtakeWrist.init(0.5);
         outtakeSlides.init(0);
         intakeSlides.init(0);
         v4b.init(0.5);
         winch.init(0);
-//        servoMech.init(0);
-//        slideMech.init(0);
-//        drivetrain.init();
+        drivetrain.init(new Pose2d(0, 0, 0));
     }
     public void init(Pose2d startPos){
-        /*
-        Initialize mechanisms here
-        */
         ElapsedTime timer = new ElapsedTime();
         timer.reset();
-//        motorMech.init(0);
-        initDrivetrain(startPos);
-//        servoMech.init(0);
-//        slideMech.init(0);
-//        drivetrain.init();
+        outtakeClaw.init(0);
+        outtakeWrist.init(0.5);
+        outtakeSlides.init(0);
+        intakeSlides.init(0);
+        v4b.init(0.5);
+        winch.init(0);
+        drivetrain.init(startPos);
     }
 
     @Override
     public void update(){
-        /*
-        Updates mechanisms
-        */
-//        motorMech.update();
-//        servoMech.update();
-//        slideMech.update();
-//        drivetrain.update();
+        drivetrain.update();
         outtakeWrist.update();
         outtakeClaw.update();
         outtakeSlides.update();
@@ -162,7 +148,7 @@ public class Bot implements Robot{
         return motorMech.isBusy() || servoMech.isBusy() || slideMech.isBusy();
     }
     public void setTargetVectors(double x, double y, double theta){
-        drivetrain.setTargetVectors(x,y,theta);
+//        drivetrain.setTargetVectors(x,y,theta);
     }
     public void setTeleOpTargets(double left_stick_x, double left_stick_y, double right_stick_x){
         drivetrain.setTeleOpTargets(left_stick_x, left_stick_y, right_stick_x);

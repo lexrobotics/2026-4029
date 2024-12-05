@@ -26,6 +26,7 @@ public class Q1TeleBlue extends LinearOpMode {
     private double angle;
     private double translateMag;
     private double spin;
+    private double imuOffset = 0;
     private OuttakeStates outtakeState;
     private IntakeStates intakeStates;
     private V4BState v4BState;
@@ -40,12 +41,12 @@ public class Q1TeleBlue extends LinearOpMode {
         bot = new Bot(Setup.mechStates, Setup.sensorStates);
         imu = new IMUStatic();
         actionSequences = new ActionSequences(bot);
-        LightStrip lights = new LightStrip("lights", RevBlinkinLedDriver.BlinkinPattern.BLUE);
+//        LightStrip lights = new LightStrip("lights", RevBlinkinLedDriver.BlinkinPattern.BLUE);
         waitForStart();
 
         while(opModeIsActive()){
             driver1();
-            driver2();
+//            driver2();
             bot.update();
         }
 
@@ -55,7 +56,7 @@ public class Q1TeleBlue extends LinearOpMode {
     }
     private void driver1(){
         if (gamepad1.left_trigger > 0.1){
-            imu.resetYaw();
+            imuOffset = bot.drivetrain.getHeadingIMU();
         }
 
         x = Math.abs(gamepad1.left_stick_x)>0.04 ? gamepad1.left_stick_x : 0;
@@ -64,7 +65,7 @@ public class Q1TeleBlue extends LinearOpMode {
         translateMag = Math.sqrt(x*x + y*y);
         angle = Math.atan2(y, x);
 
-        angle += (-bot.drivetrain.getHeadingIMU());
+        angle += (-bot.drivetrain.getHeadingIMU() + imuOffset);
 
 
         x = Math.cos(angle) * translateMag;
