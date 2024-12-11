@@ -83,7 +83,7 @@ public class flextest2 extends LinearOpMode {
                     futureVelPos = Range.clip(futureVelPos - 0.1*SERVO_INCREMENT, 0, 1);
                     isMoving = false;
                 }
-                if (gamepad2.a && !isMoving){
+                if (gamepad2.right_bumper && !isMoving){
                     changeInPos = Math.abs(targetPos - futureVelPos);
                     targetPos = futureVelPos;
                     timer.reset();

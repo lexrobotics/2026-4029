@@ -14,6 +14,7 @@ public class V4B extends ServoMechanism {
     public static final double BUC2 = 0;
     public static final double ANG = 0;
     public static final double RST = 0;
+    public static final double WALL = 0.846599999999;
 
     @Override
     public void setTarget(double target) {
