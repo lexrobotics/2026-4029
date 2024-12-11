@@ -3,8 +3,8 @@ package org.firstinspires.ftc.teamcode.Bot.States;
 import com.qualcomm.robotcore.util.Range;
 
 import org.firstinspires.ftc.teamcode.Bot.Bot;
-import org.firstinspires.ftc.teamcode.Bot.Mechanisms.IntakeMotor;
 import org.firstinspires.ftc.teamcode.Bot.Mechanisms.IntakeSlides;
+import org.firstinspires.ftc.teamcode.Bot.Mechanisms.Noodler;
 import org.firstinspires.ftc.teamcode.Bot.Mechanisms.OuttakeClaw;
 import org.firstinspires.ftc.teamcode.Bot.Mechanisms.OuttakeSlides;
 import org.firstinspires.ftc.teamcode.Bot.Mechanisms.OuttakeSlidesSmart;
@@ -23,7 +23,7 @@ public class ActionSequences {
     }
 
     public void IntakeMotor(int vel){
-        bot.intake.setVelocity(vel);
+        bot.noodler.setVelocity(vel);
     }
     public void V4BAngled(){
         bot.v4b.setTarget(V4B.ANG);
@@ -87,10 +87,10 @@ public class ActionSequences {
         bot.intakeSlides.setTarget(IntakeSlides.RST);
     }
     public void Intake(boolean on){
-        bot.intake.setVelocity(on? IntakeMotor.FORWARD_MAX: IntakeMotor.MIN_SPEED);
+        bot.noodler.setVelocity(on? Noodler.FORWARD_MAX: Noodler.MIN_SPEED);
     }
     public void ReverseIntake(boolean on){
-        bot.intake.setVelocity(on? IntakeMotor.REVERSE_MAX: IntakeMotor.MIN_SPEED);
+        bot.noodler.setVelocity(on? Noodler.REVERSE_MAX: Noodler.MIN_SPEED);
     }
     public void ManualIntakeSlides(double joystick){
         bot.intakeSlides.setVelocity(0.5);
@@ -100,7 +100,7 @@ public class ActionSequences {
     public void AttemptTransfer(OuttakeStates OutState, IntakeStates InState){
         if(OutState == OuttakeStates.REST && InState == IntakeStates.REST){
             bot.outtakeWrist.setTarget(OuttakeWrist.TRA);
-            bot.outtakeClaw.setTarget(OuttakeClaw.GRIP);
+            bot.outtakeClaw.setTarget(OuttakeClaw.INIT);
         }
     }
 

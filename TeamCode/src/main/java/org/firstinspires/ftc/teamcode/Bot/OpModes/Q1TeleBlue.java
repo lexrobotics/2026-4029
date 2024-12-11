@@ -27,9 +27,9 @@ public class Q1TeleBlue extends LinearOpMode {
     private double translateMag;
     private double spin;
     private double imuOffset = 0;
-    private OuttakeStates outtakeState;
-    private IntakeStates intakeStates;
-    private V4BState v4BState;
+    private OuttakeStates outtakeState = OuttakeStates.REST;
+    private IntakeStates intakeStates = IntakeStates.REST;
+    private V4BState v4BState = V4BState.REST;
     private boolean v4bTracker = false;
     private boolean hasBPressed2 = false;
     private double D1GPM = 0.01;
@@ -38,6 +38,7 @@ public class Q1TeleBlue extends LinearOpMode {
     @Override
     public void runOpMode() throws InterruptedException {
         setup = new Setup(hardwareMap, telemetry, true, this, Setup.OpModeType.AUTO, Setup.Team.Q1);
+        setup.disableMechanism("Winch");
         bot = new Bot(Setup.mechStates, Setup.sensorStates);
         imu = new IMUStatic();
         actionSequences = new ActionSequences(bot);
@@ -46,7 +47,7 @@ public class Q1TeleBlue extends LinearOpMode {
 
         while(opModeIsActive()){
             driver1();
-//            driver2();
+            driver2();
             bot.update();
         }
 

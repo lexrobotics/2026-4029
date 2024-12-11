@@ -7,29 +7,24 @@ import com.qualcomm.robotcore.util.ElapsedTime;
 
 import org.firstinspires.ftc.teamcode.Bot.Drivetrain.Drivetrain;
 import org.firstinspires.ftc.teamcode.Bot.Mechanisms.AbstractMechanisms.Mechanism;
-import org.firstinspires.ftc.teamcode.Bot.Mechanisms.IntakeMotor;
 import org.firstinspires.ftc.teamcode.Bot.Mechanisms.IntakeSlides;
 //import org.firstinspires.ftc.teamcode.Bot.Mechanisms.IntakeSlidesSmart;
-import org.firstinspires.ftc.teamcode.Bot.Mechanisms.MotorExample;
+import org.firstinspires.ftc.teamcode.Bot.Mechanisms.Noodler;
 import org.firstinspires.ftc.teamcode.Bot.Mechanisms.OuttakeClaw;
 import org.firstinspires.ftc.teamcode.Bot.Mechanisms.OuttakeSlides;
 import org.firstinspires.ftc.teamcode.Bot.Mechanisms.OuttakeSlidesSmart;
 import org.firstinspires.ftc.teamcode.Bot.Mechanisms.OuttakeWrist;
-import org.firstinspires.ftc.teamcode.Bot.Mechanisms.RunToPosMotorExample;
-import org.firstinspires.ftc.teamcode.Bot.Mechanisms.ServoExample;
-import org.firstinspires.ftc.teamcode.Bot.Mechanisms.SmartClaw;
 import org.firstinspires.ftc.teamcode.Bot.Mechanisms.V4B;
 import org.firstinspires.ftc.teamcode.Bot.Mechanisms.Winch;
 import org.firstinspires.ftc.teamcode.Bot.Sensors.SensorSwitch;
 import org.firstinspires.ftc.teamcode.Bot.Sensors.Sensors;
 import org.firstinspires.ftc.teamcode.Bot.InitStates.HardwareStates;
-import org.firstinspires.ftc.teamcode.PedroPathing.localization.Pose;
 
 import java.util.HashMap;
 
 public class Bot implements Robot{
     public Drivetrain drivetrain;
-    public Mechanism motorMech, servoMech, slideMech, outtakeWrist, outtakeClaw, outtakeSlides, intakeSlides, v4b, winch, intake;
+    public Mechanism slideMech, outtakeWrist, outtakeClaw, outtakeSlides, intakeSlides, v4b, winch, intake, noodler;
     public Sensors sensors;
     public SensorSwitch outtakeSlidesSwitch, intakeSlidesSwitch;
 
@@ -37,11 +32,16 @@ public class Bot implements Robot{
         /*
         Bot constructor creates all mechanisms in Mechanism objects if they are enabled
          */
-        telemetry.addLine("BOTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTT");
-        if(hardwareStates.get("IntakeMotor").isEnabled){
-            motorMech = new Mechanism("IntakeMotor"); //todo, replace
+        telemetry.addLine("robot");
+        if(hardwareStates.get("drivetrain").isEnabled){
+            drivetrain = new Drivetrain();
         } else {
-            motorMech = new Mechanism("IntakeMotor");
+            drivetrain = null;
+        }
+        if(hardwareStates.get("Noodler").isEnabled){
+            noodler = new Noodler(); //todo, replace
+        } else {
+            noodler = new Mechanism("Noodler");
         }
         if(hardwareStates.get("Winch").isEnabled){
             winch = new Winch();
@@ -53,12 +53,6 @@ public class Bot implements Robot{
         } else {
             v4b = new Mechanism("V4B");
         }
-        if(hardwareStates.get("IntakeMotor").isEnabled){
-            intake = new IntakeMotor();
-        } else {
-            intake = new Mechanism("Intake");
-        }
-
         if(hardwareStates.get("OuttakeClaw").isEnabled){
             outtakeClaw = new OuttakeClaw();
         } else {
@@ -70,7 +64,7 @@ public class Bot implements Robot{
             outtakeWrist = new Mechanism("OuttakeWrist");
         }
         if(hardwareStates.get("OuttakeSlides").isEnabled){
-            outtakeSlides = new OuttakeSlides();
+            outtakeSlides = new OuttakeSlidesSmart();
         } else {
             telemetry.addLine("NO SLIDES, OUT");
             outtakeSlides = new Mechanism("OuttakeSlides");
@@ -80,11 +74,7 @@ public class Bot implements Robot{
         } else {
             intakeSlides = new Mechanism("IntakeSlides");
         }
-        if(hardwareStates.get("drivetrain").isEnabled){
-            drivetrain = new Drivetrain();
-        } else {
-            drivetrain = null;
-        }
+
         init();
 
     }
@@ -102,50 +92,55 @@ public class Bot implements Robot{
         */
         ElapsedTime timer = new ElapsedTime();
         timer.reset();
-        outtakeClaw.init(0);
-        outtakeWrist.init(0.5);
-        outtakeSlides.init(0);
-        intakeSlides.init(0);
-        v4b.init(0.5);
-        winch.init(0);
+        noodler.init(0);
+        winch.init(StartPositions.winchPos);
+        v4b.init(StartPositions.outtakeV4BPos);
+        outtakeClaw.init(StartPositions.outtakeClawPos);
+        outtakeWrist.init(StartPositions.outtakeWristPos);
+        outtakeSlides.init(StartPositions.outtakeSlidesPos);
+        intakeSlides.init(StartPositions.intakeSlidesPos);
         drivetrain.init(new Pose2d(0, 0, 0));
     }
     public void init(Pose2d startPos){
         ElapsedTime timer = new ElapsedTime();
         timer.reset();
-        outtakeClaw.init(0);
-        outtakeWrist.init(0.5);
-        outtakeSlides.init(0);
-        intakeSlides.init(0);
-        v4b.init(0.5);
-        winch.init(0);
+        noodler.init(0);
+        winch.init(StartPositions.winchPos);
+        v4b.init(StartPositions.outtakeV4BPos);
+        outtakeClaw.init(StartPositions.outtakeClawPos);
+        outtakeWrist.init(StartPositions.outtakeWristPos);
+        outtakeSlides.init(StartPositions.outtakeSlidesPos);
+        intakeSlides.init(StartPositions.intakeSlidesPos);
         drivetrain.init(startPos);
     }
 
     @Override
     public void update(){
-        drivetrain.update();
-        outtakeWrist.update();
+        noodler.update();
+        winch.update();
+        v4b.update();
         outtakeClaw.update();
+        outtakeWrist.update();
         outtakeSlides.update();
         intakeSlides.update();
-        v4b.update();
-        winch.update();
+        drivetrain.update();
     }
 
     @Override
     public void telemetry(){
-        motorMech.telemetry();
-        servoMech.telemetry();
-        slideMech.telemetry();
-        drivetrain.telemetry();
-        v4b.telemetry();
+        noodler.telemetry();
         winch.telemetry();
+        v4b.telemetry();
+        outtakeClaw.telemetry();
+        outtakeWrist.telemetry();
+        outtakeSlides.telemetry();
+        intakeSlides.telemetry();
+        drivetrain.telemetry();
     }
 
     @Override
     public boolean isBusy(){
-        return motorMech.isBusy() || servoMech.isBusy() || slideMech.isBusy();
+        return noodler.isBusy() || winch.isBusy() || v4b.isBusy() || outtakeClaw.isBusy() || outtakeWrist.isBusy() || outtakeSlides.isBusy() || intakeSlides.isBusy() || drivetrain.isBusy();
     }
     public void setTargetVectors(double x, double y, double theta){
 //        drivetrain.setTargetVectors(x,y,theta);

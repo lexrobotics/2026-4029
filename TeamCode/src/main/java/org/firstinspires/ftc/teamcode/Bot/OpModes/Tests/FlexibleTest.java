@@ -6,21 +6,22 @@ import com.qualcomm.robotcore.util.ElapsedTime;
 import com.qualcomm.robotcore.util.Range;
 
 import org.firstinspires.ftc.teamcode.Bot.Mechanisms.AbstractMechanisms.Mechanism;
-import org.firstinspires.ftc.teamcode.Bot.Mechanisms.IntakeMotor;
+import org.firstinspires.ftc.teamcode.Bot.Mechanisms.IntakeArm;
 import org.firstinspires.ftc.teamcode.Bot.Mechanisms.IntakeSlides;
+import org.firstinspires.ftc.teamcode.Bot.Mechanisms.Noodler;
 import org.firstinspires.ftc.teamcode.Bot.Mechanisms.OuttakeClaw;
 import org.firstinspires.ftc.teamcode.Bot.Mechanisms.OuttakeSlides;
-import org.firstinspires.ftc.teamcode.Bot.Mechanisms.OuttakeSlidesSmart;
 import org.firstinspires.ftc.teamcode.Bot.Mechanisms.OuttakeWrist;
 import org.firstinspires.ftc.teamcode.Bot.Mechanisms.V4B;
 import org.firstinspires.ftc.teamcode.Bot.Setup;
+import org.firstinspires.ftc.teamcode.Bot.StartPositions;
 
 @TeleOp(name = "flexible test", group = "tele-op")
 public class FlexibleTest extends LinearOpMode {
     Setup setup;
 
     Mechanism mechanism;
-    Mechanism intakeSlides = new IntakeSlides(), intakeMotor = new IntakeMotor(), outtakeClaw = new OuttakeClaw(), outtakeSlides = new OuttakeSlides(), outtakeWrist = new OuttakeWrist(), v4b = new V4B();
+    Mechanism intakeSlides = new IntakeSlides(), intakeMotor = new Noodler(), outtakeClaw = new OuttakeClaw(), outtakeSlides = new OuttakeSlides(), outtakeWrist = new OuttakeWrist(), v4b = new V4B(), intakeArm = new IntakeArm();
 
 
     Mechanism[] mechanisms;
@@ -38,9 +39,29 @@ public class FlexibleTest extends LinearOpMode {
     public void runOpMode() throws InterruptedException {
         setup = new Setup(hardwareMap, telemetry, false, this, Setup.OpModeType.AUTO, Setup.Team.Q1);
         mechanism = new Mechanism("mechanism");
-        mechanisms = new Mechanism[]{outtakeSlides, v4b, outtakeWrist, outtakeClaw};
-        initPositions = new double[]{0, 0.5, 0.5, 0.5};
-        isServo = new boolean[]{false, true, true, true};
+        mechanisms = new Mechanism[]{
+                outtakeSlides,
+                v4b,
+                outtakeWrist,
+                outtakeClaw,
+                intakeSlides,
+                intakeArm};
+        initPositions = new double[]{
+                StartPositions.outtakeSlidesPos,
+                StartPositions.outtakeV4BPos,
+                StartPositions.outtakeWristPos,
+                StartPositions.outtakeClawPos,
+                StartPositions.intakeSlidesPos,
+                StartPositions.intakeArmPos
+        };
+        isServo = new boolean[]{
+                false,
+                true,
+                true,
+                true,
+                false,
+                true
+        };
 
         telemetry.update();
 

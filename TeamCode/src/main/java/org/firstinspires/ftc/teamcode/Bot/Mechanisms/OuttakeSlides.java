@@ -6,6 +6,7 @@ public class OuttakeSlides extends RunToPosMotorMechanism {
     public OuttakeSlides() {
         super("OuttakeSlides");
     }
+    public static final double INIT = 0;
 
     public static final double MIN = 0;
     public static final double MAX = 100;

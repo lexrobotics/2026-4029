@@ -48,10 +48,10 @@ public class MechTest extends LinearOpMode {
             }
             if(gamepad1.b){
                 telemetry.addLine("GR:GR");
-                bot.outtakeClaw.setTarget(OuttakeClaw.GRIP);
+                bot.outtakeClaw.setTarget(OuttakeClaw.INIT);
             } else {
                 telemetry.addLine("GR:MI");
-                bot.outtakeClaw.setTarget(OuttakeClaw.MIN);
+                bot.outtakeClaw.setTarget(OuttakeClaw.INIT);
             }
             telemetry.update();
             bot.update();

@@ -2,9 +2,9 @@ package org.firstinspires.ftc.teamcode.Bot.Mechanisms;
 
 import org.firstinspires.ftc.teamcode.Bot.Mechanisms.AbstractMechanisms.ServoMechanism;
 
-public class OuttakeClaw extends ServoMechanism {
-    public OuttakeClaw() {
-        super("OuttakeClaw");
+public class IntakeArm extends ServoMechanism {
+    public IntakeArm() {
+        super("IntakeArm");
     }
     public static final double INIT = 0.15;
     public static final double OPEN = 0.238;
