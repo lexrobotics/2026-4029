@@ -5,6 +5,7 @@ import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 
 import org.firstinspires.ftc.teamcode.Bot.Bot;
+import org.firstinspires.ftc.teamcode.Bot.Mechanisms.IntakeArm;
 import org.firstinspires.ftc.teamcode.Bot.Mechanisms.IntakeSlides;
 import org.firstinspires.ftc.teamcode.Bot.Mechanisms.Noodler;
 import org.firstinspires.ftc.teamcode.Bot.Mechanisms.OuttakeClaw;
@@ -28,6 +29,8 @@ public class InitTest extends LinearOpMode {
         setup = new Setup(hardwareMap, telemetry, true, this, Setup.OpModeType.AUTO, Setup.Team.Q1);
         setup.disableMechanism("Winch");
         setup.disableMechanism("OuttakeSlides");
+        setup.disableMechanism("IntakeSlides");
+
 
 
         bot = new Bot(Setup.mechStates, Setup.sensorStates);
@@ -43,6 +46,8 @@ public class InitTest extends LinearOpMode {
             bot.outtakeWrist.setTarget(OuttakeWrist.INIT);
             bot.outtakeSlides.setTarget(OuttakeSlides.INIT);
             bot.intakeSlides.setTarget(IntakeSlides.INIT);
+            bot.intakeArm.setTarget(IntakeArm.INIT);
+
 
             bot.update();
         }

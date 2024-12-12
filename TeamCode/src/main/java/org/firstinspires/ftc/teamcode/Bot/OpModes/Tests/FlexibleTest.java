@@ -34,7 +34,7 @@ public class FlexibleTest extends LinearOpMode {
     private double targetPos, futureVelPos, changeInPos, velocity;
     private boolean isGetVelocityMode, isMoving;
 
-    private double SERVO_INCREMENT = 0.0001, MOTOR_INCREMENT = 5;
+    private double SERVO_INCREMENT = 0.0001, MOTOR_INCREMENT = 3;
     ElapsedTime timer = new ElapsedTime();
     @Override
     public void runOpMode() throws InterruptedException {
