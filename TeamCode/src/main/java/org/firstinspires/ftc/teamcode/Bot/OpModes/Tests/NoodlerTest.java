@@ -13,16 +13,15 @@ public class NoodlerTest extends LinearOpMode {
         waitForStart();
         while (opModeIsActive()) {
             if (gamepad1.a) {
-                noodler.setPower(1);
+                noodler.setPower(50);
             }
             if (gamepad1.b) {
-                noodler.setPower(-1);
+                noodler.setPower(-50);
             }
             if (gamepad1.atRest()) {
                 noodler.setPower(0);
             }
             telemetry.update();
         }
-        noodler.setPower(0);
     }
 }

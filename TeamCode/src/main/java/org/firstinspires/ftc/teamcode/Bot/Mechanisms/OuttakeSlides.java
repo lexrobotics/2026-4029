@@ -1,12 +1,15 @@
 package org.firstinspires.ftc.teamcode.Bot.Mechanisms;
 
+import com.acmerobotics.dashboard.config.Config;
+
 import org.firstinspires.ftc.teamcode.Bot.Mechanisms.AbstractMechanisms.RunToPosMotorMechanism;
+@Config
 
 public class OuttakeSlides extends RunToPosMotorMechanism {
     public OuttakeSlides() {
         super("OuttakeSlides");
     }
-    public static final double INIT = 0;
+    public static double INIT = 0;
 
     public static final double MIN = 0;
     public static final double MAX = 100;

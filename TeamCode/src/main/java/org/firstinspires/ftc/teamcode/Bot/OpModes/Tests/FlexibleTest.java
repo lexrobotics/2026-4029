@@ -11,6 +11,7 @@ import org.firstinspires.ftc.teamcode.Bot.Mechanisms.IntakeSlides;
 import org.firstinspires.ftc.teamcode.Bot.Mechanisms.Noodler;
 import org.firstinspires.ftc.teamcode.Bot.Mechanisms.OuttakeClaw;
 import org.firstinspires.ftc.teamcode.Bot.Mechanisms.OuttakeSlides;
+import org.firstinspires.ftc.teamcode.Bot.Mechanisms.OuttakeSlidesSmart;
 import org.firstinspires.ftc.teamcode.Bot.Mechanisms.OuttakeWrist;
 import org.firstinspires.ftc.teamcode.Bot.Mechanisms.V4B;
 import org.firstinspires.ftc.teamcode.Bot.Setup;
@@ -21,7 +22,7 @@ public class FlexibleTest extends LinearOpMode {
     Setup setup;
 
     Mechanism mechanism;
-    Mechanism intakeSlides = new IntakeSlides(), intakeMotor = new Noodler(), outtakeClaw = new OuttakeClaw(), outtakeSlides = new OuttakeSlides(), outtakeWrist = new OuttakeWrist(), v4b = new V4B(), intakeArm = new IntakeArm();
+    Mechanism intakeSlides = new IntakeSlides(), noodler = new Noodler(), outtakeClaw = new OuttakeClaw(), outtakeSlides = new OuttakeSlidesSmart(), outtakeWrist = new OuttakeWrist(), v4b = new V4B(), intakeArm = new IntakeArm();
 
 
     Mechanism[] mechanisms;
@@ -45,14 +46,17 @@ public class FlexibleTest extends LinearOpMode {
                 outtakeWrist,
                 outtakeClaw,
                 intakeSlides,
-                intakeArm};
+                intakeArm,
+                noodler
+        };
         initPositions = new double[]{
                 StartPositions.outtakeSlidesPos,
                 StartPositions.outtakeV4BPos,
                 StartPositions.outtakeWristPos,
                 StartPositions.outtakeClawPos,
                 StartPositions.intakeSlidesPos,
-                StartPositions.intakeArmPos
+                StartPositions.intakeArmPos,
+                StartPositions.noodlerPos
         };
         isServo = new boolean[]{
                 false,
@@ -60,7 +64,8 @@ public class FlexibleTest extends LinearOpMode {
                 true,
                 true,
                 false,
-                true
+                true,
+                false
         };
 
         telemetry.update();
@@ -97,29 +102,32 @@ public class FlexibleTest extends LinearOpMode {
             }
 
             double gamepad_input = -gamepad1.left_stick_y;
-
-                if (isGetVelocityMode && isServo[mechIndex%mechanisms.length]){
+            if(mechIndex==6){
+                break;
+            }
+            else{
+                if (isGetVelocityMode && isServo[mechIndex % mechanisms.length]) {
                     if (gamepad_input > 0.1) {
-                        futureVelPos = Range.clip(futureVelPos + 0.1*SERVO_INCREMENT, 0, 1);
+                        futureVelPos = Range.clip(futureVelPos + 0.1 * SERVO_INCREMENT, 0, 1);
                         isMoving = false;
                         mechanism.update();
                     } else if (gamepad_input < -0.1) {
-                        futureVelPos = Range.clip(futureVelPos - 0.1*SERVO_INCREMENT, 0, 1);
+                        futureVelPos = Range.clip(futureVelPos - 0.1 * SERVO_INCREMENT, 0, 1);
                         isMoving = false;
                         mechanism.update();
                     }
-                    if (gamepad2.a && !isMoving){
+                    if (gamepad2.a && !isMoving) {
                         changeInPos = Math.abs(targetPos - futureVelPos);
                         targetPos = futureVelPos;
                         timer.reset();
                         isMoving = true;
                         mechanism.update();
                     }
-                    if (gamepad2.b && isMoving){
-                        velocity = changeInPos/timer.seconds();
+                    if (gamepad2.b && isMoving) {
+                        velocity = changeInPos / timer.seconds();
                         mechanism.update();
                     }
-                }else {
+                } else {
                     if (gamepad_input > 0.1) {
                         if (isServo[mechIndex % mechanisms.length]) {
                             targetPos = Range.clip(targetPos + SERVO_INCREMENT, 0, 1);
@@ -128,7 +136,7 @@ public class FlexibleTest extends LinearOpMode {
                         }
                         mechanism.update();
                     } else if (gamepad_input < -0.1) {
-                        if (isServo[mechIndex%mechanisms.length]) {
+                        if (isServo[mechIndex % mechanisms.length]) {
                             targetPos = Range.clip(targetPos - SERVO_INCREMENT, 0, 1);
                         } else {
                             targetPos = Range.clip(targetPos - MOTOR_INCREMENT, -10000, 10000);
@@ -136,7 +144,7 @@ public class FlexibleTest extends LinearOpMode {
                         mechanism.update();
                     }
                 }
-
+            }
 
                 if(mechanism.wasInitialized()){
                     mechanism.update();

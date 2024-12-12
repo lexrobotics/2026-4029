@@ -7,6 +7,7 @@ import com.qualcomm.robotcore.util.ElapsedTime;
 
 import org.firstinspires.ftc.teamcode.Bot.Drivetrain.Drivetrain;
 import org.firstinspires.ftc.teamcode.Bot.Mechanisms.AbstractMechanisms.Mechanism;
+import org.firstinspires.ftc.teamcode.Bot.Mechanisms.IntakeArm;
 import org.firstinspires.ftc.teamcode.Bot.Mechanisms.IntakeSlides;
 //import org.firstinspires.ftc.teamcode.Bot.Mechanisms.IntakeSlidesSmart;
 import org.firstinspires.ftc.teamcode.Bot.Mechanisms.Noodler;
@@ -24,7 +25,7 @@ import java.util.HashMap;
 
 public class Bot implements Robot{
     public Drivetrain drivetrain;
-    public Mechanism slideMech, outtakeWrist, outtakeClaw, outtakeSlides, intakeSlides, v4b, winch, intake, noodler;
+    public Mechanism intakeArm, outtakeWrist, outtakeClaw, outtakeSlides, intakeSlides, v4b, winch, intake, noodler;
     public Sensors sensors;
     public SensorSwitch outtakeSlidesSwitch, intakeSlidesSwitch;
 
@@ -73,6 +74,10 @@ public class Bot implements Robot{
             intakeSlides = new IntakeSlides();
         } else {
             intakeSlides = new Mechanism("IntakeSlides");
+        } if(hardwareStates.get("IntakeArm").isEnabled){
+            intakeArm = new IntakeArm();
+        } else {
+            intakeArm = new Mechanism("IntakeArm");
         }
 
         init();
@@ -99,6 +104,7 @@ public class Bot implements Robot{
         outtakeWrist.init(StartPositions.outtakeWristPos);
         outtakeSlides.init(StartPositions.outtakeSlidesPos);
         intakeSlides.init(StartPositions.intakeSlidesPos);
+        intakeArm.init(StartPositions.intakeArmPos);
         drivetrain.init(new Pose2d(0, 0, 0));
     }
     public void init(Pose2d startPos){
@@ -111,6 +117,7 @@ public class Bot implements Robot{
         outtakeWrist.init(StartPositions.outtakeWristPos);
         outtakeSlides.init(StartPositions.outtakeSlidesPos);
         intakeSlides.init(StartPositions.intakeSlidesPos);
+        intakeArm.init(StartPositions.intakeArmPos);
         drivetrain.init(startPos);
     }
 
@@ -123,6 +130,7 @@ public class Bot implements Robot{
         outtakeWrist.update();
         outtakeSlides.update();
         intakeSlides.update();
+        intakeArm.update();
         drivetrain.update();
     }
 
@@ -136,11 +144,12 @@ public class Bot implements Robot{
         outtakeSlides.telemetry();
         intakeSlides.telemetry();
         drivetrain.telemetry();
+        intakeArm.telemetry();
     }
 
     @Override
     public boolean isBusy(){
-        return noodler.isBusy() || winch.isBusy() || v4b.isBusy() || outtakeClaw.isBusy() || outtakeWrist.isBusy() || outtakeSlides.isBusy() || intakeSlides.isBusy() || drivetrain.isBusy();
+        return noodler.isBusy() || winch.isBusy() || v4b.isBusy() || outtakeClaw.isBusy() || outtakeWrist.isBusy() || outtakeSlides.isBusy() || intakeSlides.isBusy() || drivetrain.isBusy() || intakeArm.isBusy() || intakeSlides.isBusy();
     }
     public void setTargetVectors(double x, double y, double theta){
 //        drivetrain.setTargetVectors(x,y,theta);

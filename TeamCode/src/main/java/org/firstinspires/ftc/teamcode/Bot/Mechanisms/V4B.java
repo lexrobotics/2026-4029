@@ -1,14 +1,15 @@
 package org.firstinspires.ftc.teamcode.Bot.Mechanisms;
 
+import com.acmerobotics.dashboard.config.Config;
 import com.qualcomm.robotcore.util.Range;
 
 import org.firstinspires.ftc.teamcode.Bot.Mechanisms.AbstractMechanisms.ServoMechanism;
-
+@Config
 public class V4B extends ServoMechanism {
     public V4B() {
         super("V4B");
     }
-    public static final double INIT = 0.5;
+    public static double INIT = 0.5;
 
     public static final double MAX = 1;
     public static final double MIN = 0;
