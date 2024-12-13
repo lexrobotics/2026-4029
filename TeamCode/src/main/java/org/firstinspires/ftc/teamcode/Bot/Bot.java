@@ -8,11 +8,9 @@ import com.qualcomm.robotcore.util.ElapsedTime;
 import org.firstinspires.ftc.teamcode.Bot.Drivetrain.Drivetrain;
 import org.firstinspires.ftc.teamcode.Bot.Mechanisms.AbstractMechanisms.Mechanism;
 import org.firstinspires.ftc.teamcode.Bot.Mechanisms.IntakeArm;
-import org.firstinspires.ftc.teamcode.Bot.Mechanisms.IntakeSlides;
-//import org.firstinspires.ftc.teamcode.Bot.Mechanisms.IntakeSlidesSmart;
+import org.firstinspires.ftc.teamcode.Bot.Mechanisms.IntakeSlidesSmart;
 import org.firstinspires.ftc.teamcode.Bot.Mechanisms.Noodler;
 import org.firstinspires.ftc.teamcode.Bot.Mechanisms.OuttakeClaw;
-import org.firstinspires.ftc.teamcode.Bot.Mechanisms.OuttakeSlides;
 import org.firstinspires.ftc.teamcode.Bot.Mechanisms.OuttakeSlidesSmart;
 import org.firstinspires.ftc.teamcode.Bot.Mechanisms.OuttakeWrist;
 import org.firstinspires.ftc.teamcode.Bot.Mechanisms.V4B;
@@ -71,7 +69,7 @@ public class Bot implements Robot{
             outtakeSlides = new Mechanism("OuttakeSlides");
         }
         if(hardwareStates.get("IntakeSlides").isEnabled){
-            intakeSlides = new IntakeSlides();
+            intakeSlides = new IntakeSlidesSmart();
         } else {
             intakeSlides = new Mechanism("IntakeSlides");
         } if(hardwareStates.get("IntakeArm").isEnabled){
@@ -117,6 +115,7 @@ public class Bot implements Robot{
         outtakeWrist.init(StartPositions.outtakeWristPos);
         outtakeSlides.init(StartPositions.outtakeSlidesPos);
         intakeSlides.init(StartPositions.intakeSlidesPos);
+        intakeSlides.reverse(true);
         intakeArm.init(StartPositions.intakeArmPos);
         drivetrain.init(startPos);
     }
@@ -149,7 +148,7 @@ public class Bot implements Robot{
 
     @Override
     public boolean isBusy(){
-        return noodler.isBusy() || winch.isBusy() || v4b.isBusy() || outtakeClaw.isBusy() || outtakeWrist.isBusy() || outtakeSlides.isBusy() || intakeSlides.isBusy() || drivetrain.isBusy() || intakeArm.isBusy() || intakeSlides.isBusy();
+        return noodler.isBusy() || winch.isBusy() || v4b.isBusy() || outtakeClaw.isBusy() || outtakeWrist.isBusy() || outtakeSlides.isBusy() || intakeSlides.isBusy() || drivetrain.isBusy() || intakeArm.isBusy() ;
     }
     public void setTargetVectors(double x, double y, double theta){
 //        drivetrain.setTargetVectors(x,y,theta);

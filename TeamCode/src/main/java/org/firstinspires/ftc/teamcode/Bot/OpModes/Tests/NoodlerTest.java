@@ -3,23 +3,30 @@ package org.firstinspires.ftc.teamcode.Bot.OpModes.Tests;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.CRServo;
+import com.qualcomm.robotcore.hardware.DcMotor;
+import com.qualcomm.robotcore.hardware.DcMotorEx;
+
+import org.firstinspires.ftc.teamcode.Bot.Mechanisms.OuttakeSlidesSmart;
 
 @TeleOp(name="NoodlerTest", group = "0")
 public class NoodlerTest extends LinearOpMode {
     private CRServo noodler;
+    private DcMotorEx motor;
+    private int currentPos = 0 ;
     @Override
     public void runOpMode(){
-        noodler = hardwareMap.crservo.get("Noodler");
+        motor = hardwareMap.get(DcMotorEx.class, "IntakeSlides");
+        motor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         waitForStart();
         while (opModeIsActive()) {
             if (gamepad1.a) {
-                noodler.setPower(50);
+                motor.setTargetPosition(currentPos);
             }
             if (gamepad1.b) {
-                noodler.setPower(-50);
+                motor.setTargetPosition(currentPos + 5);
             }
             if (gamepad1.atRest()) {
-                noodler.setPower(0);
+                motor.setTargetPosition(currentPos);
             }
             telemetry.update();
         }
