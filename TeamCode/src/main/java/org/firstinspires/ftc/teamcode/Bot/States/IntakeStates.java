@@ -5,5 +5,6 @@ public enum IntakeStates {
     POS1,
     POS2,
     MANUAL,
-    MOVING
+    MOVING,
+    TRANSFER
 }

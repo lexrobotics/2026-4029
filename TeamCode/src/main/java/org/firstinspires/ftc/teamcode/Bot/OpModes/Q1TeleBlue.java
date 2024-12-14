@@ -27,7 +27,7 @@ public class Q1TeleBlue extends LinearOpMode {
     private double translateMag;
     private double spin;
     private double imuOffset = 0;
-    private OuttakeStates outtakeState = OuttakeStates.REST;
+    private OuttakeStates outtakeState = OuttakeStates.TRANSFER;
     private IntakeStates intakeStates = IntakeStates.REST;
     private V4BState v4BState = V4BState.REST;
     private boolean v4bTracker = false;
@@ -105,6 +105,7 @@ public class Q1TeleBlue extends LinearOpMode {
 //        specimenOuttake button = gamepad1.?
 //        unextendedIntake button = gamepad1.?
 //        extendedIntake button = gamepad1.?
+
         if(gamepad2.right_trigger > 0.1){
             actionSequences.IntakeMotor(1);
         } else if(gamepad2.left_trigger > 0.1){
@@ -173,8 +174,10 @@ public class Q1TeleBlue extends LinearOpMode {
                 actionSequences.Specimen2();
                 break;
             case REST:
-                actionSequences.OuttakeRest(false);
+                actionSequences.OuttakeRest(true);
                 break;
+            case TRANSFER:
+                actionSequences.PrepScore();
             case MANUAL:
                 actionSequences.ManualOuttakeSlides(gamepad2.right_stick_y);
                 break;

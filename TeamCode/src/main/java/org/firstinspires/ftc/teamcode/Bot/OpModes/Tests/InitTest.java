@@ -33,7 +33,6 @@ public class InitTest extends LinearOpMode {
     public void runOpMode(){
         setup = new Setup(hardwareMap, telemetry, true, this, Setup.OpModeType.AUTO, Setup.Team.Q1);
         setup.disableMechanism("Winch");
-        setup.disableMechanism("IntakeSlides");
 
 
 
