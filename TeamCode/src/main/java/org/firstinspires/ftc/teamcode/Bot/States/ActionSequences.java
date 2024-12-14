@@ -3,6 +3,7 @@ package org.firstinspires.ftc.teamcode.Bot.States;
 import com.qualcomm.robotcore.util.Range;
 
 import org.firstinspires.ftc.teamcode.Bot.Bot;
+import org.firstinspires.ftc.teamcode.Bot.Mechanisms.IntakeArm;
 import org.firstinspires.ftc.teamcode.Bot.Mechanisms.IntakeSlides;
 import org.firstinspires.ftc.teamcode.Bot.Mechanisms.Noodler;
 import org.firstinspires.ftc.teamcode.Bot.Mechanisms.OuttakeClaw;
@@ -29,7 +30,7 @@ public class ActionSequences {
         bot.v4b.setTarget(V4B.ANG);
     }
     public void V4BRest(){
-        bot.v4b.setTarget(V4B.RST);
+        bot.v4b.setTarget(V4B.TRANSFER);
     }
 
     public void Bucket1(){
@@ -42,7 +43,7 @@ public class ActionSequences {
         bot.outtakeSlides.setVelocity(1);
         bot.outtakeSlides.setTarget(OuttakeSlidesSmart.BUC2);
         bot.outtakeWrist.setTarget(OuttakeWrist.POS2);
-        bot.v4b.setTarget(V4B.BUC2);
+        bot.v4b.setTarget(V4B.ANG);
     }
     public void Specimen1(){
         bot.outtakeSlides.setVelocity(1);
@@ -72,22 +73,26 @@ public class ActionSequences {
         bot.outtakeSlides.setVelocity(1);
         bot.outtakeSlides.setTarget(OuttakeSlidesSmart.RST);
         bot.outtakeWrist.setTarget(OuttakeWrist.RST);
-        bot.v4b.setTarget(V4B.RST);
+        bot.v4b.setTarget(V4B.TRANSFER);
         if(drop){
             bot.outtakeClaw.setTarget(OuttakeClaw.DROP);
         }
     }
     public void IntakePos1(){
         bot.intakeSlides.setTarget(IntakeSlides.POS1);
+//        bot.intakeArm.setTarget(IntakeArm.INTAKE);
     }
     public void IntakePos2(){
         bot.intakeSlides.setTarget(IntakeSlides.POS2);
+//        bot.intakeArm.setTarget(IntakeArm.INTAKE);
     }
     public void IntakeRest(){
         bot.intakeSlides.setTarget(IntakeSlides.RST);
+        bot.intakeArm.setTarget(IntakeArm.TRANSFER);
     }
     public void Intake(boolean on){
         bot.noodler.setVelocity(on? Noodler.FORWARD_MAX: Noodler.MIN_SPEED);
+        bot.intakeArm.setTarget(IntakeArm.INTAKE);
     }
     public void ReverseIntake(boolean on){
         bot.noodler.setVelocity(on? Noodler.REVERSE_MAX: Noodler.MIN_SPEED);

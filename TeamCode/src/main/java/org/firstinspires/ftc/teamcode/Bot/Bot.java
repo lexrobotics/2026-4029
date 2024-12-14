@@ -101,6 +101,7 @@ public class Bot implements Robot{
         outtakeClaw.init(StartPositions.outtakeClawPos);
         outtakeWrist.init(StartPositions.outtakeWristPos);
         outtakeSlides.init(StartPositions.outtakeSlidesPos);
+//        outtakeSlides.reverse(true);
         intakeSlides.init(StartPositions.intakeSlidesPos);
         intakeArm.init(StartPositions.intakeArmPos);
         drivetrain.init(new Pose2d(0, 0, 0));
@@ -114,8 +115,8 @@ public class Bot implements Robot{
         outtakeClaw.init(StartPositions.outtakeClawPos);
         outtakeWrist.init(StartPositions.outtakeWristPos);
         outtakeSlides.init(StartPositions.outtakeSlidesPos);
+//        outtakeSlides.reverse(true);
         intakeSlides.init(StartPositions.intakeSlidesPos);
-        intakeSlides.reverse(true);
         intakeArm.init(StartPositions.intakeArmPos);
         drivetrain.init(startPos);
     }
