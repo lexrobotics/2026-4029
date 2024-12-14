@@ -12,7 +12,7 @@ public class IntakeArm extends ServoMechanism {
     public static double INIT = 0.31;
     public static final double INTAKE = 0.1;
     public static final double MIN = 0.1;
-    public static final double TRANSFER = 0.3;
+    public static final double TRANSFER = 0.55;
 
 
 }

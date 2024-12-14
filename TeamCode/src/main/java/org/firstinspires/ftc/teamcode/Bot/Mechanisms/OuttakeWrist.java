@@ -19,5 +19,5 @@ public class OuttakeWrist extends ServoMechanism {
     public static final double SPC1 = 0.5;
     public static final double SPC2 = 0.5;
     public static final double RST = 0.5;
-    public static final double TRA = 0.5;
+    public static final double TRA = 0;
 }

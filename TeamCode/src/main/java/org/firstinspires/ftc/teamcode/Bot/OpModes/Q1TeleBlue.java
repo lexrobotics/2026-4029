@@ -52,7 +52,7 @@ public class Q1TeleBlue extends LinearOpMode {
 
         while(opModeIsActive()){
             driver1();
-//            driver2();
+            driver2();
             bot.update();
         }
 
