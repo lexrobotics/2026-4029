@@ -1,5 +1,7 @@
 package org.firstinspires.ftc.teamcode.Bot;
 
+import com.acmerobotics.roadrunner.geometry.Pose2d;
+
 import org.firstinspires.ftc.teamcode.Bot.Mechanisms.IntakeArm;
 import org.firstinspires.ftc.teamcode.Bot.Mechanisms.IntakeSlides;
 import org.firstinspires.ftc.teamcode.Bot.Mechanisms.Noodler;
@@ -18,5 +20,8 @@ public class StartPositions {
     public static double intakeSlidesPos = IntakeSlides.INIT;
     public static double intakeArmPos = IntakeArm.INIT;
     public static double noodlerPos = Noodler.INIT;
-
+    public static Pose2d redRightDrivePos = new Pose2d(12, 72-12, Math.toRadians(270));
+    public static Pose2d redLeftDrivePos = new Pose2d(-12, 72-12, Math.toRadians(270));
+    public static Pose2d blueRightDrivePos = new Pose2d(-12, 72-12, Math.toRadians(90));
+    public static Pose2d blueLeftDrivePos = new Pose2d(12, 72-12, Math.toRadians(90));
 }
