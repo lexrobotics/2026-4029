@@ -43,11 +43,16 @@ public class Q1TeleBlue extends LinearOpMode {
         imu = new IMUStatic();
         actionSequences = new ActionSequences(bot);
 //        LightStrip lights = new LightStrip("lights", RevBlinkinLedDriver.BlinkinPattern.BLUE);
+        bot.init();
+        while(opModeInInit()){
+            bot.outtakeSlides.telemetry();
+            telemetry.update();
+        }
         waitForStart();
 
         while(opModeIsActive()){
             driver1();
-            driver2();
+//            driver2();
             bot.update();
         }
 
@@ -107,7 +112,7 @@ public class Q1TeleBlue extends LinearOpMode {
         } else {
             actionSequences.IntakeMotor(0);
         }
-        if(Math.abs(gamepad2.left_stick_y) > D1GPM){
+        if(Math.abs(gamepad2.right_stick_y) > D1GPM){
             outtakeState = OuttakeStates.MANUAL;
         } else if(bot.outtakeSlides.isBusy()){
             outtakeState = OuttakeStates.MOVING;
@@ -124,7 +129,7 @@ public class Q1TeleBlue extends LinearOpMode {
                 outtakeState = OuttakeStates.BU2;
             }
         }
-        if(Math.abs(gamepad2.right_stick_y) > D1GPM){
+        if(Math.abs(gamepad2.left_stick_y) > D1GPM){
             intakeStates = IntakeStates.MANUAL;
         } else if(bot.outtakeSlides.isBusy()){
             intakeStates = IntakeStates.MOVING;
@@ -171,13 +176,13 @@ public class Q1TeleBlue extends LinearOpMode {
                 actionSequences.OuttakeRest(false);
                 break;
             case MANUAL:
-                actionSequences.ManualOuttakeSlides(gamepad2.left_stick_y);
+                actionSequences.ManualOuttakeSlides(gamepad2.right_stick_y);
                 break;
         }
 
         switch(intakeStates){
             case MANUAL:
-                actionSequences.ManualIntakeSlides(gamepad2.right_stick_y);
+                actionSequences.ManualIntakeSlides(gamepad2.left_stick_y);
                 break;
             case REST:
                 actionSequences.IntakeRest();

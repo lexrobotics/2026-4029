@@ -94,6 +94,7 @@ public class ActionSequences {
     }
     public void ManualIntakeSlides(double joystick){
         bot.intakeSlides.setVelocity(0.5);
+
 //        bot.intakeSlides.setTarget(Range.clip(bot.intakeSlides.getCurrentPosition() + MANUAL_OUTTAKE_SLIDES_INCREMENT*(Math.signum(-joystick)*Math.pow(1,Math.abs(-joystick) * 2)), 0, IntakeSlides.MAX));
         bot.intakeSlides.setTarget(Range.clip(bot.intakeSlides.getCurrentPosition() + MANUAL_OUTTAKE_SLIDES_INCREMENT*(Math.signum(-joystick)*(Math.pow(2,Math.abs(-joystick) * 2)) - 1), 0, IntakeSlides.MAX));
     }

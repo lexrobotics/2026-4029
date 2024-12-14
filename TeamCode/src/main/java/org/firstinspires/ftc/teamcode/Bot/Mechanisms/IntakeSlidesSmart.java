@@ -1,19 +1,18 @@
 package org.firstinspires.ftc.teamcode.Bot.Mechanisms;
 
 import com.qualcomm.robotcore.hardware.DcMotor;
-import com.qualcomm.robotcore.hardware.HardwareMap;
 
 import org.firstinspires.ftc.teamcode.Bot.Sensors.SensorSwitch;
 import org.firstinspires.ftc.teamcode.Bot.Setup;
 
-public class OuttakeSlidesSmart extends OuttakeSlides{
+public class IntakeSlidesSmart extends IntakeSlides{
     private SensorSwitch sensorSwitch;
     private boolean lastState = false;
-    public OuttakeSlidesSmart(){super();}
+    public IntakeSlidesSmart(){super();}
 
     @Override
     public void init(double target){
-        sensorSwitch = new SensorSwitch("OuttakeSlidesSwitch", true);
+        sensorSwitch = new SensorSwitch("IntakeSlidesSwitch", true);
 //        lastState = sensorSwitch.getStatus();
         super.init(target);
     }
@@ -22,7 +21,6 @@ public class OuttakeSlidesSmart extends OuttakeSlides{
     public void telemetry(){
         super.telemetry();
         Setup.telemetry.addData(name + " SwitchState", sensorSwitch.getStatus());
-        Setup.telemetry.addData(name + " OSlidesPos", motor.getCurrentPosition());
     }
 
     @Override

@@ -13,7 +13,7 @@ public class OuttakeSlides extends RunToPosMotorMechanism {
 
     public static final double MIN = 0;
     public static final double MAX = 100;
-    public static final double BUC1 = 0;
+    public static final double BUC1 = 100;
     public static final double BUC2 = 0;
     public static final double SPC1 = 0;
     public static final double SPC2 = 0;
