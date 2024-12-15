@@ -41,6 +41,22 @@ public class IntakeSlidesSmart extends IntakeSlides{
 //        motor.setTargetPosition((int)targetPos);
         motor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
         motor.setPower(velocity);
+//        boolean state = sensorSwitch.getStatus();
+//        Setup.telemetry.addData(name + " SwitchState", sensorSwitch.getStatus());
+//        if (state && !lastState) {
+//            reset();
+//        }
+//        lastState = state;
+//
+//        currentPos = motor.getCurrentPosition();
+//        if (targetPos == 0 && currentPos < margin && !state){
+//            motor.setTargetPosition((int)(currentPos - margin*1.5));
+//        }else {
+//            motor.setTargetPosition((int)targetPos);
+//        }
+////        motor.setTargetPosition((int)targetPos);
+//        motor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+//        motor.setPower(velocity);
     }
 
 }

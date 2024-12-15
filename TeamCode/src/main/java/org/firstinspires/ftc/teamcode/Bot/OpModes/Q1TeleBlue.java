@@ -15,7 +15,7 @@ import org.firstinspires.ftc.teamcode.Bot.States.IntakeStates;
 import org.firstinspires.ftc.teamcode.Bot.States.OuttakeStates;
 import org.firstinspires.ftc.teamcode.Bot.States.V4BState;
 
-@TeleOp(name = "Blue", group = "0")
+@TeleOp(name = "Q1Tele", group = "0")
 public class Q1TeleBlue extends LinearOpMode {
     private Setup setup;
     private Bot bot;
@@ -90,7 +90,7 @@ public class Q1TeleBlue extends LinearOpMode {
             y *= 1;
             spin *= .7;
         }
-
+        telemetry.addData("IMU", -bot.drivetrain.getHeadingIMU());
         bot.drivetrain.setTeleOpTargets(x,y,spin);
         telemetry.addData("translateMag", translateMag);
         telemetry.addData("x", x);
@@ -107,11 +107,11 @@ public class Q1TeleBlue extends LinearOpMode {
 //        extendedIntake button = gamepad1.?
 
         if(gamepad2.right_trigger > 0.1){
-            actionSequences.IntakeMotor(1);
+            actionSequences.IntakeMotor(1, true);
         } else if(gamepad2.left_trigger > 0.1){
-            actionSequences.IntakeMotor(-1);
+            actionSequences.IntakeMotor(-1, true);
         } else {
-            actionSequences.IntakeMotor(0);
+            actionSequences.IntakeMotor(0, false);
         }
         if(Math.abs(gamepad2.right_stick_y) > D1GPM){
             outtakeState = OuttakeStates.MANUAL;

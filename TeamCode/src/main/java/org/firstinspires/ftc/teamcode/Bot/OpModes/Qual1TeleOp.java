@@ -114,11 +114,11 @@ public class Qual1TeleOp extends LinearOpMode {
 //        extendedIntake button = gamepad1.?
 
         if(gamepad2.right_trigger > 0.1){
-            actionSequences.IntakeMotor(1);
+            actionSequences.IntakeMotor(1, true);
         } else if(gamepad2.left_trigger > 0.1){
-            actionSequences.IntakeMotor(-1);
+            actionSequences.IntakeMotor(-1, true);
         } else {
-            actionSequences.IntakeMotor(0);
+            actionSequences.IntakeMotor(0, false);
         }
         if(Math.abs(gamepad2.right_stick_y) > D1GPM){
             outtakeState = OuttakeStates.MANUAL;
@@ -182,6 +182,7 @@ public class Qual1TeleOp extends LinearOpMode {
                 break;
             case REST:
                 actionSequences.OuttakeRest(true);
+                actionSequences.AttemptTransfer(outtakeState, intakeStates);
                 break;
             case SCORE_PREP:
                 bot.v4b.setTarget(V4B.TRANSFER);
@@ -198,6 +199,7 @@ public class Qual1TeleOp extends LinearOpMode {
                 break;
             case REST:
                 actionSequences.IntakeRest();
+                actionSequences.AttemptTransfer(outtakeState, intakeStates);
                 break;
             case POS1:
                 actionSequences.IntakePos1();
@@ -207,6 +209,7 @@ public class Qual1TeleOp extends LinearOpMode {
                 break;
             case TRANSFER:
                 bot.intakeArm.setTarget(IntakeArm.TRANSFER);
+                actionSequences.AttemptTransfer(outtakeState, IntakeStates.REST);
                 break;
         }
 //        switch(v4BState){

@@ -23,9 +23,9 @@ public class ActionSequences {
         return bot;
     }
 
-    public void IntakeMotor(int vel){
+    public void IntakeMotor(int vel, boolean drop){
         bot.noodler.setVelocity(vel);
-        bot.intakeArm.setTarget(IntakeArm.INTAKE);
+        if(drop) bot.intakeArm.setTarget(IntakeArm.INTAKE);
     }
     public void V4BAngled(){
         bot.v4b.setTarget(V4B.ANG);
@@ -73,8 +73,9 @@ public class ActionSequences {
     public void ManualOuttakeSlides(double joystick){
         bot.outtakeSlides.setVelocity(0.5);
 //        joystick = Math.signum(-joystick)*Math.pow(1,Math.abs(-joystick) * 2);
-        joystick = Math.signum(-joystick)*(Math.pow(2,Math.abs(-joystick) * 2) - 1);
-        bot.outtakeSlides.setTarget(Range.clip(bot.outtakeSlides.getCurrentPosition() + MANUAL_OUTTAKE_SLIDES_INCREMENT*(joystick), 0, OuttakeSlides.MAX));
+//        joystick = Math.signum(-joystick)*(Math.pow(2,Math.abs(-joystick) * 2) - 1);
+//        bot.outtakeSlides.setTarget(Range.clip(bot.outtakeSlides.getCurrentPosition() + MANUAL_OUTTAKE_SLIDES_INCREMENT*(joystick), 0, OuttakeSlides.MAX));
+        bot.outtakeSlides.setTarget(Range.clip(bot.outtakeSlides.getCurrentPosition() + (MANUAL_OUTTAKE_SLIDES_INCREMENT/2)*(Math.signum(-joystick)*(Math.pow(2,Math.abs(-joystick) * 2)) - 1), 0, OuttakeSlides.MAX));
     }
     public void OuttakeRest(boolean drop){
         bot.outtakeSlides.setVelocity(1);
@@ -116,6 +117,7 @@ public class ActionSequences {
             bot.v4b.setTarget(V4B.TRANSFER);
             bot.outtakeWrist.setTarget(OuttakeWrist.TRA);
             bot.outtakeClaw.setTarget(OuttakeClaw.INIT);
+            bot.intakeArm.setTarget(IntakeArm.TRANSFER);
         }
     }
     public void PrepScore(){
