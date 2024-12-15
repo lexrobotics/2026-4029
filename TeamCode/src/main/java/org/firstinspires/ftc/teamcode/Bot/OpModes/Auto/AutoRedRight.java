@@ -38,7 +38,7 @@ public class AutoRedRight extends LinearOpMode {
         while(opModeIsActive() && bot.isBusy()){
             bot.update();
         }
-
+/*
         bot.drivetrain.setTrajectorySequence(paths.buildRedRightTrajectory(bot.drivetrain, 1));
         actionSequences.OuttakeRest(true);
         while(opModeIsActive() && bot.isBusy()){
@@ -56,6 +56,6 @@ public class AutoRedRight extends LinearOpMode {
         actionSequences.OuttakeRest(false);
         while(opModeIsActive() && bot.isBusy()){
             bot.update();
-        }
+        }*/
     }
 }

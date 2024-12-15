@@ -25,7 +25,7 @@ public class RoadRunnerPaths {
     public TrajectorySequence buildRedRightTrajectory(Drivetrain drive, int trajectoryIndex){
         if(trajectoryIndex == 0){
             redRightTrajectories[0] = drive.buildTrajectorySequence(drive.currentPos)
-                    .lineToLinearHeading(new Pose2d(6, -(24 + BOT_FRONT_TO_BACK_LENGTH), Math.toRadians(270)))
+                    .back(24)
                     .build();
             redRightTrajectories[1] = drive.buildTrajectorySequence(drive.currentPos)
                     .lineToLinearHeading(new Pose2d(6, -(24 + BOT_FRONT_TO_BACK_LENGTH + 3), Math.toRadians(270)))
@@ -44,7 +44,7 @@ public class RoadRunnerPaths {
     }
     public TrajectorySequence buildBlueRightTrajectory(Drivetrain drive, int trajectoryIndex){
         blueRightTrajectories[0] = drive.buildTrajectorySequence(drive.currentPos)
-                .lineToLinearHeading(new Pose2d(-6, (24+12), Math.toRadians(90)))
+                .back(24)
                 .build();
         blueRightTrajectories[1] = drive.buildTrajectorySequence(drive.currentPos)
                 .lineToLinearHeading(new Pose2d(-6, (24+15), Math.toRadians(90)))

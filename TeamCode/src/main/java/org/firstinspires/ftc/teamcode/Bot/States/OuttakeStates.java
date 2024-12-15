@@ -9,6 +9,10 @@ public enum OuttakeStates {
     MANUAL,
     MOVING,
     TRANSFER,
-    SCORE_PREP
+    SCORE_PREP,
+    DROP,
+    HOLD,
+    GRAB,
+    ANGLE
 }
 

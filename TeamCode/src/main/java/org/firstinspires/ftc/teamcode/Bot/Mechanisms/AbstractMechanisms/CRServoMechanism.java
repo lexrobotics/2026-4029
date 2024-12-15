@@ -18,7 +18,7 @@ public abstract class CRServoMechanism extends Mechanism {
     @Override
     public void init(double power) {
         servo = Setup.hardwareMap.get(CRServo.class, name);
-        servo.setPower(power);
+        servo.setPower(0);
     }
 
     @Override
@@ -37,5 +37,10 @@ public abstract class CRServoMechanism extends Mechanism {
     public void update() {
         servo.setPower(velocity);
 
+    }
+
+    @Override
+    public double getVelocity(){
+        return velocity;
     }
 }

@@ -36,14 +36,14 @@ public class ActionSequences {
 
     public void Bucket1(){
         bot.outtakeSlides.setVelocity(1);
-        bot.outtakeSlides.setTarget(OuttakeSlidesSmart.BUC1);
+        bot.outtakeSlides.setTarget(OuttakeSlides.BUC1);
         bot.outtakeWrist.setTarget(OuttakeWrist.POS1);
-        bot.v4b.setTarget(V4B.HOR);
+        bot.v4b.setTarget(V4B.ANG);
         bot.outtakeClaw.setTarget(OuttakeClaw.INIT);
     }
     public void Bucket2(){
         bot.outtakeSlides.setVelocity(1);
-        bot.outtakeSlides.setTarget(OuttakeSlidesSmart.BUC2);
+        bot.outtakeSlides.setTarget(OuttakeSlides.BUC2);
         bot.outtakeWrist.setTarget(OuttakeWrist.POS2);
         bot.v4b.setTarget(V4B.ANG);
         bot.outtakeClaw.setTarget(OuttakeClaw.INIT);
@@ -51,23 +51,23 @@ public class ActionSequences {
     }
     public void Specimen1(){
         bot.outtakeSlides.setVelocity(1);
-        bot.outtakeSlides.setTarget(OuttakeSlidesSmart.SPC1);
+        bot.outtakeSlides.setTarget(OuttakeSlides.SPC1);
         bot.outtakeWrist.setTarget(OuttakeWrist.SPC1);
-        bot.v4b.setTarget(V4B.HOR);
+        bot.v4b.setTarget(V4B.ANG);
         bot.outtakeClaw.setTarget(OuttakeClaw.INIT);
 
     }
     public void GrabSpecimen(){
         bot.outtakeSlides.setVelocity(1);
-        bot.outtakeSlides.setTarget(OuttakeSlidesSmart.GRA);
+        bot.outtakeSlides.setTarget(OuttakeSlides.GRA);
         bot.outtakeWrist.setTarget(OuttakeWrist.VER);
         bot.v4b.setTarget(V4B.HOR);
     }
     public void Specimen2(){
         bot.outtakeSlides.setVelocity(1);
-        bot.outtakeSlides.setTarget(OuttakeSlidesSmart.SPC2);
+        bot.outtakeSlides.setTarget(OuttakeSlides.SPC2);
         bot.outtakeWrist.setTarget(OuttakeWrist.SPC2);
-        bot.v4b.setTarget(V4B.HOR);
+        bot.v4b.setTarget(V4B.ANG);
         bot.outtakeClaw.setTarget(OuttakeClaw.INIT);
     }
     public void ManualOuttakeSlides(double joystick){
@@ -78,8 +78,8 @@ public class ActionSequences {
         bot.outtakeSlides.setTarget(Range.clip(bot.outtakeSlides.getCurrentPosition() + (MANUAL_OUTTAKE_SLIDES_INCREMENT/2)*(Math.signum(-joystick)*(Math.pow(2,Math.abs(-joystick) * 2)) - 1), 0, OuttakeSlides.MAX));
     }
     public void OuttakeRest(boolean drop){
-        bot.outtakeSlides.setVelocity(1);
-        bot.outtakeSlides.setTarget(OuttakeSlidesSmart.RST);
+        bot.outtakeSlides.setVelocity(0.5);
+        bot.outtakeSlides.setTarget(OuttakeSlides.RST);
         bot.outtakeWrist.setTarget(OuttakeWrist.TRA);
         bot.v4b.setTarget(V4B.TRANSFER);
         if(drop){
@@ -96,7 +96,8 @@ public class ActionSequences {
     }
     public void IntakeRest(){
         bot.intakeSlides.setTarget(IntakeSlides.RST);
-        bot.intakeArm.setTarget(IntakeArm.INIT);
+        bot.intakeArm.setTarget(IntakeArm.TRANSFER);
+//        bot.noodler.setVelocity(0.3);
     }
     public void Intake(boolean on){
         bot.noodler.setVelocity(on? Noodler.FORWARD_MAX: Noodler.MIN_SPEED);

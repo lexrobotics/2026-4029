@@ -8,6 +8,7 @@ import org.firstinspires.ftc.teamcode.Bot.Mechanisms.AbstractMechanisms.MotorMec
 public class Noodler extends CRServoMechanism {
     public Noodler() {
         super("Noodler"); //TODO
+        setVelocity(0);
     }
     public static  double INIT = 0;
     public static final double FORWARD_MAX = 1;

@@ -178,4 +178,10 @@ public class Drivetrain {
         }
     };
 
+    public TrajectorySequence backward(double amount){
+        return drive.trajectorySequenceBuilder(new Pose2d(0, 0, 0))
+                .back(24)
+                .build();
+    }
+
 }

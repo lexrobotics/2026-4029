@@ -68,4 +68,8 @@ public class Mechanism {
     public boolean wasInitialized(){
         return initialized;
     }
+
+    public double getVelocity(){
+        return 0;
+    }
 }

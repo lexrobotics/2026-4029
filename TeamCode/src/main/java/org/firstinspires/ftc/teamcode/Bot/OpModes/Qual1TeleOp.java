@@ -9,6 +9,7 @@ import com.qualcomm.robotcore.util.ElapsedTime;
 import org.firstinspires.ftc.teamcode.Bot.Bot;
 import org.firstinspires.ftc.teamcode.Bot.Mechanisms.IntakeArm;
 import org.firstinspires.ftc.teamcode.Bot.Mechanisms.OuttakeClaw;
+import org.firstinspires.ftc.teamcode.Bot.Mechanisms.OuttakeSlides;
 import org.firstinspires.ftc.teamcode.Bot.Mechanisms.OuttakeWrist;
 import org.firstinspires.ftc.teamcode.Bot.Mechanisms.V4B;
 import org.firstinspires.ftc.teamcode.Bot.Sensors.IMUStatic;
@@ -43,6 +44,7 @@ public class Qual1TeleOp extends LinearOpMode {
     public void runOpMode() throws InterruptedException {
         setup = new Setup(hardwareMap, telemetry, true, this, Setup.OpModeType.AUTO, Setup.Team.Q1);
         setup.disableMechanism("Winch");
+
         bot = new Bot(Setup.mechStates, Setup.sensorStates);
         imu = new IMUStatic();
         actionSequences = new ActionSequences(bot);
@@ -51,8 +53,12 @@ public class Qual1TeleOp extends LinearOpMode {
         while(opModeInInit()){
             bot.outtakeSlides.telemetry();
             telemetry.update();
+            bot.intakeSlides.update();
         }
         waitForStart();
+
+        bot.noodler.setVelocity(0);
+        bot.update();
 
         while(opModeIsActive()){
             driver1();
@@ -60,6 +66,8 @@ public class Qual1TeleOp extends LinearOpMode {
             bot.update();
             telemetry.addData("state out", outtakeState);
             telemetry.addData("state in", intakeStates);
+            telemetry.addData("noodler pos", bot.noodler.getVelocity());
+
             telemetry.update();
         }
 
@@ -68,7 +76,7 @@ public class Qual1TeleOp extends LinearOpMode {
 
     }
     private void driver1(){
-        if (gamepad1.left_trigger > 0.1){
+        if (gamepad1.a){
             imuOffset = bot.drivetrain.getHeadingIMU();
         }
 
@@ -116,7 +124,7 @@ public class Qual1TeleOp extends LinearOpMode {
         if(gamepad2.right_trigger > 0.1){
             actionSequences.IntakeMotor(1, true);
         } else if(gamepad2.left_trigger > 0.1){
-            actionSequences.IntakeMotor(-1, true);
+            actionSequences.IntakeMotor(-1, false);
         } else {
             actionSequences.IntakeMotor(0, false);
         }
@@ -135,6 +143,12 @@ public class Qual1TeleOp extends LinearOpMode {
                 outtakeState = OuttakeStates.BU1;
             } else if(gamepad2.dpad_up){
                 outtakeState = OuttakeStates.BU2;
+            }else if (gamepad2.left_bumper){
+                outtakeState = OuttakeStates.DROP;
+            }else if (gamepad2.right_bumper) {
+                outtakeState = OuttakeStates.HOLD;
+            }else if (gamepad2.start){
+                outtakeState = OuttakeStates.GRAB;
             }
         }
         if(Math.abs(gamepad2.left_stick_y) > D1GPM){
@@ -142,16 +156,17 @@ public class Qual1TeleOp extends LinearOpMode {
         } else if(bot.outtakeSlides.isBusy()){
             intakeStates = IntakeStates.MOVING;
         } else{
-            if(gamepad2.left_bumper){
-                intakeStates = IntakeStates.REST;
+            if(gamepad2.back){
+                intakeStates = IntakeStates.TRANSFER;
             } else if(gamepad2.dpad_right){
                 intakeStates = IntakeStates.POS2;
-            } else if(gamepad2.dpad_left){
+            } else if(gamepad2.dpad_down){
                 intakeStates = IntakeStates.POS1;
             }
         }
-        if(!gamepad2.b){
-            hasBPressed2 = false;
+
+        if(gamepad2.b){
+            outtakeState = OuttakeStates.ANGLE;
         }
 //        if(outtakeState != OuttakeStates.REST && outtakeState != OuttakeStates.MOVING && outtakeState != OuttakeStates.MANUAL){
 ////            v4BState = V4BState.ANGLED_UP;
@@ -182,7 +197,7 @@ public class Qual1TeleOp extends LinearOpMode {
                 break;
             case REST:
                 actionSequences.OuttakeRest(true);
-                actionSequences.AttemptTransfer(outtakeState, intakeStates);
+//                actionSequences.AttemptTransfer(outtakeState, intakeStates);
                 break;
             case SCORE_PREP:
                 bot.v4b.setTarget(V4B.TRANSFER);
@@ -190,6 +205,31 @@ public class Qual1TeleOp extends LinearOpMode {
                 bot.outtakeWrist.setTarget(OuttakeWrist.TRA);
             case MANUAL:
                 actionSequences.ManualOuttakeSlides(gamepad2.right_stick_y);
+                break;
+            case DROP:
+                bot.outtakeClaw.setTarget(OuttakeClaw.DROP);
+                break;
+
+            case TRANSFER:
+                bot.outtakeSlides.setTarget(0);
+                bot.v4b.setTarget(V4B.TRANSFER);
+                bot.outtakeWrist.setTarget(OuttakeWrist.TRA);
+                bot.outtakeClaw.setTarget(OuttakeClaw.DROP);
+                break;
+
+            case HOLD:
+                bot.outtakeClaw.setTarget(OuttakeClaw.INIT);
+                break;
+
+            case GRAB:
+//                bot.outtakeClaw.setTarget(OuttakeClaw.DROP);
+//                bot.outtakeSlides.setTarget(OuttakeSlides.GRA);
+                bot.v4b.setTarget(V4B.HOR);
+                bot.outtakeWrist.setTarget((OuttakeWrist.MIN));
+                break;
+            case ANGLE:
+                bot.v4b.setTarget(V4B.ANG);
+                bot.outtakeWrist.setTarget(OuttakeWrist.MIN);
                 break;
         }
 
@@ -199,7 +239,7 @@ public class Qual1TeleOp extends LinearOpMode {
                 break;
             case REST:
                 actionSequences.IntakeRest();
-                actionSequences.AttemptTransfer(outtakeState, intakeStates);
+//                actionSequences.AttemptTransfer(outtakeState, intakeStates);
                 break;
             case POS1:
                 actionSequences.IntakePos1();
@@ -209,7 +249,8 @@ public class Qual1TeleOp extends LinearOpMode {
                 break;
             case TRANSFER:
                 bot.intakeArm.setTarget(IntakeArm.TRANSFER);
-                actionSequences.AttemptTransfer(outtakeState, IntakeStates.REST);
+                bot.intakeSlides.setTarget(0);
+//                actionSequences.AttemptTransfer(outtakeState, IntakeStates.REST);
                 break;
         }
 //        switch(v4BState){
