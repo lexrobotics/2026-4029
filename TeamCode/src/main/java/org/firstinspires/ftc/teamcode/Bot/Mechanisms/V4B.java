@@ -9,7 +9,7 @@ public class V4B extends ServoMechanism {
     public V4B() {
         super("V4B");
     }
-    public static double INIT = 0.5;
+    public static double INIT = 0.198;
 
     public static final double MAX = 1;
     public static final double MIN = 0;

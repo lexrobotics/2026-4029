@@ -9,9 +9,8 @@ public class OuttakeClaw extends ServoMechanism {
     public OuttakeClaw() {
         super("OuttakeClaw");
     }
-    public static double INIT = 0.15;
-    public static final double OPEN = 0.238;
-    public static final double DROP = 0.164;
+    public static double INIT = 0;
+    public static final double DROP = 0.15;
     public static final double MAX = 0.238;
 
 }
