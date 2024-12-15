@@ -57,10 +57,6 @@ public class InitTest extends LinearOpMode {
 
 
             bot.update();
-            telemetry.addData("IntakeSlidesPos", bot.intakeSlides.getCurrentPosition());
-            telemetry.addData("OuttakeSlidesPos", bot.outtakeSlides.getCurrentPosition());
-            telemetry.update();
-
         }
 
 

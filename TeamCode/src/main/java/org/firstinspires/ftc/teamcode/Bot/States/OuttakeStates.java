@@ -7,6 +7,8 @@ public enum OuttakeStates {
     RU1,
     RU2,
     MANUAL,
-    MOVING
+    MOVING,
+    TRANSFER,
+    SCORE_PREP
 }
 

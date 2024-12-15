@@ -32,6 +32,9 @@ public class OuttakeSlidesSmart extends OuttakeSlides{
         if (state && !lastState) {
             reset();
         }
+        if(state){
+            currentPos = 0;
+        }
         lastState = state;
 
         currentPos = motor.getCurrentPosition();

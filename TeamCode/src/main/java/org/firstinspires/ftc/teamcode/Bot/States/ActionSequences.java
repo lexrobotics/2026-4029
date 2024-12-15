@@ -23,8 +23,9 @@ public class ActionSequences {
         return bot;
     }
 
-    public void IntakeMotor(int vel){
+    public void IntakeMotor(int vel, boolean drop){
         bot.noodler.setVelocity(vel);
+        if(drop) bot.intakeArm.setTarget(IntakeArm.INTAKE);
     }
     public void V4BAngled(){
         bot.v4b.setTarget(V4B.ANG);
@@ -38,18 +39,23 @@ public class ActionSequences {
         bot.outtakeSlides.setTarget(OuttakeSlidesSmart.BUC1);
         bot.outtakeWrist.setTarget(OuttakeWrist.POS1);
         bot.v4b.setTarget(V4B.HOR);
+        bot.outtakeClaw.setTarget(OuttakeClaw.INIT);
     }
     public void Bucket2(){
         bot.outtakeSlides.setVelocity(1);
         bot.outtakeSlides.setTarget(OuttakeSlidesSmart.BUC2);
         bot.outtakeWrist.setTarget(OuttakeWrist.POS2);
         bot.v4b.setTarget(V4B.ANG);
+        bot.outtakeClaw.setTarget(OuttakeClaw.INIT);
+
     }
     public void Specimen1(){
         bot.outtakeSlides.setVelocity(1);
         bot.outtakeSlides.setTarget(OuttakeSlidesSmart.SPC1);
         bot.outtakeWrist.setTarget(OuttakeWrist.SPC1);
         bot.v4b.setTarget(V4B.HOR);
+        bot.outtakeClaw.setTarget(OuttakeClaw.INIT);
+
     }
     public void GrabSpecimen(){
         bot.outtakeSlides.setVelocity(1);
@@ -62,17 +68,19 @@ public class ActionSequences {
         bot.outtakeSlides.setTarget(OuttakeSlidesSmart.SPC2);
         bot.outtakeWrist.setTarget(OuttakeWrist.SPC2);
         bot.v4b.setTarget(V4B.HOR);
+        bot.outtakeClaw.setTarget(OuttakeClaw.INIT);
     }
     public void ManualOuttakeSlides(double joystick){
         bot.outtakeSlides.setVelocity(0.5);
 //        joystick = Math.signum(-joystick)*Math.pow(1,Math.abs(-joystick) * 2);
-        joystick = Math.signum(-joystick)*(Math.pow(2,Math.abs(-joystick) * 2) - 1);
-        bot.outtakeSlides.setTarget(Range.clip(bot.outtakeSlides.getCurrentPosition() + MANUAL_OUTTAKE_SLIDES_INCREMENT*(joystick), 0, OuttakeSlides.MAX));
+//        joystick = Math.signum(-joystick)*(Math.pow(2,Math.abs(-joystick) * 2) - 1);
+//        bot.outtakeSlides.setTarget(Range.clip(bot.outtakeSlides.getCurrentPosition() + MANUAL_OUTTAKE_SLIDES_INCREMENT*(joystick), 0, OuttakeSlides.MAX));
+        bot.outtakeSlides.setTarget(Range.clip(bot.outtakeSlides.getCurrentPosition() + (MANUAL_OUTTAKE_SLIDES_INCREMENT/2)*(Math.signum(-joystick)*(Math.pow(2,Math.abs(-joystick) * 2)) - 1), 0, OuttakeSlides.MAX));
     }
     public void OuttakeRest(boolean drop){
         bot.outtakeSlides.setVelocity(1);
         bot.outtakeSlides.setTarget(OuttakeSlidesSmart.RST);
-        bot.outtakeWrist.setTarget(OuttakeWrist.RST);
+        bot.outtakeWrist.setTarget(OuttakeWrist.TRA);
         bot.v4b.setTarget(V4B.TRANSFER);
         if(drop){
             bot.outtakeClaw.setTarget(OuttakeClaw.DROP);
@@ -88,7 +96,7 @@ public class ActionSequences {
     }
     public void IntakeRest(){
         bot.intakeSlides.setTarget(IntakeSlides.RST);
-        bot.intakeArm.setTarget(IntakeArm.TRANSFER);
+        bot.intakeArm.setTarget(IntakeArm.INIT);
     }
     public void Intake(boolean on){
         bot.noodler.setVelocity(on? Noodler.FORWARD_MAX: Noodler.MIN_SPEED);
@@ -101,13 +109,21 @@ public class ActionSequences {
         bot.intakeSlides.setVelocity(0.5);
 
 //        bot.intakeSlides.setTarget(Range.clip(bot.intakeSlides.getCurrentPosition() + MANUAL_OUTTAKE_SLIDES_INCREMENT*(Math.signum(-joystick)*Math.pow(1,Math.abs(-joystick) * 2)), 0, IntakeSlides.MAX));
-        bot.intakeSlides.setTarget(Range.clip(bot.intakeSlides.getCurrentPosition() + MANUAL_OUTTAKE_SLIDES_INCREMENT*(Math.signum(-joystick)*(Math.pow(2,Math.abs(-joystick) * 2)) - 1), 0, IntakeSlides.MAX));
+        bot.intakeSlides.setTarget(Range.clip(bot.intakeSlides.getCurrentPosition() + MANUAL_OUTTAKE_SLIDES_INCREMENT*(Math.signum(-joystick)*(Math.pow(1.1,Math.abs(-joystick) * 2)) - 1), 0, IntakeSlides.MAX));
     }
     public void AttemptTransfer(OuttakeStates OutState, IntakeStates InState){
         if(OutState == OuttakeStates.REST && InState == IntakeStates.REST){
+            bot.intakeSlides.setTarget(IntakeSlides.TRANSFER);
+            bot.v4b.setTarget(V4B.TRANSFER);
             bot.outtakeWrist.setTarget(OuttakeWrist.TRA);
             bot.outtakeClaw.setTarget(OuttakeClaw.INIT);
+            bot.intakeArm.setTarget(IntakeArm.TRANSFER);
         }
+    }
+    public void PrepScore(){
+        bot.outtakeClaw.setTarget(OuttakeClaw.INIT);
+        bot.v4b.setTarget(V4B.TRANSFER);
+        bot.outtakeWrist.setTarget(OuttakeWrist.TRA);
     }
 
     public void Winch1(){

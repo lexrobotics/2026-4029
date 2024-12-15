@@ -15,9 +15,7 @@ public class V4B extends ServoMechanism {
     public static final double MIN = 0;
     public static final double HOR = 0.9142;
     public static final double ANG = 0.7302;
-//    public static final double ANG = 0;
-    public static final double RST = 0;
-    public static final double WALL = 0.846599999999;
+
     public static final double TRANSFER = 0.198;
 
 

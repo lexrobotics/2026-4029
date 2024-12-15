@@ -23,7 +23,7 @@ import java.util.HashMap;
 
 public class Bot implements Robot{
     public Drivetrain drivetrain;
-    public Mechanism intakeArm, outtakeWrist, outtakeClaw, outtakeSlides, intakeSlides, v4b, winch, intake, noodler;
+    public Mechanism intakeArm, outtakeWrist, outtakeClaw, outtakeSlides, intakeSlides, v4b, winch, noodler;
     public Sensors sensors;
     public SensorSwitch outtakeSlidesSwitch, intakeSlidesSwitch;
 
