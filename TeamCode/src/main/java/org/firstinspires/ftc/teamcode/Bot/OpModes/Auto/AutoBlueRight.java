@@ -6,6 +6,7 @@ import com.qualcomm.robotcore.util.ElapsedTime;
 
 import org.firstinspires.ftc.teamcode.Bot.AutoSequences;
 import org.firstinspires.ftc.teamcode.Bot.Bot;
+import org.firstinspires.ftc.teamcode.Bot.Drivetrain.Drivetrain;
 import org.firstinspires.ftc.teamcode.Bot.Drivetrain.RoadRunnerPaths;
 import org.firstinspires.ftc.teamcode.Bot.Mechanisms.OuttakeSlides;
 import org.firstinspires.ftc.teamcode.Bot.Sensors.IMUStatic;
@@ -31,6 +32,7 @@ public class AutoBlueRight extends LinearOpMode {
         actionSequences = new ActionSequences(bot);
         paths = new RoadRunnerPaths();
         timer = new ElapsedTime();
+
         waitForStart();
         timer.reset();
 
@@ -47,6 +49,12 @@ public class AutoBlueRight extends LinearOpMode {
         }
 
         bot.init();
+        bot.drivetrain.setTrajectorySequence(bot.drivetrain.leftward(24));
+        while(opModeIsActive() && bot.isBusy()){
+            bot.update();
+        }
+
+        bot.drivetrain.setTrajectorySequence(bot.drivetrain.backward(24));
         while(opModeIsActive() && bot.isBusy()){
             bot.update();
         }

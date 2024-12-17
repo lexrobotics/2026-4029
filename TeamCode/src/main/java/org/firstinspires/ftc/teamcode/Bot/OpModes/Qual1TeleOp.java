@@ -44,6 +44,8 @@ public class Qual1TeleOp extends LinearOpMode {
     public void runOpMode() throws InterruptedException {
         setup = new Setup(hardwareMap, telemetry, true, this, Setup.OpModeType.AUTO, Setup.Team.Q1);
         setup.disableMechanism("Winch");
+        setup.disableMechanism("IntakeSlides");
+        setup.disableMechanism("Noodler");
 
         bot = new Bot(Setup.mechStates, Setup.sensorStates);
         imu = new IMUStatic();
