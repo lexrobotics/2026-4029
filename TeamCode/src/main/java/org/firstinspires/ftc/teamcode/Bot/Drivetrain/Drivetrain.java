@@ -48,7 +48,7 @@ public class Drivetrain {
         TRAJECTORY_RR,
         POWER,
     }
-    protected DriveState state = DriveState.POWER; // TODO CHANGE TO TRAJECTORY
+    protected DriveState state = DriveState.TRAJECTORY_RR; // TODO CHANGE TO TRAJECTORY
 
     private static final TrajectoryVelocityConstraint VEL_CONSTRAINT = getVelocityConstraint(DriveConstants.MAX_VEL, DriveConstants.MAX_ANG_VEL, DriveConstants.TRACK_WIDTH);
     private static final TrajectoryAccelerationConstraint ACCEL_CONSTRAINT = getAccelerationConstraint(DriveConstants.MAX_ACCEL);
@@ -80,6 +80,7 @@ public class Drivetrain {
         drive = new SampleMecanumDrive(Setup.hardwareMap);
         drive.setPoseEstimate(startPose);
         telemetry.addLine("Follower: " + follower.driveError);
+
     }
 
     public void update(boolean usePeP){
@@ -181,6 +182,12 @@ public class Drivetrain {
     public TrajectorySequence backward(double amount){
         return drive.trajectorySequenceBuilder(new Pose2d(0, 0, 0))
                 .back(24)
+                .build();
+    }
+
+    public TrajectorySequence leftward(double amount){
+        return drive.trajectorySequenceBuilder(new Pose2d(0, 0, 0))
+                .strafeLeft(24)
                 .build();
     }
 
