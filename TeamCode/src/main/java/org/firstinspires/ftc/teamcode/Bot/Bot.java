@@ -41,11 +41,7 @@ public class Bot implements Robot{
         } else {
             noodler = new Mechanism("Noodler");
         }
-        if(hardwareStates.get("Winch").isEnabled){
-            winch = new Winch();
-        } else {
-            winch = new Mechanism("Winch");
-        }
+
         if(hardwareStates.get("Wrist").isEnabled){
             wrist = new Wrist();
         } else {
@@ -81,7 +77,6 @@ public class Bot implements Robot{
         ElapsedTime timer = new ElapsedTime();
         timer.reset();
         noodler.init(0);
-        winch.init(StartPositions.winchPos);
         wrist.init(StartPositions.outtakeWristPos);
         outtakeSlides.init(StartPositions.outtakeSlidesPos);
         drivetrain.init(new Pose2d(0, 0, 0));
@@ -90,7 +85,6 @@ public class Bot implements Robot{
         ElapsedTime timer = new ElapsedTime();
         timer.reset();
         noodler.init(0);
-        winch.init(StartPositions.winchPos);
         wrist.init(StartPositions.outtakeWristPos);
         outtakeSlides.init(StartPositions.outtakeSlidesPos);
 //        outtakeSlides.reverse(true);
@@ -100,7 +94,6 @@ public class Bot implements Robot{
     @Override
     public void update(){
         noodler.update();
-        winch.update();
         wrist.update();
         outtakeSlides.update();
         drivetrain.update();
@@ -109,7 +102,6 @@ public class Bot implements Robot{
     @Override
     public void telemetry(){
         noodler.telemetry();
-        winch.telemetry();
         wrist.telemetry();
         outtakeSlides.telemetry();
         drivetrain.telemetry();
@@ -117,7 +109,7 @@ public class Bot implements Robot{
 
     @Override
     public boolean isBusy(){
-        return noodler.isBusy() || winch.isBusy() || wrist.isBusy() || outtakeSlides.isBusy() || drivetrain.isBusy();
+        return noodler.isBusy() || wrist.isBusy() || outtakeSlides.isBusy() || drivetrain.isBusy();
     }
     public void setTargetVectors(double x, double y, double theta){
 //        drivetrain.setTargetVectors(x,y,theta);

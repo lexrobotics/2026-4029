@@ -15,7 +15,7 @@ public class StartPositions {
     public static double winchPos = Winch.INIT;
     public static double outtakeClawPos = OuttakeClaw.INIT;
     public static double outtakeWristPos = Wrist.INIT;
-    public static double outtakeV4BPos = V4B.INIT;
+//    public static double outtakeV4BPos = V4B.INIT;
     public static double outtakeSlidesPos = OuttakeSlides.INIT;
     public static double intakeSlidesPos = IntakeSlides.INIT;
     public static double intakeArmPos = Arm.INIT;
