@@ -5,8 +5,8 @@ import com.acmerobotics.dashboard.config.Config;
 import org.firstinspires.ftc.teamcode.Bot.Mechanisms.AbstractMechanisms.ServoMechanism;
 @Config
 
-public class OuttakeWrist extends ServoMechanism {
-    public OuttakeWrist() {
+public class Wrist extends ServoMechanism {
+    public Wrist() {
         super("OuttakeWrist");
     }
     public static double INIT = 1;

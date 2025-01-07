@@ -7,7 +7,7 @@ import org.firstinspires.ftc.teamcode.Bot.Bot;
 import org.firstinspires.ftc.teamcode.Bot.Mechanisms.IntakeSlides;
 import org.firstinspires.ftc.teamcode.Bot.Mechanisms.OuttakeClaw;
 import org.firstinspires.ftc.teamcode.Bot.Mechanisms.OuttakeSlides;
-import org.firstinspires.ftc.teamcode.Bot.Mechanisms.OuttakeWrist;
+import org.firstinspires.ftc.teamcode.Bot.Mechanisms.Wrist;
 import org.firstinspires.ftc.teamcode.Bot.Sensors.IMUStatic;
 import org.firstinspires.ftc.teamcode.Bot.Setup;
 @TeleOp(name="MECH TEST")
@@ -41,10 +41,10 @@ public class MechTest extends LinearOpMode {
             }
             if(gamepad1.y){
                 telemetry.addLine("OW:MA");
-                bot.outtakeWrist.setTarget(OuttakeWrist.MAX);
+                bot.outtakeWrist.setTarget(Wrist.MAX);
             } else {
                 telemetry.addLine("OW:MI");
-                bot.outtakeWrist.setTarget(OuttakeWrist.MIN);
+                bot.outtakeWrist.setTarget(Wrist.MIN);
             }
             if(gamepad1.b){
                 telemetry.addLine("GR:GR");

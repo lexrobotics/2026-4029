@@ -8,13 +8,9 @@ import com.qualcomm.robotcore.util.Range;
 
 import org.firstinspires.ftc.teamcode.Bot.Mechanisms.AbstractMechanisms.Mechanism;
 import org.firstinspires.ftc.teamcode.Bot.Mechanisms.OuttakeClaw;
-import org.firstinspires.ftc.teamcode.Bot.Mechanisms.OuttakeSlides;
 import org.firstinspires.ftc.teamcode.Bot.Mechanisms.OuttakeSlidesSmart;
-import org.firstinspires.ftc.teamcode.Bot.Mechanisms.OuttakeWrist;
-import org.firstinspires.ftc.teamcode.Bot.Mechanisms.V4B;
+import org.firstinspires.ftc.teamcode.Bot.Mechanisms.Wrist;
 import org.firstinspires.ftc.teamcode.Bot.Setup;
-
-import java.util.HashMap;
 
 @TeleOp(name="2FlexibleTest", group="teleop")
 
@@ -23,7 +19,7 @@ public class flextest2 extends LinearOpMode {
     Mechanism mechanism;
     //    MechTest mechTest;
 //    MechTest outtakeRotation = new OuttakeRotation();
-    Mechanism outtakeSlides = new OuttakeSlidesSmart(), outtakeWrist = new OuttakeWrist(), v4b = new V4B(), outtakeClaw = new OuttakeClaw();
+    Mechanism outtakeSlides = new OuttakeSlidesSmart(), outtakeWrist = new Wrist(), v4b = new V4B(), outtakeClaw = new OuttakeClaw();
     boolean mechIsServo;
     double targetPos, futureVelPos, changeInPos, velocity;
     double SERVO_INCREMENT = 0.001, MOTOR_INCREMENT = 5;

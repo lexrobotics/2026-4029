@@ -6,14 +6,12 @@ import com.qualcomm.robotcore.util.ElapsedTime;
 import com.qualcomm.robotcore.util.Range;
 
 import org.firstinspires.ftc.teamcode.Bot.Mechanisms.AbstractMechanisms.Mechanism;
-import org.firstinspires.ftc.teamcode.Bot.Mechanisms.IntakeArm;
+import org.firstinspires.ftc.teamcode.Bot.Mechanisms.Arm;
 import org.firstinspires.ftc.teamcode.Bot.Mechanisms.IntakeSlides;
 import org.firstinspires.ftc.teamcode.Bot.Mechanisms.Noodler;
 import org.firstinspires.ftc.teamcode.Bot.Mechanisms.OuttakeClaw;
-import org.firstinspires.ftc.teamcode.Bot.Mechanisms.OuttakeSlides;
 import org.firstinspires.ftc.teamcode.Bot.Mechanisms.OuttakeSlidesSmart;
-import org.firstinspires.ftc.teamcode.Bot.Mechanisms.OuttakeWrist;
-import org.firstinspires.ftc.teamcode.Bot.Mechanisms.V4B;
+import org.firstinspires.ftc.teamcode.Bot.Mechanisms.Wrist;
 import org.firstinspires.ftc.teamcode.Bot.Setup;
 import org.firstinspires.ftc.teamcode.Bot.StartPositions;
 
@@ -22,7 +20,7 @@ public class FlexibleTest extends LinearOpMode {
     Setup setup;
 
     Mechanism mechanism;
-    Mechanism intakeSlides = new IntakeSlides(), noodler = new Noodler(), outtakeClaw = new OuttakeClaw(), outtakeSlides = new OuttakeSlidesSmart(), outtakeWrist = new OuttakeWrist(), v4b = new V4B(), intakeArm = new IntakeArm();
+    Mechanism intakeSlides = new IntakeSlides(), noodler = new Noodler(), outtakeClaw = new OuttakeClaw(), outtakeSlides = new OuttakeSlidesSmart(), outtakeWrist = new Wrist(), v4b = new V4B(), intakeArm = new Arm();
 
 
     Mechanism[] mechanisms;

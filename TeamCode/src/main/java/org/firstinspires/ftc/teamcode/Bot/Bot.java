@@ -7,13 +7,12 @@ import com.qualcomm.robotcore.util.ElapsedTime;
 
 import org.firstinspires.ftc.teamcode.Bot.Drivetrain.Drivetrain;
 import org.firstinspires.ftc.teamcode.Bot.Mechanisms.AbstractMechanisms.Mechanism;
-import org.firstinspires.ftc.teamcode.Bot.Mechanisms.IntakeArm;
+import org.firstinspires.ftc.teamcode.Bot.Mechanisms.Arm;
 import org.firstinspires.ftc.teamcode.Bot.Mechanisms.IntakeSlidesSmart;
 import org.firstinspires.ftc.teamcode.Bot.Mechanisms.Noodler;
 import org.firstinspires.ftc.teamcode.Bot.Mechanisms.OuttakeClaw;
 import org.firstinspires.ftc.teamcode.Bot.Mechanisms.OuttakeSlidesSmart;
-import org.firstinspires.ftc.teamcode.Bot.Mechanisms.OuttakeWrist;
-import org.firstinspires.ftc.teamcode.Bot.Mechanisms.V4B;
+import org.firstinspires.ftc.teamcode.Bot.Mechanisms.Wrist;
 import org.firstinspires.ftc.teamcode.Bot.Mechanisms.Winch;
 import org.firstinspires.ftc.teamcode.Bot.Sensors.SensorSwitch;
 import org.firstinspires.ftc.teamcode.Bot.Sensors.Sensors;
@@ -23,7 +22,7 @@ import java.util.HashMap;
 
 public class Bot implements Robot{
     public Drivetrain drivetrain;
-    public Mechanism intakeArm, outtakeWrist, outtakeClaw, outtakeSlides, intakeSlides, v4b, winch, noodler;
+    public Mechanism arm, wrist, outtakeSlides, noodler;
     public Sensors sensors;
     public SensorSwitch outtakeSlidesSwitch, intakeSlidesSwitch;
 
@@ -47,20 +46,10 @@ public class Bot implements Robot{
         } else {
             winch = new Mechanism("Winch");
         }
-        if(hardwareStates.get("V4B").isEnabled){
-            v4b = new V4B();
+        if(hardwareStates.get("Wrist").isEnabled){
+            wrist = new Wrist();
         } else {
-            v4b = new Mechanism("V4B");
-        }
-        if(hardwareStates.get("OuttakeClaw").isEnabled){
-            outtakeClaw = new OuttakeClaw();
-        } else {
-            outtakeClaw = new Mechanism("OuttakeClaw");
-        }
-        if(hardwareStates.get("OuttakeWrist").isEnabled){
-            outtakeWrist = new OuttakeWrist();
-        } else {
-            outtakeWrist = new Mechanism("OuttakeWrist");
+            wrist = new Mechanism("Wrist");
         }
         if(hardwareStates.get("OuttakeSlides").isEnabled){
             outtakeSlides = new OuttakeSlidesSmart();
@@ -68,14 +57,10 @@ public class Bot implements Robot{
             telemetry.addLine("NO SLIDES, OUT");
             outtakeSlides = new Mechanism("OuttakeSlides");
         }
-        if(hardwareStates.get("IntakeSlides").isEnabled){
-            intakeSlides = new IntakeSlidesSmart();
+        if(hardwareStates.get("Arm").isEnabled){
+            arm = new Arm();
         } else {
-            intakeSlides = new Mechanism("IntakeSlides");
-        } if(hardwareStates.get("IntakeArm").isEnabled){
-            intakeArm = new IntakeArm();
-        } else {
-            intakeArm = new Mechanism("IntakeArm");
+            arm = new Mechanism("Arm");
         }
 
         init();
@@ -97,13 +82,8 @@ public class Bot implements Robot{
         timer.reset();
         noodler.init(0);
         winch.init(StartPositions.winchPos);
-        v4b.init(StartPositions.outtakeV4BPos);
-        outtakeClaw.init(StartPositions.outtakeClawPos);
-        outtakeWrist.init(StartPositions.outtakeWristPos);
+        wrist.init(StartPositions.outtakeWristPos);
         outtakeSlides.init(StartPositions.outtakeSlidesPos);
-//        outtakeSlides.reverse(true);
-        intakeSlides.init(StartPositions.intakeSlidesPos);
-        intakeArm.init(StartPositions.intakeArmPos);
         drivetrain.init(new Pose2d(0, 0, 0));
     }
     public void init(Pose2d startPos){
@@ -111,13 +91,9 @@ public class Bot implements Robot{
         timer.reset();
         noodler.init(0);
         winch.init(StartPositions.winchPos);
-        v4b.init(StartPositions.outtakeV4BPos);
-        outtakeClaw.init(StartPositions.outtakeClawPos);
-        outtakeWrist.init(StartPositions.outtakeWristPos);
+        wrist.init(StartPositions.outtakeWristPos);
         outtakeSlides.init(StartPositions.outtakeSlidesPos);
 //        outtakeSlides.reverse(true);
-        intakeSlides.init(StartPositions.intakeSlidesPos);
-        intakeArm.init(StartPositions.intakeArmPos);
         drivetrain.init(startPos);
     }
 
@@ -125,12 +101,8 @@ public class Bot implements Robot{
     public void update(){
         noodler.update();
         winch.update();
-        v4b.update();
-        outtakeClaw.update();
-        outtakeWrist.update();
+        wrist.update();
         outtakeSlides.update();
-        intakeSlides.update();
-        intakeArm.update();
         drivetrain.update();
     }
 
@@ -138,18 +110,14 @@ public class Bot implements Robot{
     public void telemetry(){
         noodler.telemetry();
         winch.telemetry();
-        v4b.telemetry();
-        outtakeClaw.telemetry();
-        outtakeWrist.telemetry();
+        wrist.telemetry();
         outtakeSlides.telemetry();
-        intakeSlides.telemetry();
         drivetrain.telemetry();
-        intakeArm.telemetry();
     }
 
     @Override
     public boolean isBusy(){
-        return noodler.isBusy() || winch.isBusy() || v4b.isBusy() || outtakeClaw.isBusy() || outtakeWrist.isBusy() || outtakeSlides.isBusy() || intakeSlides.isBusy() || drivetrain.isBusy() || intakeArm.isBusy() ;
+        return noodler.isBusy() || winch.isBusy() || wrist.isBusy() || outtakeSlides.isBusy() || drivetrain.isBusy();
     }
     public void setTargetVectors(double x, double y, double theta){
 //        drivetrain.setTargetVectors(x,y,theta);
