@@ -3,6 +3,7 @@ package org.firstinspires.ftc.teamcode.Bot.Mechanisms.AbstractMechanisms;
 import androidx.annotation.NonNull;
 
 import com.qualcomm.robotcore.hardware.DcMotor;
+import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
 import org.firstinspires.ftc.teamcode.Bot.Setup;
@@ -24,6 +25,11 @@ public class Mechanism {
         setTarget(target);
         initialized = true;
     }
+    public void init(double target, HardwareMap hwm){
+        setTarget(target);
+        initialized = true;
+    }
+
     public void init(double target, DcMotor.ZeroPowerBehavior zeroPowerBehavior){
         setTarget(target);
     }

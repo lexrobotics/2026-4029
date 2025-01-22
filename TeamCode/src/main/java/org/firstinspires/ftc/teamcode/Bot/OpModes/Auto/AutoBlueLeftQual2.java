@@ -3,7 +3,7 @@ package org.firstinspires.ftc.teamcode.Bot.OpModes.Auto;
 import android.provider.SyncStateContract;
 import android.view.animation.PathInterpolator;
 
-import org.firstinspires.ftc.teamcode.PedroPathing.constants.LConstants;
+//import org.firstinspires.ftc.teamcode.PedroPathing.constants.LConstants;
 import org.firstinspires.ftc.teamcode.PedroPathing.follower.Follower;
 import org.firstinspires.ftc.teamcode.PedroPathing.localization.Pose;
 import org.firstinspires.ftc.teamcode.PedroPathing.pathGeneration.BezierCurve;

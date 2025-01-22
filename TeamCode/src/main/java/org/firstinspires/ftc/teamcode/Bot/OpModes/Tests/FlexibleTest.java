@@ -3,14 +3,13 @@ package org.firstinspires.ftc.teamcode.Bot.OpModes.Tests;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.util.ElapsedTime;
-import com.qualcomm.robotcore.util.Range;
 
 
 import org.firstinspires.ftc.teamcode.Bot.Mechanisms.AbstractMechanisms.Mechanism;
 import org.firstinspires.ftc.teamcode.Bot.Mechanisms.Arm;
 import org.firstinspires.ftc.teamcode.Bot.Mechanisms.Fingers;
+import org.firstinspires.ftc.teamcode.Bot.Mechanisms.Grippers;
 import org.firstinspires.ftc.teamcode.Bot.Mechanisms.SlidesSmart;
-import org.firstinspires.ftc.teamcode.Bot.Mechanisms.Wheels;
 import org.firstinspires.ftc.teamcode.Bot.Mechanisms.Wrist;
 import org.firstinspires.ftc.teamcode.Bot.Setup;
 
@@ -21,7 +20,7 @@ public class FlexibleTest extends LinearOpMode {
     Mechanism mechanism;
     //    MechTest mechTest;
 //    MechTest outtakeRotation = new OuttakeRotation();
-    Mechanism slides = new SlidesSmart(), wrist = new Wrist(), arm = new Arm(), fingers = new Fingers(), wheels = new Wheels();
+    Mechanism slides = new SlidesSmart(), wrist = new Wrist(), arm = new Arm(), fingers = new Fingers(), grippers = new Grippers();
     double targetSlides = 0,targetWrist = 0.5, targetArm = 0.5, targetFingers = 0.5, targetWheels = 1;
     double SERVO_INCREMENT = 0.0002, MOTOR_INCREMENT = 5;
     boolean isGetVelocityMode, isMoving;
@@ -36,15 +35,15 @@ public class FlexibleTest extends LinearOpMode {
         while(opModeIsActive()){
             //ARM
             if (gamepad1.a){
-                wheels.reverse(true, false);
-                wheels.init(targetWheels);
+                grippers.reverse(true, false);
+                grippers.init(targetWheels);
                 if(Math.abs(gamepad1.left_stick_y) > 0.05){
                     targetWheels = 1;
                 } else if(Math.abs(gamepad1.left_stick_y) < -0.05){
                     targetWheels = -1;
                 }
-                wheels.setTarget(targetWheels);
-                wheels.update();
+                grippers.setTarget(targetWheels);
+                grippers.update();
             }
             if (gamepad1.x){
                 arm.init(targetArm);

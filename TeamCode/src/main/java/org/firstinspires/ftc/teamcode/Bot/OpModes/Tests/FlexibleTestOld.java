@@ -7,6 +7,8 @@ import com.qualcomm.robotcore.util.Range;
 
 import org.firstinspires.ftc.teamcode.Bot.Mechanisms.AbstractMechanisms.Mechanism;
 import org.firstinspires.ftc.teamcode.Bot.Mechanisms.Arm;
+import org.firstinspires.ftc.teamcode.Bot.Mechanisms.Fingers;
+import org.firstinspires.ftc.teamcode.Bot.Mechanisms.Grippers;
 import org.firstinspires.ftc.teamcode.Bot.Mechanisms.SlidesSmart;
 import org.firstinspires.ftc.teamcode.Bot.Mechanisms.Wrist;
 import org.firstinspires.ftc.teamcode.Bot.Setup;
@@ -17,12 +19,11 @@ public class FlexibleTestOld extends LinearOpMode {
     Setup setup;
 
     Mechanism mechanism;
-    Mechanism slides = new SlidesSmart();
-
+    Mechanism slides = new SlidesSmart(), arm = new Arm(), wrist = new Wrist(), grippers = new Grippers(), fingers = new Fingers();
     Mechanism[] mechanisms;
     boolean[] isServo;
     double[] initPositions;
-    private int mechIndex = 0;
+    private int mechIndex = 1;
     private boolean wasPressed = false;
 
     private double targetPos, futureVelPos, changeInPos, velocity;
@@ -35,14 +36,25 @@ public class FlexibleTestOld extends LinearOpMode {
         setup = new Setup(hardwareMap, telemetry, false, this, Setup.OpModeType.AUTO, Setup.Team.Q1);
         mechanism = new Mechanism("mechanism");
         mechanisms = new Mechanism[]{
-                slides
+                slides,
+                arm,
+                wrist,
+                fingers,
+                grippers
         };
         initPositions = new double[]{
-                0
+                0,
+                0.5,
+                0.5,
+                0.5,
+                0.5
         };
         isServo = new boolean[]{
                 false,
-
+                true,
+                true,
+                true,
+                true
         };
 
         telemetry.update();

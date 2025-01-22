@@ -36,7 +36,6 @@ public abstract class CRServoMechanism extends Mechanism {
     @Override
     public void update() {
         servo.setPower(velocity);
-
     }
 
     @Override

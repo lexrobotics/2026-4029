@@ -25,8 +25,12 @@ public class CoupledCRServoMechanism extends Mechanism{
         servoRight.setPower(velocity);
     }
 
-    public void setVelocity(double v){
+    public void setTarget(double v){
         this.velocity = v;
+    }
+
+    public void setVelocity(double v){
+        setTarget(v);
     }
 
     public double getVelocity(){
