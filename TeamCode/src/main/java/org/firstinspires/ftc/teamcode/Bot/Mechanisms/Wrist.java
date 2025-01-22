@@ -16,8 +16,10 @@ public class Wrist extends ServoMechanism {
     public static final double POS1 = 0;
     public static final double POS2 = 0;
     public static final double VER = 0;
-    public static final double SPC1 = 0;
-    public static final double SPC2 = 0;
+    public static final double SPC = 0;
     public static final double RST = 1;
     public static final double TRA = 1;
+    public static final double BUCKET = 1;
+    public static final double OUT = 1;
+    public static final double HANG = 1;
 }

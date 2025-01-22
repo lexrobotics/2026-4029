@@ -19,6 +19,7 @@ public class OuttakeSlides extends RunToPosMotorMechanism {
     public static final double SPC2 = 500;
     public static final double GRA = 10;
     public static final double RST = 0;
+    public static final double INTAKE = 0;
 
 
 

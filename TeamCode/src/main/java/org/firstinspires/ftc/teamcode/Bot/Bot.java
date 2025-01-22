@@ -3,26 +3,28 @@ package org.firstinspires.ftc.teamcode.Bot;
 import static org.firstinspires.ftc.teamcode.Bot.Setup.telemetry;
 
 import com.acmerobotics.roadrunner.geometry.Pose2d;
+import com.qualcomm.robotcore.hardware.ColorSensor;
+import com.qualcomm.robotcore.hardware.DistanceSensor;
+import com.qualcomm.robotcore.hardware.TouchSensor;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
 import org.firstinspires.ftc.teamcode.Bot.Drivetrain.Drivetrain;
 import org.firstinspires.ftc.teamcode.Bot.Mechanisms.AbstractMechanisms.Mechanism;
 import org.firstinspires.ftc.teamcode.Bot.Mechanisms.Arm;
-import org.firstinspires.ftc.teamcode.Bot.Mechanisms.IntakeSlidesSmart;
-import org.firstinspires.ftc.teamcode.Bot.Mechanisms.Noodler;
-import org.firstinspires.ftc.teamcode.Bot.Mechanisms.OuttakeClaw;
+//import org.firstinspires.ftc.teamcode.Bot.Mechanisms.IntakeSlidesSmart;
+import org.firstinspires.ftc.teamcode.Bot.Mechanisms.Fingers;
+import org.firstinspires.ftc.teamcode.Bot.Mechanisms.Grippers;
 import org.firstinspires.ftc.teamcode.Bot.Mechanisms.OuttakeSlidesSmart;
 import org.firstinspires.ftc.teamcode.Bot.Mechanisms.Wrist;
-import org.firstinspires.ftc.teamcode.Bot.Mechanisms.Winch;
 import org.firstinspires.ftc.teamcode.Bot.Sensors.SensorSwitch;
-import org.firstinspires.ftc.teamcode.Bot.Sensors.Sensors;
+import org.firstinspires.ftc.teamcode.Bot.Mechanisms.Sensors;
 import org.firstinspires.ftc.teamcode.Bot.InitStates.HardwareStates;
 
 import java.util.HashMap;
 
 public class Bot implements Robot{
     public Drivetrain drivetrain;
-    public Mechanism arm, wrist, outtakeSlides, noodler;
+    public Mechanism arm, wrist, outtakeSlides, noodler, fingers, grippers;
     public Sensors sensors;
     public SensorSwitch outtakeSlidesSwitch, intakeSlidesSwitch;
 
@@ -30,6 +32,9 @@ public class Bot implements Robot{
         /*
         Bot constructor creates all mechanisms in Mechanism objects if they are enabled
          */
+        sensors = new Sensors(1,1,0,1,false);
+
+
         telemetry.addLine("robot");
         if(hardwareStates.get("drivetrain").isEnabled){
             drivetrain = new Drivetrain();
@@ -37,7 +42,7 @@ public class Bot implements Robot{
             drivetrain = null;
         }
         if(hardwareStates.get("Noodler").isEnabled){
-            noodler = new Noodler(); //todo, replace
+            noodler = new Grippers(); //todo, replace
         } else {
             noodler = new Mechanism("Noodler");
         }
@@ -57,6 +62,24 @@ public class Bot implements Robot{
             arm = new Arm();
         } else {
             arm = new Mechanism("Arm");
+        }
+        if(hardwareStates.get("Fingers").isEnabled){
+            fingers = new Fingers("Fingers");
+        } else {
+            fingers = new Mechanism("Fingers");
+        }
+        if(hardwareStates.get("Grippers").isEnabled){
+            grippers = new Grippers();
+        } else {
+            grippers = new Mechanism("Grippers");
+        }
+
+        if(hardwareStates.get("IntakeCDSensor").isEnabled){
+            sensors.addSensor(ColorSensor.class, "IntakeCDSensor", 0);
+            sensors.addSensor(DistanceSensor.class, "IntakeCDSensor", 0);
+        }
+        if(hardwareStates.get("IntakeTouchSensor").isEnabled){
+            sensors.addSensor(TouchSensor.class, "IntakeTouchSensor", 0);
         }
 
         init();
@@ -80,6 +103,9 @@ public class Bot implements Robot{
         wrist.init(StartPositions.outtakeWristPos);
         outtakeSlides.init(StartPositions.outtakeSlidesPos);
         drivetrain.init(new Pose2d(0, 0, 0));
+        fingers.init(Fingers.INIT);
+        grippers.init(Grippers.INIT);
+//        grippers.setup();
     }
     public void init(Pose2d startPos){
         ElapsedTime timer = new ElapsedTime();
@@ -89,6 +115,7 @@ public class Bot implements Robot{
         outtakeSlides.init(StartPositions.outtakeSlidesPos);
 //        outtakeSlides.reverse(true);
         drivetrain.init(startPos);
+        fingers.init(Fingers.INIT);
     }
 
     @Override
@@ -97,6 +124,7 @@ public class Bot implements Robot{
         wrist.update();
         outtakeSlides.update();
         drivetrain.update();
+        fingers.update();
     }
 
     @Override
@@ -105,11 +133,12 @@ public class Bot implements Robot{
         wrist.telemetry();
         outtakeSlides.telemetry();
         drivetrain.telemetry();
+        fingers.telemetry();
     }
 
     @Override
     public boolean isBusy(){
-        return noodler.isBusy() || wrist.isBusy() || outtakeSlides.isBusy() || drivetrain.isBusy();
+        return noodler.isBusy() || wrist.isBusy() || outtakeSlides.isBusy() || drivetrain.isBusy() || fingers.isBusy();
     }
     public void setTargetVectors(double x, double y, double theta){
 //        drivetrain.setTargetVectors(x,y,theta);

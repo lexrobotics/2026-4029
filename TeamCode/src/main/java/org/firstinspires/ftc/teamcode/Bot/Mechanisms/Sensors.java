@@ -4,17 +4,22 @@ import com.qualcomm.robotcore.hardware.ColorSensor;
 import com.qualcomm.robotcore.hardware.DigitalChannel;
 import com.qualcomm.robotcore.hardware.DistanceSensor;
 import com.qualcomm.robotcore.hardware.I2cAddr;
+import com.qualcomm.robotcore.hardware.TouchSensor;
 
 import org.firstinspires.ftc.robotcore.external.navigation.DistanceUnit;
+import org.firstinspires.ftc.teamcode.Bot.OpModes.Tests.ColorDistanceSensorTest;
 import org.firstinspires.ftc.teamcode.Bot.Sensors.SensorColor;
+import org.firstinspires.ftc.teamcode.Bot.Sensors.SensorColorDistance;
 import org.firstinspires.ftc.teamcode.Bot.Sensors.SensorDistance;
 import org.firstinspires.ftc.teamcode.Bot.Sensors.SensorSwitch;
+import org.firstinspires.ftc.teamcode.Bot.Sensors.SensorTouch;
 import org.firstinspires.ftc.teamcode.Bot.Setup;
 
 public class Sensors {
     private static SensorColor[] colors;
     private static SensorDistance[] distances;
     private static SensorSwitch[] switches;
+    private static SensorTouch[] touchSensors;
     private static boolean standardInvertSwitches = true;
 
     /**
@@ -29,9 +34,10 @@ public class Sensors {
         switches = new SensorSwitch[switchSensorLength];
     }
 
-    public Sensors(int colorSensorLength, int distanceSensorLength, int switchSensorLength, boolean invertSwitches){
+    public Sensors(int colorSensorLength, int distanceSensorLength, int switchSensorLength, int touchSensorLength, boolean invertSwitches){
         colors = new SensorColor[colorSensorLength];
         distances = new SensorDistance[distanceSensorLength];
+        touchSensors = new SensorTouch[touchSensorLength];
         switches = new SensorSwitch[switchSensorLength];
         standardInvertSwitches = invertSwitches;
     }
@@ -47,8 +53,10 @@ public class Sensors {
             colors[position] = new SensorColor(name);
         } else if(type == DistanceSensor.class){
             distances[position] = new SensorDistance(name);
-        } else if(type == DigitalChannel.class){
+        } else if(type == DigitalChannel.class) {
             switches[position] = new SensorSwitch(name, standardInvertSwitches);
+        } else if(type == TouchSensor.class){
+            touchSensors[position] = new SensorTouch(name, standardInvertSwitches);
         }
     }
 
@@ -83,6 +91,10 @@ public class Sensors {
      */
     public boolean getSwitchStatus(int position){
         return switches[position].getStatus();
+    }
+
+    public boolean getTouchStatus(int position){
+        return touchSensors[position].getStatus();
     }
 
     /**

@@ -1,48 +1,59 @@
 package org.firstinspires.ftc.teamcode.Bot.Mechanisms;
 
-import com.qualcomm.robotcore.util.ElapsedTime;
+import com.qualcomm.robotcore.hardware.HardwareMap;
 
-import org.firstinspires.ftc.robotcore.external.navigation.DistanceUnit;
-import org.firstinspires.ftc.teamcode.Bot.Bot;
-import org.firstinspires.ftc.teamcode.Bot.Sensors.SensorDistance;
+import org.firstinspires.ftc.teamcode.Bot.Sensors.SensorColorDistance;
+import org.firstinspires.ftc.teamcode.Bot.Sensors.SensorTouch;
 import org.firstinspires.ftc.teamcode.Bot.States.ActionSequences;
 
+
 public class SmartIntake {
-    private SensorDistance distance;
-    private Bot bot;
-    private ActionSequences actionSequences;
-    private ElapsedTime timer;
-    private boolean hasDetected = false;
-    public double MARGIN = 10;
-    public void SmartIntake(Bot bot){
-        distance = new SensorDistance("IntakeSensor");
-        this.bot = bot;
-        actionSequences = new ActionSequences(bot);
+    private ActionSequences actions;
+    private boolean isBlue;
+    private SensorColorDistance colorSensor;
+    private SensorTouch touchSensor;
+    public enum Color{
+        YELLOW,
+        RED,
+        BLUE
     }
-    public boolean update(int direction){
-        if(direction < 0){
-            bot.noodler.setTarget(-1);
-        } else if(direction > 0){
-            if(distance.getDistance(DistanceUnit.CM) > MARGIN){
-                bot.noodler.setTarget(1);
-                hasDetected = false;
-            } else {
-                if(!hasDetected){
-                    timer = new ElapsedTime();
-                    hasDetected = true;
-                }
-                if(timer.seconds() < 0.5) {
-                    bot.noodler.setTarget(1);
-                } else if(timer.seconds() < 1){
-                    actionSequences.IntakeRest();
-                } else if(timer.seconds() < 1.25){
-                    bot.noodler.setTarget(0);
-                    return true;
-                }
+    public SmartIntake(ActionSequences actionSequences, boolean isBlue){
+        actions = actionSequences;
+        this.isBlue = isBlue;
+
+    }
+
+    /***
+     *
+     * @param bePicky
+     * @return 0 for yellow,
+     */
+    public Color intake(boolean bePicky){
+        Color colore;
+        while (true) {
+            actions.intake(1);
+            colore = assignColor(colorSensor.getColor());
+            if(!bePicky && colore == Color.YELLOW){
+                break;
+            } else if(isBlue && colore == Color.BLUE){
+               break;
+            } else if(!isBlue && colore == Color.RED){
+                break;
             }
-        } else {
-            bot.noodler.setTarget(0);
+            actions.intake(-1);
         }
-        return false;
+        return colore;
+    }
+    public Color assignColor(double[] colors){
+        if(1.5*colors[2] > colors[1] && colors[2] > colors[3]) {
+            return Color.YELLOW;
+        } else if(colors[1] > colors[2] && colors[1] > colors[3]){
+            return Color.RED;
+        } else{
+            return Color.BLUE;
+        }
+//        else if(colors[3] > colors[1] && colors[3] > colors[2]){
+//            return Color.BLUE;
+//        }
     }
 }

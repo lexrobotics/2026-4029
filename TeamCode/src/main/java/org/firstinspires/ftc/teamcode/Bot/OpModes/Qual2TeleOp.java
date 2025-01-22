@@ -8,6 +8,7 @@ import org.firstinspires.ftc.teamcode.Bot.Mechanisms.Arm;
 import org.firstinspires.ftc.teamcode.Bot.Mechanisms.OuttakeSlides;
 import org.firstinspires.ftc.teamcode.Bot.Mechanisms.Wrist;
 import org.firstinspires.ftc.teamcode.Bot.Setup;
+import org.firstinspires.ftc.teamcode.Bot.States.ActionSequences;
 
 public class Qual2TeleOp extends LinearOpMode {
 
@@ -20,12 +21,13 @@ public class Qual2TeleOp extends LinearOpMode {
         double imuOffset = 0;
         waitForStart();
 
+        ActionSequences actionSequences = new ActionSequences(bot);
         while(opModeIsActive()){
-            driverOne(bot, imuOffset);
-            driverTwo(bot);
+            driverOne(bot, imuOffset, actionSequences);
+            driverTwo(bot, actionSequences);
         }
     }
-    private void driverOne(Bot bot, double imuOffset){
+    private void driverOne(Bot bot, double imuOffset, ActionSequences actionSequences){
 
         if (gamepad1.a){
             imuOffset = bot.drivetrain.getHeadingIMU();
@@ -57,6 +59,14 @@ public class Qual2TeleOp extends LinearOpMode {
             spin *= .7;
         }
 
+        if(gamepad1.dpad_down){
+            actionSequences.hang(0);
+        } else if(gamepad1.dpad_left){
+            actionSequences.hang(1);
+        } else if(gamepad1.dpad_up){
+            actionSequences.hang(2);
+        }
+
         bot.drivetrain.setTeleOpTargets(x, y, spin);
         telemetry.addData("translateMag", translateMag);
         telemetry.addData("x", x);
@@ -64,11 +74,9 @@ public class Qual2TeleOp extends LinearOpMode {
         telemetry.addData("spin", spin);
         telemetry.addData("angle", angle);
     }
-    private void driverTwo(Bot bot){
+    private void driverTwo(Bot bot, ActionSequences actionSequences){
         if(gamepad2.b){
-            if(gamepad2.a){
-                bot.outtakeSlides.setTarget(OuttakeSlides.RST);
-            } else if(gamepad2.dpad_down){
+            if(gamepad2.a || gamepad2.dpad_down){
                 bot.outtakeSlides.setTarget(OuttakeSlides.RST);
             } else if(gamepad2.x){
                 bot.outtakeSlides.setTarget(OuttakeSlides.SPC1);
@@ -80,24 +88,16 @@ public class Qual2TeleOp extends LinearOpMode {
                 bot.outtakeSlides.setTarget(OuttakeSlides.BUC2);
             }
         } else {
-            if(gamepad2.a){
-                bot.outtakeSlides.setTarget(OuttakeSlides.RST);
-                bot.arm.setTarget(Arm.TRANSFER);
-            } else if(gamepad2.dpad_down){
-                bot.outtakeSlides.setTarget(OuttakeSlides.RST);
-                bot.arm.setTarget(Arm.TRANSFER);
+            if(gamepad2.a || gamepad2.dpad_down){
+                actionSequences.rest();
             } else if(gamepad2.x){
-                bot.outtakeSlides.setTarget(OuttakeSlides.SPC1);
-                bot.arm.setTarget(Arm.OUT);
+                actionSequences.specimenScoring(1);
             } else if(gamepad2.y){
-                bot.outtakeSlides.setTarget(OuttakeSlides.SPC2);
-                bot.arm.setTarget(Arm.OUT);
+                actionSequences.specimenScoring(2);
             } else if(gamepad2.dpad_left){
-                bot.outtakeSlides.setTarget(OuttakeSlides.BUC1);
-                bot.arm.setTarget(Arm.OUT);
+                actionSequences.sampleScoring(1);
             } else if(gamepad2.dpad_up){
-                bot.outtakeSlides.setTarget(OuttakeSlides.BUC2);
-                bot.arm.setTarget(Arm.OUT);
+                actionSequences.sampleScoring(2);
             }
         }
         driverTwoManual(bot);

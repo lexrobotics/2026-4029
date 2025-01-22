@@ -9,14 +9,14 @@ import org.firstinspires.ftc.teamcode.Bot.Drivetrain.RoadRunnerPaths;
 import org.firstinspires.ftc.teamcode.Bot.Sensors.IMUStatic;
 import org.firstinspires.ftc.teamcode.Bot.Setup;
 import org.firstinspires.ftc.teamcode.Bot.StartPositions;
-import org.firstinspires.ftc.teamcode.Bot.States.ActionSequences;
+//import org.firstinspires.ftc.teamcode.Bot.States.ActionSequences;
 
 @Autonomous(name = "AutoRedRight", group = "q1")
 public class AutoRedRight extends LinearOpMode {
     private Setup setup;
     private Bot bot;
     private IMUStatic imu;
-    private ActionSequences actionSequences;
+//    private ActionSequences actionSequences;
     private RoadRunnerPaths paths;
     private ElapsedTime timer;
     @Override
@@ -26,7 +26,7 @@ public class AutoRedRight extends LinearOpMode {
         imu = new IMUStatic();
         bot.init(StartPositions.redRightDrivePos);
 
-        actionSequences = new ActionSequences(bot);
+//        actionSequences = new ActionSequences(bot);
         paths = new RoadRunnerPaths();
 
         waitForStart();
@@ -34,7 +34,7 @@ public class AutoRedRight extends LinearOpMode {
 
 //        actionSequences.
         bot.drivetrain.setTrajectorySequence(paths.buildRedRightTrajectory(bot.drivetrain, 0));
-        actionSequences.Specimen2();
+//        actionSequences.Specimen2();
         while(opModeIsActive() && bot.isBusy()){
             bot.update();
         }
