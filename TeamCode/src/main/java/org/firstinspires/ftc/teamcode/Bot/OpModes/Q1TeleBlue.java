@@ -107,11 +107,11 @@
 ////        extendedIntake button = gamepad1.?
 //
 //        if(gamepad2.right_trigger > 0.1){
-//            actionSequences.IntakeMotor(1, true);
+//            actionSequences.Intake(1, true);
 //        } else if(gamepad2.left_trigger > 0.1){
-//            actionSequences.IntakeMotor(-1, true);
+//            actionSequences.Intake(-1, true);
 //        } else {
-//            actionSequences.IntakeMotor(0, false);
+//            actionSequences.Intake(0, false);
 //        }
 //        if(Math.abs(gamepad2.right_stick_y) > D1GPM){
 //            outtakeState = OuttakeStates.MANUAL;
