@@ -5,7 +5,8 @@ import com.qualcomm.robotcore.util.Range;
 
 import org.firstinspires.ftc.teamcode.Bot.Bot;
 import org.firstinspires.ftc.teamcode.Bot.Mechanisms.Arm;
-import org.firstinspires.ftc.teamcode.Bot.Mechanisms.OuttakeSlides;
+import org.firstinspires.ftc.teamcode.Bot.Mechanisms.Slides;
+import org.firstinspires.ftc.teamcode.Bot.Mechanisms.Slides;
 import org.firstinspires.ftc.teamcode.Bot.Mechanisms.Wrist;
 import org.firstinspires.ftc.teamcode.Bot.Setup;
 import org.firstinspires.ftc.teamcode.Bot.States.ActionSequences;
@@ -77,15 +78,15 @@ public class Qual2TeleOp extends LinearOpMode {
     private void driverTwo(Bot bot, ActionSequences actionSequences){
         if(gamepad2.b){
             if(gamepad2.a || gamepad2.dpad_down){
-                bot.outtakeSlides.setTarget(OuttakeSlides.RST);
+                bot.outtakeSlides.setTarget(Slides.RST);
             } else if(gamepad2.x){
-                bot.outtakeSlides.setTarget(OuttakeSlides.SPC1);
+                bot.outtakeSlides.setTarget(Slides.SPC1);
             } else if(gamepad2.y){
-                bot.outtakeSlides.setTarget(OuttakeSlides.SPC2);
+                bot.outtakeSlides.setTarget(Slides.SPC2);
             } else if(gamepad2.dpad_left){
-                bot.outtakeSlides.setTarget(OuttakeSlides.BUC1);
+                bot.outtakeSlides.setTarget(Slides.BUC1);
             } else if(gamepad2.dpad_up){
-                bot.outtakeSlides.setTarget(OuttakeSlides.BUC2);
+                bot.outtakeSlides.setTarget(Slides.BUC2);
             }
         } else {
             if(gamepad2.a || gamepad2.dpad_down){
@@ -106,7 +107,7 @@ public class Qual2TeleOp extends LinearOpMode {
         double joystickL = gamepad2.left_stick_y;
         double joystickR = gamepad2.right_stick_y;
         bot.outtakeSlides.setVelocity(0.5);
-        bot.outtakeSlides.setTarget(Range.clip(bot.outtakeSlides.getCurrentPosition() + (100/2)*(Math.signum(-joystickR)*(Math.pow(2,Math.abs(-joystickR) * 2)) - 1), 0, OuttakeSlides.MAX));
+        bot.outtakeSlides.setTarget(Range.clip(bot.outtakeSlides.getCurrentPosition() + (100/2)*(Math.signum(-joystickR)*(Math.pow(2,Math.abs(-joystickR) * 2)) - 1), 0, Slides.MAX));
 
         bot.wrist.setTarget(Range.clip(bot.wrist.getCurrentPosition() + (0.01)*(Math.signum(-joystickL)*(Math.pow(2,Math.abs(-joystickL) * 2)) - 1), 0, Wrist.MAX));
 

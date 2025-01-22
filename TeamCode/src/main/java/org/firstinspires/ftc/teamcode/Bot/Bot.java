@@ -101,6 +101,9 @@ public class Bot implements Robot{
         timer.reset();
         noodler.init(0);
         wrist.init(StartPositions.outtakeWristPos);
+        grippers.init(StartPositions.grippersPos);
+        wrist.init(StartPositions.wristPos);
+
         outtakeSlides.init(StartPositions.outtakeSlidesPos);
         drivetrain.init(new Pose2d(0, 0, 0));
         fingers.init(Fingers.INIT);

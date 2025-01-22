@@ -5,7 +5,7 @@ import org.firstinspires.ftc.teamcode.Bot.Bot;
 import org.firstinspires.ftc.teamcode.Bot.Mechanisms.Arm;
 import org.firstinspires.ftc.teamcode.Bot.Mechanisms.Fingers;
 import org.firstinspires.ftc.teamcode.Bot.Mechanisms.Grippers;
-import org.firstinspires.ftc.teamcode.Bot.Mechanisms.OuttakeSlides;
+import org.firstinspires.ftc.teamcode.Bot.Mechanisms.Slides;
 import org.firstinspires.ftc.teamcode.Bot.Mechanisms.SmartIntake;
 import org.firstinspires.ftc.teamcode.Bot.Mechanisms.Wrist;
 import org.firstinspires.ftc.teamcode.Bot.Mechanisms.SmartIntake;
@@ -55,10 +55,10 @@ public class ActionSequences {
     public void specimenScoring(int level){
         switch(level){
             case 1:
-                bot.outtakeSlides.setTarget(OuttakeSlides.SPC1);
+                bot.outtakeSlides.setTarget(Slides.SPC1);
                 break;
             case 2:
-                bot.outtakeSlides.setTarget(OuttakeSlides.SPC2);
+                bot.outtakeSlides.setTarget(Slides.SPC2);
                 break;
         }
         bot.arm.setTarget(Arm.OUT);
@@ -69,10 +69,10 @@ public class ActionSequences {
     public void sampleScoring(int level){
         switch(level){
             case 1:
-                bot.outtakeSlides.setTarget(OuttakeSlides.BUC1);
+                bot.outtakeSlides.setTarget(Slides.BUC1);
                 break;
             case 2:
-                bot.outtakeSlides.setTarget(OuttakeSlides.BUC2);
+                bot.outtakeSlides.setTarget(Slides.BUC2);
                 break;
         }
         bot.arm.setTarget(Arm.BUCKET);
@@ -80,7 +80,7 @@ public class ActionSequences {
         bot.fingers.setTarget(Fingers.OUTTAKE);
     }
     public void intake(){
-        bot.outtakeSlides.setTarget(OuttakeSlides.INTAKE);
+        bot.outtakeSlides.setTarget(Slides.INTAKE);
         bot.arm.setTarget(Arm.OUT);
         bot.wrist.setTarget(Wrist.OUT);
         bot.fingers.setTarget(Fingers.INTAKE);
@@ -90,7 +90,7 @@ public class ActionSequences {
 //        bot.grippers.smarterIntake(isBlue, collectNeutral);
     }
     public void rest(){
-        bot.outtakeSlides.setTarget(OuttakeSlides.INIT);
+        bot.outtakeSlides.setTarget(Slides.INIT);
         bot.arm.setTarget(Arm.INIT);
         bot.wrist.setTarget(Wrist.INIT);
         bot.fingers.setTarget(Fingers.INIT);
