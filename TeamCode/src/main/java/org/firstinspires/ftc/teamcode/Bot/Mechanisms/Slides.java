@@ -5,8 +5,8 @@ import com.acmerobotics.dashboard.config.Config;
 import org.firstinspires.ftc.teamcode.Bot.Mechanisms.AbstractMechanisms.RunToPosMotorMechanism;
 @Config
 
-public class OuttakeSlides extends RunToPosMotorMechanism {
-    public OuttakeSlides() {
+public class Slides extends RunToPosMotorMechanism {
+    public Slides() {
         super("OuttakeSlides");
     }
     public static double INIT = 0;

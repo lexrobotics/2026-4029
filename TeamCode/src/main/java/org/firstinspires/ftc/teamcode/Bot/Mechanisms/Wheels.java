@@ -2,12 +2,12 @@ package org.firstinspires.ftc.teamcode.Bot.Mechanisms;
 
 import com.acmerobotics.dashboard.config.Config;
 
-import org.firstinspires.ftc.teamcode.Bot.Mechanisms.AbstractMechanisms.CRServoMechanism;
-import org.firstinspires.ftc.teamcode.Bot.Mechanisms.AbstractMechanisms.MotorMechanism;
+import org.firstinspires.ftc.teamcode.Bot.Mechanisms.AbstractMechanisms.CoupledCRServoMechanism;
+
 @Config
-public class Noodler extends CRServoMechanism {
-    public Noodler() {
-        super("Noodler"); //TODO
+public class Wheels extends CoupledCRServoMechanism {
+    public Wheels() {
+        super("Wheels"); //TODO
         setVelocity(0);
     }
     public static  double INIT = 0;

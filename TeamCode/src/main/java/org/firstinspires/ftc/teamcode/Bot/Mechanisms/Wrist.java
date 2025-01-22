@@ -7,7 +7,7 @@ import org.firstinspires.ftc.teamcode.Bot.Mechanisms.AbstractMechanisms.ServoMec
 
 public class Wrist extends ServoMechanism {
     public Wrist() {
-        super("OuttakeWrist");
+        super("Wrist");
     }
     public static double INIT = 1;
 

@@ -59,6 +59,9 @@ public class Mechanism {
     public void reverse(boolean reverse){
 
     }
+    public void reverse(boolean reverseLeft, boolean reverseRight){
+
+    }
 
     @NonNull
     public String toString(){

@@ -1,14 +1,16 @@
 package org.firstinspires.ftc.teamcode.Bot.OpModes;
 
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
+import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.util.Range;
 
 import org.firstinspires.ftc.teamcode.Bot.Bot;
 import org.firstinspires.ftc.teamcode.Bot.Mechanisms.Arm;
-import org.firstinspires.ftc.teamcode.Bot.Mechanisms.OuttakeSlides;
+import org.firstinspires.ftc.teamcode.Bot.Mechanisms.Slides;
 import org.firstinspires.ftc.teamcode.Bot.Mechanisms.Wrist;
 import org.firstinspires.ftc.teamcode.Bot.Setup;
 
+@TeleOp(name="qual2tele", group = "tele-op")
 public class Qual2TeleOp extends LinearOpMode {
 
     @Override
@@ -47,7 +49,7 @@ public class Qual2TeleOp extends LinearOpMode {
             x *= 0.25;
             y *= 0.25;
             spin *= 0.25;
-        } else if(bot.outtakeSlides.getCurrentPosition()>100){
+        } else if(bot.slides.getCurrentPosition()>100){
             x *= 0.7;
             y *= 0.7;
             spin *= 0.4;
@@ -67,36 +69,36 @@ public class Qual2TeleOp extends LinearOpMode {
     private void driverTwo(Bot bot){
         if(gamepad2.b){
             if(gamepad2.a){
-                bot.outtakeSlides.setTarget(OuttakeSlides.RST);
+                bot.slides.setTarget(Slides.RST);
             } else if(gamepad2.dpad_down){
-                bot.outtakeSlides.setTarget(OuttakeSlides.RST);
+                bot.slides.setTarget(Slides.RST);
             } else if(gamepad2.x){
-                bot.outtakeSlides.setTarget(OuttakeSlides.SPC1);
+                bot.slides.setTarget(Slides.SPC1);
             } else if(gamepad2.y){
-                bot.outtakeSlides.setTarget(OuttakeSlides.SPC2);
+                bot.slides.setTarget(Slides.SPC2);
             } else if(gamepad2.dpad_left){
-                bot.outtakeSlides.setTarget(OuttakeSlides.BUC1);
+                bot.slides.setTarget(Slides.BUC1);
             } else if(gamepad2.dpad_up){
-                bot.outtakeSlides.setTarget(OuttakeSlides.BUC2);
+                bot.slides.setTarget(Slides.BUC2);
             }
         } else {
             if(gamepad2.a){
-                bot.outtakeSlides.setTarget(OuttakeSlides.RST);
+                bot.slides.setTarget(Slides.RST);
                 bot.arm.setTarget(Arm.TRANSFER);
             } else if(gamepad2.dpad_down){
-                bot.outtakeSlides.setTarget(OuttakeSlides.RST);
+                bot.slides.setTarget(Slides.RST);
                 bot.arm.setTarget(Arm.TRANSFER);
             } else if(gamepad2.x){
-                bot.outtakeSlides.setTarget(OuttakeSlides.SPC1);
+                bot.slides.setTarget(Slides.SPC1);
                 bot.arm.setTarget(Arm.OUT);
             } else if(gamepad2.y){
-                bot.outtakeSlides.setTarget(OuttakeSlides.SPC2);
+                bot.slides.setTarget(Slides.SPC2);
                 bot.arm.setTarget(Arm.OUT);
             } else if(gamepad2.dpad_left){
-                bot.outtakeSlides.setTarget(OuttakeSlides.BUC1);
+                bot.slides.setTarget(Slides.BUC1);
                 bot.arm.setTarget(Arm.OUT);
             } else if(gamepad2.dpad_up){
-                bot.outtakeSlides.setTarget(OuttakeSlides.BUC2);
+                bot.slides.setTarget(Slides.BUC2);
                 bot.arm.setTarget(Arm.OUT);
             }
         }
@@ -105,8 +107,8 @@ public class Qual2TeleOp extends LinearOpMode {
     private void driverTwoManual(Bot bot){
         double joystickL = gamepad2.left_stick_y;
         double joystickR = gamepad2.right_stick_y;
-        bot.outtakeSlides.setVelocity(0.5);
-        bot.outtakeSlides.setTarget(Range.clip(bot.outtakeSlides.getCurrentPosition() + (100/2)*(Math.signum(-joystickR)*(Math.pow(2,Math.abs(-joystickR) * 2)) - 1), 0, OuttakeSlides.MAX));
+        bot.slides.setVelocity(0.5);
+        bot.slides.setTarget(Range.clip(bot.slides.getCurrentPosition() + (100/2)*(Math.signum(-joystickR)*(Math.pow(2,Math.abs(-joystickR) * 2)) - 1), 0, Slides.MAX));
 
         bot.wrist.setTarget(Range.clip(bot.wrist.getCurrentPosition() + (0.01)*(Math.signum(-joystickL)*(Math.pow(2,Math.abs(-joystickL) * 2)) - 1), 0, Wrist.MAX));
 

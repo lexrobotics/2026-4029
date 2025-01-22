@@ -6,8 +6,6 @@ import com.qualcomm.robotcore.hardware.CRServo;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorEx;
 
-import org.firstinspires.ftc.teamcode.Bot.Mechanisms.OuttakeSlidesSmart;
-
 @TeleOp(name="NoodlerTest", group = "0")
 public class NoodlerTest extends LinearOpMode {
     private CRServo noodler;

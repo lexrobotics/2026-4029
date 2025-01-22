@@ -1,19 +1,18 @@
 package org.firstinspires.ftc.teamcode.Bot.Mechanisms;
 
 import com.qualcomm.robotcore.hardware.DcMotor;
-import com.qualcomm.robotcore.hardware.HardwareMap;
 
 import org.firstinspires.ftc.teamcode.Bot.Sensors.SensorSwitch;
 import org.firstinspires.ftc.teamcode.Bot.Setup;
 
-public class OuttakeSlidesSmart extends OuttakeSlides{
+public class SlidesSmart extends Slides {
     private SensorSwitch sensorSwitch;
     private boolean lastState = false;
-    public OuttakeSlidesSmart(){super();}
+    public SlidesSmart(){super();}
 
     @Override
     public void init(double target){
-        sensorSwitch = new SensorSwitch("OuttakeSlidesSwitch", true);
+        sensorSwitch = new SensorSwitch("SlidesSwitch", true);
 //        lastState = sensorSwitch.getStatus();
         super.init(target);
     }
