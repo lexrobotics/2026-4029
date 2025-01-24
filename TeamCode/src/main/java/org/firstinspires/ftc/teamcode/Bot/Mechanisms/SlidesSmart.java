@@ -1,6 +1,7 @@
 package org.firstinspires.ftc.teamcode.Bot.Mechanisms;
 
 import com.qualcomm.robotcore.hardware.DcMotor;
+import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 
 import org.firstinspires.ftc.teamcode.Bot.Sensors.SensorSwitch;
@@ -16,12 +17,15 @@ public class SlidesSmart extends Slides {
         sensorSwitch = new SensorSwitch("SlidesSwitch", true, hwm);
 //        lastState = sensorSwitch.getStatus();
         super.init(target);
+        motor.setDirection(DcMotorSimple.Direction.REVERSE);
+
     }
     @Override
     public void init(double target){
         sensorSwitch = new SensorSwitch("SlidesSwitch", true);
 //        lastState = sensorSwitch.getStatus();
         super.init(target);
+        motor.setDirection(DcMotorSimple.Direction.REVERSE);
     }
 
     @Override

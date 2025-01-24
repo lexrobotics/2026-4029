@@ -7,7 +7,7 @@ import org.firstinspires.ftc.teamcode.Bot.Mechanisms.AbstractMechanisms.RunToPos
 
 public class Slides extends RunToPosMotorMechanism {
     public Slides() {
-        super("OuttakeSlides");
+        super("Slides");
     }
     public static double INIT = 0;
 

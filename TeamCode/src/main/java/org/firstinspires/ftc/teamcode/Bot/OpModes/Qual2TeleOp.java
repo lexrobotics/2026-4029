@@ -1,6 +1,7 @@
 package org.firstinspires.ftc.teamcode.Bot.OpModes;
 
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
+import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.util.Range;
 
 import org.firstinspires.ftc.teamcode.Bot.Bot;
@@ -8,13 +9,15 @@ import org.firstinspires.ftc.teamcode.Bot.Mechanisms.Slides;
 import org.firstinspires.ftc.teamcode.Bot.Mechanisms.Wrist;
 import org.firstinspires.ftc.teamcode.Bot.Setup;
 import org.firstinspires.ftc.teamcode.Bot.States.ActionSequences;
-
+@TeleOp
 public class Qual2TeleOp extends LinearOpMode {
+    private Bot bot;
+    private Setup setup;
 
     @Override
     public void runOpMode() throws InterruptedException {
-        Setup setup = new Setup(hardwareMap, telemetry, true, this, Setup.OpModeType.AUTO, Setup.Team.Q1);
-        Bot bot = new Bot(Setup.mechStates, Setup.sensorStates);
+        setup = new Setup(hardwareMap, telemetry, true, this, Setup.OpModeType.AUTO, Setup.Team.Q1);
+        bot = new Bot(Setup.mechStates, Setup.sensorStates);
         bot.init();
 
         double imuOffset = 0;
@@ -73,6 +76,7 @@ public class Qual2TeleOp extends LinearOpMode {
         telemetry.addData("spin", spin);
         telemetry.addData("angle", angle);
     }
+
     private void driverTwo(Bot bot, ActionSequences actionSequences){
         if(gamepad2.b){
             if(gamepad2.a || gamepad2.dpad_down){

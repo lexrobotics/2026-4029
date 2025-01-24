@@ -83,6 +83,8 @@ public class Setup {
     private void addSensors(){
         sensorStates.put("webcam", new HardwareStates(false));
         sensorStates.put("SlidesSwitch", new HardwareStates(true));
+        sensorStates.put("IntakeCDSensor", new HardwareStates(true));
+        sensorStates.put("IntakeTouchSensor", new HardwareStates(true));
     }
 
     public void disableMechanism(String mechanismName){

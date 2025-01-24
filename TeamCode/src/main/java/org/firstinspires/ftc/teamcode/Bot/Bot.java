@@ -25,7 +25,7 @@ public class Bot implements Robot{
     public Drivetrain drivetrain;
     public Mechanism arm, wrist, slides, fingers, grippers;
     public Sensors sensors;
-    public SensorSwitch outtakeSlidesSwitch, intakeSlidesSwitch;
+    public SensorSwitch slidesSwitch, intakeSlidesSwitch;
 
     public Bot(HashMap<String, HardwareStates> hardwareStates, HashMap<String, HardwareStates> sensorStates){
         /*
@@ -55,7 +55,7 @@ public class Bot implements Robot{
             slides = new SlidesSmart();
         } else {
             telemetry.addLine("NO SLIDES, OUT");
-            slides = new Mechanism("OuttakeSlides");
+            slides = new Mechanism("Slides");
         }
         if(hardwareStates.get("Arm").isEnabled){
             arm = new Arm();

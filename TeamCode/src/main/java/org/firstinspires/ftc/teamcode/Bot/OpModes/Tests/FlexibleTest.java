@@ -3,137 +3,134 @@ package org.firstinspires.ftc.teamcode.Bot.OpModes.Tests;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.util.ElapsedTime;
-
+import com.qualcomm.robotcore.util.Range;
 
 import org.firstinspires.ftc.teamcode.Bot.Mechanisms.AbstractMechanisms.Mechanism;
 import org.firstinspires.ftc.teamcode.Bot.Mechanisms.Arm;
 import org.firstinspires.ftc.teamcode.Bot.Mechanisms.Fingers;
 import org.firstinspires.ftc.teamcode.Bot.Mechanisms.Grippers;
+import org.firstinspires.ftc.teamcode.Bot.Mechanisms.Slides;
 import org.firstinspires.ftc.teamcode.Bot.Mechanisms.SlidesSmart;
 import org.firstinspires.ftc.teamcode.Bot.Mechanisms.Wrist;
 import org.firstinspires.ftc.teamcode.Bot.Setup;
 
-@TeleOp(name="FlexibleTest", group="teleop")
+
+import java.util.HashMap;
+
+@TeleOp(name="*FlexibleTest", group="Test")
 
 public class FlexibleTest extends LinearOpMode {
-    Setup setup2;
+    Setup setup;
     Mechanism mechanism;
     //    MechTest mechTest;
 //    MechTest outtakeRotation = new OuttakeRotation();
-    Mechanism slides = new SlidesSmart(), wrist = new Wrist(), arm = new Arm(), fingers = new Fingers(), grippers = new Grippers();
-    double targetSlides = 0,targetWrist = 0.5, targetArm = 0.5, targetFingers = 0.5, targetWheels = 1;
-    double SERVO_INCREMENT = 0.0002, MOTOR_INCREMENT = 5;
+    Mechanism arm = new Arm(), wrist = new Wrist(),
+            slides = new SlidesSmart(), fingers = new Fingers(),
+            grippers = new Grippers();
+    boolean mechIsServo;
+    double targetPos, futureVelPos, changeInPos, velocity;
+    double SERVO_INCREMENT = 0.001, MOTOR_INCREMENT = 5;
     boolean isGetVelocityMode, isMoving;
     ElapsedTime timer = new ElapsedTime();
     @Override
     public void runOpMode() throws InterruptedException {
-        setup2=new Setup(hardwareMap, telemetry, false, this, Setup.OpModeType.TELEOP, Setup.Team.Q1);
+        setup =new Setup(hardwareMap, telemetry, false, this, Setup.OpModeType.AUTO, Setup.Team.Q1);
         mechanism = new Mechanism("mechanism");
         telemetry.update();
         waitForStart();
         resetRuntime();
         while(opModeIsActive()){
-            //ARM
-            if (gamepad1.a){
-                grippers.reverse(true, false);
-                grippers.init(targetWheels);
-                if(Math.abs(gamepad1.left_stick_y) > 0.05){
-                    targetWheels = 1;
-                } else if(Math.abs(gamepad1.left_stick_y) < -0.05){
-                    targetWheels = -1;
-                }
-                grippers.setTarget(targetWheels);
-                grippers.update();
-            }
-            if (gamepad1.x){
-                arm.init(targetArm);
-                if(Math.abs(gamepad1.left_stick_y) > 0.05){
-                    targetArm += gamepad1.left_stick_y*SERVO_INCREMENT;
-                    if(targetArm > 1){
-                        targetArm = 1;
-                    }
-                    else if(targetArm < 0){
-                        targetArm = 0;
-                    }
-                }else if(Math.abs(gamepad1.left_stick_y) < -0.05){
-                    targetArm -= gamepad1.left_stick_y*SERVO_INCREMENT;
-                    if(targetArm > 1){
-                        targetArm = 1;
-                    }
-                    else if(targetArm < 0){
-                        targetArm = 0;
-                    }
-                }
-                if(targetArm>1){
-                    targetArm=1;
-                }
-                arm.setTarget(targetArm);
-                arm.update();
-            }
-            if (gamepad1.b){
-                wrist.init(targetWrist);
-                if(Math.abs(gamepad1.left_stick_y) > 0.05){
-                    targetWrist += gamepad1.left_stick_y*SERVO_INCREMENT;
-                    if(targetWrist > 1){
-                        targetWrist = 1;
-                    }
-                    else if(targetWrist < 0){
-                        targetWrist = 0;
-                    }
-                }else if(Math.abs(gamepad1.left_stick_y) < -0.05){
-                    targetWrist -= gamepad1.left_stick_y*SERVO_INCREMENT;
-                    if(targetWrist > 1){
-                        targetWrist = 1;
-                    }
-                    else if(targetWrist < 0){
-                        targetWrist = 0;
-                    }
-                }
-                wrist.setTarget(targetWrist);
-                wrist.update();
-            }
 
             if (gamepad1.y){
-                fingers.init(targetFingers);
-                if(Math.abs(gamepad1.left_stick_y) > 0.05){
-                    targetFingers += gamepad1.left_stick_y*SERVO_INCREMENT;
-                    if(targetFingers > 1){
-                        targetFingers = 1;
-                    }
-                    else if(targetFingers < 0){
-                        targetFingers = 0;
-                    }
-                }else if(Math.abs(gamepad1.left_stick_y) < -0.05){
-                    targetFingers -= gamepad1.left_stick_y*SERVO_INCREMENT;
-                    if(targetFingers > 1){
-                        targetFingers = 1;
-                    }
-                    else if(targetFingers < 0){
-                        targetFingers = 0;
-                    }
-                }
-                fingers.setTarget(targetFingers);
-                fingers.update();
+                mechanism = arm;
+                targetPos = 0.5;
+                futureVelPos = targetPos;
+                mechanism.init(targetPos);
+                mechIsServo = true;
+            }
+            //stack 5: 0.2609, stack 4: 0.2899
+            if (gamepad1.x){
+                mechanism = wrist;
+                targetPos = 0.5;
+                futureVelPos = targetPos;
+                mechanism.init(targetPos);
+                mechIsServo = true;
+            }
+            if (gamepad1.b){
+                mechanism = fingers;
+                targetPos = 0.5;
+                futureVelPos = targetPos;
+                mechanism.init(targetPos);
+                mechIsServo = true;
+            }
+            if (gamepad2.dpad_up){
+                mechanism = grippers;
+                targetPos = 0;
+                futureVelPos = targetPos;
+                mechanism.init(targetPos);
+                mechIsServo = true;
+            }
+
+
+            if (gamepad1.a){
+                slides = new SlidesSmart();
+                mechanism = slides;
+                targetPos = 0;
+                futureVelPos = targetPos;
+                mechanism.init(targetPos);
+                mechIsServo = false;
             }
 
             if (gamepad2.dpad_down){
-                slides.init(targetSlides);
-                if(Math.abs(gamepad1.left_stick_y) > 0.05){
-                    targetSlides += gamepad1.left_stick_y*MOTOR_INCREMENT;
-                }else if(Math.abs(gamepad1.left_stick_y) < -0.05){
-                    targetSlides -= gamepad1.left_stick_y*MOTOR_INCREMENT;
+                isGetVelocityMode = true;
+            }else if (gamepad2.dpad_up){
+                isGetVelocityMode = false;
+            }
+            double gamepad_input = -gamepad1.left_stick_y;
+            if (isGetVelocityMode && mechIsServo){
+                if (gamepad_input > 0.1) {
+                    futureVelPos = Range.clip(futureVelPos + 0.1*SERVO_INCREMENT, 0, 1);
+                    isMoving = false;
+                } else if (gamepad_input < -0.1) {
+                    futureVelPos = Range.clip(futureVelPos - 0.1*SERVO_INCREMENT, 0, 1);
+                    isMoving = false;
                 }
-                slides.setTarget(targetSlides);
-                slides.update();
+                if (gamepad2.a && !isMoving){
+                    changeInPos = Math.abs(targetPos - futureVelPos);
+                    targetPos = futureVelPos;
+                    timer.reset();
+                    isMoving = true;
+                }
+                if (gamepad2.b && isMoving){
+                    velocity = changeInPos/timer.seconds();
+                }
+            }else {
+                if (gamepad_input > 0.1) {
+                    if (mechIsServo) {
+                        targetPos = Range.clip(targetPos + SERVO_INCREMENT, 0, 1);
+                    } else {
+                        targetPos = Range.clip(targetPos + MOTOR_INCREMENT, -10000, 10000);
+                    }
+                } else if (gamepad_input < -0.1) {
+                    if (mechIsServo) {
+                        targetPos = Range.clip(targetPos - SERVO_INCREMENT, 0, 1);
+                    } else {
+                        targetPos = Range.clip(targetPos - MOTOR_INCREMENT, -10000, 10000);
+                    }
+                }
             }
 
-            telemetry.addData("wheel pos (A)", targetWheels);
-            telemetry.addData("wrist pos (B)", targetWrist);
-            telemetry.addData("arm pos (X)", targetArm);
-            telemetry.addData("fingers pos (Y)", targetFingers);
-            telemetry.addData("slides pos (DPad Down)", targetSlides);
+            mechanism.setTarget(targetPos);
+            mechanism.update();
+            mechanism.telemetry();
+            telemetry.addData("Bot2FlexibleTest targetPos", targetPos);
+            telemetry.addData("Bot2FlexibleTest futureVelPos", futureVelPos);
+            telemetry.addData("Bot2FlexibleTest velocity", velocity);
+            telemetry.addLine("gamepad1.a slides \ngamepad1.b fingers\ngamepad1.x wrist\ngamepad1.y arm");
             telemetry.addLine("gamepad1.left_stick_y increase/decrease target position");
+            telemetry.addLine("gamepad1.right_stick_y > 0 activates target position");
             telemetry.update();
+
         }
     }
 

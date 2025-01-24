@@ -6,9 +6,8 @@ import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import org.firstinspires.ftc.teamcode.Bot.Setup;
 
 public class CoupledCRServoMechanism extends Mechanism{
-
-    private CRServo servoLeft;
-    private CRServo servoRight;
+    protected CRServo servoLeft;
+    protected CRServo servoRight;
 
     public CoupledCRServoMechanism(String name){super(name);}
 
