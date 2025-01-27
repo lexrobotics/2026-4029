@@ -23,7 +23,6 @@ public class ActionSequences {
             case 1:
                 bot.leftGripper.setVelocity(LeftGripper.INTAKE);
                 bot.rightGripper.setVelocity(RightGripper.INTAKE);
-
                 break;
             case 0:
                 bot.leftGripper.setVelocity(LeftGripper.STOP);

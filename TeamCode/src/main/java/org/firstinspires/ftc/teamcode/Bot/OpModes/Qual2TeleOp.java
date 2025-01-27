@@ -2,6 +2,7 @@ package org.firstinspires.ftc.teamcode.Bot.OpModes;
 
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
+import com.qualcomm.robotcore.util.ElapsedTime;
 import com.qualcomm.robotcore.util.Range;
 
 import org.firstinspires.ftc.teamcode.Bot.Bot;
@@ -13,6 +14,7 @@ import org.firstinspires.ftc.teamcode.Bot.States.ActionSequences;
 public class Qual2TeleOp extends LinearOpMode {
     private Bot bot;
     private Setup setup;
+    private ElapsedTime timer;
 
     @Override
     public void runOpMode() throws InterruptedException {
@@ -21,7 +23,9 @@ public class Qual2TeleOp extends LinearOpMode {
         bot.init();
 
         double imuOffset = 0;
+
         waitForStart();
+        resetRuntime();
 
         ActionSequences actionSequences = new ActionSequences(bot);
         while(opModeIsActive()){
