@@ -43,7 +43,7 @@ public class FlexibleTestOld extends LinearOpMode {
         };
         initPositions = new double[]{
                 0,
-                0.5,
+                1,
                 0.5,
                 0.5,
                 0.5
@@ -73,12 +73,21 @@ public class FlexibleTestOld extends LinearOpMode {
                 if(mechanism.wasInitialized()) {
                     targetPos = mechanism.getCurrentPosition();
                     futureVelPos = targetPos;
+                    if(mechanism.getName().equals("OuttakeSlides") || mechanism.getName().equals("Grippers")){
+                        mechanism.init(targetPos, hardwareMap);
+                    } else {
+                        mechanism.init(targetPos);
+                    }
                     mechanism.init(targetPos);
                     mechanism.update();
                 }else {
                     targetPos = initPositions[mechIndex % mechanisms.length];
                     futureVelPos = targetPos;
-                    mechanism.init(targetPos);
+                    if(mechanism.getName().equals("OuttakeSlides") || mechanism.getName().equals("Grippers")){
+                        mechanism.init(targetPos, hardwareMap);
+                    } else {
+                        mechanism.init(targetPos);
+                    }
                     mechanism.update();
                 }
             }

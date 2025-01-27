@@ -10,7 +10,7 @@ import org.firstinspires.ftc.teamcode.Bot.Setup;
 public class SensorColor {
     private ColorSensor sensor;
     public SensorColor(String name) {
-        sensor = Setup.hardwareMap.get(ColorRangeSensor.class, name);
+        sensor = Setup.hardwareMap.get(ColorSensor.class, name);
     }
 
     public double[] getColor(){

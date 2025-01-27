@@ -26,8 +26,8 @@ public class VFBTest extends LinearOpMode {
 
     @Override
     public void runOpMode() throws InterruptedException {
-        arm = hardwareMap.get(Servo.class, "arm");
-        wrist = hardwareMap.get(Servo.class, "wrist");
+        arm = hardwareMap.get(Servo.class, "Arm");
+        wrist = hardwareMap.get(Servo.class, "Wrist");
 
         positions = new double[] {zeroed, maxHeight, furthest};
 

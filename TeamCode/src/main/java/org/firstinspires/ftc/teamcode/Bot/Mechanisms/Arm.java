@@ -16,7 +16,4 @@ public class Arm extends ServoMechanism {
     public static final double OUT = 0.3;
     public static final double BUCKET = 0.3;
     public static final double HANG = 0.3;
-
-
-
 }

@@ -25,6 +25,9 @@ public class Mechanism {
         setTarget(target);
         initialized = true;
     }
+    public String getName(){
+        return name;
+    }
     public void init(double target, HardwareMap hwm){
         setTarget(target);
         initialized = true;

@@ -19,6 +19,7 @@ public class Qual2TeleOp extends LinearOpMode {
     @Override
     public void runOpMode() throws InterruptedException {
         setup = new Setup(hardwareMap, telemetry, true, this, Setup.OpModeType.AUTO, Setup.Team.Q1);
+//        setup.disableMechanism("Fingers");
         bot = new Bot(Setup.mechStates, Setup.sensorStates);
         bot.init();
 
