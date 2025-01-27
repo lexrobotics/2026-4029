@@ -27,6 +27,7 @@ public class Qual2TeleOp extends LinearOpMode {
         while(opModeIsActive()){
             driverOne(bot, imuOffset, actionSequences);
             driverTwo(bot, actionSequences);
+            bot.update();
         }
     }
     private void driverOne(Bot bot, double imuOffset, ActionSequences actionSequences){

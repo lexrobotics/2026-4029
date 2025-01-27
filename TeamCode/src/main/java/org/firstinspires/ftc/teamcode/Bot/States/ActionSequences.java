@@ -4,7 +4,8 @@ package org.firstinspires.ftc.teamcode.Bot.States;
 import org.firstinspires.ftc.teamcode.Bot.Bot;
 import org.firstinspires.ftc.teamcode.Bot.Mechanisms.Arm;
 import org.firstinspires.ftc.teamcode.Bot.Mechanisms.Fingers;
-import org.firstinspires.ftc.teamcode.Bot.Mechanisms.Grippers;
+import org.firstinspires.ftc.teamcode.Bot.Mechanisms.LeftGripper;
+import org.firstinspires.ftc.teamcode.Bot.Mechanisms.RightGripper;
 import org.firstinspires.ftc.teamcode.Bot.Mechanisms.Slides;
 import org.firstinspires.ftc.teamcode.Bot.Mechanisms.SmartIntake;
 import org.firstinspires.ftc.teamcode.Bot.Mechanisms.Wrist;
@@ -20,16 +21,22 @@ public class ActionSequences {
     public void intake(int direction){
         switch(direction){
             case 1:
-                bot.grippers.setVelocity(Grippers.INTAKE);
+                bot.leftGripper.setVelocity(LeftGripper.INTAKE);
+                bot.rightGripper.setVelocity(RightGripper.INTAKE);
+
                 break;
             case 0:
-                bot.grippers.setVelocity(Grippers.STOP);
+                bot.leftGripper.setVelocity(LeftGripper.STOP);
+                bot.rightGripper.setVelocity(RightGripper.STOP);
                 break;
             case -1:
-                bot.grippers.setVelocity(Grippers.OUTTAKE);
+                bot.leftGripper.setVelocity(LeftGripper.OUTTAKE);
+                bot.rightGripper.setVelocity(RightGripper.OUTTAKE);
                 break;
         }
-        bot.grippers.update();
+        bot.leftGripper.update();
+        bot.rightGripper.update();
+
     }
 //    public SmartIntake.Color smartIntake(boolean bePicky){
 //        SmartIntake.Color color = SmartIntake.intake(bePicky);

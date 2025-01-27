@@ -8,18 +8,17 @@ import com.qualcomm.robotcore.util.Range;
 import org.firstinspires.ftc.teamcode.Bot.Mechanisms.AbstractMechanisms.Mechanism;
 import org.firstinspires.ftc.teamcode.Bot.Mechanisms.Arm;
 import org.firstinspires.ftc.teamcode.Bot.Mechanisms.Fingers;
-import org.firstinspires.ftc.teamcode.Bot.Mechanisms.Grippers;
+import org.firstinspires.ftc.teamcode.Bot.Mechanisms.LeftGripper;
 import org.firstinspires.ftc.teamcode.Bot.Mechanisms.SlidesSmart;
 import org.firstinspires.ftc.teamcode.Bot.Mechanisms.Wrist;
 import org.firstinspires.ftc.teamcode.Bot.Setup;
-import org.firstinspires.ftc.teamcode.Bot.StartPositions;
 
 @TeleOp(name = "flexible test", group = "tele-op")
 public class FlexibleTestOld extends LinearOpMode {
     Setup setup;
 
     Mechanism mechanism;
-    Mechanism slides = new SlidesSmart(), arm = new Arm(), wrist = new Wrist(), grippers = new Grippers(), fingers = new Fingers();
+    Mechanism slides = new SlidesSmart(), arm = new Arm(), wrist = new Wrist(), grippers = new LeftGripper(), fingers = new Fingers();
     Mechanism[] mechanisms;
     boolean[] isServo;
     double[] initPositions;

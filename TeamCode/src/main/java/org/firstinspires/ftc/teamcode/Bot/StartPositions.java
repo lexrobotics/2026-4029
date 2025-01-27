@@ -1,7 +1,7 @@
 package org.firstinspires.ftc.teamcode.Bot;
 
 import org.firstinspires.ftc.teamcode.Bot.Mechanisms.Fingers;
-import org.firstinspires.ftc.teamcode.Bot.Mechanisms.Grippers;
+import org.firstinspires.ftc.teamcode.Bot.Mechanisms.LeftGripper;
 import org.firstinspires.ftc.teamcode.Bot.Mechanisms.Slides;
 import org.firstinspires.ftc.teamcode.PedroPathing.localization.Pose;
 
@@ -13,7 +13,7 @@ public class StartPositions {
     public static double winchPos = Winch.INIT;
     public static double wristPos = Wrist.INIT;
     public static double fingersPos = Fingers.INIT;
-    public static double grippersPos = Grippers.INIT;
+    public static double grippersPos = LeftGripper.INIT;
     public static double slidesPos = Slides.INIT;
     public static double armPos = Arm.INIT;
     public static Pose redRightDrivePos = new Pose(132, 108, Math.toRadians(270));

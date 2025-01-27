@@ -74,10 +74,11 @@ public class Setup {
     private void addMechanisms(){
         mechStates.put("drivetrain", new HardwareStates(true));
         mechStates.put("Arm", new HardwareStates(true));
-        mechStates.put("Grippers", new HardwareStates(true));
-        mechStates.put("Wrist", new HardwareStates(true));
+        mechStates.put("LeftGripper", new HardwareStates(true));
+        mechStates.put("RightGripper", new HardwareStates(true));
+        mechStates.put("Wrist", new HardwareStates(false));
         mechStates.put("Slides", new HardwareStates(true));
-        mechStates.put("Fingers", new HardwareStates(true));
+        mechStates.put("Fingers", new HardwareStates(false));
     }
 
     private void addSensors(){

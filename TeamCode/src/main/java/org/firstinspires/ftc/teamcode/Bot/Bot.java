@@ -12,7 +12,8 @@ import org.firstinspires.ftc.teamcode.Bot.Drivetrain.Drivetrain;
 import org.firstinspires.ftc.teamcode.Bot.Mechanisms.AbstractMechanisms.Mechanism;
 import org.firstinspires.ftc.teamcode.Bot.Mechanisms.Arm;
 import org.firstinspires.ftc.teamcode.Bot.Mechanisms.Fingers;
-import org.firstinspires.ftc.teamcode.Bot.Mechanisms.Grippers;
+import org.firstinspires.ftc.teamcode.Bot.Mechanisms.LeftGripper;
+import org.firstinspires.ftc.teamcode.Bot.Mechanisms.RightGripper;
 import org.firstinspires.ftc.teamcode.Bot.Mechanisms.SlidesSmart;
 import org.firstinspires.ftc.teamcode.Bot.Mechanisms.Wrist;
 import org.firstinspires.ftc.teamcode.Bot.Sensors.SensorSwitch;
@@ -23,7 +24,7 @@ import java.util.HashMap;
 
 public class Bot implements Robot{
     public Drivetrain drivetrain;
-    public Mechanism arm, wrist, slides, fingers, grippers;
+    public Mechanism arm, wrist, slides, fingers, leftGripper, rightGripper;
     public Sensors sensors;
     public SensorSwitch slidesSwitch, intakeSlidesSwitch;
 
@@ -40,10 +41,16 @@ public class Bot implements Robot{
         } else {
             drivetrain = null;
         }
-        if(hardwareStates.get("Grippers").isEnabled){
-            grippers = new Grippers(); //todo, replace
+        if(hardwareStates.get("LeftGripper").isEnabled){
+            leftGripper = new LeftGripper();
         } else {
-            grippers = new Mechanism("Noodler");
+            leftGripper = new Mechanism("LeftGripper");
+        }
+
+        if(hardwareStates.get("RightGripper").isEnabled){
+            rightGripper = new RightGripper();
+        } else {
+            leftGripper = new Mechanism("RightGripper");
         }
 
         if(hardwareStates.get("Wrist").isEnabled){
@@ -67,17 +74,11 @@ public class Bot implements Robot{
         } else {
             fingers = new Mechanism("Fingers");
         }
-        if(hardwareStates.get("Grippers").isEnabled){
-            grippers = new Grippers();
-        } else {
-            grippers = new Mechanism("Grippers");
-        }
-
-        if(hardwareStates.get("IntakeCDSensor").isEnabled){
+        if(sensorStates.get("IntakeCDSensor").isEnabled){
             sensors.addSensor(ColorSensor.class, "IntakeCDSensor", 0);
             sensors.addSensor(DistanceSensor.class, "IntakeCDSensor", 0);
         }
-        if(hardwareStates.get("IntakeTouchSensor").isEnabled){
+        if(sensorStates.get("IntakeTouchSensor").isEnabled){
             sensors.addSensor(TouchSensor.class, "IntakeTouchSensor", 0);
         }
 
@@ -99,7 +100,8 @@ public class Bot implements Robot{
         ElapsedTime timer = new ElapsedTime();
         timer.reset();
         wrist.init(StartPositions.wristPos);
-        grippers.init(StartPositions.grippersPos);
+        leftGripper.init(StartPositions.grippersPos);
+        rightGripper.init(StartPositions.grippersPos);
         arm.init(StartPositions.armPos);
         slides.init(StartPositions.slidesPos);
         drivetrain.init(new Pose2d(0, 0, 0));
@@ -108,7 +110,8 @@ public class Bot implements Robot{
     public void init(Pose2d startPos){
         ElapsedTime timer = new ElapsedTime();
         timer.reset();
-        grippers.init(0);
+        leftGripper.init(StartPositions.grippersPos);
+        rightGripper.init(StartPositions.grippersPos);
         wrist.init(StartPositions.wristPos);
         slides.init(StartPositions.slidesPos);
         drivetrain.init(startPos);
@@ -118,7 +121,8 @@ public class Bot implements Robot{
 
     @Override
     public void update(){
-        grippers.update();
+        leftGripper.update();
+        rightGripper.update();
         wrist.update();
         slides.update();
         drivetrain.update();
@@ -128,7 +132,8 @@ public class Bot implements Robot{
 
     @Override
     public void telemetry(){
-        grippers.telemetry();
+        leftGripper.telemetry();
+        rightGripper.telemetry();
         wrist.telemetry();
         slides.telemetry();
         drivetrain.telemetry();
@@ -138,11 +143,9 @@ public class Bot implements Robot{
 
     @Override
     public boolean isBusy(){
-        return grippers.isBusy() || wrist.isBusy() || slides.isBusy() || drivetrain.isBusy() || fingers.isBusy() || arm.isBusy();
+        return leftGripper.isBusy() || rightGripper.isBusy() || wrist.isBusy() || slides.isBusy() || drivetrain.isBusy() || fingers.isBusy() || arm.isBusy();
     }
-    public void setTargetVectors(double x, double y, double theta){
-//        drivetrain.setTargetVectors(x,y,theta);
-    }
+
     public void setTeleOpTargets(double left_stick_x, double left_stick_y, double right_stick_x){
         drivetrain.setTeleOpTargets(left_stick_x, left_stick_y, right_stick_x);
     }

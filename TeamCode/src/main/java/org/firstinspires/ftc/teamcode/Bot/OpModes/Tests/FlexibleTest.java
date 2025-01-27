@@ -8,14 +8,11 @@ import com.qualcomm.robotcore.util.Range;
 import org.firstinspires.ftc.teamcode.Bot.Mechanisms.AbstractMechanisms.Mechanism;
 import org.firstinspires.ftc.teamcode.Bot.Mechanisms.Arm;
 import org.firstinspires.ftc.teamcode.Bot.Mechanisms.Fingers;
-import org.firstinspires.ftc.teamcode.Bot.Mechanisms.Grippers;
-import org.firstinspires.ftc.teamcode.Bot.Mechanisms.Slides;
+import org.firstinspires.ftc.teamcode.Bot.Mechanisms.LeftGripper;
+import org.firstinspires.ftc.teamcode.Bot.Mechanisms.RightGripper;
 import org.firstinspires.ftc.teamcode.Bot.Mechanisms.SlidesSmart;
 import org.firstinspires.ftc.teamcode.Bot.Mechanisms.Wrist;
 import org.firstinspires.ftc.teamcode.Bot.Setup;
-
-
-import java.util.HashMap;
 
 @TeleOp(name="*FlexibleTest", group="Test")
 
@@ -25,8 +22,7 @@ public class FlexibleTest extends LinearOpMode {
     //    MechTest mechTest;
 //    MechTest outtakeRotation = new OuttakeRotation();
     Mechanism arm = new Arm(), wrist = new Wrist(),
-            slides = new SlidesSmart(), fingers = new Fingers(),
-            grippers = new Grippers();
+            slides = new SlidesSmart(), fingers = new Fingers(), leftGripper = new LeftGripper(), rightGripper = new RightGripper();
     boolean mechIsServo;
     double targetPos, futureVelPos, changeInPos, velocity;
     double SERVO_INCREMENT = 0.001, MOTOR_INCREMENT = 5;
@@ -36,11 +32,26 @@ public class FlexibleTest extends LinearOpMode {
     public void runOpMode() throws InterruptedException {
         setup =new Setup(hardwareMap, telemetry, false, this, Setup.OpModeType.AUTO, Setup.Team.Q1);
         mechanism = new Mechanism("mechanism");
+        leftGripper.init(0);
+        rightGripper.init(1);
         telemetry.update();
         waitForStart();
         resetRuntime();
         while(opModeIsActive()){
-
+            if(gamepad2.right_trigger > 0.3 && gamepad2.left_trigger < 0.3){
+                leftGripper.setTarget(1);
+                rightGripper.setTarget(-1);
+            }
+            if(gamepad2.left_trigger < 0.3 && gamepad2.right_trigger < 0.3){
+                leftGripper.setTarget(0);
+                rightGripper.setTarget(0);
+            }
+            if(gamepad2.left_trigger > 0.3 && gamepad2.right_trigger < 0.3){
+                leftGripper.setTarget(-1);
+                rightGripper.setTarget(1);
+            }
+            leftGripper.update();
+            rightGripper.update();
             if (gamepad1.y){
                 mechanism = arm;
                 targetPos = 0.5;
@@ -51,7 +62,7 @@ public class FlexibleTest extends LinearOpMode {
             //stack 5: 0.2609, stack 4: 0.2899
             if (gamepad1.x){
                 mechanism = wrist;
-                targetPos = 0.5;
+                targetPos = Wrist.INIT;
                 futureVelPos = targetPos;
                 mechanism.init(targetPos);
                 mechIsServo = true;
@@ -63,14 +74,6 @@ public class FlexibleTest extends LinearOpMode {
                 mechanism.init(targetPos);
                 mechIsServo = true;
             }
-            if (gamepad2.dpad_up){
-                mechanism = grippers;
-                targetPos = 0;
-                futureVelPos = targetPos;
-                mechanism.init(targetPos);
-                mechIsServo = true;
-            }
-
 
             if (gamepad1.a){
                 slides = new SlidesSmart();
