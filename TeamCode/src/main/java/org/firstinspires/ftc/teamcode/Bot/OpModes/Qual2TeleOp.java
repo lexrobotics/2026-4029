@@ -15,11 +15,11 @@ public class Qual2TeleOp extends LinearOpMode {
     private Bot bot;
     private Setup setup;
     private ElapsedTime timer;
+    private ActionSequences actionSequences;
 
     @Override
     public void runOpMode() throws InterruptedException {
         setup = new Setup(hardwareMap, telemetry, true, this, Setup.OpModeType.AUTO, Setup.Team.Q1);
-//        setup.disableMechanism("Fingers");
         bot = new Bot(Setup.mechStates, Setup.sensorStates);
         bot.init();
 
@@ -28,7 +28,7 @@ public class Qual2TeleOp extends LinearOpMode {
         waitForStart();
         resetRuntime();
 
-        ActionSequences actionSequences = new ActionSequences(bot);
+        actionSequences = new ActionSequences(bot);
         while(opModeIsActive()){
             driverOne(bot, imuOffset, actionSequences);
             driverTwo(bot, actionSequences);
@@ -82,13 +82,18 @@ public class Qual2TeleOp extends LinearOpMode {
         telemetry.addData("spin", spin);
         telemetry.addData("angle", angle);
     }
+    enum MechanismStates{
+        REST, SCORE_PREP_SPEC, SCORE_PREP_SAMPLE, SCORE, MANUAL, EMERGENCY_STOP, INTAKE_PREP, INTAKE
+    }
+    private MechanismStates mechanismState = MechanismStates.REST;
 
     private void driverTwo(Bot bot, ActionSequences actionSequences){
-        if(gamepad2.b){
+        if(gamepad2.b){ // JUST SLIDES
             if(gamepad2.a || gamepad2.dpad_down){
-                bot.slides.setTarget(Slides.RST);
+                bot.slides.setTarget(Slides.REST);
             } else if(gamepad2.x){
                 bot.slides.setTarget(Slides.SPC1);
+                mechanismState = MechanismStates.REST;
             } else if(gamepad2.y){
                 bot.slides.setTarget(Slides.SPC2);
             } else if(gamepad2.dpad_left){
@@ -99,15 +104,36 @@ public class Qual2TeleOp extends LinearOpMode {
         } else {
             if(gamepad2.a || gamepad2.dpad_down){
                 actionSequences.rest();
+                mechanismState = MechanismStates.REST;
             } else if(gamepad2.x){
-                actionSequences.specimenScoring(1);
+                actionSequences.specimenScorePrep(1);
+                mechanismState = MechanismStates.SCORE_PREP_SPEC;
             } else if(gamepad2.y){
-                actionSequences.specimenScoring(2);
+                actionSequences.specimenScorePrep(2);
+                mechanismState = MechanismStates.SCORE_PREP_SPEC;
             } else if(gamepad2.dpad_left){
-                actionSequences.sampleScoring(1);
+                actionSequences.sampleScorePrep(1);
+                mechanismState = MechanismStates.SCORE_PREP_SAMPLE;
             } else if(gamepad2.dpad_up){
-                actionSequences.sampleScoring(2);
+                actionSequences.sampleScorePrep(2);
+                mechanismState = MechanismStates.SCORE_PREP_SAMPLE;
             }
+        }
+        if(gamepad2.right_trigger > 0.1 && bot.sensors.getTouchStatus(0)){ // SMART INTAKE
+            actionSequences.intake(1);
+        }else if (gamepad2.left_trigger > 0.1){ //EJECT
+            actionSequences.intake(-1);
+        }else if(gamepad2.right_trigger<0.1 && gamepad2.left_trigger < 0.1){ //REST
+            actionSequences.intake(0);
+        }
+
+        if(gamepad2.left_bumper && mechanismState == MechanismStates.SCORE_PREP_SPEC){
+            mechanismState = MechanismStates.SCORE;
+            actionSequences.specimenOuttake();
+        }
+        if(gamepad2.right_bumper && mechanismState == MechanismStates.SCORE_PREP_SAMPLE){
+            mechanismState = MechanismStates.SCORE;
+            actionSequences.sampleOuttake();
         }
         driverTwoManual(bot);
     }
@@ -118,6 +144,6 @@ public class Qual2TeleOp extends LinearOpMode {
         bot.slides.setTarget(Range.clip(bot.slides.getCurrentPosition() + (100/2)*(Math.signum(-joystickR)*(Math.pow(2,Math.abs(-joystickR) * 2)) - 1), 0, Slides.MAX));
 
         bot.wrist.setTarget(Range.clip(bot.wrist.getCurrentPosition() + (0.01)*(Math.signum(-joystickL)*(Math.pow(2,Math.abs(-joystickL) * 2)) - 1), 0, Wrist.MAX));
-
     }
+
 }

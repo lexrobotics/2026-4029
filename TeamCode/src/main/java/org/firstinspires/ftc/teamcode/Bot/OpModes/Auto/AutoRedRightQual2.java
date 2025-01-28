@@ -1,8 +1,5 @@
 package org.firstinspires.ftc.teamcode.Bot.OpModes.Auto;
 
-import android.provider.SyncStateContract;
-import android.view.animation.PathInterpolator;
-
 import org.firstinspires.ftc.teamcode.Bot.Bot;
 import org.firstinspires.ftc.teamcode.Bot.States.ActionSequences;
 import org.firstinspires.ftc.teamcode.PedroPathing.follower.Follower;
@@ -19,7 +16,6 @@ import org.firstinspires.ftc.teamcode.PedroPathing.tuning.FollowerConstants;
 
 import com.pedropathing.util.Constants;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
-import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 
 @Autonomous(name = "Auto Red Right", group = "Qual 2")
@@ -112,7 +108,7 @@ public class AutoRedRightQual2 extends OpMode{
                 break;
             case 1:
                 if (!follower.isBusy()) {
-                    AS.specimenScoring(2);
+                    AS.specimenScorePrep(2);
                     AS.rest();
                     follower.followPath(push1, true);
                     setPathState(2);
@@ -144,7 +140,7 @@ public class AutoRedRightQual2 extends OpMode{
                 break;
             case 6:
                 if(!follower.isBusy()){
-                    AS.intake();
+                    AS.intakePrep();
                     AS.rest();
                     follower.followPath(score, true);
                     setPathState(7);
@@ -152,7 +148,7 @@ public class AutoRedRightQual2 extends OpMode{
                 break;
             case 7:
                 if(!follower.isBusy()){
-                    AS.specimenScoring(2);
+                    AS.specimenScorePrep(2);
                     AS.rest();
                     follower.followPath(pickup, true);
                     setPathState(8);
@@ -160,7 +156,7 @@ public class AutoRedRightQual2 extends OpMode{
                 break;
             case 8:
                 if(!follower.isBusy()){
-                    AS.intake();
+                    AS.intakePrep();
                     AS.rest();
                     follower.followPath(score, true);
                     setPathState(9);
@@ -168,7 +164,7 @@ public class AutoRedRightQual2 extends OpMode{
                 break;
             case 9:
                 if(!follower.isBusy()){
-                    AS.specimenScoring(2);
+                    AS.specimenScorePrep(2);
                     AS.rest();
                     follower.followPath(park);
                     setPathState(10);

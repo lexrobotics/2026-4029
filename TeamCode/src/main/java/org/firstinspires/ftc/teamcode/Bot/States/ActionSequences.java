@@ -29,13 +29,10 @@ public class ActionSequences {
                 bot.rightGripper.setVelocity(RightGripper.STOP);
                 break;
             case -1:
-                bot.leftGripper.setVelocity(LeftGripper.OUTTAKE);
-                bot.rightGripper.setVelocity(RightGripper.OUTTAKE);
+                bot.leftGripper.setVelocity(LeftGripper.EJECT);
+                bot.rightGripper.setVelocity(RightGripper.EJECT);
                 break;
         }
-        bot.leftGripper.update();
-        bot.rightGripper.update();
-
     }
 //    public SmartIntake.Color smartIntake(boolean bePicky){
 //        SmartIntake.Color color = SmartIntake.intake(bePicky);
@@ -57,7 +54,20 @@ public class ActionSequences {
         return isTouching;
     }
 
-    public void specimenScoring(int level){
+    public void specimenOuttake(){
+        bot.slides.setTarget(bot.slides.getCurrentPosition() - 500);
+        bot.leftGripper.setVelocity(LeftGripper.OUTTAKE);
+        bot.rightGripper.setVelocity(RightGripper.OUTTAKE);
+    }
+
+    public void sampleOuttake(){
+        bot.leftGripper.setVelocity(LeftGripper.EJECT);
+        bot.rightGripper.setVelocity(RightGripper.EJECT);
+    }
+
+
+
+    public void specimenScorePrep(int level){
         switch(level){
             case 1:
                 bot.slides.setTarget(Slides.SPC1);
@@ -66,12 +76,12 @@ public class ActionSequences {
                 bot.slides.setTarget(Slides.SPC2);
                 break;
         }
-        bot.arm.setTarget(Arm.OUT);
-        bot.wrist.setTarget(Wrist.SPC);
+        bot.arm.setTarget(Arm.INTAKE);
+        bot.wrist.setTarget(Wrist.SPECIMEN);
         bot.fingers.setTarget(Fingers.OUTTAKE);
 
     }
-    public void sampleScoring(int level){
+    public void sampleScorePrep(int level){
         switch(level){
             case 1:
                 bot.slides.setTarget(Slides.BUC1);
@@ -84,14 +94,35 @@ public class ActionSequences {
         bot.wrist.setTarget(Wrist.BUCKET);
         bot.fingers.setTarget(Fingers.OUTTAKE);
     }
-    public void intake(){
+    public void intakePrep(){
         bot.slides.setTarget(Slides.INTAKE);
-        bot.arm.setTarget(Arm.OUT);
-        bot.wrist.setTarget(Wrist.OUT);
+        bot.arm.setTarget(Arm.INTAKE);
+        bot.wrist.setTarget(Wrist.INTAKE);
         bot.fingers.setTarget(Fingers.INTAKE);
     }
-    public void smartIntake(boolean isBlue, boolean collectNeutral){
-        intake();
+    public void smartIntakeSpecimen(boolean isBlue, boolean collectNeutral){
+        intakePrep();
+        double[] colors = bot.sensors.getColor(0);
+        if(bot.sensors.getTouchStatus(0)){
+            if(1.5*colors[2] > colors[1] && colors[2] > colors[3]) {
+                intake(-1);
+            } else if(colors[1] > colors[2] && colors[1] > colors[3]){
+                if(!isBlue){
+                    intake(1);
+                }else{
+                    intake(-1);
+                }
+            } else if(colors[3] > colors[1] && colors[3] > colors[2]){
+                if(isBlue){
+                    intake(1);
+                }else{
+                    intake(-1);
+                }
+            } else{
+                intake(1);
+            }
+        }
+
 //        bot.grippers.smarterIntake(isBlue, collectNeutral);
     }
     public void rest(){
