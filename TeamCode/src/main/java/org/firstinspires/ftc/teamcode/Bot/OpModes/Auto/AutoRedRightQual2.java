@@ -1,12 +1,10 @@
 package org.firstinspires.ftc.teamcode.Bot.OpModes.Auto;
 
-import android.provider.SyncStateContract;
-import android.view.animation.PathInterpolator;
-
 import org.firstinspires.ftc.teamcode.Bot.Bot;
 import org.firstinspires.ftc.teamcode.Bot.States.ActionSequences;
+import org.firstinspires.ftc.teamcode.PedroPathing.constants.FConstants;
 import org.firstinspires.ftc.teamcode.PedroPathing.follower.Follower;
-import org.firstinspires.ftc.teamcode.PedroPathing.follower.LConstants;
+import org.firstinspires.ftc.teamcode.PedroPathing.constants.LConstants;
 import org.firstinspires.ftc.teamcode.PedroPathing.localization.Pose;
 import org.firstinspires.ftc.teamcode.PedroPathing.pathGeneration.BezierCurve;
 import org.firstinspires.ftc.teamcode.PedroPathing.pathGeneration.BezierLine;
@@ -15,11 +13,9 @@ import org.firstinspires.ftc.teamcode.PedroPathing.pathGeneration.PathChain;
 import org.firstinspires.ftc.teamcode.PedroPathing.pathGeneration.Point;
 import org.firstinspires.ftc.teamcode.PedroPathing.util.Timer;
 import org.firstinspires.ftc.teamcode.Bot.StartPositions;
-import org.firstinspires.ftc.teamcode.PedroPathing.tuning.FollowerConstants;
 
 import com.pedropathing.util.Constants;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
-import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 
 @Autonomous(name = "Auto Red Right", group = "Qual 2")
@@ -197,7 +193,7 @@ public class AutoRedRightQual2 extends OpMode{
         follower = new Follower(hardwareMap);
         follower.setStartingPose(startPose);
         AS = new ActionSequences(bot);
-        Constants.setConstants(FollowerConstants.class, LConstants.class);
+        Constants.setConstants(FConstants.class, LConstants.class);
         buildPaths();
     }
 
