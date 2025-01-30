@@ -11,7 +11,9 @@ public class RightGripper extends CRServoMechanism {
         setVelocity(0);
     }
     public static double INIT = 0;
-    public static final double INTAKE = 1;
-    public static final double OUTTAKE = -1;
+    public static final double INTAKE = -1;
+    public static final double EJECT = 1;
     public static final double STOP = 0;
+    public static final double OUTTAKE = 0.5;
+
 }

@@ -108,7 +108,7 @@ public class AutoRedRightQual2 extends OpMode{
                 break;
             case 1:
                 if (!follower.isBusy()) {
-                    AS.specimenScoring(2);
+                    AS.specimenScorePrep(2);
                     AS.rest();
                     follower.followPath(push1, true);
                     setPathState(2);
@@ -140,7 +140,7 @@ public class AutoRedRightQual2 extends OpMode{
                 break;
             case 6:
                 if(!follower.isBusy()){
-                    AS.intake();
+                    AS.intakePrep();
                     AS.rest();
                     follower.followPath(score, true);
                     setPathState(7);
@@ -148,7 +148,7 @@ public class AutoRedRightQual2 extends OpMode{
                 break;
             case 7:
                 if(!follower.isBusy()){
-                    AS.specimenScoring(2);
+                    AS.specimenScorePrep(2);
                     AS.rest();
                     follower.followPath(pickup, true);
                     setPathState(8);
@@ -156,7 +156,7 @@ public class AutoRedRightQual2 extends OpMode{
                 break;
             case 8:
                 if(!follower.isBusy()){
-                    AS.intake();
+                    AS.intakePrep();
                     AS.rest();
                     follower.followPath(score, true);
                     setPathState(9);
@@ -164,7 +164,7 @@ public class AutoRedRightQual2 extends OpMode{
                 break;
             case 9:
                 if(!follower.isBusy()){
-                    AS.specimenScoring(2);
+                    AS.specimenScorePrep(2);
                     AS.rest();
                     follower.followPath(park);
                     setPathState(10);

@@ -94,7 +94,7 @@ public class AutoRedLeftQual2 extends OpMode{
                 break;
             case 1:
                 if(!follower.isBusy()){
-                    AS.sampleScoring(2);
+                    AS.sampleScorePrep(2);
                     AS.rest();
                     follower.followPath(getSample1, true);
                     setPathState(2);
@@ -102,7 +102,7 @@ public class AutoRedLeftQual2 extends OpMode{
                 break;
             case 2:
                 if(!follower.isBusy()){
-                    AS.intake();
+                    AS.intakePrep();
                     AS.rest();
                     follower.followPath(scoreSample1, true);
                     setPathState(3);
@@ -110,7 +110,7 @@ public class AutoRedLeftQual2 extends OpMode{
                 break;
             case 3:
                 if(!follower.isBusy()){
-                    AS.sampleScoring(2);
+                    AS.sampleScorePrep(2);
                     AS.rest();
                     follower.followPath(getSample2, true);
                     setPathState(4);
@@ -118,7 +118,7 @@ public class AutoRedLeftQual2 extends OpMode{
                 break;
             case 4:
                 if(!follower.isBusy()){
-                    AS.intake();
+                    AS.intakePrep();
                     AS.rest();
                     follower.followPath(scoreSample2, true);
                     setPathState(5);
@@ -126,7 +126,7 @@ public class AutoRedLeftQual2 extends OpMode{
                 break;
             case 5:
                 if(!follower.isBusy()){
-                    AS.sampleScoring(2);
+                    AS.sampleScorePrep(2);
                     AS.rest();
                     follower.followPath(getSample3, true);
                     setPathState(6);
@@ -134,7 +134,7 @@ public class AutoRedLeftQual2 extends OpMode{
                 break;
             case 6:
                 if(!follower.isBusy()){
-                    AS.intake();
+                    AS.intakePrep();
                     AS.rest();
                     follower.followPath(scoreSample3, true);
                     setPathState(7);
@@ -142,7 +142,7 @@ public class AutoRedLeftQual2 extends OpMode{
                 break;
             case 7:
                 if(!follower.isBusy()){
-                    AS.sampleScoring(2);
+                    AS.sampleScorePrep(2);
                     AS.rest();
                     follower.followPath(park);
                     setPathState(8);

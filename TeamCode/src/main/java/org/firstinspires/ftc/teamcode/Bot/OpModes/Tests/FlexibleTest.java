@@ -22,7 +22,7 @@ public class FlexibleTest extends LinearOpMode {
     //    MechTest mechTest;
 //    MechTest outtakeRotation = new OuttakeRotation();
     Mechanism arm = new Arm(), wrist = new Wrist(),
-            slides = new SlidesSmart(), fingers = new Fingers(), leftGripper = new LeftGripper(), rightGripper = new RightGripper();
+            slides = new SlidesSmart(), leftGripper = new LeftGripper(), rightGripper = new RightGripper();
     boolean mechIsServo;
     double targetPos, futureVelPos, changeInPos, velocity;
     double SERVO_INCREMENT = 0.001, MOTOR_INCREMENT = 5;
@@ -67,13 +67,7 @@ public class FlexibleTest extends LinearOpMode {
                 mechanism.init(targetPos);
                 mechIsServo = true;
             }
-            if (gamepad1.b){
-                mechanism = fingers;
-                targetPos = 0.5;
-                futureVelPos = targetPos;
-                mechanism.init(targetPos);
-                mechIsServo = true;
-            }
+
 
             if (gamepad1.a){
                 slides = new SlidesSmart();
