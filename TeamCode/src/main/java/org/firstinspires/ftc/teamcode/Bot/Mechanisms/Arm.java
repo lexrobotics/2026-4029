@@ -10,6 +10,7 @@ public class Arm extends ServoMechanism {
         super("Arm");
     }
     public static double INIT = 0.84;
+    public static double REST = 0.84;
     public static final double MIN = 0;
     public static final double INTAKE = 0;
     public static final double BUCKET = 0.961;
