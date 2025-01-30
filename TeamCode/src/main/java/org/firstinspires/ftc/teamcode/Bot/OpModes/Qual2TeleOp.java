@@ -1,5 +1,6 @@
 package org.firstinspires.ftc.teamcode.Bot.OpModes;
 
+import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.util.ElapsedTime;
@@ -10,32 +11,35 @@ import org.firstinspires.ftc.teamcode.Bot.Mechanisms.Slides;
 import org.firstinspires.ftc.teamcode.Bot.Mechanisms.Wrist;
 import org.firstinspires.ftc.teamcode.Bot.Setup;
 import org.firstinspires.ftc.teamcode.Bot.States.ActionSequences;
+@Disabled
 @TeleOp
 public class Qual2TeleOp extends LinearOpMode {
-    private Bot bot;
-    private Setup setup;
-    private ElapsedTime timer;
-    private ActionSequences actionSequences;
+    Bot bot;
+    Setup setup;
+    ElapsedTime timer =new ElapsedTime();
+    ActionSequences actionSequences;
 
     @Override
     public void runOpMode() throws InterruptedException {
         setup = new Setup(hardwareMap, telemetry, true, this, Setup.OpModeType.AUTO, Setup.Team.Q1);
         bot = new Bot(Setup.mechStates, Setup.sensorStates);
+        actionSequences = new ActionSequences(bot);
         bot.init();
 
         double imuOffset = 0;
 
         waitForStart();
-        resetRuntime();
+        timer.reset();
 
-        actionSequences = new ActionSequences(bot);
         while(opModeIsActive()){
-            driverOne(bot, imuOffset, actionSequences);
-            driverTwo(bot, actionSequences);
+            driverOne(imuOffset, actionSequences);
+            driverTwo(actionSequences);
             bot.update();
+            bot.telemetry();
+            telemetry.update();
         }
     }
-    private void driverOne(Bot bot, double imuOffset, ActionSequences actionSequences){
+    private void driverOne(double imuOffset, ActionSequences actionSequences){
 
         if (gamepad1.a){
             imuOffset = bot.drivetrain.getHeadingIMU();
@@ -76,31 +80,31 @@ public class Qual2TeleOp extends LinearOpMode {
         }
 
         bot.drivetrain.setTeleOpTargets(x, y, spin);
-        telemetry.addData("translateMag", translateMag);
-        telemetry.addData("x", x);
-        telemetry.addData("y", y);
-        telemetry.addData("spin", spin);
-        telemetry.addData("angle", angle);
+        Setup.telemetry.addData("translateMag", translateMag);
+        Setup.telemetry.addData("x", x);
+        Setup.telemetry.addData("y", y);
+        Setup.telemetry.addData("spin", spin);
+        Setup.telemetry.addData("angle", angle);
     }
     enum MechanismStates{
         REST, SCORE_PREP_SPEC, SCORE_PREP_SAMPLE, SCORE, MANUAL, EMERGENCY_STOP, INTAKE_PREP, INTAKE
     }
     private MechanismStates mechanismState = MechanismStates.REST;
 
-    private void driverTwo(Bot bot, ActionSequences actionSequences){
+    private void driverTwo(ActionSequences actionSequences){
         if(gamepad2.b){ // JUST SLIDES
-            if(gamepad2.a || gamepad2.dpad_down){
-                bot.slides.setTarget(Slides.REST);
-            } else if(gamepad2.x){
-                bot.slides.setTarget(Slides.SPC1);
-                mechanismState = MechanismStates.REST;
-            } else if(gamepad2.y){
-                bot.slides.setTarget(Slides.SPC2);
-            } else if(gamepad2.dpad_left){
-                bot.slides.setTarget(Slides.BUC1);
-            } else if(gamepad2.dpad_up){
-                bot.slides.setTarget(Slides.BUC2);
-            }
+            bot.slides.setTarget(950);
+//            if(gamepad2.a || gamepad2.dpad_down){
+//                bot.slides.setTarget(Slides.REST);
+//            } else if(gamepad2.x){
+//                bot.slides.setTarget(Slides.SPC1);
+//            } else if(gamepad2.y){
+//                bot.slides.setTarget(Slides.SPC2);
+//            } else if(gamepad2.dpad_left){
+//                bot.slides.setTarget(Slides.BUC1);
+//            } else if(gamepad2.dpad_up){
+//                bot.slides.setTarget(Slides.BUC2);
+//            }
         } else {
             if(gamepad2.a || gamepad2.dpad_down){
                 actionSequences.rest();
