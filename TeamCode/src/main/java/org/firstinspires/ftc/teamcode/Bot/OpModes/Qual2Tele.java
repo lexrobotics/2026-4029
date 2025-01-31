@@ -11,15 +11,12 @@ import org.firstinspires.ftc.teamcode.Bot.Mechanisms.Arm;
 import org.firstinspires.ftc.teamcode.Bot.Mechanisms.LeftGripper;
 import org.firstinspires.ftc.teamcode.Bot.Mechanisms.RightGripper;
 import org.firstinspires.ftc.teamcode.Bot.Mechanisms.Slides;
-import org.firstinspires.ftc.teamcode.Bot.Mechanisms.SmartIntake;
 import org.firstinspires.ftc.teamcode.Bot.Mechanisms.Wrist;
 import org.firstinspires.ftc.teamcode.Bot.Sensors.IMUStatic;
 import org.firstinspires.ftc.teamcode.Bot.Setup;
 import org.firstinspires.ftc.teamcode.Bot.States.ActionSequences;
 import org.firstinspires.ftc.teamcode.Bot.States.IntakeStates;
 import org.firstinspires.ftc.teamcode.Bot.States.OuttakeStates;
-
-import kotlin._Assertions;
 
 @TeleOp(name = "QUAL 2 TELEOP", group = "0")
 public class Qual2Tele extends LinearOpMode {
@@ -38,35 +35,20 @@ public class Qual2Tele extends LinearOpMode {
     private double D1GPM = 0.01;
     private double gamepad2LeftStick = 0;
 
-    private SmartIntake smartIntake;
     private ActionSequences actionSequences;
     enum MechStates{
-        REST, SCORE_PREP_SPEC, SCORE_PREP_SAMPLE, SCORE_SPEC, SCORE_SAMPLE, INTAKE, HOME, EJECT, MANUAL, MOVING
+        REST, SCORE_PREP_SPEC, SCORE_PREP_SAMPLE, SCORE_SPEC, SCORE_SAMPLE, INTAKE, EJECT, MANUAL, MOVING, INTAKE_PREP
     }
     MechStates mechState = MechStates.REST;
     @Override
     public void runOpMode() throws InterruptedException {
         setup = new Setup(hardwareMap, telemetry, true, this, Setup.OpModeType.AUTO, Setup.Team.Q1);
 
-        //---For testing---//
-//        setup.disableMechanism("Arm");
-//        setup.disableMechanism("LeftGripper");
-//        setup.disableMechanism("RightGripper");
-//        setup.disableMechanism("Wrist");
-//        setup.disableMechanism("Slides");
-//        setup.disableMechanism("Fingers");
-//        setup.disableMechanism("webcam");
-//        setup.disableMechanism("SlidesSwitch"); //TODO, UNDO THIS ASAP
-        //-----//
-
         bot = new Bot(Setup.mechStates, Setup.sensorStates);
         imu = new IMUStatic();
         actionSequences = new ActionSequences(bot);
-
 //        LightStrip lights = new LightStrip("lights", RevBlinkinLedDriver.BlinkinPattern.BLUE);
         bot.init();
-        smartIntake = new SmartIntake(actionSequences, false, bot.sensors);
-
         while(opModeInInit()){
             bot.slides.telemetry();
             telemetry.update();
@@ -81,6 +63,7 @@ public class Qual2Tele extends LinearOpMode {
             bot.update();
             telemetry.addData("state", mechState);
             telemetry.update();
+            bot.arm.update();
         }
 
     }
@@ -129,83 +112,84 @@ public class Qual2Tele extends LinearOpMode {
 //        specimenOuttake button = gamepad1.?
 //        unextendedIntake button = gamepad1.?
 //        extendedIntake button = gamepad1.?
-
-        if(gamepad2.right_trigger > 0.1 && bot.sensors.getTouchStatus(0)){
-            smartIntake.intake(false, false); //Todo, set to true for 2nd
-        } else if(gamepad2.left_trigger > 0.1){
-            bot.rightGripper.setTarget(RightGripper.EJECT);
+//&& bot.sensors.getTouchStatus(0)
+        if (gamepad2.right_trigger > 0.3 && gamepad2.left_trigger < 0.3) {
+            bot.leftGripper.setTarget(LeftGripper.INTAKE);
+            bot.rightGripper.setTarget(RightGripper.INTAKE);
+        }
+        if (gamepad2.left_trigger < 0.3 && gamepad2.right_trigger < 0.3) {
+            bot.leftGripper.setTarget(LeftGripper.STOP);
+            bot.rightGripper.setTarget(RightGripper.STOP);
+        }
+        if (gamepad2.left_trigger > 0.3 && gamepad2.right_trigger < 0.3) {
             bot.leftGripper.setTarget(LeftGripper.EJECT);
-        } else {
-            smartIntake.intake(false, false); //Todo, set to true for 2nd
-//            bot.rightGripper.setTarget(RightGripper.STOP);
-//            bot.leftGripper.setTarget(LeftGripper.STOP);
+            bot.rightGripper.setTarget(RightGripper.EJECT);
         }
-
-
-        if(Math.abs(gamepad2.right_stick_y) > D1GPM){
-            mechState = MechStates.MANUAL;
-        } else if(bot.slides.isBusy()){
-            mechState = MechStates.MOVING;
-        } else{
-            if(gamepad2.dpad_down){
-                mechState = MechStates.REST;
-            } else if(gamepad2.x){
-                mechState = MechStates.SCORE_PREP_SAMPLE;
-                SlidesPosition = Slides.BUC1;
-            } else if(gamepad2.y){
-                mechState = MechStates.SCORE_PREP_SAMPLE;
-                SlidesPosition = Slides.BUC2;
-            } else if(gamepad2.dpad_up){
-                mechState = MechStates.SCORE_PREP_SPEC;
-                SlidesPosition = Slides.SPC1;
-            } else if(gamepad2.b){
-                mechState = MechStates.SCORE_PREP_SPEC;
-                SlidesPosition = Slides.SPC2;
-            } else if(gamepad2.a){
-                mechState = MechStates.SCORE_SPEC;
-            } else if(gamepad2.right_bumper){
-                mechState = MechStates.INTAKE;
-            } else if(gamepad2.left_bumper){
-                mechState = MechStates.HOME;
-            }
+        if (gamepad2.dpad_right) {
+            bot.arm.setTarget(Arm.INTAKE);
+            bot.wrist.setTarget(Wrist.INTAKE);
+            bot.slides.setTarget(Slides.INTAKE);
         }
-        switch(mechState){
-            case REST:
-                bot.init();
-                break;
-            case SCORE_PREP_SAMPLE:
-//                bot.slides.setTarget(SlidesPosition);
-                bot.arm.setTarget(Arm.BUCKET);
-                bot.wrist.setTarget(Wrist.BUCKET);
-                break;
-            case SCORE_PREP_SPEC:
-//                bot.slides.setTarget(SlidesPosition);
-                bot.arm.setTarget(Arm.SPECIMEN);
-                bot.wrist.setTarget(Wrist.SPECIMEN);
-                break;
-            case SCORE_SPEC:
-                bot.arm.setTarget(Arm.SPECIMEN);
-                bot.wrist.setTarget(Wrist.SPECIMEN_SCORE);
-                break;
-            case SCORE_SAMPLE:
-                bot.slides.setTarget(SlidesPosition);
-                bot.arm.setTarget(Arm.BUCKET);
-                bot.wrist.setTarget(Wrist.BUCKET);
-                bot.rightGripper.setTarget(RightGripper.EJECT);
-                bot.leftGripper.setTarget(LeftGripper.EJECT);
-                break;
-            case MANUAL:
-                bot.slides.setTarget(Range.clip(0, bot.slides.getCurrentPosition() + MANUAL_OUTTAKE_SLIDES_INCREMENT*(-gamepad2.left_stick_y), Slides.MAX));
-                break;
-            case INTAKE:
-                bot.arm.setTarget(Arm.INTAKE);
-                bot.wrist.setTarget(Wrist.INTAKE);
-                break;
-            case HOME:
-                bot.arm.setTarget(Arm.REST);
+        if (gamepad2.dpad_up) {
+                bot.arm.setTarget((Arm.REST));
                 bot.wrist.setTarget(Wrist.REST);
-                break;
         }
-    }
+        if (Math.abs(gamepad2.left_stick_y) > D1GPM) {
+                mechState = MechStates.MANUAL;
+        } else if (bot.slides.isBusy()) {
+                mechState = MechStates.MOVING;
+        } else {
+                if (gamepad2.dpad_down) {
+                    mechState = MechStates.REST;
+                } else if (gamepad2.x) {
+                    mechState = MechStates.SCORE_PREP_SAMPLE;
+                    SlidesPosition = Slides.BUC1;
+                } else if (gamepad2.y) {
+                    mechState = MechStates.SCORE_PREP_SAMPLE;
+                    SlidesPosition = Slides.BUC2;
+                } else if (gamepad2.a) {
+                    mechState = MechStates.SCORE_PREP_SPEC;
+                    SlidesPosition = Slides.SPC1;
+                } else if (gamepad2.b) {
+                    mechState = MechStates.SCORE_PREP_SPEC;
+                    SlidesPosition = Slides.SPC2;
+                } else if (gamepad2.right_bumper){
+                    mechState = MechStates.SCORE_SPEC;
+                } else if (gamepad2.left_bumper){
+                    mechState = MechStates.SCORE_SAMPLE;
+                }
+        }
+        switch (mechState) {
+                case REST:
+                    bot.init();
+                    break;
+                case SCORE_PREP_SAMPLE:
+                    bot.slides.setTarget(SlidesPosition);
+                    bot.arm.setTarget(Arm.REST);
+                    bot.wrist.setTarget(Wrist.BUCKET);
+                    break;
+                case SCORE_PREP_SPEC:
+                    bot.slides.setTarget(SlidesPosition);
+                    bot.arm.setTarget(Arm.SPECIMEN);
+                    bot.wrist.setTarget(Wrist.SPECIMEN);
+                    break;
+                case SCORE_SPEC:
+                    bot.leftGripper.setTarget(LeftGripper.EJECT);
+                    bot.rightGripper.setTarget(RightGripper.EJECT);
+                    break;
+                case SCORE_SAMPLE:
+                    bot.arm.setTarget(Arm.BUCKET);
+                    bot.rightGripper.setTarget(RightGripper.EJECT);
+                    bot.leftGripper.setTarget(LeftGripper.EJECT);
+                    break;
+                case MANUAL:
+                    bot.slides.setTarget(Range.clip(0, bot.slides.getCurrentPosition() + MANUAL_OUTTAKE_SLIDES_INCREMENT * (-gamepad2.left_stick_y), Slides.MAX));
+                    break;
+                case INTAKE_PREP:
+                    bot.arm.setTarget(Arm.INTAKE);
+                    bot.wrist.setTarget(Wrist.INTAKE);
+                    bot.slides.setTarget(Slides.INTAKE);
+            }
 
+    }
 }

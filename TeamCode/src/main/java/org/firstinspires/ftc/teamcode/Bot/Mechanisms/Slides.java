@@ -13,7 +13,7 @@ public class Slides extends RunToPosMotorMechanism {
 
     public static final double MIN = 0;
     public static final double MAX = 2100;
-    public static final double BUC1 = 950;
+    public static final double BUC1 = 1250;
     public static final double BUC2 = 2100;
     public static final double SPC1 = 500;
     public static final double SPC2 = 950;
