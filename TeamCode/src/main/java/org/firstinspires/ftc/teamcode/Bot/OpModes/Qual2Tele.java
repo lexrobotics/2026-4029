@@ -30,6 +30,7 @@ public class Qual2Tele extends LinearOpMode {
     private double angle;
     private double translateMag;
     private double spin;
+    private double imuOffset = 0;
     private boolean v4bTracker = false;
     private boolean hasBPressed2 = false;
     private double D1GPM = 0.01;
@@ -111,17 +112,11 @@ public class Qual2Tele extends LinearOpMode {
         telemetry.addData("angle", angle);
     }
     double MANUAL_OUTTAKE_SLIDES_INCREMENT = 150; //was 200
-    double MANUAL_SERVO_INCREMENT = 0.01; //was 200
+    double MANUAL_WRIST_INCREMENT = 0.01;
 
     private double SlidesPosition = 0;
-    double imuOffset = 0;
     private void driver2() {
-//        Outtake to Net, Outtake for Specimen, Intake w/o extending, Intake w/ extended Noodler
-//        sampleOuttake button = gamepad1.?
-//        specimenOuttake button = gamepad1.?
-//        unextendedIntake button = gamepad1.?
-//        extendedIntake button = gamepad1.?
-//&& bot.sensors.getTouchStatus(0)
+
         if (gamepad2.right_trigger > 0.3 && gamepad2.left_trigger < 0.3) {
             bot.leftGripper.setTarget(LeftGripper.INTAKE);
             bot.rightGripper.setTarget(RightGripper.INTAKE);
@@ -134,38 +129,32 @@ public class Qual2Tele extends LinearOpMode {
             bot.leftGripper.setTarget(LeftGripper.EJECT);
             bot.rightGripper.setTarget(RightGripper.EJECT);
         }
-        if (gamepad2.dpad_right) {
-            bot.arm.setTarget(Arm.INTAKE);
-            bot.wrist.setTarget(Wrist.INTAKE);
-            bot.slides.setTarget(Slides.INTAKE);
+        if (gamepad2.right_bumper) {
+            mechState = MechStates.INTAKE;
+        }
+        if(gamepad2.left_bumper){
+            mechState = MechStates.INTAKE_PREP;
         }
         if (gamepad2.dpad_up) {
                 bot.arm.setTarget((Arm.REST));
                 bot.wrist.setTarget(Wrist.REST);
         }
-        if (Math.abs(gamepad2.left_stick_y) > D1GPM) {
+        if (Math.abs(gamepad2.left_stick_y) > D1GPM || Math.abs(gamepad2.right_stick_y) > D1GPM) {
                 mechState = MechStates.MANUAL;
         } else if (bot.slides.isBusy()) {
                 mechState = MechStates.MOVING;
         } else {
                 if (gamepad2.dpad_down) {
                     mechState = MechStates.REST;
-                } else if (gamepad2.x) {
+                } else if (gamepad2.a) {
                     mechState = MechStates.SCORE_PREP_SAMPLE;
                     SlidesPosition = Slides.BUC1;
-                } else if (gamepad2.y) {
+                } else if (gamepad2.x) {
                     mechState = MechStates.SCORE_PREP_SAMPLE;
                     SlidesPosition = Slides.BUC2;
-                } else if (gamepad2.a) {
-                    mechState = MechStates.SCORE_PREP_SPEC;
-                    SlidesPosition = Slides.SPC1;
-                } else if (gamepad2.b) {
+                } else if (gamepad2.y) {
                     mechState = MechStates.SCORE_PREP_SPEC;
                     SlidesPosition = Slides.SPC2;
-                } else if (gamepad2.right_bumper){
-                    mechState = MechStates.SCORE_SPEC;
-                } else if (gamepad2.left_bumper){
-                    mechState = MechStates.SCORE_SAMPLE;
                 }
         }
         switch (mechState) {
@@ -184,23 +173,19 @@ public class Qual2Tele extends LinearOpMode {
                     bot.arm.setTarget(Arm.SPECIMEN);
                     bot.wrist.setTarget(Wrist.SPECIMEN);
                     break;
-                case SCORE_SPEC:
-                    bot.leftGripper.setTarget(LeftGripper.EJECT);
-                    bot.rightGripper.setTarget(RightGripper.EJECT);
-                    break;
-                case SCORE_SAMPLE:
-                    bot.rightGripper.setTarget(RightGripper.EJECT);
-                    bot.leftGripper.setTarget(LeftGripper.EJECT);
-                    break;
                 case MANUAL:
+                    bot.wrist.setTarget(Range.clip(0, bot.wrist.getCurrentPosition() + MANUAL_WRIST_INCREMENT * (-gamepad2.right_stick_y), 1));
                     bot.slides.setTarget(Range.clip(0, bot.slides.getCurrentPosition() + MANUAL_OUTTAKE_SLIDES_INCREMENT * (-gamepad2.left_stick_y), Slides.MAX));
-                    bot.wrist.setTarget(Range.clip(0, bot.wrist.getCurrentPosition() + MANUAL_SERVO_INCREMENT*(-gamepad2.left_stick_y), 1));
                     break;
                 case INTAKE_PREP:
-                    bot.arm.setTarget(Arm.INTAKE);
+                    bot.arm.setTarget(Arm.INTAKE_PREP);
                     bot.wrist.setTarget(Wrist.INTAKE_PREP);
                     bot.slides.setTarget(Slides.INTAKE);
-            }
+                case INTAKE:
+                    bot.arm.setTarget(Arm.INTAKE);
+                    bot.wrist.setTarget(Wrist.INTAKE);
+                    bot.slides.setTarget(Slides.INTAKE);
+        }
 
     }
 }
