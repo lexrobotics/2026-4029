@@ -30,7 +30,6 @@ public class Qual2Tele extends LinearOpMode {
     private double angle;
     private double translateMag;
     private double spin;
-    private double imuOffset = 0;
     private boolean v4bTracker = false;
     private boolean hasBPressed2 = false;
     private double D1GPM = 0.01;
@@ -112,7 +111,10 @@ public class Qual2Tele extends LinearOpMode {
         telemetry.addData("angle", angle);
     }
     double MANUAL_OUTTAKE_SLIDES_INCREMENT = 150; //was 200
+    double MANUAL_SERVO_INCREMENT = 0.01; //was 200
+
     private double SlidesPosition = 0;
+    double imuOffset = 0;
     private void driver2() {
 //        Outtake to Net, Outtake for Specimen, Intake w/o extending, Intake w/ extended Noodler
 //        sampleOuttake button = gamepad1.?
@@ -192,10 +194,11 @@ public class Qual2Tele extends LinearOpMode {
                     break;
                 case MANUAL:
                     bot.slides.setTarget(Range.clip(0, bot.slides.getCurrentPosition() + MANUAL_OUTTAKE_SLIDES_INCREMENT * (-gamepad2.left_stick_y), Slides.MAX));
+                    bot.wrist.setTarget(Range.clip(0, bot.wrist.getCurrentPosition() + MANUAL_SERVO_INCREMENT*(-gamepad2.left_stick_y), 1));
                     break;
                 case INTAKE_PREP:
                     bot.arm.setTarget(Arm.INTAKE);
-                    bot.wrist.setTarget(Wrist.INTAKE);
+                    bot.wrist.setTarget(Wrist.INTAKE_PREP);
                     bot.slides.setTarget(Slides.INTAKE);
             }
 

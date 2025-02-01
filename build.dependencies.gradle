@@ -20,7 +20,7 @@ dependencies {
     implementation 'com.fasterxml.jackson.core:jackson-databind:2.12.7'
     implementation 'com.acmerobotics.roadrunner:core:0.5.6'
 
-    implementation 'com.pedropathing:pedro:1.0.7'
+    implementation 'com.pedropathing:pedro:1.0.3'
     implementation 'com.acmerobotics.dashboard:dashboard:0.4.16'
 
 
