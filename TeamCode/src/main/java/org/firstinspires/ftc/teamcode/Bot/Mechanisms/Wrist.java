@@ -16,10 +16,10 @@ public class Wrist extends ServoMechanism {
     public static final double INTAKE = 0.532;
 
     public static final double VERTICAL = 0.298;
-    public static final double SPECIMEN = 0.89;
-    public static final double SPECIMEN_SCORE = 0.78;
+    public static final double SPECIMEN = 0.271;// old: 0.89;
+    public static final double SPECIMEN_SCORE = 0.271; // new pos
 
     public static final double REST = 0.298;
-    public static final double BUCKET = 0.89;
+    public static final double BUCKET = 0.964;
     public static final double HANG = 1;
 }

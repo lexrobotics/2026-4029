@@ -11,6 +11,7 @@ import org.firstinspires.ftc.teamcode.Bot.Mechanisms.Arm;
 import org.firstinspires.ftc.teamcode.Bot.Mechanisms.LeftGripper;
 import org.firstinspires.ftc.teamcode.Bot.Mechanisms.RightGripper;
 import org.firstinspires.ftc.teamcode.Bot.Mechanisms.Slides;
+import org.firstinspires.ftc.teamcode.Bot.Mechanisms.SmartIntake;
 import org.firstinspires.ftc.teamcode.Bot.Mechanisms.Wrist;
 import org.firstinspires.ftc.teamcode.Bot.Sensors.IMUStatic;
 import org.firstinspires.ftc.teamcode.Bot.Setup;
@@ -22,7 +23,7 @@ import org.firstinspires.ftc.teamcode.Bot.States.OuttakeStates;
 public class Qual2Tele extends LinearOpMode {
     private Setup setup;
     private Bot bot;
-    private IMUStatic imu;
+//    private IMUStatic imu;
     private ElapsedTime timer;
     private double y;
     private double x;
@@ -34,6 +35,7 @@ public class Qual2Tele extends LinearOpMode {
     private boolean hasBPressed2 = false;
     private double D1GPM = 0.01;
     private double gamepad2LeftStick = 0;
+    private SmartIntake smartIntake;
 
     private ActionSequences actionSequences;
     enum MechStates{
@@ -45,10 +47,12 @@ public class Qual2Tele extends LinearOpMode {
         setup = new Setup(hardwareMap, telemetry, true, this, Setup.OpModeType.AUTO, Setup.Team.Q1);
 
         bot = new Bot(Setup.mechStates, Setup.sensorStates);
-        imu = new IMUStatic();
+//        imu = new IMUStatic();
         actionSequences = new ActionSequences(bot);
 //        LightStrip lights = new LightStrip("lights", RevBlinkinLedDriver.BlinkinPattern.BLUE);
         bot.init();
+        smartIntake = new SmartIntake(actionSequences, false, bot.sensors);
+
         while(opModeInInit()){
             bot.slides.telemetry();
             telemetry.update();
@@ -78,6 +82,9 @@ public class Qual2Tele extends LinearOpMode {
         angle = Math.atan2(y, x);
 
         angle += (-bot.drivetrain.getHeadingIMU() + imuOffset);
+        telemetry.addLine("IMU Offset: " + imuOffset);
+        telemetry.addLine("IMU Reading: " + (-bot.drivetrain.getHeadingIMU() + imuOffset));
+
 
 
         x = Math.cos(angle) * translateMag;
@@ -104,7 +111,7 @@ public class Qual2Tele extends LinearOpMode {
         telemetry.addData("spin", spin);
         telemetry.addData("angle", angle);
     }
-    double MANUAL_OUTTAKE_SLIDES_INCREMENT = 100; //was 200
+    double MANUAL_OUTTAKE_SLIDES_INCREMENT = 150; //was 200
     private double SlidesPosition = 0;
     private void driver2() {
 //        Outtake to Net, Outtake for Specimen, Intake w/o extending, Intake w/ extended Noodler
@@ -161,11 +168,13 @@ public class Qual2Tele extends LinearOpMode {
         }
         switch (mechState) {
                 case REST:
-                    bot.init();
+                    bot.slides.setTarget(Slides.REST);
+                    bot.arm.setTarget(Arm.REST);
+                    bot.wrist.setTarget(Wrist.REST);
                     break;
                 case SCORE_PREP_SAMPLE:
                     bot.slides.setTarget(SlidesPosition);
-                    bot.arm.setTarget(Arm.REST);
+                    bot.arm.setTarget(Arm.BUCKET);
                     bot.wrist.setTarget(Wrist.BUCKET);
                     break;
                 case SCORE_PREP_SPEC:
@@ -178,7 +187,6 @@ public class Qual2Tele extends LinearOpMode {
                     bot.rightGripper.setTarget(RightGripper.EJECT);
                     break;
                 case SCORE_SAMPLE:
-                    bot.arm.setTarget(Arm.BUCKET);
                     bot.rightGripper.setTarget(RightGripper.EJECT);
                     bot.leftGripper.setTarget(LeftGripper.EJECT);
                     break;

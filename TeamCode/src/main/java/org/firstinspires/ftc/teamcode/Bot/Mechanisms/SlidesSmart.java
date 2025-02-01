@@ -14,17 +14,17 @@ public class SlidesSmart extends Slides {
 
     @Override
     public void init(double target, HardwareMap hwm){
+        super.init(target);
         sensorSwitch = new SensorSwitch("SlidesSwitch", true, hwm);
 //        lastState = sensorSwitch.getStatus();
-        super.init(target);
         motor.setDirection(DcMotorSimple.Direction.REVERSE);
 
     }
     @Override
     public void init(double target){
+        super.init(target);
         sensorSwitch = new SensorSwitch("SlidesSwitch", true);
 //        lastState = sensorSwitch.getStatus();
-        super.init(target);
         motor.setDirection(DcMotorSimple.Direction.REVERSE);
     }
 
