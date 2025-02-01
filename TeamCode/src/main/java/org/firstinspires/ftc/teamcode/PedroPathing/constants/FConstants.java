@@ -8,7 +8,7 @@ public class FConstants {
     static {
         FollowerConstants.localizers = Localizers.THREE_WHEEL;
 
-        FollowerConstants.xMovement = 133.332;
+        //FollowerConstants.xMovement = 133.332;
         //FollowerConstants.yMovement = [OUTPUT]
         //FollowerConstants.forwardZeroPowerAcceleration = [OUTPUT]
         //FollowerConstants.lateralZeroPowerAcceleration = [OUTPUT]
