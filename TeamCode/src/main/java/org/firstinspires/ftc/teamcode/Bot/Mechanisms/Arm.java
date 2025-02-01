@@ -14,6 +14,7 @@ public class Arm extends ServoMechanism {
     public static final double MIN = 0.05;
     public static final double MAX = 0.95;
     public static final double INTAKE = 0.135;
+    public static final double INTAKE_PREP = 0.17;
     public static final double BUCKET = 0.984;
     public static final double SPECIMEN = 0.571;
 
