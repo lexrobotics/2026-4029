@@ -174,8 +174,8 @@ public class Qual2Tele extends LinearOpMode {
                     bot.wrist.setTarget(Wrist.SPECIMEN);
                     break;
                 case MANUAL:
+                    bot.wrist.setTarget(Range.clip(0, bot.wrist.getCurrentPosition() + MANUAL_WRIST_INCREMENT * (-gamepad2.right_stick_y), 1));
                     bot.slides.setTarget(Range.clip(0, bot.slides.getCurrentPosition() + MANUAL_OUTTAKE_SLIDES_INCREMENT * (-gamepad2.left_stick_y), Slides.MAX));
-                    bot.wrist.setTarget(Range.clip(0, bot.wrist.getCurrentPosition() + MANUAL_WRIST_INCREMENT * (-gamepad2.left_stick_y), 1));
                     break;
                 case INTAKE_PREP:
                     bot.arm.setTarget(Arm.INTAKE_PREP);
