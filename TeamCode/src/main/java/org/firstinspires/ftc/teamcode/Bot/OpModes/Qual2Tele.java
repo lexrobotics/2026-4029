@@ -123,6 +123,8 @@ public class Qual2Tele extends LinearOpMode {
     private double WristPosition = Wrist.INIT;
     private double ArmPosition = Arm.INIT;
 
+    private double manualWRist = Wrist.REST;
+
     private void driver2() {
 
         if (gamepad2.right_bumper) {
@@ -160,8 +162,8 @@ public class Qual2Tele extends LinearOpMode {
                 break;
             case SCORE_PREP_SAMPLE:
                 bot.slides.setTarget(SlidesPosition);
-                bot.arm.setTarget(Arm.BUCKET);
-                bot.wrist.setTarget(Wrist.BUCKET);
+                bot.arm.setTarget(ArmPosition);
+                bot.wrist.setTarget(WristPosition);
                 break;
             case SCORE_PREP_SPEC:
                 bot.slides.setTarget(SlidesPosition);
@@ -205,19 +207,15 @@ public class Qual2Tele extends LinearOpMode {
 
         if(gamepad2.right_stick_y > 0.3){
             mechState = MechStates.MANUAL_SLIDES;
-            bot.slides.setTarget(Range.clip(bot.slides.getCurrentPosition() + MANUAL_OUTTAKE_SLIDES_INCREMENT, 0, Slides.MAX));
+            bot.slides.setTarget(Range.clip(bot.slides.getCurrentPosition() - MANUAL_OUTTAKE_SLIDES_INCREMENT, 0, Slides.MAX));
         } else if(gamepad2.right_stick_y < -0.3){
             mechState = MechStates.MANUAL_SLIDES;
-            bot.slides.setTarget(Range.clip(bot.slides.getCurrentPosition() - MANUAL_OUTTAKE_SLIDES_INCREMENT, 0, Slides.MAX));
+            bot.slides.setTarget(Range.clip(bot.slides.getCurrentPosition() + MANUAL_OUTTAKE_SLIDES_INCREMENT, 0, Slides.MAX));
         }
 
-        if(gamepad2.left_stick_y > 0.3){
+        if(Math.abs(gamepad2.left_stick_y) > 0.3 ){
             mechState = MechStates.MANUAL_SERVO;
-            bot.wrist.setTarget(Range.clip(bot.slides.getCurrentPosition() + MANUAL_WRIST_INCREMENT, 0,1));
-        }
-        else if(gamepad2.left_stick_y < -0.3){
-            mechState = MechStates.MANUAL_SERVO;
-            bot.wrist.setTarget(Range.clip(bot.slides.getCurrentPosition() - MANUAL_WRIST_INCREMENT, 0, 1));
+            bot.wrist.setTarget(Range.clip(-gamepad2.left_stick_y, 0.05,0.95));
         }
     }
 }

@@ -43,47 +43,53 @@ public class BucketAutoQ2 extends LinearOpMode {
         SampleMecanumDrive drive = new SampleMecanumDrive(hardwareMap);
 
         TrajectorySequence trajectory = drive.trajectorySequenceBuilder(new Pose2d())
-                .strafeLeft(7)
-                .back(44)
+                .strafeRight(12)
+                .forward(45)
                 .turn(Math.toRadians(45))
-                .back(3)
+                .forward(1)
                 .build();
 
-        TrajectorySequence trajectory2 = drive.trajectorySequenceBuilder(new Pose2d(-55, 55, Math.toRadians(225)))
-                .forward(3)
-                .turn(Math.toRadians(-45))
-                .forward(20)
-                .turn(Math.toRadians(-90))
-                .forward(30)
-
-                .build();
+//        TrajectorySequence trajectory2 = drive.trajectorySequenceBuilder(new Pose2d(-55, 55, Math.toRadians(225)))
+//                .forward(3)
+//                .turn(Math.toRadians(-45))
+//                .forward(20)
+//                .turn(Math.toRadians(90))
+//                .forward(30)
+//                .turn(Math.toRadians(90))
+//                .build();
 
         waitForStart();
         timer.reset();
 
         if (isStopRequested()) return;
-
         drive.followTrajectorySequence(trajectory);
 
         timer.reset();
-        bot.slides.setTarget(Slides.BUC2);
-        bot.wrist.setTarget(Wrist.BUCKET);
+        bot.slides.setTarget(2400);
         while(opModeIsActive() && timer.seconds()<2){
             bot.update();
         }
-//
-//        timer.reset();
-//        bot.arm.setTarget(Arm.BUCKET);
-//        while(opModeIsActive() && timer.seconds()<2){
-//            bot.update();
-//        }
-//
-//        timer.reset();
-//        bot.leftGripper.setTarget(LeftGripper.EJECT);
-//        bot.rightGripper.setTarget(RightGripper.EJECT);
-//        while(opModeIsActive() && timer.seconds()<2){
-//            bot.update();
-//        }
+
+        timer.reset();
+        bot.arm.setTarget(Arm.BUCKET2);
+        bot.wrist.setTarget(Wrist.BUCKET2);
+        while(opModeIsActive() && timer.seconds()<2){
+            bot.update();
+        }
+
+        timer.reset();
+        bot.leftGripper.setTarget(LeftGripper.EJECT);
+        bot.rightGripper.setTarget(RightGripper.EJECT);
+        while(opModeIsActive() && timer.seconds()<1){
+            bot.update();
+        }
+
+        timer.reset();
+        bot.arm.setTarget(Arm.REST);
+        bot.wrist.setTarget(Arm.MAX);
+        while(opModeIsActive() && timer.seconds()<1){
+            bot.update();
+        }
 
         timer.reset();
         bot.leftGripper.setTarget(LeftGripper.STOP);
@@ -95,7 +101,15 @@ public class BucketAutoQ2 extends LinearOpMode {
             bot.update();
         }
 
-        drive.followTrajectorySequence(trajectory2);
+//        drive.followTrajectorySequence(trajectory2);
+
+//        timer.reset();
+//        bot.slides.setTarget(Slides.BUC1);
+//        bot.arm.setTarget(Arm.SPECIMEN);
+//        bot.wrist.setTarget(Wrist.SPECIMEN_SCORE);
+//        while(opModeIsActive() && timer.seconds()<2){
+//            bot.update();
+//        }
 
         while (!isStopRequested() && opModeIsActive()) ;
     }

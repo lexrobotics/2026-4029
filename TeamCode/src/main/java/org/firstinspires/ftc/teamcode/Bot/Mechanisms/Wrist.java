@@ -22,7 +22,7 @@ public class Wrist extends ServoMechanism {
 
     public static final double REST = 0.298;
     public static final double BUCKET = 0.964;
-    public static final double BUCKET2 = 0.514;
+    public static final double BUCKET2 = 0.271;
 
     public static final double HANG = 1;
 }
