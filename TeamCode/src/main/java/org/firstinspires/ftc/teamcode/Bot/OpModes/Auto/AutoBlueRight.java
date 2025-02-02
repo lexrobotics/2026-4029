@@ -3,12 +3,30 @@
 //import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 //import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 //import com.qualcomm.robotcore.util.ElapsedTime;
+//import org.firstinspires.ftc.teamcode.Bot.Bot;
+//import org.firstinspires.ftc.teamcode.Bot.Mechanisms.Slides;
+//import org.firstinspires.ftc.teamcode.Bot.States.ActionSequences;
+//import com.pedropathing.follower.Follower;
+//import com.pedropathing.pathgen.BezierCurve;
+//import com.pedropathing.pathgen.BezierLine;
+//import com.pedropathing.pathgen.Path;
+//import com.pedropathing.pathgen.PathChain;
+//import com.pedropathing.pathgen.Point;
+//import com.pedropathing.localization.Pose;
 //
-//import org.firstinspires.ftc.teamcode.Bot.AutoSequences;
+//import org.firstinspires.ftc.teamcode.Bot.StartPositions;
+//import com.pedropathing.util.Constants;
+//import com.pedropathing.util.Timer;
+//import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
+//import com.qualcomm.robotcore.eventloop.opmode.OpMode;
+//
+//
+//import org.firstinspires.ftc.teamcode.pedroPathing.constants.FConstants;
+//import org.firstinspires.ftc.teamcode.pedroPathing.constants.LConstants;
+//
 //import org.firstinspires.ftc.teamcode.Bot.Bot;
 //import org.firstinspires.ftc.teamcode.Bot.Drivetrain.Drivetrain;
 //import org.firstinspires.ftc.teamcode.Bot.Drivetrain.RoadRunnerPaths;
-//import org.firstinspires.ftc.teamcode.Bot.Mechanisms.OuttakeSlides;
 //import org.firstinspires.ftc.teamcode.Bot.Sensors.IMUStatic;
 //import org.firstinspires.ftc.teamcode.Bot.Setup;
 //import org.firstinspires.ftc.teamcode.Bot.StartPositions;
@@ -38,12 +56,12 @@
 //
 ////        actionSequences.
 //        bot.drivetrain.setTrajectorySequence(bot.drivetrain.backward(24));
-//        actionSequences.Specimen2();
+//        actionSequences.specimenScorePrep(2);
 //        while(opModeIsActive() && bot.isBusy()){
 //            bot.update();
 //        }
 //
-//        bot.outtakeSlides.setTarget(OuttakeSlides.SPC2 - 100);
+//        bot.slides.setTarget(Slides.SPC2 - 100);
 //        while(opModeIsActive() && bot.isBusy()){
 //            bot.update();
 //        }
