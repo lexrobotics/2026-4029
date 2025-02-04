@@ -18,7 +18,7 @@ public class IMUStatic {
     public IMUStatic(){
         sensor = hardwareMap.get(IMU.class, "imu");
         //todo: FIND NEW
-        sensor.initialize(new IMU.Parameters(new RevHubOrientationOnRobot(RevHubOrientationOnRobot.LogoFacingDirection.LEFT, RevHubOrientationOnRobot.UsbFacingDirection.FORWARD)));
+        sensor.initialize(new IMU.Parameters(new RevHubOrientationOnRobot(RevHubOrientationOnRobot.LogoFacingDirection.UP, RevHubOrientationOnRobot.UsbFacingDirection.BACKWARD)));
     }
 
     public void resetYaw(){

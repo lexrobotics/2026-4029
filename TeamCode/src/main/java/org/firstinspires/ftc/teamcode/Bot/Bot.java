@@ -32,7 +32,7 @@ public class Bot implements Robot{
         /*
         Bot constructor creates all mechanisms in Mechanism objects if they are enabled
          */
-        sensors = new Sensors(1,1,0,1,false);
+        sensors = new Sensors(1,1,0,1,true);
 
 
         telemetry.addLine("robot");
@@ -50,7 +50,7 @@ public class Bot implements Robot{
         if(hardwareStates.get("RightGripper").isEnabled){
             rightGripper = new RightGripper();
         } else {
-            leftGripper = new Mechanism("RightGripper");
+            rightGripper = new Mechanism("RightGripper");
         }
 
         if(hardwareStates.get("Wrist").isEnabled){

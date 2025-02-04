@@ -1,48 +1,38 @@
 package org.firstinspires.ftc.teamcode.Bot.Mechanisms;
 
-import com.qualcomm.robotcore.hardware.HardwareMap;
+import static org.firstinspires.ftc.teamcode.Bot.Setup.telemetry;
 
-import org.firstinspires.ftc.teamcode.Bot.Sensors.SensorColorDistance;
-import org.firstinspires.ftc.teamcode.Bot.Sensors.SensorTouch;
 import org.firstinspires.ftc.teamcode.Bot.States.ActionSequences;
-
+import org.firstinspires.ftc.teamcode.Bot.Mechanisms.Sensors;
 
 public class SmartIntake {
     private ActionSequences actions;
     private boolean isBlue;
-    private SensorColorDistance colorSensor;
-    private SensorTouch touchSensor;
+    private Sensors sensors;
     public enum Color{
         YELLOW,
         RED,
-        BLUE
+        BLUE,
+        NOTHING
     }
-    public SmartIntake(ActionSequences actionSequences, boolean isBlue){
+    public SmartIntake(ActionSequences actionSequences, boolean isBlue, Sensors sensors){
         actions = actionSequences;
         this.isBlue = isBlue;
-
+        this.sensors = sensors;
     }
 
     /***
-     *
      * @param bePicky
-     * @return 0 for yellow,
      */
-    public Color intake(boolean bePicky){
-        Color colore;
-        while (true) {
+    public Color intake(boolean bePicky, boolean move){
+        if(!sensors.getTouchStatus(0)) {
+            telemetry.addLine("Booped (SmartIntake)");
+            return assignColor(sensors.getColor(0));
+        } else {
+            telemetry.addLine("Not booped (SmartIntake)");
             actions.intake(1);
-            colore = assignColor(colorSensor.getColor());
-            if(!bePicky && colore == Color.YELLOW){
-                break;
-            } else if(isBlue && colore == Color.BLUE){
-               break;
-            } else if(!isBlue && colore == Color.RED){
-                break;
-            }
-            actions.intake(-1);
+            return Color.NOTHING;
         }
-        return colore;
     }
     public Color assignColor(double[] colors){
         if(1.5*colors[2] > colors[1] && colors[2] > colors[3]) {

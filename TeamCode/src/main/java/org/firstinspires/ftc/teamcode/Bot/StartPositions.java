@@ -1,9 +1,10 @@
 package org.firstinspires.ftc.teamcode.Bot;
 
+import com.pedropathing.localization.Pose;
+
 import org.firstinspires.ftc.teamcode.Bot.Mechanisms.Fingers;
 import org.firstinspires.ftc.teamcode.Bot.Mechanisms.LeftGripper;
 import org.firstinspires.ftc.teamcode.Bot.Mechanisms.Slides;
-import org.firstinspires.ftc.teamcode.PedroPathing.localization.Pose;
 
 import org.firstinspires.ftc.teamcode.Bot.Mechanisms.Arm;
 import org.firstinspires.ftc.teamcode.Bot.Mechanisms.Wrist;

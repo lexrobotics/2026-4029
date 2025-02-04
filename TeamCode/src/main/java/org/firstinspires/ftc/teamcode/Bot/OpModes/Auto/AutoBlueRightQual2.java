@@ -2,16 +2,20 @@ package org.firstinspires.ftc.teamcode.Bot.OpModes.Auto;
 
 import org.firstinspires.ftc.teamcode.Bot.Bot;
 import org.firstinspires.ftc.teamcode.Bot.States.ActionSequences;
-import org.firstinspires.ftc.teamcode.PedroPathing.constants.FConstants;
-import org.firstinspires.ftc.teamcode.PedroPathing.follower.Follower;
-import org.firstinspires.ftc.teamcode.PedroPathing.constants.LConstants;
-import org.firstinspires.ftc.teamcode.PedroPathing.localization.Pose;
-import org.firstinspires.ftc.teamcode.PedroPathing.pathGeneration.BezierCurve;
-import org.firstinspires.ftc.teamcode.PedroPathing.pathGeneration.BezierLine;
-import org.firstinspires.ftc.teamcode.PedroPathing.pathGeneration.Path;
-import org.firstinspires.ftc.teamcode.PedroPathing.pathGeneration.PathChain;
-import org.firstinspires.ftc.teamcode.PedroPathing.pathGeneration.Point;
-import org.firstinspires.ftc.teamcode.PedroPathing.util.Timer;
+import com.pedropathing.follower.Follower;
+import com.pedropathing.pathgen.BezierCurve;
+import com.pedropathing.pathgen.BezierLine;
+import com.pedropathing.pathgen.Path;
+import com.pedropathing.pathgen.PathChain;
+import com.pedropathing.pathgen.Point;
+import com.pedropathing.localization.Pose;
+import com.pedropathing.util.Constants;
+import com.pedropathing.util.Timer;
+
+import org.firstinspires.ftc.teamcode.pedroPathing.constants.FConstants;
+import org.firstinspires.ftc.teamcode.pedroPathing.constants.LConstants;
+
+
 import org.firstinspires.ftc.teamcode.Bot.StartPositions;
 
 import com.pedropathing.util.Constants;
