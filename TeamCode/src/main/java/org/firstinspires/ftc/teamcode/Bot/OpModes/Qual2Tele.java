@@ -7,17 +7,14 @@ import com.qualcomm.robotcore.util.ElapsedTime;
 import com.qualcomm.robotcore.util.Range;
 
 import org.firstinspires.ftc.teamcode.Bot.Bot;
-import org.firstinspires.ftc.teamcode.Bot.Mechanisms.Arm;
-import org.firstinspires.ftc.teamcode.Bot.Mechanisms.LeftGripper;
-import org.firstinspires.ftc.teamcode.Bot.Mechanisms.RightGripper;
-import org.firstinspires.ftc.teamcode.Bot.Mechanisms.Slides;
-import org.firstinspires.ftc.teamcode.Bot.Mechanisms.SmartIntake;
-import org.firstinspires.ftc.teamcode.Bot.Mechanisms.Wrist;
-import org.firstinspires.ftc.teamcode.Bot.Sensors.IMUStatic;
+import org.firstinspires.ftc.teamcode.Bot.Mechanisms.Bot2.Arm;
+import org.firstinspires.ftc.teamcode.Bot.Mechanisms.Bot2.LeftGripper;
+import org.firstinspires.ftc.teamcode.Bot.Mechanisms.Bot2.RightGripper;
+import org.firstinspires.ftc.teamcode.Bot.Mechanisms.Bot2.Slides;
+import org.firstinspires.ftc.teamcode.Bot.Mechanisms.Bot2.SmartIntake;
+import org.firstinspires.ftc.teamcode.Bot.Mechanisms.Bot2.Wrist;
 import org.firstinspires.ftc.teamcode.Bot.Setup;
 import org.firstinspires.ftc.teamcode.Bot.States.ActionSequences;
-import org.firstinspires.ftc.teamcode.Bot.States.IntakeStates;
-import org.firstinspires.ftc.teamcode.Bot.States.OuttakeStates;
 
 @TeleOp(name = "QUAL 2 TELEOP", group = "0")
 public class Qual2Tele extends LinearOpMode {

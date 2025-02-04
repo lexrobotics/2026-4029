@@ -2,13 +2,13 @@ package org.firstinspires.ftc.teamcode.Bot;
 
 import com.pedropathing.localization.Pose;
 
-import org.firstinspires.ftc.teamcode.Bot.Mechanisms.Fingers;
-import org.firstinspires.ftc.teamcode.Bot.Mechanisms.LeftGripper;
-import org.firstinspires.ftc.teamcode.Bot.Mechanisms.Slides;
+import org.firstinspires.ftc.teamcode.Bot.Mechanisms.Bot2.Fingers;
+import org.firstinspires.ftc.teamcode.Bot.Mechanisms.Bot2.LeftGripper;
+import org.firstinspires.ftc.teamcode.Bot.Mechanisms.Bot2.Slides;
 
-import org.firstinspires.ftc.teamcode.Bot.Mechanisms.Arm;
-import org.firstinspires.ftc.teamcode.Bot.Mechanisms.Wrist;
-import org.firstinspires.ftc.teamcode.Bot.Mechanisms.Winch;
+import org.firstinspires.ftc.teamcode.Bot.Mechanisms.Bot2.Arm;
+import org.firstinspires.ftc.teamcode.Bot.Mechanisms.Bot2.Wrist;
+import org.firstinspires.ftc.teamcode.Bot.Mechanisms.Bot2.Winch;
 
 public class StartPositions {
     public static double winchPos = Winch.INIT;

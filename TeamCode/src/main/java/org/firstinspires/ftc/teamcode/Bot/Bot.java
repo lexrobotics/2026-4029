@@ -10,14 +10,14 @@ import com.qualcomm.robotcore.util.ElapsedTime;
 
 import org.firstinspires.ftc.teamcode.Bot.Drivetrain.Drivetrain;
 import org.firstinspires.ftc.teamcode.Bot.Mechanisms.AbstractMechanisms.Mechanism;
-import org.firstinspires.ftc.teamcode.Bot.Mechanisms.Arm;
-import org.firstinspires.ftc.teamcode.Bot.Mechanisms.Fingers;
-import org.firstinspires.ftc.teamcode.Bot.Mechanisms.LeftGripper;
-import org.firstinspires.ftc.teamcode.Bot.Mechanisms.RightGripper;
-import org.firstinspires.ftc.teamcode.Bot.Mechanisms.SlidesSmart;
-import org.firstinspires.ftc.teamcode.Bot.Mechanisms.Wrist;
+import org.firstinspires.ftc.teamcode.Bot.Mechanisms.Bot2.Arm;
+import org.firstinspires.ftc.teamcode.Bot.Mechanisms.Bot2.Fingers;
+import org.firstinspires.ftc.teamcode.Bot.Mechanisms.Bot2.LeftGripper;
+import org.firstinspires.ftc.teamcode.Bot.Mechanisms.Bot2.RightGripper;
+import org.firstinspires.ftc.teamcode.Bot.Mechanisms.Bot2.SlidesSmart;
+import org.firstinspires.ftc.teamcode.Bot.Mechanisms.Bot2.Wrist;
 import org.firstinspires.ftc.teamcode.Bot.Sensors.SensorSwitch;
-import org.firstinspires.ftc.teamcode.Bot.Mechanisms.Sensors;
+import org.firstinspires.ftc.teamcode.Bot.Mechanisms.Bot2.Sensors;
 import org.firstinspires.ftc.teamcode.Bot.InitStates.HardwareStates;
 
 import java.util.HashMap;

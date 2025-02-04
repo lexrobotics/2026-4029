@@ -1,4 +1,4 @@
-package org.firstinspires.ftc.teamcode.Bot.Mechanisms;
+package org.firstinspires.ftc.teamcode.Bot.Mechanisms.Bot2;
 
 import org.firstinspires.ftc.teamcode.Bot.Mechanisms.AbstractMechanisms.RunToPosMotorMechanism;
 

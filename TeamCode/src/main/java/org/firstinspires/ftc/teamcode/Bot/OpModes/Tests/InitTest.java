@@ -5,11 +5,10 @@ import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 
 import org.firstinspires.ftc.teamcode.Bot.Bot;
-import org.firstinspires.ftc.teamcode.Bot.Mechanisms.Arm;
-import org.firstinspires.ftc.teamcode.Bot.Mechanisms.LeftGripper;
-import org.firstinspires.ftc.teamcode.Bot.Mechanisms.Slides;
-import org.firstinspires.ftc.teamcode.Bot.Mechanisms.Wrist;
-import org.firstinspires.ftc.teamcode.Bot.Mechanisms.Winch;
+import org.firstinspires.ftc.teamcode.Bot.Mechanisms.Bot2.Arm;
+import org.firstinspires.ftc.teamcode.Bot.Mechanisms.Bot2.LeftGripper;
+import org.firstinspires.ftc.teamcode.Bot.Mechanisms.Bot2.Slides;
+import org.firstinspires.ftc.teamcode.Bot.Mechanisms.Bot2.Wrist;
 import org.firstinspires.ftc.teamcode.Bot.Setup;
 
 @Config

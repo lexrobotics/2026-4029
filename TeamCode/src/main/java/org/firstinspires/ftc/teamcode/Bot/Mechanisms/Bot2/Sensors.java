@@ -1,4 +1,4 @@
-package org.firstinspires.ftc.teamcode.Bot.Mechanisms;
+package org.firstinspires.ftc.teamcode.Bot.Mechanisms.Bot2;
 
 import com.qualcomm.robotcore.hardware.ColorSensor;
 import com.qualcomm.robotcore.hardware.DigitalChannel;
@@ -7,13 +7,10 @@ import com.qualcomm.robotcore.hardware.I2cAddr;
 import com.qualcomm.robotcore.hardware.TouchSensor;
 
 import org.firstinspires.ftc.robotcore.external.navigation.DistanceUnit;
-import org.firstinspires.ftc.teamcode.Bot.OpModes.Tests.ColorDistanceSensorTest;
 import org.firstinspires.ftc.teamcode.Bot.Sensors.SensorColor;
-import org.firstinspires.ftc.teamcode.Bot.Sensors.SensorColorDistance;
 import org.firstinspires.ftc.teamcode.Bot.Sensors.SensorDistance;
 import org.firstinspires.ftc.teamcode.Bot.Sensors.SensorSwitch;
 import org.firstinspires.ftc.teamcode.Bot.Sensors.SensorTouch;
-import org.firstinspires.ftc.teamcode.Bot.Setup;
 
 public class Sensors {
     private static SensorColor[] colors;

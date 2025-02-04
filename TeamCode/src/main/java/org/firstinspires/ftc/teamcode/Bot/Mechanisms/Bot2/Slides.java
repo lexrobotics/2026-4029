@@ -1,4 +1,4 @@
-package org.firstinspires.ftc.teamcode.Bot.Mechanisms;
+package org.firstinspires.ftc.teamcode.Bot.Mechanisms.Bot2;
 
 import com.acmerobotics.dashboard.config.Config;
 

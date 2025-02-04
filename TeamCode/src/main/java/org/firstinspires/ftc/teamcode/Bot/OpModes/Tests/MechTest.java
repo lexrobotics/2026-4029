@@ -7,7 +7,7 @@
 //import org.firstinspires.ftc.teamcode.Bot.Mechanisms.IntakeSlides;
 //import org.firstinspires.ftc.teamcode.Bot.Mechanisms.OuttakeClaw;
 //import org.firstinspires.ftc.teamcode.Bot.Mechanisms.OuttakeSlides;
-//import org.firstinspires.ftc.teamcode.Bot.Mechanisms.Wrist;
+//import org.firstinspires.ftc.teamcode.Bot.Mechanisms.Bot2.Wrist;
 //import org.firstinspires.ftc.teamcode.Bot.Sensors.IMUStatic;
 //import org.firstinspires.ftc.teamcode.Bot.Setup;
 //@TeleOp(name="MECH TEST")

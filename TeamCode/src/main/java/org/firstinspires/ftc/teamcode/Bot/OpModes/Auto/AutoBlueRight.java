@@ -4,7 +4,7 @@
 //import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 //import com.qualcomm.robotcore.util.ElapsedTime;
 //import org.firstinspires.ftc.teamcode.Bot.Bot;
-//import org.firstinspires.ftc.teamcode.Bot.Mechanisms.Slides;
+//import org.firstinspires.ftc.teamcode.Bot.Mechanisms.Bot2.Slides;
 //import org.firstinspires.ftc.teamcode.Bot.States.ActionSequences;
 //import com.pedropathing.follower.Follower;
 //import com.pedropathing.pathgen.BezierCurve;

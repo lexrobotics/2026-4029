@@ -1,9 +1,8 @@
-package org.firstinspires.ftc.teamcode.Bot.Mechanisms;
+package org.firstinspires.ftc.teamcode.Bot.Mechanisms.Bot2;
 
 import static org.firstinspires.ftc.teamcode.Bot.Setup.telemetry;
 
 import org.firstinspires.ftc.teamcode.Bot.States.ActionSequences;
-import org.firstinspires.ftc.teamcode.Bot.Mechanisms.Sensors;
 
 public class SmartIntake {
     private ActionSequences actions;
