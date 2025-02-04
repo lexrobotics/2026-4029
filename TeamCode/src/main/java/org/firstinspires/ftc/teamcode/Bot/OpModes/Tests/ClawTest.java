@@ -5,7 +5,7 @@
 //
 //import org.firstinspires.ftc.teamcode.Bot.Bot;
 //import org.firstinspires.ftc.teamcode.Bot.Drivetrain.Drivetrain;
-//import org.firstinspires.ftc.teamcode.Bot.Mechanisms.SmartClaw;
+//import org.firstinspires.ftc.teamcode.Bot.Mechanisms.Bot2.SmartClaw;
 //import org.firstinspires.ftc.teamcode.Bot.Sensors.Vision.Camera;
 //import org.firstinspires.ftc.teamcode.Bot.Sensors.Vision.Pipelines.Contour;
 //import org.firstinspires.ftc.teamcode.Bot.Setup;

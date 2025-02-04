@@ -2,13 +2,13 @@ package org.firstinspires.ftc.teamcode.Bot.States;
 
 
 import org.firstinspires.ftc.teamcode.Bot.Bot;
-import org.firstinspires.ftc.teamcode.Bot.Mechanisms.Arm;
-import org.firstinspires.ftc.teamcode.Bot.Mechanisms.Fingers;
-import org.firstinspires.ftc.teamcode.Bot.Mechanisms.LeftGripper;
-import org.firstinspires.ftc.teamcode.Bot.Mechanisms.RightGripper;
-import org.firstinspires.ftc.teamcode.Bot.Mechanisms.Slides;
-import org.firstinspires.ftc.teamcode.Bot.Mechanisms.SmartIntake;
-import org.firstinspires.ftc.teamcode.Bot.Mechanisms.Wrist;
+import org.firstinspires.ftc.teamcode.Bot.Mechanisms.Bot2.Arm;
+import org.firstinspires.ftc.teamcode.Bot.Mechanisms.Bot2.Fingers;
+import org.firstinspires.ftc.teamcode.Bot.Mechanisms.Bot2.LeftGripper;
+import org.firstinspires.ftc.teamcode.Bot.Mechanisms.Bot2.RightGripper;
+import org.firstinspires.ftc.teamcode.Bot.Mechanisms.Bot2.Slides;
+import org.firstinspires.ftc.teamcode.Bot.Mechanisms.Bot2.SmartIntake;
+import org.firstinspires.ftc.teamcode.Bot.Mechanisms.Bot2.Wrist;
 
 public class ActionSequences {
     private Bot bot;

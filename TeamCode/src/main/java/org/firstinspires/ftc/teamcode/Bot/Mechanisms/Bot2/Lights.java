@@ -1,6 +1,4 @@
-package org.firstinspires.ftc.teamcode.Bot.Mechanisms;
-
-import static org.firstinspires.ftc.teamcode.Bot.Setup.hardwareMap;
+package org.firstinspires.ftc.teamcode.Bot.Mechanisms.Bot2;
 
 import com.qualcomm.hardware.rev.RevBlinkinLedDriver;
 

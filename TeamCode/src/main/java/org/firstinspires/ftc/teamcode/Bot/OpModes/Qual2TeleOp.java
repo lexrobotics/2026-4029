@@ -7,8 +7,8 @@ import com.qualcomm.robotcore.util.ElapsedTime;
 import com.qualcomm.robotcore.util.Range;
 
 import org.firstinspires.ftc.teamcode.Bot.Bot;
-import org.firstinspires.ftc.teamcode.Bot.Mechanisms.Slides;
-import org.firstinspires.ftc.teamcode.Bot.Mechanisms.Wrist;
+import org.firstinspires.ftc.teamcode.Bot.Mechanisms.Bot2.Slides;
+import org.firstinspires.ftc.teamcode.Bot.Mechanisms.Bot2.Wrist;
 import org.firstinspires.ftc.teamcode.Bot.Setup;
 import org.firstinspires.ftc.teamcode.Bot.States.ActionSequences;
 @Disabled
