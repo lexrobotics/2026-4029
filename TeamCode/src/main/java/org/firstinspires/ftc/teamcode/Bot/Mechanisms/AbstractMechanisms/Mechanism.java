@@ -6,7 +6,7 @@ import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
-import org.firstinspires.ftc.teamcode.Bot.Setup;
+import org.firstinspires.ftc.teamcode.Bot.Old.Setup1;
 public class Mechanism {
     protected String name;
     public double targetPos = 0;
@@ -51,11 +51,11 @@ public class Mechanism {
         zero = getCurrentPosition();
     }
     public void telemetry(){
-        Setup.telemetry.addData(name + " currentPos",currentPos - zero);
-        Setup.telemetry.addData(name + " targetPos",targetPos);
-        Setup.telemetry.addData(name + " velocity",velocity);
-        Setup.telemetry.addData(name + " timeLimit",timeLimit);
-        Setup.telemetry.addData(name + " isBusy",isBusy());
+        Setup1.telemetry.addData(name + " currentPos",currentPos - zero);
+        Setup1.telemetry.addData(name + " targetPos",targetPos);
+        Setup1.telemetry.addData(name + " velocity",velocity);
+        Setup1.telemetry.addData(name + " timeLimit",timeLimit);
+        Setup1.telemetry.addData(name + " isBusy",isBusy());
     }
     public void update(){
         currentPos = targetPos;

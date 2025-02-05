@@ -1,6 +1,6 @@
 package org.firstinspires.ftc.teamcode.Bot.Drivetrain;
 
-import static org.firstinspires.ftc.teamcode.Bot.Setup.telemetry;
+import static org.firstinspires.ftc.teamcode.Bot.Old.Setup1.telemetry;
 import static org.firstinspires.ftc.teamcode.roadrunner.drive.SampleMecanumDrive.getAccelerationConstraint;
 import static org.firstinspires.ftc.teamcode.roadrunner.drive.SampleMecanumDrive.getVelocityConstraint;
 
@@ -12,7 +12,7 @@ import com.acmerobotics.roadrunner.trajectory.constraints.TrajectoryAcceleration
 import com.acmerobotics.roadrunner.trajectory.constraints.TrajectoryVelocityConstraint;
 import com.qualcomm.robotcore.util.Range;
 
-import org.firstinspires.ftc.teamcode.Bot.Setup;
+import org.firstinspires.ftc.teamcode.Bot.Old.Setup1;
 
 import org.firstinspires.ftc.teamcode.roadrunner.trajectorysequence.TrajectorySequenceBuilder;
 
@@ -51,7 +51,7 @@ public class Drivetrain {
 //        targetDriveVector = new Vector();
 //        targetHeadingVector = new Vector();
 //        imu = new IMUStatic();
-        drive = new SampleMecanumDrive(Setup.hardwareMap);
+        drive = new SampleMecanumDrive(Setup1.hardwareMap);
         drive.setPoseEstimate(startPose);
 //        telemetry.addLine("Follower: " + follower.driveError);
 

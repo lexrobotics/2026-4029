@@ -1,16 +1,15 @@
 package org.firstinspires.ftc.teamcode.Bot.Sensors;
 
-import com.qualcomm.robotcore.hardware.ColorRangeSensor;
 import com.qualcomm.robotcore.hardware.ColorSensor;
 import com.qualcomm.robotcore.hardware.I2cAddr;
 
 
-import org.firstinspires.ftc.teamcode.Bot.Setup;
+import org.firstinspires.ftc.teamcode.Bot.Old.Setup1;
 
 public class SensorColor {
     private ColorSensor sensor;
     public SensorColor(String name) {
-        sensor = Setup.hardwareMap.get(ColorSensor.class, name);
+        sensor = Setup1.hardwareMap.get(ColorSensor.class, name);
     }
 
     public double[] getColor(){

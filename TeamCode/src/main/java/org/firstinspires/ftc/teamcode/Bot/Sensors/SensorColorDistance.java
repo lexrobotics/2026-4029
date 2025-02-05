@@ -3,7 +3,7 @@ package org.firstinspires.ftc.teamcode.Bot.Sensors;
 //import static org.firstinspires.ftc.teamcode.Bot.Setup.hardwareMap;
 
 //import com.qualcomm.robotcore.hardware.ColorRangeSensor;
-import static org.firstinspires.ftc.teamcode.Bot.Setup.hardwareMap;
+import static org.firstinspires.ftc.teamcode.Bot.Old.Setup1.hardwareMap;
 
 import com.qualcomm.robotcore.hardware.ColorSensor;
 import com.qualcomm.robotcore.hardware.DistanceSensor;

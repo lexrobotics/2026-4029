@@ -11,11 +11,11 @@ import org.firstinspires.ftc.teamcode.Bot.Mechanisms.Bot2.Fingers;
 import org.firstinspires.ftc.teamcode.Bot.Mechanisms.Bot2.LeftGripper;
 import org.firstinspires.ftc.teamcode.Bot.Mechanisms.Bot2.SlidesSmart;
 import org.firstinspires.ftc.teamcode.Bot.Mechanisms.Bot2.Wrist;
-import org.firstinspires.ftc.teamcode.Bot.Setup;
+import org.firstinspires.ftc.teamcode.Bot.Old.Setup1;
 
 @TeleOp(name = "flexible test", group = "tele-op")
 public class FlexibleTestOld extends LinearOpMode {
-    Setup setup;
+    Setup1 setup;
 
     Mechanism mechanism;
     Mechanism slides = new SlidesSmart(), arm = new Arm(), wrist = new Wrist(), grippers = new LeftGripper(), fingers = new Fingers();
@@ -32,7 +32,7 @@ public class FlexibleTestOld extends LinearOpMode {
     ElapsedTime timer = new ElapsedTime();
     @Override
     public void runOpMode() throws InterruptedException {
-        setup = new Setup(hardwareMap, telemetry, false, this, Setup.OpModeType.AUTO, Setup.Team.Q1);
+        setup = new Setup1(hardwareMap, telemetry, false, this, Setup1.OpModeType.AUTO, Setup1.Team.Q1);
         mechanism = new Mechanism("mechanism");
         mechanisms = new Mechanism[]{
                 slides,

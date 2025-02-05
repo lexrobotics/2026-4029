@@ -1,12 +1,10 @@
 package org.firstinspires.ftc.teamcode.Bot.Mechanisms.AbstractMechanisms;
 
 import com.qualcomm.robotcore.hardware.PwmControl;
-import com.qualcomm.robotcore.hardware.Servo;
-import com.qualcomm.robotcore.hardware.ServoControllerEx;
 import com.qualcomm.robotcore.hardware.ServoImplEx;
 import com.qualcomm.robotcore.util.Range;
 
-import org.firstinspires.ftc.teamcode.Bot.Setup;
+import org.firstinspires.ftc.teamcode.Bot.Old.Setup1;
 
 public abstract class ServoExMechanism extends Mechanism {
     protected ServoImplEx servo;
@@ -19,7 +17,7 @@ public abstract class ServoExMechanism extends Mechanism {
     @Override
     public void init(double target) {
         setTarget(target);
-        servo = Setup.hardwareMap.get(ServoImplEx.class, name);
+        servo = Setup1.hardwareMap.get(ServoImplEx.class, name);
         servo.setPwmRange(new PwmControl.PwmRange(553, 2300));
         servo.setPosition(target);
         currentPos = target;

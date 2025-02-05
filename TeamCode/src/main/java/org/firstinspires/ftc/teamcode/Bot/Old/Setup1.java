@@ -1,4 +1,4 @@
-package org.firstinspires.ftc.teamcode.Bot;
+package org.firstinspires.ftc.teamcode.Bot.Old;
 
 import com.acmerobotics.dashboard.FtcDashboard;
 import com.acmerobotics.dashboard.telemetry.MultipleTelemetry;
@@ -20,7 +20,7 @@ class to set up:
 - type of opmode
  */
 
-public class Setup {
+public class Setup1 {
     public enum OpModeType {
         AUTO,
         TELEOP
@@ -41,7 +41,7 @@ public class Setup {
     public static HashMap<String, HardwareStates> mechStates = new HashMap<>();
     public static HashMap<String, HardwareStates> sensorStates = new HashMap<>();
 
-    public Setup(HardwareMap hmap, Telemetry tel, boolean enableDash, LinearOpMode op, OpModeType opType, Team team){
+    public Setup1(HardwareMap hmap, Telemetry tel, boolean enableDash, LinearOpMode op, OpModeType opType, Team team){
         hardwareMap = hmap;
         telemetry = tel;
         opMode = op;
@@ -72,15 +72,13 @@ public class Setup {
         }
     }
     private void addMechanisms(){
-        mechStates.put("IntakeClaw", new HardwareStates(true));
-        mechStates.put("IntakeRotation", new HardwareStates(true));
-        mechStates.put("IntakeSlides", new HardwareStates(true));
-        mechStates.put("IntakeWrist", new HardwareStates(true));
-        mechStates.put("OuttakeClaw", new HardwareStates(true));
-        mechStates.put("OuttakeSlides", new HardwareStates(true));
-        mechStates.put("OuttakeV4B", new HardwareStates(false));
-        mechStates.put("drivetrain", new HardwareStates(false));
-
+        mechStates.put("drivetrain", new HardwareStates(true));
+        mechStates.put("Arm", new HardwareStates(true));
+        mechStates.put("LeftGripper", new HardwareStates(true));
+        mechStates.put("RightGripper", new HardwareStates(true));
+        mechStates.put("Wrist", new HardwareStates(true));
+        mechStates.put("Slides", new HardwareStates(true));
+        mechStates.put("Fingers", new HardwareStates(false));
     }
 
     private void addSensors(){

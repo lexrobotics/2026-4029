@@ -3,9 +3,8 @@ package org.firstinspires.ftc.teamcode.Bot.Sensors.Vision;
 import org.firstinspires.ftc.robotcore.external.hardware.camera.WebcamName;
 import org.firstinspires.ftc.teamcode.Bot.InitStates.HardwareStates;
 import org.firstinspires.ftc.teamcode.Bot.Sensors.Vision.Processors.ColorProcessor;
-import org.firstinspires.ftc.teamcode.Bot.Setup;
+import org.firstinspires.ftc.teamcode.Bot.Old.Setup1;
 import org.firstinspires.ftc.vision.VisionPortal;
-import org.firstinspires.ftc.vision.apriltag.AprilTagDetection;
 import org.firstinspires.ftc.vision.apriltag.AprilTagProcessor;
 
 import java.util.HashMap;
@@ -28,7 +27,7 @@ public class Vision {
             aprilTag = new AprilTagProcessor.Builder().build();
             colorProcessor = new ColorProcessor();
             visionPortal = new VisionPortal.Builder()
-                    .setCamera(Setup.hardwareMap.get(WebcamName.class, "Webcam 1"))
+                    .setCamera(Setup1.hardwareMap.get(WebcamName.class, "Webcam 1"))
                     .addProcessors(colorProcessor, aprilTag)
                     .build();
         }

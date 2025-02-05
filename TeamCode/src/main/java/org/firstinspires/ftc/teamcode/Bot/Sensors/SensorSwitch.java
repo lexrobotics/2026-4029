@@ -1,7 +1,7 @@
 package org.firstinspires.ftc.teamcode.Bot.Sensors;
 
 
-import static org.firstinspires.ftc.teamcode.Bot.Setup.hardwareMap;
+import static org.firstinspires.ftc.teamcode.Bot.Old.Setup1.hardwareMap;
 
 import com.qualcomm.robotcore.hardware.DigitalChannel;
 import com.qualcomm.robotcore.hardware.HardwareMap;

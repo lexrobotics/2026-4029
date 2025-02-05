@@ -1,6 +1,6 @@
 package org.firstinspires.ftc.teamcode.Bot.Mechanisms.AbstractMechanisms;
 
-import org.firstinspires.ftc.teamcode.Bot.Setup;
+import org.firstinspires.ftc.teamcode.Bot.Old.Setup1;
 
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorEx;
@@ -16,14 +16,14 @@ public abstract class RunToPosMotorMechanism extends Mechanism{
     @Override
     public void init(double target) {
         setTarget(target);
-        motor = Setup.hardwareMap.get(DcMotorEx.class, name);
+        motor = Setup1.hardwareMap.get(DcMotorEx.class, name);
         motor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
     }
 
     @Override
     public void init(double target, DcMotor.ZeroPowerBehavior zeroPowerBehavior) {
         setTarget(target);
-        motor = Setup.hardwareMap.get(DcMotorEx.class, name);
+        motor = Setup1.hardwareMap.get(DcMotorEx.class, name);
         motor.setZeroPowerBehavior(zeroPowerBehavior);
     }
     @Override

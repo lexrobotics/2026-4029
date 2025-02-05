@@ -1,9 +1,7 @@
 package org.firstinspires.ftc.teamcode.Bot.Sensors;
 
-import org.firstinspires.ftc.robotcore.external.hardware.camera.WebcamName;
 import org.firstinspires.ftc.teamcode.Bot.InitStates.HardwareStates;
 import org.firstinspires.ftc.teamcode.Bot.Sensors.Vision.Vision;
-import org.firstinspires.ftc.teamcode.Bot.Setup;
 import org.firstinspires.ftc.vision.VisionPortal;
 
 import java.util.HashMap;

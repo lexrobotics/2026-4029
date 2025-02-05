@@ -1,7 +1,7 @@
 package org.firstinspires.ftc.teamcode.Bot.States;
 
 
-import org.firstinspires.ftc.teamcode.Bot.Bot;
+import org.firstinspires.ftc.teamcode.Bot.Old.Bot1;
 import org.firstinspires.ftc.teamcode.Bot.Mechanisms.Bot2.Arm;
 import org.firstinspires.ftc.teamcode.Bot.Mechanisms.Bot2.Fingers;
 import org.firstinspires.ftc.teamcode.Bot.Mechanisms.Bot2.LeftGripper;
@@ -11,11 +11,11 @@ import org.firstinspires.ftc.teamcode.Bot.Mechanisms.Bot2.SmartIntake;
 import org.firstinspires.ftc.teamcode.Bot.Mechanisms.Bot2.Wrist;
 
 public class ActionSequences {
-    private Bot bot;
-    public ActionSequences(Bot robot){
+    private Bot1 bot;
+    public ActionSequences(Bot1 robot){
         bot = robot;
     }
-    public void init(Bot robot){
+    public void init(Bot1 robot){
         rest();
     }
     public void intake(int direction){

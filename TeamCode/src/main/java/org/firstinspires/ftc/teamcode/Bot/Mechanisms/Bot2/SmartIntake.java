@@ -1,20 +1,20 @@
 package org.firstinspires.ftc.teamcode.Bot.Mechanisms.Bot2;
 
-import static org.firstinspires.ftc.teamcode.Bot.Setup.telemetry;
+import static org.firstinspires.ftc.teamcode.Bot.Old.Setup1.telemetry;
 
 import org.firstinspires.ftc.teamcode.Bot.States.ActionSequences;
 
 public class SmartIntake {
     private ActionSequences actions;
     private boolean isBlue;
-    private Sensors sensors;
+    private Sensors1 sensors;
     public enum Color{
         YELLOW,
         RED,
         BLUE,
         NOTHING
     }
-    public SmartIntake(ActionSequences actionSequences, boolean isBlue, Sensors sensors){
+    public SmartIntake(ActionSequences actionSequences, boolean isBlue, Sensors1 sensors){
         actions = actionSequences;
         this.isBlue = isBlue;
         this.sensors = sensors;

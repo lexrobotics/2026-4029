@@ -12,7 +12,7 @@ import org.firstinspires.ftc.teamcode.Bot.Sensors.SensorDistance;
 import org.firstinspires.ftc.teamcode.Bot.Sensors.SensorSwitch;
 import org.firstinspires.ftc.teamcode.Bot.Sensors.SensorTouch;
 
-public class Sensors {
+public class Sensors1 {
     private static SensorColor[] colors;
     private static SensorDistance[] distances;
     private static SensorSwitch[] switches;
@@ -25,13 +25,13 @@ public class Sensors {
      *  @param distanceSensorLength is >= 0
      *  @param switchSensorLength is >= 0
      */
-    public Sensors(int colorSensorLength, int distanceSensorLength, int switchSensorLength){
+    public Sensors1(int colorSensorLength, int distanceSensorLength, int switchSensorLength){
         colors = new SensorColor[colorSensorLength];
         distances = new SensorDistance[distanceSensorLength];
         switches = new SensorSwitch[switchSensorLength];
     }
 
-    public Sensors(int colorSensorLength, int distanceSensorLength, int switchSensorLength, int touchSensorLength, boolean invertSwitches){
+    public Sensors1(int colorSensorLength, int distanceSensorLength, int switchSensorLength, int touchSensorLength, boolean invertSwitches){
         colors = new SensorColor[colorSensorLength];
         distances = new SensorDistance[distanceSensorLength];
         touchSensors = new SensorTouch[touchSensorLength];

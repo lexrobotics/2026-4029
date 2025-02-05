@@ -6,20 +6,20 @@ import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.util.ElapsedTime;
 import com.qualcomm.robotcore.util.Range;
 
-import org.firstinspires.ftc.teamcode.Bot.Bot;
+import org.firstinspires.ftc.teamcode.Bot.Old.Bot1;
 import org.firstinspires.ftc.teamcode.Bot.Mechanisms.Bot2.Arm;
 import org.firstinspires.ftc.teamcode.Bot.Mechanisms.Bot2.LeftGripper;
 import org.firstinspires.ftc.teamcode.Bot.Mechanisms.Bot2.RightGripper;
 import org.firstinspires.ftc.teamcode.Bot.Mechanisms.Bot2.Slides;
 import org.firstinspires.ftc.teamcode.Bot.Mechanisms.Bot2.SmartIntake;
 import org.firstinspires.ftc.teamcode.Bot.Mechanisms.Bot2.Wrist;
-import org.firstinspires.ftc.teamcode.Bot.Setup;
+import org.firstinspires.ftc.teamcode.Bot.Old.Setup1;
 import org.firstinspires.ftc.teamcode.Bot.States.ActionSequences;
 
 @TeleOp(name = "QUAL 2 TELEOP", group = "0")
 public class Qual2Tele extends LinearOpMode {
-    private Setup setup;
-    private Bot bot;
+    private Setup1 setup;
+    private Bot1 bot;
 //    private IMUStatic imu;
     private ElapsedTime timer;
     private double y;
@@ -41,9 +41,9 @@ public class Qual2Tele extends LinearOpMode {
     MechStates mechState = MechStates.REST;
     @Override
     public void runOpMode() throws InterruptedException {
-        setup = new Setup(hardwareMap, telemetry, true, this, Setup.OpModeType.AUTO, Setup.Team.Q1);
+        setup = new Setup1(hardwareMap, telemetry, true, this, Setup1.OpModeType.AUTO, Setup1.Team.Q1);
 
-        bot = new Bot(Setup.mechStates, Setup.sensorStates);
+        bot = new Bot1(Setup1.mechStates, Setup1.sensorStates);
 //        imu = new IMUStatic();
         actionSequences = new ActionSequences(bot);
 //        LightStrip lights = new LightStrip("lights", RevBlinkinLedDriver.BlinkinPattern.BLUE);

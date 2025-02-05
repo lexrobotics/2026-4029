@@ -4,7 +4,7 @@ import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorEx;
 
 import org.firstinspires.ftc.robotcore.external.navigation.CurrentUnit;
-import org.firstinspires.ftc.teamcode.Bot.Setup;
+import org.firstinspires.ftc.teamcode.Bot.Old.Setup1;
 
 public abstract class CoupledMotorMechanism extends Mechanism {
     protected DcMotorEx motorLeft, motorRight;
@@ -16,8 +16,8 @@ public abstract class CoupledMotorMechanism extends Mechanism {
     }
     public void init(double target, DcMotor.ZeroPowerBehavior zeroPowerBehavior) {
         setTarget(target);
-        motorLeft = Setup.hardwareMap.get(DcMotorEx.class, name + "Left");
-        motorRight = Setup.hardwareMap.get(DcMotorEx.class, name + "Right");
+        motorLeft = Setup1.hardwareMap.get(DcMotorEx.class, name + "Left");
+        motorRight = Setup1.hardwareMap.get(DcMotorEx.class, name + "Right");
 //        motorRight.setDirection(DcMotorEx.Direction.REVERSE);
         motorLeft.setZeroPowerBehavior(zeroPowerBehavior);
         motorRight.setZeroPowerBehavior(zeroPowerBehavior);

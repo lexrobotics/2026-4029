@@ -1,6 +1,6 @@
 package org.firstinspires.ftc.teamcode.Bot.OpModes.Auto;
 
-import org.firstinspires.ftc.teamcode.Bot.Bot;
+import org.firstinspires.ftc.teamcode.Bot.Old.Bot1;
 import org.firstinspires.ftc.teamcode.Bot.States.ActionSequences;
 import com.pedropathing.follower.Follower;
 import com.pedropathing.pathgen.BezierCurve;
@@ -16,9 +16,8 @@ import org.firstinspires.ftc.teamcode.pedroPathing.constants.FConstants;
 import org.firstinspires.ftc.teamcode.pedroPathing.constants.LConstants;
 
 
-import org.firstinspires.ftc.teamcode.Bot.StartPositions;
+import org.firstinspires.ftc.teamcode.Bot.Old.StartPositions;
 
-import com.pedropathing.util.Constants;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 
@@ -26,7 +25,7 @@ import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 public class AutoRedLeftQual2 extends OpMode{
     private Follower follower;
     private Timer opmodeTimer, pathTimer;
-    private Bot bot;
+    private Bot1 bot;
     private ActionSequences AS;
 
     private int pathState;

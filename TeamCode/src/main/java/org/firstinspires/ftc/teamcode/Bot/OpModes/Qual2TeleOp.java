@@ -6,23 +6,23 @@ import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.util.ElapsedTime;
 import com.qualcomm.robotcore.util.Range;
 
-import org.firstinspires.ftc.teamcode.Bot.Bot;
+import org.firstinspires.ftc.teamcode.Bot.Old.Bot1;
 import org.firstinspires.ftc.teamcode.Bot.Mechanisms.Bot2.Slides;
 import org.firstinspires.ftc.teamcode.Bot.Mechanisms.Bot2.Wrist;
-import org.firstinspires.ftc.teamcode.Bot.Setup;
+import org.firstinspires.ftc.teamcode.Bot.Old.Setup1;
 import org.firstinspires.ftc.teamcode.Bot.States.ActionSequences;
 @Disabled
 @TeleOp
 public class Qual2TeleOp extends LinearOpMode {
-    Bot bot;
-    Setup setup;
+    Bot1 bot;
+    Setup1 setup;
     ElapsedTime timer =new ElapsedTime();
     ActionSequences actionSequences;
 
     @Override
     public void runOpMode() throws InterruptedException {
-        setup = new Setup(hardwareMap, telemetry, true, this, Setup.OpModeType.AUTO, Setup.Team.Q1);
-        bot = new Bot(Setup.mechStates, Setup.sensorStates);
+        setup = new Setup1(hardwareMap, telemetry, true, this, Setup1.OpModeType.AUTO, Setup1.Team.Q1);
+        bot = new Bot1(Setup1.mechStates, Setup1.sensorStates);
         actionSequences = new ActionSequences(bot);
         bot.init();
 
@@ -80,11 +80,11 @@ public class Qual2TeleOp extends LinearOpMode {
         }
 
         bot.drivetrain.setTeleOpTargets(x, y, spin);
-        Setup.telemetry.addData("translateMag", translateMag);
-        Setup.telemetry.addData("x", x);
-        Setup.telemetry.addData("y", y);
-        Setup.telemetry.addData("spin", spin);
-        Setup.telemetry.addData("angle", angle);
+        Setup1.telemetry.addData("translateMag", translateMag);
+        Setup1.telemetry.addData("x", x);
+        Setup1.telemetry.addData("y", y);
+        Setup1.telemetry.addData("spin", spin);
+        Setup1.telemetry.addData("angle", angle);
     }
     enum MechanismStates{
         REST, SCORE_PREP_SPEC, SCORE_PREP_SAMPLE, SCORE, MANUAL, EMERGENCY_STOP, INTAKE_PREP, INTAKE
@@ -141,7 +141,7 @@ public class Qual2TeleOp extends LinearOpMode {
         }
         driverTwoManual(bot);
     }
-    private void driverTwoManual(Bot bot){
+    private void driverTwoManual(Bot1 bot){
         double joystickL = gamepad2.left_stick_y;
         double joystickR = gamepad2.right_stick_y;
         bot.slides.setVelocity(0.5);
