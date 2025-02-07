@@ -25,8 +25,8 @@ import java.util.Arrays;
 import java.util.List;
 
 
-import org.firstinspires.ftc.teamcode.pedroPathing.constants.FConstants;
-import org.firstinspires.ftc.teamcode.pedroPathing.constants.LConstants;
+import org.firstinspires.ftc.teamcode.PedroPathing.constants.FConstants;
+import org.firstinspires.ftc.teamcode.PedroPathing.constants.LConstants;
 
 
 @TeleOp(name = "Motor Directions", group = "Teleop Test")
