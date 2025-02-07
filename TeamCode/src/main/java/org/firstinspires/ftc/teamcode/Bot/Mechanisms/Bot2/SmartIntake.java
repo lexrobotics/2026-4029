@@ -2,7 +2,7 @@ package org.firstinspires.ftc.teamcode.Bot.Mechanisms.Bot2;
 
 import static org.firstinspires.ftc.teamcode.Bot.Old.Setup1.telemetry;
 
-import org.firstinspires.ftc.teamcode.Bot.States.ActionSequences;
+import org.firstinspires.ftc.teamcode.Bot.Old.States.ActionSequences;
 
 public class SmartIntake {
     private ActionSequences actions;

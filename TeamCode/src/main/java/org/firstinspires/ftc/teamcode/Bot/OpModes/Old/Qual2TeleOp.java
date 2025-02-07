@@ -1,4 +1,4 @@
-package org.firstinspires.ftc.teamcode.Bot.OpModes;
+package org.firstinspires.ftc.teamcode.Bot.OpModes.Old;
 
 import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
@@ -10,7 +10,7 @@ import org.firstinspires.ftc.teamcode.Bot.Old.Bot1;
 import org.firstinspires.ftc.teamcode.Bot.Mechanisms.Bot2.Slides;
 import org.firstinspires.ftc.teamcode.Bot.Mechanisms.Bot2.Wrist;
 import org.firstinspires.ftc.teamcode.Bot.Old.Setup1;
-import org.firstinspires.ftc.teamcode.Bot.States.ActionSequences;
+import org.firstinspires.ftc.teamcode.Bot.Old.States.ActionSequences;
 @Disabled
 @TeleOp
 public class Qual2TeleOp extends LinearOpMode {

@@ -1,7 +1,5 @@
 package org.firstinspires.ftc.teamcode.Bot;
 
-
-
 import static org.firstinspires.ftc.teamcode.Bot.Setup.telemetry;
 
 import com.acmerobotics.roadrunner.geometry.Pose2d;
@@ -10,7 +8,6 @@ import com.qualcomm.robotcore.util.ElapsedTime;
 import org.firstinspires.ftc.teamcode.Bot.Drivetrain.Drivetrain;
 import org.firstinspires.ftc.teamcode.Bot.Mechanisms.*;
 import org.firstinspires.ftc.teamcode.Bot.Mechanisms.AbstractMechanisms.*;
-
 import org.firstinspires.ftc.teamcode.Bot.Sensors.SensorSwitch;
 import org.firstinspires.ftc.teamcode.Bot.InitStates.HardwareStates;
 

@@ -1,7 +1,7 @@
 package org.firstinspires.ftc.teamcode.Bot.OpModes.Auto;
 
 import org.firstinspires.ftc.teamcode.Bot.Old.Bot1;
-import org.firstinspires.ftc.teamcode.Bot.States.ActionSequences;
+import org.firstinspires.ftc.teamcode.Bot.Old.States.ActionSequences;
 import com.pedropathing.follower.Follower;
 import com.pedropathing.pathgen.BezierCurve;
 import com.pedropathing.pathgen.BezierLine;
