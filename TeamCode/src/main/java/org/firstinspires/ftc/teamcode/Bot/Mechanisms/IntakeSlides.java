@@ -7,6 +7,7 @@ public class IntakeSlides extends ServoMechanism {
     public static double INIT = 0;
     public static double REST = 0;
     public static double TRANSFER = 0;
+    public static double TRANSFER_PREP = 0;
 
     public static double MAX = 1;
     public static double MIN = 0;

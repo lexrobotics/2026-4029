@@ -13,5 +13,6 @@ public class IntakeRotation extends ServoMechanism {
     public static double DIAGONAL_LEFT = 0.8;
     public static double DIAGONAL_RIGHT = 0.2;
     public static double TRANSFER = 0.3;
+    public static double TRANSFER_PREP = 0.3;
 
 }

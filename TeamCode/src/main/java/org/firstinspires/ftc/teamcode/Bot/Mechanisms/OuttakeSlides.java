@@ -9,6 +9,7 @@ public class OuttakeSlides extends RunToPosMotorMechanism {
     }
     public static double INIT = 0;
     public static double TRANSFER = 0;
+    public static double TRANSFER_PREP = 0;
 
     public static final double MIN = 0;
     public static final double MAX = 2234;

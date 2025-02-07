@@ -11,6 +11,7 @@ public class OuttakeV4B extends ServoMechanism {
     public static final double MIN = 0.05;
     public static final double MAX = 0.95;
     public static double TRANSFER = 0.5;
+    public static double TRANSFER_PREP = 0.5;
     public static final double INTAKE = 0.135;
     public static final double INTAKE_PREP = 0.28;
 
