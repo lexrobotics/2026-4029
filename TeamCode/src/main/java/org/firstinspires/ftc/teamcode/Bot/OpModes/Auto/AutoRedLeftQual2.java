@@ -12,8 +12,8 @@ import com.pedropathing.localization.Pose;
 import com.pedropathing.util.Constants;
 import com.pedropathing.util.Timer;
 
-import org.firstinspires.ftc.teamcode.pedroPathing.constants.FConstants;
-import org.firstinspires.ftc.teamcode.pedroPathing.constants.LConstants;
+import org.firstinspires.ftc.teamcode.PedroPathing.constants.FConstants;
+import org.firstinspires.ftc.teamcode.PedroPathing.constants.LConstants;
 
 
 import org.firstinspires.ftc.teamcode.Bot.Old.StartPositions;

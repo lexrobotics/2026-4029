@@ -17,8 +17,8 @@ import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 
 
-import org.firstinspires.ftc.teamcode.pedroPathing.constants.FConstants;
-import org.firstinspires.ftc.teamcode.pedroPathing.constants.LConstants;
+import org.firstinspires.ftc.teamcode.PedroPathing.constants.FConstants;
+import org.firstinspires.ftc.teamcode.PedroPathing.constants.LConstants;
 
 @Autonomous (name = "Auto Blue Left", group = "Qual 2")
 public class AutoBlueLeftQual2 extends OpMode {
