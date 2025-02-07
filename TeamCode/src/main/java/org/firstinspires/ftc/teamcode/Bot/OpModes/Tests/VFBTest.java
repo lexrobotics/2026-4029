@@ -1,12 +1,7 @@
 package org.firstinspires.ftc.teamcode.Bot.OpModes.Tests;
 
-import static org.firstinspires.ftc.teamcode.Bot.Setup.hardwareMap;
-import static org.firstinspires.ftc.teamcode.Bot.Setup.opMode;
-import static org.firstinspires.ftc.teamcode.Bot.Setup.telemetry;
-
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
-import com.qualcomm.robotcore.hardware.CRServo;
 import com.qualcomm.robotcore.hardware.Servo;
 
 @TeleOp

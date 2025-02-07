@@ -1,4 +1,4 @@
-package org.firstinspires.ftc.teamcode.Bot.Mechanisms.Bot2;
+package org.firstinspires.ftc.teamcode.Bot.Mechanisms;
 
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
@@ -7,16 +7,15 @@ import com.qualcomm.robotcore.hardware.HardwareMap;
 import org.firstinspires.ftc.teamcode.Bot.Sensors.SensorSwitch;
 import org.firstinspires.ftc.teamcode.Bot.Old.Setup1;
 
-public class SlidesSmart extends Slides {
+public class OuttakeSlidesSmart extends OuttakeSlides {
     private SensorSwitch sensorSwitch;
     private boolean lastState = false;
-    public SlidesSmart(){super();}
+    public OuttakeSlidesSmart(){super();}
 
     @Override
     public void init(double target, HardwareMap hwm){
         super.init(target);
         sensorSwitch = new SensorSwitch("SlidesSwitch", true, hwm);
-//        lastState = sensorSwitch.getStatus();
         motor.setDirection(DcMotorSimple.Direction.REVERSE);
 
     }
@@ -24,7 +23,6 @@ public class SlidesSmart extends Slides {
     public void init(double target){
         super.init(target);
         sensorSwitch = new SensorSwitch("SlidesSwitch", true);
-//        lastState = sensorSwitch.getStatus();
         motor.setDirection(DcMotorSimple.Direction.REVERSE);
     }
 
@@ -53,9 +51,7 @@ public class SlidesSmart extends Slides {
         }else {
             motor.setTargetPosition((int)targetPos);
         }
-//        motor.setTargetPosition((int)targetPos);
         motor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
         motor.setPower(velocity);
     }
-
 }

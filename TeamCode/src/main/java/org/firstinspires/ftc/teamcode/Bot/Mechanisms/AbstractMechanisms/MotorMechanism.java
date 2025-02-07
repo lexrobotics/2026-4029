@@ -3,7 +3,7 @@ package org.firstinspires.ftc.teamcode.Bot.Mechanisms.AbstractMechanisms;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorEx;
 
-import org.firstinspires.ftc.teamcode.Bot.Setup;
+import org.firstinspires.ftc.teamcode.Bot.Old.Setup1;
 
 public abstract class MotorMechanism extends Mechanism{
     protected DcMotorEx motor;
@@ -16,7 +16,7 @@ public abstract class MotorMechanism extends Mechanism{
     }
     @Override
     public void init(double target, DcMotor.ZeroPowerBehavior zeroPowerBehavior){
-        motor = Setup.hardwareMap.get(DcMotorEx.class, name);
+        motor = Setup1.hardwareMap.get(DcMotorEx.class, name);
         motor.setZeroPowerBehavior(zeroPowerBehavior);
     }
     @Override
@@ -46,8 +46,8 @@ public abstract class MotorMechanism extends Mechanism{
 
     @Override
     public void telemetry(){
-        Setup.telemetry.addData(name + "currentPower", currentPower);
-        Setup.telemetry.addData(name + "targetPower", targetPower);
-        Setup.telemetry.addData(name + " isBusy", isBusy());
+        Setup1.telemetry.addData(name + "currentPower", currentPower);
+        Setup1.telemetry.addData(name + "targetPower", targetPower);
+        Setup1.telemetry.addData(name + " isBusy", isBusy());
     }
 }

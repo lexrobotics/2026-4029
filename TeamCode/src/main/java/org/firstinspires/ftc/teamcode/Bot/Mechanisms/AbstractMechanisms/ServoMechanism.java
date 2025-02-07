@@ -4,7 +4,7 @@ import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.util.Range;
 
 
-import org.firstinspires.ftc.teamcode.Bot.Setup;
+import org.firstinspires.ftc.teamcode.Bot.Old.Setup1;
 
 public abstract class ServoMechanism extends Mechanism {
     protected Servo servo;
@@ -17,7 +17,7 @@ public abstract class ServoMechanism extends Mechanism {
     @Override
     public void init(double target) {
         setTarget(target);
-        servo = Setup.hardwareMap.get(Servo.class, name);
+        servo = Setup1.hardwareMap.get(Servo.class, name);
         servo.setPosition(target);
         currentPos = target;
         latestPosition = target;

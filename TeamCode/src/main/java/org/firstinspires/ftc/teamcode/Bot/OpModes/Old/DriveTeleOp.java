@@ -1,25 +1,25 @@
-package org.firstinspires.ftc.teamcode.Bot.OpModes;
+package org.firstinspires.ftc.teamcode.Bot.OpModes.Old;
 
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 
 import org.firstinspires.ftc.teamcode.Bot.Drivetrain.Drivetrain;
 import org.firstinspires.ftc.teamcode.Bot.Sensors.IMUStatic;
-import org.firstinspires.ftc.teamcode.Bot.Setup;
-import org.firstinspires.ftc.teamcode.Bot.Bot;
+import org.firstinspires.ftc.teamcode.Bot.Old.Setup1;
+import org.firstinspires.ftc.teamcode.Bot.Old.Bot1;
 
 //import org.firstinspires.ftc.teamcode.PedroPathing.localization.Pose;
 @TeleOp(name = "AAAAAAAAAAAAA", group = "1")
 public class DriveTeleOp extends LinearOpMode {
     Drivetrain drivetrain;
-    Setup setup;
-    Bot bot;
+    Setup1 setup;
+    Bot1 bot;
     IMUStatic imu;
 
     @Override
     public void runOpMode(){
-        setup = new Setup(hardwareMap, telemetry, true, this, Setup.OpModeType.TELEOP, Setup.Team.Q1);
-        bot = new Bot(Setup.mechStates, Setup.sensorStates);
+        setup = new Setup1(hardwareMap, telemetry, true, this, Setup1.OpModeType.TELEOP, Setup1.Team.Q1);
+        bot = new Bot1(Setup1.mechStates, Setup1.sensorStates);
         imu = new IMUStatic();
         if(bot !=null){
 //            bot.initDrivetrain(new Pose(0,0,0));

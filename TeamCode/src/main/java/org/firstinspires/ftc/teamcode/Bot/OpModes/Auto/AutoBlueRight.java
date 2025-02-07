@@ -14,7 +14,7 @@
 //import com.pedropathing.pathgen.Point;
 //import com.pedropathing.localization.Pose;
 //
-//import org.firstinspires.ftc.teamcode.Bot.StartPositions;
+//import org.firstinspires.ftc.teamcode.Bot.Old.StartPositions;
 //import com.pedropathing.util.Constants;
 //import com.pedropathing.util.Timer;
 //import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
@@ -29,7 +29,7 @@
 //import org.firstinspires.ftc.teamcode.Bot.Drivetrain.RoadRunnerPaths;
 //import org.firstinspires.ftc.teamcode.Bot.Sensors.IMUStatic;
 //import org.firstinspires.ftc.teamcode.Bot.Setup;
-//import org.firstinspires.ftc.teamcode.Bot.StartPositions;
+//import org.firstinspires.ftc.teamcode.Bot.Old.StartPositions;
 //import org.firstinspires.ftc.teamcode.Bot.States.ActionSequences;
 //
 //@Autonomous(name = "AutoBlueRight", group = "q1")

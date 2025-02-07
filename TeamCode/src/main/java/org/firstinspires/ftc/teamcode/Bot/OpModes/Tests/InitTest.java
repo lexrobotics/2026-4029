@@ -4,18 +4,18 @@ import com.acmerobotics.dashboard.config.Config;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 
-import org.firstinspires.ftc.teamcode.Bot.Bot;
+import org.firstinspires.ftc.teamcode.Bot.Old.Bot1;
 import org.firstinspires.ftc.teamcode.Bot.Mechanisms.Bot2.Arm;
 import org.firstinspires.ftc.teamcode.Bot.Mechanisms.Bot2.LeftGripper;
 import org.firstinspires.ftc.teamcode.Bot.Mechanisms.Bot2.Slides;
 import org.firstinspires.ftc.teamcode.Bot.Mechanisms.Bot2.Wrist;
-import org.firstinspires.ftc.teamcode.Bot.Setup;
+import org.firstinspires.ftc.teamcode.Bot.Old.Setup1;
 
 @Config
 @TeleOp(name = "InitTest", group = "0")
 public class InitTest extends LinearOpMode {
-    Setup setup;
-    Bot bot;
+    Setup1 setup;
+    Bot1 bot;
     private double y;
     private double x;
     private double angle;
@@ -25,7 +25,7 @@ public class InitTest extends LinearOpMode {
 
     @Override
     public void runOpMode(){
-        setup = new Setup(hardwareMap, telemetry, true, this, Setup.OpModeType.AUTO, Setup.Team.Q1);
+        setup = new Setup1(hardwareMap, telemetry, true, this, Setup1.OpModeType.AUTO, Setup1.Team.Q1);
         setup.disableMechanism("Winch");
 //        setup.disableMechanism("V4B");
 
@@ -33,7 +33,7 @@ public class InitTest extends LinearOpMode {
 
 
 
-        bot = new Bot(Setup.mechStates, Setup.sensorStates);
+        bot = new Bot1(Setup1.mechStates, Setup1.sensorStates);
 
         bot.init();
         waitForStart();

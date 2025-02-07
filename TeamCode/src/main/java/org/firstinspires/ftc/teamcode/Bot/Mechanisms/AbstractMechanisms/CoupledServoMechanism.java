@@ -3,7 +3,7 @@ package org.firstinspires.ftc.teamcode.Bot.Mechanisms.AbstractMechanisms;
 import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.util.Range;
 
-import org.firstinspires.ftc.teamcode.Bot.Setup;
+import org.firstinspires.ftc.teamcode.Bot.Old.Setup1;
 
 public abstract class CoupledServoMechanism extends Mechanism{
     protected Servo servoLeft, servoRight;
@@ -16,8 +16,8 @@ public abstract class CoupledServoMechanism extends Mechanism{
     @Override
     public void init(double target) {
         setTarget(target);
-        servoLeft = Setup.hardwareMap.get(Servo.class, name + "Left");
-        servoRight = Setup.hardwareMap.get(Servo.class, name + "Right");
+        servoLeft = Setup1.hardwareMap.get(Servo.class, name + "Left");
+        servoRight = Setup1.hardwareMap.get(Servo.class, name + "Right");
 //        servoLeft.setDirection(Servo.Direction.REVERSE);
         servoLeft.setPosition(target);//+0.0078125
         servoRight.setPosition(target);

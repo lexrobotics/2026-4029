@@ -11,12 +11,12 @@ import org.firstinspires.ftc.teamcode.Bot.Mechanisms.Bot2.LeftGripper;
 import org.firstinspires.ftc.teamcode.Bot.Mechanisms.Bot2.RightGripper;
 import org.firstinspires.ftc.teamcode.Bot.Mechanisms.Bot2.SlidesSmart;
 import org.firstinspires.ftc.teamcode.Bot.Mechanisms.Bot2.Wrist;
-import org.firstinspires.ftc.teamcode.Bot.Setup;
+import org.firstinspires.ftc.teamcode.Bot.Old.Setup1;
 
 @TeleOp(name="*FlexibleTest", group="Test")
 
 public class FlexibleTest extends LinearOpMode {
-    Setup setup;
+    Setup1 setup;
     Mechanism mechanism;
     //    MechTest mechTest;
 //    MechTest outtakeRotation = new OuttakeRotation();
@@ -29,7 +29,7 @@ public class FlexibleTest extends LinearOpMode {
     ElapsedTime timer = new ElapsedTime();
     @Override
     public void runOpMode() throws InterruptedException {
-        setup =new Setup(hardwareMap, telemetry, false, this, Setup.OpModeType.AUTO, Setup.Team.Q1);
+        setup =new Setup1(hardwareMap, telemetry, false, this, Setup1.OpModeType.AUTO, Setup1.Team.Q1);
         mechanism = new Mechanism("mechanism");
         leftGripper.init(0);
         rightGripper.init(1);

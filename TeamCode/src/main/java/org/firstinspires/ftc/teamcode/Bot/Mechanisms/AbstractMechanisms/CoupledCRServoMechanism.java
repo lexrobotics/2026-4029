@@ -4,7 +4,7 @@ import com.qualcomm.robotcore.hardware.CRServo;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 
-import org.firstinspires.ftc.teamcode.Bot.Setup;
+import org.firstinspires.ftc.teamcode.Bot.Old.Setup1;
 
 public class CoupledCRServoMechanism extends Mechanism{
     protected CRServo servoLeft;
@@ -13,8 +13,8 @@ public class CoupledCRServoMechanism extends Mechanism{
     public CoupledCRServoMechanism(String name){super(name);}
 
     public void init(){
-        servoLeft = Setup.hardwareMap.get(CRServo.class, name + "Left");
-        servoRight = Setup.hardwareMap.get(CRServo.class, name + "Right");
+        servoLeft = Setup1.hardwareMap.get(CRServo.class, name + "Left");
+        servoRight = Setup1.hardwareMap.get(CRServo.class, name + "Right");
         servoRight.setDirection(DcMotorSimple.Direction.REVERSE);
         servoLeft.setPower(0);
         servoRight.setPower(0);

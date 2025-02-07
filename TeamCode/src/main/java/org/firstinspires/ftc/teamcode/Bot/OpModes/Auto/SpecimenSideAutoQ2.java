@@ -9,8 +9,8 @@ import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
 import org.firstinspires.ftc.robotcore.external.Telemetry;
-import org.firstinspires.ftc.teamcode.Bot.Bot;
-import org.firstinspires.ftc.teamcode.Bot.Setup;
+import org.firstinspires.ftc.teamcode.Bot.Old.Bot1;
+import org.firstinspires.ftc.teamcode.Bot.Old.Setup1;
 import org.firstinspires.ftc.teamcode.roadrunner.drive.SampleMecanumDrive;
 import org.firstinspires.ftc.teamcode.roadrunner.trajectorysequence.TrajectorySequence;
 
@@ -20,16 +20,16 @@ import org.firstinspires.ftc.teamcode.roadrunner.trajectorysequence.TrajectorySe
 @Config
 @Autonomous(group = "0")
 public class SpecimenSideAutoQ2 extends LinearOpMode {
-    private Setup setup;
-    private Bot bot;
+    private Setup1 setup;
+    private Bot1 bot;
     private ElapsedTime timer;
 
     @Override
     public void runOpMode() throws InterruptedException {
         timer = new ElapsedTime();
-        setup = new Setup(hardwareMap, telemetry, true, this, Setup.OpModeType.AUTO, Setup.Team.Q3);
+        setup = new Setup1(hardwareMap, telemetry, true, this, Setup1.OpModeType.AUTO, Setup1.Team.Q3);
 
-        bot = new Bot(Setup.mechStates, Setup.sensorStates);
+        bot = new Bot1(Setup1.mechStates, Setup1.sensorStates);
         bot.init();
 
         Telemetry telemetry = new MultipleTelemetry(this.telemetry, FtcDashboard.getInstance().getTelemetry());

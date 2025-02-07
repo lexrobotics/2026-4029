@@ -3,28 +3,19 @@ package org.firstinspires.ftc.teamcode.Bot;
 import static org.firstinspires.ftc.teamcode.Bot.Setup.telemetry;
 
 import com.acmerobotics.roadrunner.geometry.Pose2d;
-import com.qualcomm.robotcore.hardware.ColorSensor;
-import com.qualcomm.robotcore.hardware.DistanceSensor;
-import com.qualcomm.robotcore.hardware.TouchSensor;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
 import org.firstinspires.ftc.teamcode.Bot.Drivetrain.Drivetrain;
-import org.firstinspires.ftc.teamcode.Bot.Mechanisms.AbstractMechanisms.Mechanism;
-import org.firstinspires.ftc.teamcode.Bot.Mechanisms.Bot2.Arm;
-import org.firstinspires.ftc.teamcode.Bot.Mechanisms.Bot2.Fingers;
-import org.firstinspires.ftc.teamcode.Bot.Mechanisms.Bot2.LeftGripper;
-import org.firstinspires.ftc.teamcode.Bot.Mechanisms.Bot2.RightGripper;
-import org.firstinspires.ftc.teamcode.Bot.Mechanisms.Bot2.SlidesSmart;
-import org.firstinspires.ftc.teamcode.Bot.Mechanisms.Bot2.Wrist;
+import org.firstinspires.ftc.teamcode.Bot.Mechanisms.*;
+import org.firstinspires.ftc.teamcode.Bot.Mechanisms.AbstractMechanisms.*;
 import org.firstinspires.ftc.teamcode.Bot.Sensors.SensorSwitch;
-import org.firstinspires.ftc.teamcode.Bot.Mechanisms.Bot2.Sensors;
 import org.firstinspires.ftc.teamcode.Bot.InitStates.HardwareStates;
 
 import java.util.HashMap;
 
-public class Bot implements Robot{
+public class Bot implements Robot {
     public Drivetrain drivetrain;
-    public Mechanism arm, wrist, slides, fingers, leftGripper, rightGripper;
+    public Mechanism intakeClaw, intakeRotation, intakeSlides, intakeWrist, outtakeClaw, outtakeSlides, outtakeV4B;
     public Sensors sensors;
     public SensorSwitch slidesSwitch, intakeSlidesSwitch;
 
@@ -34,120 +25,139 @@ public class Bot implements Robot{
          */
         sensors = new Sensors(1,1,0,1,true);
 
-
         telemetry.addLine("robot");
         if(hardwareStates.get("drivetrain").isEnabled){
             drivetrain = new Drivetrain();
         } else {
             drivetrain = null;
         }
-        if(hardwareStates.get("LeftGripper").isEnabled){
-            leftGripper = new LeftGripper();
+        if(hardwareStates.get("IntakeClaw").isEnabled){
+            intakeClaw = new IntakeClaw();
         } else {
-            leftGripper = new Mechanism("LeftGripper");
+            intakeClaw = new Mechanism("IntakeClaw");
         }
 
-        if(hardwareStates.get("RightGripper").isEnabled){
-            rightGripper = new RightGripper();
+        if(hardwareStates.get("IntakeRotation").isEnabled){
+            intakeRotation = new IntakeRotation();
         } else {
-            rightGripper = new Mechanism("RightGripper");
+            intakeRotation = new Mechanism("IntakeRotation");
         }
 
-        if(hardwareStates.get("Wrist").isEnabled){
-            wrist = new Wrist();
+        if(hardwareStates.get("IntakeSlides").isEnabled){
+            intakeSlides = new IntakeSlides();
         } else {
-            wrist = new Mechanism("Wrist");
+            intakeSlides = new Mechanism("IntakeSlides");
         }
-        if(hardwareStates.get("Slides").isEnabled){
-            slides = new SlidesSmart();
+        if(hardwareStates.get("IntakeWrist").isEnabled){
+            intakeWrist = new IntakeWrist();
         } else {
-            telemetry.addLine("NO SLIDES, OUT");
-            slides = new Mechanism("Slides");
+            intakeWrist = new Mechanism("IntakeWrist");
         }
-        if(hardwareStates.get("Arm").isEnabled){
-            arm = new Arm();
+        if(hardwareStates.get("OuttakeClaw").isEnabled){
+            outtakeClaw = new OuttakeClaw();
         } else {
-            arm = new Mechanism("Arm");
+            outtakeClaw = new Mechanism("OuttakeClaw");
         }
-        if(hardwareStates.get("Fingers").isEnabled){
-            fingers = new Fingers();
+        if(hardwareStates.get("OuttakeSlides").isEnabled){
+            outtakeSlides = new OuttakeSlides();
         } else {
-            fingers = new Mechanism("Fingers");
+            outtakeSlides = new Mechanism("OuttakeSlides");
         }
-        if(sensorStates.get("IntakeCDSensor").isEnabled){
-            sensors.addSensor(ColorSensor.class, "IntakeCDSensor", 0);
-            sensors.addSensor(DistanceSensor.class, "IntakeCDSensor", 0);
+        if(hardwareStates.get("OuttakeV4B").isEnabled){
+            outtakeV4B = new OuttakeV4B();
+        } else {
+            outtakeV4B = new Mechanism("OuttakeV4B");
         }
-        if(sensorStates.get("IntakeTouchSensor").isEnabled){
-            sensors.addSensor(TouchSensor.class, "IntakeTouchSensor", 0);
-        }
+//        if(sensorStates.get("IntakeCDSensor").isEnabled){
+//            sensors.addSensor(ColorSensor.class, "IntakeCDSensor", 0);
+//            sensors.addSensor(DistanceSensor.class, "IntakeCDSensor", 0);
+//        }
+//        if(sensorStates.get("IntakeTouchSensor").isEnabled){
+//            sensors.addSensor(TouchSensor.class, "IntakeTouchSensor", 0);
+//        }
 
         init();
-
     }
+
     public void initDrivetrain(Pose2d pose){
         if(drivetrain != null) {
             drivetrain.init(pose);
         } else {
-//            telemetry.addLine("");
         }
     }
+
     @Override
     public void init(){
-        /*
-        Initialize mechanisms here
-        */
         ElapsedTime timer = new ElapsedTime();
         timer.reset();
-        wrist.init(StartPositions.wristPos);
-        leftGripper.init(StartPositions.grippersPos);
-        rightGripper.init(StartPositions.grippersPos);
-        arm.init(StartPositions.armPos);
-        slides.init(StartPositions.slidesPos);
+        intakeClaw.init(IntakeClaw.INIT);
+        intakeRotation.init(IntakeRotation.INIT);
+        intakeSlides.init(IntakeSlides.INIT);
+        intakeWrist.init(IntakeWrist.INIT);
+        outtakeClaw.init(OuttakeClaw.INIT);
+        outtakeSlides.init(OuttakeSlides.INIT);
+        outtakeV4B.init(OuttakeV4B.INIT);
         drivetrain.init(new Pose2d(0, 0, 0));
-        fingers.init(Fingers.INIT);
     }
     public void init(Pose2d startPos){
         ElapsedTime timer = new ElapsedTime();
         timer.reset();
-        leftGripper.init(StartPositions.grippersPos);
-        rightGripper.init(StartPositions.grippersPos);
-        wrist.init(StartPositions.wristPos);
-        slides.init(StartPositions.slidesPos);
+        intakeClaw.init(IntakeClaw.INIT);
+        intakeRotation.init(IntakeRotation.INIT);
+        intakeSlides.init(IntakeSlides.INIT);
+        intakeWrist.init(IntakeWrist.INIT);
+        outtakeClaw.init(OuttakeClaw.INIT);
+        outtakeSlides.init(OuttakeSlides.INIT);
+        outtakeV4B.init(OuttakeV4B.INIT);
         drivetrain.init(startPos);
-        fingers.init(StartPositions.fingersPos);
-        arm.init(StartPositions.armPos);
     }
 
     @Override
     public void update(){
-        leftGripper.update();
-        rightGripper.update();
-        wrist.update();
-        slides.update();
+        intakeClaw.update();
+        intakeRotation.update();
+        intakeSlides.update();
+        intakeWrist.update();
+        outtakeClaw.update();
+        outtakeSlides.update();
+        outtakeV4B.update();
         drivetrain.update();
-        fingers.update();
-        arm.update();
     }
 
     @Override
     public void telemetry(){
-        leftGripper.telemetry();
-        rightGripper.telemetry();
-        wrist.telemetry();
-        slides.telemetry();
+        intakeClaw.telemetry();
+        intakeRotation.telemetry();
+        intakeSlides.telemetry();
+        intakeWrist.telemetry();
+        outtakeClaw.telemetry();
+        outtakeSlides.telemetry();
+        outtakeV4B.telemetry();
         drivetrain.telemetry();
-        fingers.telemetry();
-        arm.telemetry();
     }
 
     @Override
     public boolean isBusy(){
-        return leftGripper.isBusy() || rightGripper.isBusy() || wrist.isBusy() || slides.isBusy() || drivetrain.isBusy() || fingers.isBusy() || arm.isBusy();
+        return intakeClaw.isBusy() || intakeRotation.isBusy() || intakeSlides.isBusy() || intakeWrist.isBusy() || drivetrain.isBusy() || outtakeClaw.isBusy() || outtakeSlides.isBusy() || outtakeV4B.isBusy();
     }
 
-    public void setTeleOpTargets(double left_stick_x, double left_stick_y, double right_stick_x){
-        drivetrain.setTeleOpTargets(left_stick_x, left_stick_y, right_stick_x);
+    public void setRest(){
+        intakeClaw.setTarget(IntakeClaw.REST);
+        intakeRotation.setTarget(IntakeRotation.REST);
+        intakeSlides.setTarget(IntakeSlides.REST);
+        intakeWrist.setTarget(IntakeWrist.REST);
+        outtakeClaw.setTarget(OuttakeClaw.REST);
+        outtakeSlides.setTarget(OuttakeSlides.REST);
+        outtakeV4B.setTarget(OuttakeV4B.REST);
+    }
+
+    public void setTransfer(){
+        // prepares transfer position without moving claw
+        intakeRotation.setTarget(IntakeRotation.TRANSFER);
+        intakeSlides.setTarget(IntakeSlides.TRANSFER);
+        intakeWrist.setTarget(IntakeWrist.TRANSFER);
+        outtakeSlides.setTarget(OuttakeSlides.TRANSFER);
+        outtakeV4B.setTarget(OuttakeV4B.TRANSFER);
     }
 
 }
