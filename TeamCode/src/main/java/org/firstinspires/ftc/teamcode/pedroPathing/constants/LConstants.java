@@ -1,4 +1,4 @@
-package org.firstinspires.ftc.teamcode.pedroPathing.constants;
+package org.firstinspires.ftc.teamcode.PedroPathing.constants;
 
 
 import com.pedropathing.localization.constants.ThreeWheelConstants;
