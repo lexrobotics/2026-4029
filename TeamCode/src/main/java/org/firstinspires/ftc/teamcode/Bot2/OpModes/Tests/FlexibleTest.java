@@ -6,22 +6,35 @@
 //import com.qualcomm.robotcore.util.ElapsedTime;
 //import com.qualcomm.robotcore.util.Range;
 //
+//import org.firstinspires.ftc.teamcode.Bot2.IntakeClaw;
+//import org.firstinspires.ftc.teamcode.Bot2.IntakeRotation;
+//import org.firstinspires.ftc.teamcode.Bot2.IntakeSlides;
+//import org.firstinspires.ftc.teamcode.Bot2.IntakeWrist;
 //import org.firstinspires.ftc.teamcode.Bot2.Mechanisms.AbstractMechanisms.Mechanism;
-//import org.firstinspires.ftc.teamcode.Bot2.Mechanisms.Arm;
+//import org.firstinspires.ftc.teamcode.Bot2.Mechanisms.OuttakeV4B;
 //import org.firstinspires.ftc.teamcode.Bot2.Mechanisms.SlidesSmart;
-//import org.firstinspires.ftc.teamcode.Bot2.Mechanisms.Wrist;
-//import org.firstinspires.ftc.teamcode.Bot2.Old.Setup1;
+//import org.firstinspires.ftc.teamcode.Bot2.Mechanisms.OuttakeWrist;
+//import org.firstinspires.ftc.teamcode.Bot2.OuttakeClaw;
+//import org.firstinspires.ftc.teamcode.Bot2.OuttakeSlides;
+//import org.firstinspires.ftc.teamcode.Bot2.Setup;
 //
 //@Disabled
 //@TeleOp(name="*FlexibleTest", group="Test")
 //
 //public class FlexibleTest extends LinearOpMode {
-//    Setup1 setup;
+//    Setup setup;
 //    Mechanism mechanism;
 //    //    MechTest mechTest;
 ////    MechTest outtakeRotation = new OuttakeRotation();
-//    Mechanism arm = new Arm(), wrist = new Wrist(),
-//            slides = new SlidesSmart(), leftGripper = new LeftGripper(), rightGripper = new RightGripper();
+//    Mechanism
+//            outtakeV4B = new OuttakeV4B(),
+//            outtakeWrist = new OuttakeWrist(),
+//            outtakeClaw = new OuttakeClaw(),
+//            outtakeSlides = new OuttakeSlides(),
+//            intakeSlides = new IntakeSlides(),
+//            intakeRot = new IntakeRotation(),
+//            intakeWrist = new IntakeWrist(),
+//            intakeClaw = new IntakeClaw();
 //    boolean mechIsServo;
 //    double targetPos, futureVelPos, changeInPos, velocity;
 //    double SERVO_INCREMENT = 0.001, MOTOR_INCREMENT = 5;
@@ -29,30 +42,14 @@
 //    ElapsedTime timer = new ElapsedTime();
 //    @Override
 //    public void runOpMode() throws InterruptedException {
-//        setup =new Setup1(hardwareMap, telemetry, false, this, Setup1.OpModeType.AUTO, Setup1.Team.Q1);
+//        setup = new Setup(hardwareMap, telemetry, false, this, Setup.OpModeType.AUTO, Setup.Team.Q1);
 //        mechanism = new Mechanism("mechanism");
-//        leftGripper.init(0);
-//        rightGripper.init(1);
 //        telemetry.update();
 //        waitForStart();
 //        resetRuntime();
 //        while(opModeIsActive()){
-//            if(gamepad2.right_trigger > 0.3 && gamepad2.left_trigger < 0.3){
-//                leftGripper.setTarget(1);
-//                rightGripper.setTarget(-1);
-//            }
-//            if(gamepad2.left_trigger < 0.3 && gamepad2.right_trigger < 0.3){
-//                leftGripper.setTarget(0);
-//                rightGripper.setTarget(0);
-//            }
-//            if(gamepad2.left_trigger > 0.3 && gamepad2.right_trigger < 0.3){
-//                leftGripper.setTarget(-1);
-//                rightGripper.setTarget(1);
-//            }
-//            leftGripper.update();
-//            rightGripper.update();
 //            if (gamepad1.y){
-//                mechanism = arm;
+//                mechanism = outtakeV4B;
 //                targetPos = 0.5;
 //                futureVelPos = targetPos;
 //                mechanism.init(targetPos);
@@ -60,8 +57,8 @@
 //            }
 //            //stack 5: 0.2609, stack 4: 0.2899
 //            if (gamepad1.x){
-//                mechanism = wrist;
-//                targetPos = Wrist.INIT;
+//                mechanism = outtakeWrist;
+//                targetPos = OuttakeWrist.INIT;
 //                futureVelPos = targetPos;
 //                mechanism.init(targetPos);
 //                mechIsServo = true;
@@ -69,8 +66,8 @@
 //
 //
 //            if (gamepad1.a){
-//                slides = new SlidesSmart();
-//                mechanism = slides;
+//                outtakeSlides = new SlidesSmart();
+//                mechanism = outtakeSlides;
 //                targetPos = 0;
 //                futureVelPos = targetPos;
 //                mechanism.init(targetPos);
