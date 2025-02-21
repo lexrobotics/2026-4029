@@ -7,7 +7,7 @@ import android.util.Log;
 import com.acmerobotics.roadrunner.geometry.Pose2d;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
-import org.firstinspires.ftc.teamcode.DEADBot.DEADSensors.SensorSwitch;
+import org.firstinspires.ftc.teamcode.Bot2.Sensors.SensorSwitch;
 import org.firstinspires.ftc.teamcode.Bot2.Mechanisms.AbstractMechanisms.Mechanism;
 import org.firstinspires.ftc.teamcode.Bot2.Drivetrain.Drivetrain;
 import org.firstinspires.ftc.teamcode.Bot2.InitStates.HardwareStates;

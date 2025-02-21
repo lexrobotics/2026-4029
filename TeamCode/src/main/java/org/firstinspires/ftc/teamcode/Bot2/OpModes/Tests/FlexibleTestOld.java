@@ -72,7 +72,7 @@ public class FlexibleTestOld extends LinearOpMode {
                 true,
                 true,
                 false,
-                false,
+                true,
                 true,
                 true,
                 true
