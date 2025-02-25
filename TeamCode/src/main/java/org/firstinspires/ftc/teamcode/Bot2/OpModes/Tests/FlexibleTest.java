@@ -6,10 +6,10 @@
 //import com.qualcomm.robotcore.util.ElapsedTime;
 //import com.qualcomm.robotcore.util.Range;
 //
-//import org.firstinspires.ftc.teamcode.Bot2.IntakeClaw;
-//import org.firstinspires.ftc.teamcode.Bot2.IntakeRotation;
-//import org.firstinspires.ftc.teamcode.Bot2.IntakeSlides;
-//import org.firstinspires.ftc.teamcode.Bot2.IntakeWrist;
+//import org.firstinspires.ftc.teamcode.Bot2.Mechanisms.IntakeClaw;
+//import org.firstinspires.ftc.teamcode.Bot2.Mechanisms.IntakeRotation;
+//import org.firstinspires.ftc.teamcode.Bot2.Mechanisms.IntakeSlides;
+//import org.firstinspires.ftc.teamcode.Bot2.Mechanisms.IntakeWrist;
 //import org.firstinspires.ftc.teamcode.Bot2.Mechanisms.AbstractMechanisms.Mechanism;
 //import org.firstinspires.ftc.teamcode.Bot2.Mechanisms.OuttakeV4B;
 //import org.firstinspires.ftc.teamcode.Bot2.Mechanisms.SlidesSmart;

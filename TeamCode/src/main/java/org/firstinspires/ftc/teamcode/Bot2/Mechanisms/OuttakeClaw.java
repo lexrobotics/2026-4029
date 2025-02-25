@@ -11,4 +11,9 @@ public class OuttakeClaw extends ServoMechanism {
     public static double INTAKE = 0;
     public static double OUTTAKE = 0;
     public static double INIT = 0;
+    public static double REST = 0;
+    public static double CLOSE = 0;
+    public static double OPEN = 0;
+    public static double TRANSFER = 0;
+    public static double TRANSFER_PREP = 0;
 }

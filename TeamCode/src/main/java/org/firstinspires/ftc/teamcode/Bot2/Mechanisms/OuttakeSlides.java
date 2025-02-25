@@ -8,7 +8,7 @@ import org.firstinspires.ftc.teamcode.Bot2.Mechanisms.AbstractMechanisms.RunToPo
 
 public class OuttakeSlides extends RunToPosMotorMechanism {
     public OuttakeSlides() {
-        super("OuttakeSlides");
+        super("slides");
     }
     public static double INIT = 0;
 
@@ -21,6 +21,11 @@ public class OuttakeSlides extends RunToPosMotorMechanism {
     public static final double REST = 0;
     public static final double INTAKE = 0;
     public static final double OUTTAKE_INCREMENT = 500;
+    public static final double TRANSFER = 500;
+    public static final double HIGH_BUCKET = 500;
+    public static final double HIGH_SPECIMEN = 500;
+    public static final double LOW_BUCKET = 500;
+    public static final double TRANSFER_PREP = 500;
 
 
 

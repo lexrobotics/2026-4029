@@ -1,4 +1,4 @@
-package org.firstinspires.ftc.teamcode.Bot2;
+package org.firstinspires.ftc.teamcode.Bot2.Mechanisms;
 
 import org.firstinspires.ftc.teamcode.Bot2.Mechanisms.AbstractMechanisms.ServoMechanism;
 

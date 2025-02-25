@@ -7,6 +7,13 @@ import android.util.Log;
 import com.acmerobotics.roadrunner.geometry.Pose2d;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
+import org.firstinspires.ftc.teamcode.Bot2.Mechanisms.IntakeClaw;
+import org.firstinspires.ftc.teamcode.Bot2.Mechanisms.IntakeRotation;
+import org.firstinspires.ftc.teamcode.Bot2.Mechanisms.IntakeSlides;
+import org.firstinspires.ftc.teamcode.Bot2.Mechanisms.IntakeWrist;
+import org.firstinspires.ftc.teamcode.Bot2.Mechanisms.OuttakeClaw;
+import org.firstinspires.ftc.teamcode.Bot2.Mechanisms.OuttakeSlides;
+import org.firstinspires.ftc.teamcode.Bot2.Mechanisms.OuttakeV4B;
 import org.firstinspires.ftc.teamcode.Bot2.Sensors.SensorSwitch;
 import org.firstinspires.ftc.teamcode.Bot2.Mechanisms.AbstractMechanisms.Mechanism;
 import org.firstinspires.ftc.teamcode.Bot2.Drivetrain.Drivetrain;
@@ -64,12 +71,12 @@ public class Bot implements Robot {
         if(hardwareStates.get("OuttakeSlides").isEnabled){
             outtakeSlides = new OuttakeSlides();
         } else {
-            outtakeSlides = new Mechanism("OuttakeSlides");
+            outtakeSlides = new Mechanism("slides");
         }
         if(hardwareStates.get("OuttakeV4B").isEnabled){
             outtakeV4B = new OuttakeV4B();
         } else {
-            outtakeV4B = new Mechanism("OuttakeV4B");
+            outtakeV4B = new Mechanism("V4B");
         }
 //        if(sensorStates.get("IntakeCDSensor").isEnabled){
 //            sensors.addSensor(ColorSensor.class, "IntakeCDSensor", 0);

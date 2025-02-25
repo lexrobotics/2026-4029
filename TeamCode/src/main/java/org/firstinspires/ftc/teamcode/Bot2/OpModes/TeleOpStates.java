@@ -6,13 +6,12 @@ import com.qualcomm.robotcore.util.ElapsedTime;
 
 import org.firstinspires.ftc.teamcode.Bot2.Bot;
 //import org.firstinspires.ftc.teamcode.Bot2.Mechanisms.Slides;
-import org.firstinspires.ftc.teamcode.Bot2.InitStates.HardwareStates;
-import org.firstinspires.ftc.teamcode.Bot2.IntakeClaw;
-import org.firstinspires.ftc.teamcode.Bot2.IntakeRotation;
-import org.firstinspires.ftc.teamcode.Bot2.IntakeSlides;
-import org.firstinspires.ftc.teamcode.Bot2.OuttakeClaw;
-import org.firstinspires.ftc.teamcode.Bot2.OuttakeSlides;
-import org.firstinspires.ftc.teamcode.Bot2.OuttakeV4B;
+import org.firstinspires.ftc.teamcode.Bot2.Mechanisms.IntakeClaw;
+import org.firstinspires.ftc.teamcode.Bot2.Mechanisms.IntakeRotation;
+import org.firstinspires.ftc.teamcode.Bot2.Mechanisms.IntakeSlides;
+import org.firstinspires.ftc.teamcode.Bot2.Mechanisms.OuttakeSlides;
+import org.firstinspires.ftc.teamcode.Bot2.Mechanisms.OuttakeClaw;
+import org.firstinspires.ftc.teamcode.Bot2.Mechanisms.OuttakeV4B;
 import org.firstinspires.ftc.teamcode.Bot2.Setup;
 
 @TeleOp(name = "PICK MEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE STATES TELEOP", group = "0")

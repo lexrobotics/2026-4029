@@ -1,24 +1,22 @@
 package org.firstinspires.ftc.teamcode.Bot2.OpModes.Tests;
 
-import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.util.ElapsedTime;
 import com.qualcomm.robotcore.util.Range;
 
-import org.firstinspires.ftc.teamcode.Bot2.IntakeClaw;
-import org.firstinspires.ftc.teamcode.Bot2.IntakeRotation;
-import org.firstinspires.ftc.teamcode.Bot2.IntakeSlides;
-import org.firstinspires.ftc.teamcode.Bot2.IntakeWrist;
+import org.firstinspires.ftc.teamcode.Bot2.Mechanisms.IntakeClaw;
+import org.firstinspires.ftc.teamcode.Bot2.Mechanisms.IntakeRotation;
+import org.firstinspires.ftc.teamcode.Bot2.Mechanisms.IntakeSlides;
+import org.firstinspires.ftc.teamcode.Bot2.Mechanisms.IntakeWrist;
 import org.firstinspires.ftc.teamcode.Bot2.Mechanisms.AbstractMechanisms.Mechanism;
+import org.firstinspires.ftc.teamcode.Bot2.Mechanisms.OuttakeClaw;
+import org.firstinspires.ftc.teamcode.Bot2.Mechanisms.OuttakeSlides;
 import org.firstinspires.ftc.teamcode.Bot2.Mechanisms.OuttakeV4B;
 import org.firstinspires.ftc.teamcode.Bot2.Mechanisms.OuttakeWrist;
-import org.firstinspires.ftc.teamcode.Bot2.Mechanisms.SlidesSmart;
-import org.firstinspires.ftc.teamcode.Bot2.OuttakeClaw;
-import org.firstinspires.ftc.teamcode.Bot2.OuttakeSlides;
 import org.firstinspires.ftc.teamcode.Bot2.Setup;
 
-@TeleOp(name = "flexible test", group = "tele-op")
+@TeleOp(name = "flexible test HEREHEREHEREHEREHEREHEREHEREHEREHEREHEREHEREHEREHERE", group = "tele-op")
 public class FlexibleTestOld extends LinearOpMode {
     Setup setup;
 

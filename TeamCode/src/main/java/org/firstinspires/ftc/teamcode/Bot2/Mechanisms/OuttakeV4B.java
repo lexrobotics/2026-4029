@@ -7,7 +7,7 @@ import org.firstinspires.ftc.teamcode.Bot2.Mechanisms.AbstractMechanisms.ServoMe
 @Config
 public class OuttakeV4B extends ServoMechanism {
     public OuttakeV4B() {
-        super("OuttakeV4B");
+        super("V4B");
     }
     public static double INIT = 0.859;
     public static double REST = 0.721;
@@ -20,4 +20,9 @@ public class OuttakeV4B extends ServoMechanism {
     public static final double SPECIMEN = 0.571;
     public static final double SPECIMEN_PREP = 0.591;
     public static final double HANG = 0.634;
+    public static final double TRANSFER = 0.634;
+    public static final double HIGH_BUCKET = 0.634;
+    public static final double HIGH_SPECIMEN = 0.634;
+    public static final double LOW_BUCKET = 0.634;
+    public static final double TRANSFER_PREP = 0.634;
 }
