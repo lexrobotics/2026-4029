@@ -6,7 +6,7 @@ import com.qualcomm.robotcore.util.ElapsedTime;
 import com.qualcomm.robotcore.util.Range;
 
 import org.firstinspires.ftc.teamcode.Bot2.Mechanisms.IntakeClaw;
-import org.firstinspires.ftc.teamcode.Bot2.Mechanisms.IntakeRotation;
+import org.firstinspires.ftc.teamcode.Bot2.Mechanisms.Turret;
 import org.firstinspires.ftc.teamcode.Bot2.Mechanisms.IntakeSlides;
 import org.firstinspires.ftc.teamcode.Bot2.Mechanisms.IntakeWrist;
 import org.firstinspires.ftc.teamcode.Bot2.Mechanisms.AbstractMechanisms.Mechanism;
@@ -27,7 +27,7 @@ public class FlexibleTestOld extends LinearOpMode {
             outtakeClaw = new OuttakeClaw(),
             outtakeSlides = new OuttakeSlides(),
             intakeSlides = new IntakeSlides(),
-            intakeRot = new IntakeRotation(),
+            intakeRot = new Turret(),
             intakeWrist = new IntakeWrist(),
             intakeClaw = new IntakeClaw();
     Mechanism[] mechanisms;
@@ -57,7 +57,7 @@ public class FlexibleTestOld extends LinearOpMode {
         };
         initPositions = new double[]{
                 0.5,
-                1,
+                0.5,
                 0.5,
                 0.5,
                 0.5,

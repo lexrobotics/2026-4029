@@ -8,7 +8,7 @@ import com.acmerobotics.roadrunner.geometry.Pose2d;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
 import org.firstinspires.ftc.teamcode.Bot2.Mechanisms.IntakeClaw;
-import org.firstinspires.ftc.teamcode.Bot2.Mechanisms.IntakeRotation;
+import org.firstinspires.ftc.teamcode.Bot2.Mechanisms.Turret;
 import org.firstinspires.ftc.teamcode.Bot2.Mechanisms.IntakeSlides;
 import org.firstinspires.ftc.teamcode.Bot2.Mechanisms.IntakeWrist;
 import org.firstinspires.ftc.teamcode.Bot2.Mechanisms.OuttakeClaw;
@@ -48,7 +48,7 @@ public class Bot implements Robot {
         }
 
         if(hardwareStates.get("IntakeRotation").isEnabled){
-            intakeRotation = new IntakeRotation();
+            intakeRotation = new Turret();
         } else {
             intakeRotation = new Mechanism("IntakeRotation");
         }
@@ -101,7 +101,7 @@ public class Bot implements Robot {
         ElapsedTime timer = new ElapsedTime();
         timer.reset();
         intakeClaw.init(IntakeClaw.INIT);
-        intakeRotation.init(IntakeRotation.INIT);
+        intakeRotation.init(Turret.INIT);
         intakeSlides.init(IntakeSlides.INIT);
         intakeWrist.init(IntakeWrist.INIT);
         outtakeClaw.init(OuttakeClaw.INIT);
@@ -113,7 +113,7 @@ public class Bot implements Robot {
         ElapsedTime timer = new ElapsedTime();
         timer.reset();
         intakeClaw.init(IntakeClaw.INIT);
-        intakeRotation.init(IntakeRotation.INIT);
+        intakeRotation.init(Turret.INIT);
         intakeSlides.init(IntakeSlides.INIT);
         intakeWrist.init(IntakeWrist.INIT);
         outtakeClaw.init(OuttakeClaw.INIT);
@@ -153,7 +153,7 @@ public class Bot implements Robot {
 
     public void setRest(){
         intakeClaw.setTarget(IntakeClaw.REST);
-        intakeRotation.setTarget(IntakeRotation.REST);
+        intakeRotation.setTarget(Turret.REST);
         intakeSlides.setTarget(IntakeSlides.REST);
         intakeWrist.setTarget(IntakeWrist.REST);
         outtakeClaw.setTarget(OuttakeClaw.REST);
@@ -163,7 +163,7 @@ public class Bot implements Robot {
 
     public void setTransfer(){
         // prepares transfer position without moving claw
-        intakeRotation.setTarget(IntakeRotation.TRANSFER);
+        intakeRotation.setTarget(Turret.TRANSFER);
         intakeSlides.setTarget(IntakeSlides.TRANSFER);
         intakeWrist.setTarget(IntakeWrist.TRANSFER);
         outtakeSlides.setTarget(OuttakeSlides.TRANSFER);

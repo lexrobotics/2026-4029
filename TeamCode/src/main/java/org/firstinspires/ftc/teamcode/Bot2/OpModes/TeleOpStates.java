@@ -7,7 +7,7 @@ import com.qualcomm.robotcore.util.ElapsedTime;
 import org.firstinspires.ftc.teamcode.Bot2.Bot;
 //import org.firstinspires.ftc.teamcode.Bot2.Mechanisms.Slides;
 import org.firstinspires.ftc.teamcode.Bot2.Mechanisms.IntakeClaw;
-import org.firstinspires.ftc.teamcode.Bot2.Mechanisms.IntakeRotation;
+import org.firstinspires.ftc.teamcode.Bot2.Mechanisms.Turret;
 import org.firstinspires.ftc.teamcode.Bot2.Mechanisms.IntakeSlides;
 import org.firstinspires.ftc.teamcode.Bot2.Mechanisms.OuttakeSlides;
 import org.firstinspires.ftc.teamcode.Bot2.Mechanisms.OuttakeClaw;
@@ -200,17 +200,17 @@ public class TeleOpStates extends LinearOpMode {
             case REST:
                 bot.intakeSlides.setTarget(IntakeSlides.REST);
                 bot.intakeClaw.setTarget(IntakeClaw.REST);
-                bot.intakeRotation.setTarget(IntakeRotation.REST);
+                bot.intakeRotation.setTarget(Turret.REST);
                 break;
             case TRANSFER:
                 bot.intakeSlides.setTarget(IntakeSlides.TRANSFER);
                 bot.intakeClaw.setTarget(IntakeClaw.TRANSFER);
-                bot.intakeRotation.setTarget(IntakeRotation.TRANSFER);
+                bot.intakeRotation.setTarget(Turret.TRANSFER);
                 break;
             case TRANSFER_PREP:
                 bot.intakeSlides.setTarget(IntakeSlides.TRANSFER_PREP);
                 bot.intakeClaw.setTarget(IntakeClaw.TRANSFER_PREP);
-                bot.intakeRotation.setTarget(IntakeRotation.TRANSFER_PREP);
+                bot.intakeRotation.setTarget(Turret.TRANSFER_PREP);
                 break;
         }
     }

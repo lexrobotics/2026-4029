@@ -2,8 +2,8 @@ package org.firstinspires.ftc.teamcode.Bot2.Mechanisms;
 
 import org.firstinspires.ftc.teamcode.Bot2.Mechanisms.AbstractMechanisms.ServoMechanism;
 
-public class IntakeRotation extends ServoMechanism {
-    public  IntakeRotation(){ super("IntakeRotation"); }
+public class Turret extends ServoMechanism {
+    public Turret(){ super("Turret"); }
     public static double INIT = 0.5;
     public static double REST = 0.5;
     public static double MAX = 1;
