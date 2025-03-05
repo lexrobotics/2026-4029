@@ -5,8 +5,8 @@ import com.acmerobotics.dashboard.config.Config;
 import org.firstinspires.ftc.teamcode.Bot2.Mechanisms.AbstractMechanisms.ServoMechanism;
 
 @Config
-public class OuttakeV4B extends ServoMechanism {
-    public OuttakeV4B() {
+public class mOuttakeV4B extends ServoMechanism {
+    public mOuttakeV4B() {
         super("V4B");
     }
     public static double INIT = 0.859;

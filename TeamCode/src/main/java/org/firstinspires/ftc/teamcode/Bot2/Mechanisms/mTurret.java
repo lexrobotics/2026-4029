@@ -1,9 +1,11 @@
 package org.firstinspires.ftc.teamcode.Bot2.Mechanisms;
 
-import org.firstinspires.ftc.teamcode.Bot2.Mechanisms.AbstractMechanisms.ServoMechanism;
+import com.acmerobotics.dashboard.config.Config;
 
-public class Turret extends ServoMechanism {
-    public Turret(){ super("Turret"); }
+import org.firstinspires.ftc.teamcode.Bot2.Mechanisms.AbstractMechanisms.ServoMechanism;
+@Config
+public class mTurret extends ServoMechanism {
+    public mTurret(){ super("Turret"); }
     public static double INIT = 0.5;
     public static double REST = 0.5;
     public static double MAX = 1;

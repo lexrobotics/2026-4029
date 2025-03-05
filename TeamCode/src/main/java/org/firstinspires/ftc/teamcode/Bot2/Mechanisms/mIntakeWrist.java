@@ -1,9 +1,11 @@
 package org.firstinspires.ftc.teamcode.Bot2.Mechanisms;
 
-import org.firstinspires.ftc.teamcode.Bot2.Mechanisms.AbstractMechanisms.ServoMechanism;
+import com.acmerobotics.dashboard.config.Config;
 
-public class IntakeWrist extends ServoMechanism {
-    public IntakeWrist() {
+import org.firstinspires.ftc.teamcode.Bot2.Mechanisms.AbstractMechanisms.ServoMechanism;
+@Config
+public class mIntakeWrist extends ServoMechanism {
+    public mIntakeWrist() {
         super("IntakeWrist");
     }
     public static double INIT = 0.514;

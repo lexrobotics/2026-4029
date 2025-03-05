@@ -74,11 +74,12 @@ public class Setup {
     }
     private void addMechanisms(){
         mechStates.put("IntakeClaw", new HardwareStates(true));
-        mechStates.put("IntakeRotation", new HardwareStates(true));
-        mechStates.put("IntakeSlides", new HardwareStates(true));
+        mechStates.put("Turret", new HardwareStates(true));
+        mechStates.put("Linkage", new HardwareStates(true));
         mechStates.put("IntakeWrist", new HardwareStates(true));
         mechStates.put("OuttakeClaw", new HardwareStates(true));
         mechStates.put("OuttakeSlides", new HardwareStates(true));
+        mechStates.put("OuttakeWrist", new HardwareStates(true));
         mechStates.put("OuttakeV4B", new HardwareStates(true));
         mechStates.put("drivetrain", new HardwareStates(true));
 

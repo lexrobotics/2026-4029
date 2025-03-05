@@ -1,9 +1,11 @@
 package org.firstinspires.ftc.teamcode.Bot2.Mechanisms;
 
-import org.firstinspires.ftc.teamcode.Bot2.Mechanisms.AbstractMechanisms.ServoMechanism;
+import com.acmerobotics.dashboard.config.Config;
 
-public class OuttakeClaw extends ServoMechanism {
-    public OuttakeClaw() {
+import org.firstinspires.ftc.teamcode.Bot2.Mechanisms.AbstractMechanisms.ServoMechanism;
+@Config
+public class mOuttakeClaw extends ServoMechanism {
+    public mOuttakeClaw() {
         super("OuttakeClaw");
     }
     public static double MAX = 0;

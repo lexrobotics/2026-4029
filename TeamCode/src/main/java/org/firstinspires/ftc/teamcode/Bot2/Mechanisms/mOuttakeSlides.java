@@ -6,8 +6,8 @@ import org.firstinspires.ftc.teamcode.Bot2.Mechanisms.AbstractMechanisms.RunToPo
 
 @Config
 
-public class OuttakeSlides extends RunToPosMotorMechanism {
-    public OuttakeSlides() {
+public class mOuttakeSlides extends RunToPosMotorMechanism {
+    public mOuttakeSlides() {
         super("slides");
     }
     public static double INIT = 0;

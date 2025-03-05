@@ -5,15 +5,15 @@ import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.util.ElapsedTime;
 import com.qualcomm.robotcore.util.Range;
 
-import org.firstinspires.ftc.teamcode.Bot2.Mechanisms.IntakeClaw;
-import org.firstinspires.ftc.teamcode.Bot2.Mechanisms.Turret;
-import org.firstinspires.ftc.teamcode.Bot2.Mechanisms.IntakeSlides;
-import org.firstinspires.ftc.teamcode.Bot2.Mechanisms.IntakeWrist;
+import org.firstinspires.ftc.teamcode.Bot2.Mechanisms.mIntakeClaw;
+import org.firstinspires.ftc.teamcode.Bot2.Mechanisms.mTurret;
+import org.firstinspires.ftc.teamcode.Bot2.Mechanisms.mLinkage;
+import org.firstinspires.ftc.teamcode.Bot2.Mechanisms.mIntakeWrist;
 import org.firstinspires.ftc.teamcode.Bot2.Mechanisms.AbstractMechanisms.Mechanism;
-import org.firstinspires.ftc.teamcode.Bot2.Mechanisms.OuttakeClaw;
-import org.firstinspires.ftc.teamcode.Bot2.Mechanisms.OuttakeSlides;
-import org.firstinspires.ftc.teamcode.Bot2.Mechanisms.OuttakeV4B;
-import org.firstinspires.ftc.teamcode.Bot2.Mechanisms.OuttakeWrist;
+import org.firstinspires.ftc.teamcode.Bot2.Mechanisms.mOuttakeClaw;
+import org.firstinspires.ftc.teamcode.Bot2.Mechanisms.mOuttakeSlides;
+import org.firstinspires.ftc.teamcode.Bot2.Mechanisms.mOuttakeV4B;
+import org.firstinspires.ftc.teamcode.Bot2.Mechanisms.mOuttakeWrist;
 import org.firstinspires.ftc.teamcode.Bot2.Setup;
 
 @TeleOp(name = "flexible test HEREHEREHEREHEREHEREHEREHEREHEREHEREHEREHEREHEREHERE", group = "tele-op")
@@ -22,14 +22,14 @@ public class FlexibleTestOld extends LinearOpMode {
 
     Mechanism mechanism;
     Mechanism
-            outtakeV4B = new OuttakeV4B(),
-            outtakeWrist = new OuttakeWrist(),
-            outtakeClaw = new OuttakeClaw(),
-            outtakeSlides = new OuttakeSlides(),
-            intakeSlides = new IntakeSlides(),
-            intakeRot = new Turret(),
-            intakeWrist = new IntakeWrist(),
-            intakeClaw = new IntakeClaw();
+            outtakeV4B = new mOuttakeV4B(),
+            outtakeWrist = new mOuttakeWrist(),
+            outtakeClaw = new mOuttakeClaw(),
+            outtakeSlides = new mOuttakeSlides(),
+            intakeSlides = new mLinkage(),
+            intakeRot = new mTurret(),
+            intakeWrist = new mIntakeWrist(),
+            intakeClaw = new mIntakeClaw();
     Mechanism[] mechanisms;
     boolean[] isServo;
     double[] initPositions;
