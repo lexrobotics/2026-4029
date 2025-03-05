@@ -18,6 +18,8 @@ public class mIntakeWrist extends ServoMechanism {
     public static final double INTAKE_PREP = 0;
 
     public static final double VERTICAL = 0.298;
+    public static final double LEFT = 0.298;
+    public static final double RIGHT = 0.298;
     public static final double SPECIMEN = 0.395;
     public static final double SPECIMEN_SCORE = 0.271;
 
