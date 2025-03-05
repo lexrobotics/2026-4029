@@ -7,10 +7,10 @@ import com.qualcomm.robotcore.hardware.HardwareMap;
 import org.firstinspires.ftc.teamcode.Bot2.Sensors.SensorSwitch;
 import org.firstinspires.ftc.teamcode.Bot2.Setup;
 
-public class SlidesSmart extends OuttakeSlides {
+public class mSlidesSmart extends mOuttakeSlides {
     private SensorSwitch sensorSwitch;
     private boolean lastState = false;
-    public SlidesSmart(){super();}
+    public mSlidesSmart(){super();}
 
     @Override
     public void init(double target, HardwareMap hwm){

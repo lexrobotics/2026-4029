@@ -6,8 +6,8 @@ import org.firstinspires.ftc.teamcode.Bot2.Mechanisms.AbstractMechanisms.ServoMe
 
 @Config
 
-public class OuttakeWrist extends ServoMechanism {
-    public OuttakeWrist() {
+public class mOuttakeWrist extends ServoMechanism {
+    public mOuttakeWrist() {
         super("OuttakeWrist");
     }
     public static double INIT = 0.514;
@@ -17,6 +17,7 @@ public class OuttakeWrist extends ServoMechanism {
     public static final double INTAKE = 0.661; //0.532
     public static final double INTAKE_PREP = 0;//0.641
 
+    public static final double TRANSFER = 0.514;//0.641
     public static final double VERTICAL = 0.298;
     public static final double SPECIMEN = 0.395;// old: 0.89; 0.271
     public static final double SPECIMEN_SCORE = 0.271; // new pos
