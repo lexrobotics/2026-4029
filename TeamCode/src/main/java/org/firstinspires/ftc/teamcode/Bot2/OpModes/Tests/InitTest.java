@@ -37,17 +37,17 @@ public class InitTest extends LinearOpMode {
 
         bot = new Bot(Setup.mechStates, Setup.sensorStates);
 
-        bot.init();
+//        bot.init();
         waitForStart();
 
         while(opModeIsActive()){
             driver1();
-            bot.intakeClaw.init(mIntakeClaw.INIT);
-            bot.linkage.init(mLinkage.INIT);
-            bot.turret.init(mTurret.INIT);
-            bot.intakeWrist.init(mIntakeWrist.INIT);
+//            bot.intakeClaw.init(mIntakeClaw.INIT);
+//            bot.linkage.init(mLinkage.INIT);
+//            bot.turret.init(mTurret.INIT);
+//            bot.intakeWrist.init(mIntakeWrist.INIT);
             bot.outtakeClaw.init(mOuttakeClaw.INIT);
-            bot.outtakeSlides.init(mOuttakeSlides.INIT);
+//            bot.outtakeSlides.init(mOuttakeSlides.INIT);
             bot.outtakeV4B.init(mOuttakeV4B.INIT);
             bot.outtakeWrist.init(mOuttakeWrist.INIT);
             bot.update();
