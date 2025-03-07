@@ -6,7 +6,7 @@ import org.firstinspires.ftc.teamcode.Bot2.Mechanisms.AbstractMechanisms.ServoMe
 @Config
 public class mTurret extends ServoMechanism {
     public mTurret(){ super("Turret"); }
-    public static double INIT = 0.5;
+    public static double INIT = 0.55;
     public static double REST = 0.5;
     public static double MAX = 1;
     public static double MIN = 0;
