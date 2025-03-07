@@ -19,7 +19,7 @@ public class mOuttakeWrist extends ServoMechanism {
     public static final double INTAKE_SPEC_FRONT = 0.4055;
     public static final double INTAKE_SPEC_BACK = 1;
 
-    public static final double TRANSFER = 0.0315;//0.641
+    public static final double TRANSFER = 0.078;//.641
     public static final double VERTICAL = 0.298;
     public static final double SPECIMEN = 1;// old: 0.89; 0.271
     public static final double SPECIMEN_SCORE = 1; // new pos

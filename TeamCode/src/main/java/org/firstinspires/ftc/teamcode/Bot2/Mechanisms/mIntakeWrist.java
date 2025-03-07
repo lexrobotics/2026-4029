@@ -14,7 +14,7 @@ public class mIntakeWrist extends ServoMechanism {
     public static final double MAX = 1;
     public static final double MIN = 0;
 
-    public static final double INTAKE = 0.1705;
+    public static final double INTAKE = 0.089;
     public static final double INTAKE_PREP = 0.661;
 
 //    public static final double SPECIMEN_GRAB = 0.395;

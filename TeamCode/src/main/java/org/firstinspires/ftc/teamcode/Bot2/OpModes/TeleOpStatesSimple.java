@@ -163,7 +163,7 @@ public class TeleOpStatesSimple extends LinearOpMode {
         }
         //INTAKE WALL SPEC BACK
         if(gamepad2.dpad_left){
-            mechanismStates = MechanismStates.INTAKE_SPEC_BACK;
+            mechanismStates = MechanismStates.INTAKE_SPEC_BACK; //TODO: GET POSITIONS FOR THIS
 
         }
 
@@ -198,7 +198,7 @@ public class TeleOpStatesSimple extends LinearOpMode {
                 break;
             case INTAKE_EXTEND:
                 bot.outtakeSlides.setTarget(mOuttakeSlides.REST);
-                bot.outtakeV4B.setTarget(mOuttakeV4B.TRANSFER);
+                bot.outtakeV4B.setTarget(mOuttakeV4B.INIT);
                 bot.outtakeWrist.setTarget(mOuttakeWrist.TRANSFER);
                 bot.outtakeClaw.setTarget(mOuttakeClaw.OPEN);
                 bot.linkage.setTarget(mLinkage.EXTEND);
