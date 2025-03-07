@@ -7,9 +7,11 @@ import com.qualcomm.robotcore.util.ElapsedTime;
 import org.firstinspires.ftc.teamcode.Bot2.Bot;
 //import org.firstinspires.ftc.teamcode.Bot2.Mechanisms.Slides;
 import org.firstinspires.ftc.teamcode.Bot2.Mechanisms.mIntakeClaw;
+import org.firstinspires.ftc.teamcode.Bot2.Mechanisms.mLinkage;
 import org.firstinspires.ftc.teamcode.Bot2.Mechanisms.mOuttakeSlides;
 import org.firstinspires.ftc.teamcode.Bot2.Mechanisms.mOuttakeClaw;
 import org.firstinspires.ftc.teamcode.Bot2.Mechanisms.mOuttakeV4B;
+import org.firstinspires.ftc.teamcode.Bot2.Mechanisms.mOuttakeWrist;
 import org.firstinspires.ftc.teamcode.Bot2.Setup;
 
 @TeleOp(name = "STATES TELEOP", group = "0")
@@ -30,7 +32,7 @@ public class TeleOpStates extends LinearOpMode {
     private double wrist;
 
     enum OuttakeStates{
-        REST, TRANSFER, TRANSFER_PREP, SCORE_PREP
+        REST, TRANSFER, TRANSFER_PREP, SCORE_PREP, SPEC_WALL_FRONT, SPEC_WALL_BACK
     }
 
     enum IntakeStates{
@@ -42,12 +44,6 @@ public class TeleOpStates extends LinearOpMode {
     @Override
     public void runOpMode() throws InterruptedException {
         setup = new Setup(hardwareMap, telemetry, true, this, Setup.OpModeType.AUTO, Setup.Team.Q1);
-        setup.disableMechanism("IntakeClaw");
-        setup.disableMechanism("IntakeSlides");
-        setup.disableMechanism("IntakeRotation");
-        setup.disableMechanism("IntakeWrist");
-        setup.disableMechanism("IntakeCDSensor");
-        setup.disableMechanism("IntakeTouchSensor");
 
 
         bot = new Bot(Setup.mechStates, Setup.sensorStates);
@@ -114,16 +110,20 @@ public class TeleOpStates extends LinearOpMode {
     boolean intakeClawOpen = true;
     boolean leftWasPressed;
     boolean outtakeClawOpen = true;
+    boolean scorePrepPressed;
+    boolean transferring = true;
 
     double outtakeSlidesPosition = mOuttakeSlides.INIT;
+    double outtakeWristPosition = mOuttakeWrist.INIT;
     double outtakeV4BPosition = mOuttakeV4B.INIT;
+
+    double intakeSlidesPosition = mLinkage.INIT;
 
     private void driver2() {
         /*
            CLAW LOGIC:
            1. if right bumper is pressed, intake claw changes from previous position
            2. if right bumper and left bumper are pressed, it goes to transfer
-
          */
         if (gamepad2.right_bumper && !rightWasPressed && !gamepad2.left_bumper) {
             if(intakeClawOpen){
@@ -134,8 +134,6 @@ public class TeleOpStates extends LinearOpMode {
             rightWasPressed = true;
         } else if(!gamepad2.right_bumper){
             rightWasPressed = false;
-        }else if(gamepad2.right_bumper && gamepad2.left_bumper){
-            outtakeState = OuttakeStates.TRANSFER_PREP;
         }
         if(gamepad2.left_bumper && !leftWasPressed){
             if(outtakeClawOpen){
@@ -148,34 +146,71 @@ public class TeleOpStates extends LinearOpMode {
             leftWasPressed = false;
         }
 
-        // SCORING, excluding low specimen
-        if (gamepad2.b) {
-            outtakeSlidesPosition = mOuttakeSlides.HIGH_BUCKET;
-            outtakeV4BPosition = mOuttakeV4B.HIGH_BUCKET;
-            outtakeState = OuttakeStates.SCORE_PREP;
-        }else if(gamepad2.x){
-            outtakeSlidesPosition = mOuttakeSlides.HIGH_SPECIMEN;
-            outtakeV4BPosition = mOuttakeV4B.HIGH_SPECIMEN;
-            outtakeState = OuttakeStates.SCORE_PREP;
-        }else if (gamepad2.y){
-            outtakeSlidesPosition = mOuttakeSlides.LOW_BUCKET;
-            outtakeV4BPosition = mOuttakeV4B.LOW_BUCKET;
-            outtakeState = OuttakeStates.SCORE_PREP;
+        /*
+           SCORING LOGIC:
+           1. b,x,y account for scoring high buckets, high scec, and low bucket respectively
+           2. when they are first pressed, the intake retracts to transfer position
+           3. the second time it is pressed extends it.
+         */
+        if((gamepad2.b || gamepad2.x || gamepad2.y) && !scorePrepPressed){
+            if(transferring){
+                intakeState = IntakeStates.REST;
+            }else{
+                if (gamepad2.b) {
+                    intakeState = IntakeStates.TRANSFER;
+                    outtakeSlidesPosition = mOuttakeSlides.HIGH_BUCKET;
+                    outtakeV4BPosition = mOuttakeV4B.HIGH_BUCKET;
+                    outtakeWristPosition = mOuttakeWrist.BUCKET;
+                    outtakeState = OuttakeStates.SCORE_PREP;
+                }else if(gamepad2.x){
+                    intakeState = IntakeStates.TRANSFER;
+                    outtakeSlidesPosition = mOuttakeSlides.HIGH_SPECIMEN;
+                    outtakeV4BPosition = mOuttakeV4B.SPECIMEN;
+                    outtakeWristPosition = mOuttakeWrist.SPECIMEN;
+                    outtakeState = OuttakeStates.SCORE_PREP;
+                }else if (gamepad2.y){
+                    outtakeSlidesPosition = mOuttakeSlides.LOW_BUCKET;
+                    outtakeV4BPosition = mOuttakeV4B.LOW_BUCKET;
+                    outtakeWristPosition = mOuttakeWrist.BUCKET;
+                    outtakeState = OuttakeStates.SCORE_PREP;
+                }
+                scorePrepPressed = true;
+            }
+        }else if (!(gamepad2.b || gamepad2.x || gamepad2.y)){
+            scorePrepPressed = false;
         }
 
-        //REST AND TRANSFER LOGIC
-        if (gamepad2.a || gamepad2.dpad_down) {
+
+        //REST
+        if (gamepad2.a) {
             outtakeState = OuttakeStates.REST;
             intakeState = IntakeStates.REST;
         }
 
-        if(outtakeState == OuttakeStates.REST && intakeState == IntakeStates.REST){
-            outtakeState = OuttakeStates.TRANSFER_PREP;
-            intakeState = IntakeStates.TRANSFER_PREP;
-        } else if(outtakeState == OuttakeStates.TRANSFER_PREP && intakeState == IntakeStates.TRANSFER_PREP){
-            outtakeState = OuttakeStates.TRANSFER;
-            intakeState = IntakeStates.TRANSFER;
+        //EXTEND INTAKE SUBMERSIBLE
+        if(gamepad2.dpad_down){
+            intakeState = IntakeStates.INTAKE_PREP;
+            intakeSlidesPosition = mLinkage.EXTEND;
         }
+
+        //INTAKE WALL SPEC FRONT
+        if(gamepad2.dpad_right){
+            intakeState = IntakeStates.REST;
+            outtakeState = OuttakeStates.SPEC_WALL_FRONT;
+        }
+        //INTAKE WALL SPEC BACK
+        if(gamepad2.dpad_left){
+            outtakeState = OuttakeStates.SPEC_WALL_BACK;
+            intakeState = IntakeStates.REST;
+        }
+//
+//        if(outtakeState == OuttakeStates.REST && intakeState == IntakeStates.REST){
+//            outtakeState = OuttakeStates.TRANSFER_PREP;
+//            intakeState = IntakeStates.TRANSFER_PREP;
+//        } else if(outtakeState == OuttakeStates.TRANSFER_PREP && intakeState == IntakeStates.TRANSFER_PREP){
+//            outtakeState = OuttakeStates.TRANSFER;
+//            intakeState = IntakeStates.TRANSFER;
+//        }
 
         switch (outtakeState) {
             case REST:
@@ -193,6 +228,13 @@ public class TeleOpStates extends LinearOpMode {
                 bot.outtakeClaw.setTarget(mOuttakeClaw.TRANSFER_PREP);
                 bot.outtakeV4B.setTarget(mOuttakeV4B.TRANSFER_PREP);
                 break;
+            case SCORE_PREP:
+                bot.outtakeClaw.setTarget(mOuttakeClaw.CLOSE);
+                bot.intakeClaw.setTarget(mIntakeClaw.OPEN);
+                bot.outtakeSlides.setTarget(outtakeSlidesPosition);
+                bot.outtakeV4B.setTarget(outtakeV4BPosition);
+                bot.outtakeWrist.setTarget(outtakeWristPosition);
+
         }
         switch (intakeState) {
             case REST:
