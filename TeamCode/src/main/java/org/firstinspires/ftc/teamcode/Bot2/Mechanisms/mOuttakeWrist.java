@@ -10,13 +10,14 @@ public class mOuttakeWrist extends ServoMechanism {
     public mOuttakeWrist() {
         super("OuttakeWrist");
     }
-    public static double INIT = 0.514;
+    public static double INIT = 0.4055;
 
     public static final double MAX = 1;
     public static final double MIN = 0;
     public static final double INTAKE = 0.661; //0.532
     public static final double INTAKE_PREP = 0;//0.641
     public static final double INTAKE_SPEC_FRONT = 0.4055;
+    public static final double INTAKE_SPEC_BACK = 0.4055;
 
     public static final double TRANSFER = 0;//0.641
     public static final double VERTICAL = 0.298;

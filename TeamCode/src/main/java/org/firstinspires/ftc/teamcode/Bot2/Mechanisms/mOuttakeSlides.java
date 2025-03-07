@@ -21,7 +21,7 @@ public class mOuttakeSlides extends RunToPosMotorMechanism {
     public static final double REST = 0;
     public static final double INTAKE = 0;
     public static final double OUTTAKE_INCREMENT = 500;
-    public static final double TRANSFER = 500;
+    public static final double TRANSFER = 0;
     public static final double HIGH_BUCKET = 500;
     public static final double HIGH_SPECIMEN = 500;
     public static final double LOW_BUCKET = 500;

@@ -9,11 +9,12 @@ public class mOuttakeV4B extends ServoMechanism {
     public mOuttakeV4B() {
         super("V4B");
     }
-    public static double INIT = 0.76;
+    public static double INIT = 0.9745;
     public static double REST = 0.721;
     public static final double MIN = 0.05;
     public static final double MAX = 0.95;
     public static final double INTAKE = 0.135;
+    public static final double INTAKE_SPEC_BACK = 0.9745;
     public static final double INTAKE_SPEC_FRONT = 0.9745;
     public static final double INTAKE_PREP = 0.28;
     public static final double BUCKET = 0.984;

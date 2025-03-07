@@ -7,10 +7,10 @@ import com.qualcomm.robotcore.hardware.I2cAddr;
 import com.qualcomm.robotcore.hardware.TouchSensor;
 
 import org.firstinspires.ftc.robotcore.external.navigation.DistanceUnit;
-import org.firstinspires.ftc.teamcode.DEADBot.DEADSensors.SensorColor;
-import org.firstinspires.ftc.teamcode.DEADBot.DEADSensors.SensorDistance;
-import org.firstinspires.ftc.teamcode.DEADBot.DEADSensors.SensorSwitch;
-import org.firstinspires.ftc.teamcode.DEADBot.DEADSensors.SensorTouch;
+import org.firstinspires.ftc.teamcode.Bot2.Sensors.SensorColor;
+import org.firstinspires.ftc.teamcode.Bot2.Sensors.SensorDistance;
+import org.firstinspires.ftc.teamcode.Bot2.Sensors.SensorSwitch;
+import org.firstinspires.ftc.teamcode.Bot2.Sensors.SensorTouch;
 
 public class Sensors1 {
     private static SensorColor[] colors;
