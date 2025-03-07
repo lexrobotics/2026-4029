@@ -9,6 +9,7 @@ import com.qualcomm.robotcore.util.ElapsedTime;
 
 import org.firstinspires.ftc.teamcode.Bot2.Mechanisms.mIntakeClaw;
 import org.firstinspires.ftc.teamcode.Bot2.Mechanisms.mOuttakeWrist;
+import org.firstinspires.ftc.teamcode.Bot2.Mechanisms.mSlidesSmart;
 import org.firstinspires.ftc.teamcode.Bot2.Mechanisms.mTurret;
 import org.firstinspires.ftc.teamcode.Bot2.Mechanisms.mLinkage;
 import org.firstinspires.ftc.teamcode.Bot2.Mechanisms.mIntakeWrist;
@@ -59,7 +60,7 @@ public class Bot implements Robot {
             outtakeClaw = new Mechanism("OuttakeClaw");
         }
         if(hardwareStates.get("OuttakeSlides").isEnabled){
-            outtakeSlides = new mOuttakeSlides();
+            outtakeSlides = new mSlidesSmart();
         } else {
             outtakeSlides = new Mechanism("slides");
         }
@@ -142,6 +143,7 @@ public class Bot implements Robot {
         outtakeSlides.update();
         outtakeV4B.update();
         outtakeWrist.update();
+        drivetrain.update();
     }
 
     @Override
@@ -154,6 +156,8 @@ public class Bot implements Robot {
         outtakeSlides.telemetry();
         outtakeV4B.telemetry();
         outtakeWrist.telemetry();
+        drivetrain.telemetry();
+
     }
 
     @Override

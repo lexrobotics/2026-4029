@@ -3,6 +3,7 @@ package org.firstinspires.ftc.teamcode.Bot2.OpModes;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.util.ElapsedTime;
+import com.qualcomm.robotcore.util.Range;
 
 import org.firstinspires.ftc.teamcode.Bot2.Bot;
 //import org.firstinspires.ftc.teamcode.Bot2.Mechanisms.Slides;
@@ -43,8 +44,8 @@ public class TeleOpStates extends LinearOpMode {
 
     @Override
     public void runOpMode() throws InterruptedException {
-        setup = new Setup(hardwareMap, telemetry, true, this, Setup.OpModeType.AUTO, Setup.Team.Q1);
-
+        setup = new Setup(hardwareMap, telemetry, true, this, Setup.OpModeType.TELEOP, Setup.Team.Q1);
+        setup.disableMechanism("OuttakeSlides");
 
         bot = new Bot(Setup.mechStates, Setup.sensorStates);
 
@@ -57,8 +58,8 @@ public class TeleOpStates extends LinearOpMode {
             driver2();
             manual2();
             bot.update();
-            telemetry.addData("state", outtakeState);
-            telemetry.addData("state", intakeState);
+            telemetry.addData("outtake state", outtakeState);
+            telemetry.addData("intake state", intakeState);
             telemetry.update();
         }
     }
@@ -106,11 +107,11 @@ public class TeleOpStates extends LinearOpMode {
     double MANUAL_OUTTAKE_SLIDES_INCREMENT = 150; //was 200
     double MANUAL_WRIST_INCREMENT = 0.0007;
 
-    boolean rightWasPressed;
+    boolean rightWasPressed = false;
     boolean intakeClawOpen = true;
-    boolean leftWasPressed;
+    boolean leftWasPressed = false;
     boolean outtakeClawOpen = true;
-    boolean scorePrepPressed;
+    boolean scorePrepPressed = false;
     boolean transferring = true;
 
     double outtakeSlidesPosition = mOuttakeSlides.INIT;
@@ -119,32 +120,58 @@ public class TeleOpStates extends LinearOpMode {
 
     double intakeSlidesPosition = mLinkage.INIT;
 
+    boolean isOuttakeClawOpen = false;
+    boolean isIntakeClawOpen = false;
+
     private void driver2() {
         /*
            CLAW LOGIC:
            1. if right bumper is pressed, intake claw changes from previous position
            2. if right bumper and left bumper are pressed, it goes to transfer
          */
-        if (gamepad2.right_bumper && !rightWasPressed && !gamepad2.left_bumper) {
-            if(intakeClawOpen){
+        if(gamepad2.right_bumper && !rightWasPressed){
+            if(isIntakeClawOpen){
                 bot.intakeClaw.setTarget(mIntakeClaw.CLOSE);
-            }else{
+            } else {
                 bot.intakeClaw.setTarget(mIntakeClaw.OPEN);
             }
+            isIntakeClawOpen = !isIntakeClawOpen;
             rightWasPressed = true;
         } else if(!gamepad2.right_bumper){
             rightWasPressed = false;
         }
+
         if(gamepad2.left_bumper && !leftWasPressed){
-            if(outtakeClawOpen){
+            if(isOuttakeClawOpen){
                 bot.outtakeClaw.setTarget(mOuttakeClaw.CLOSE);
-            }else{
+            } else {
                 bot.outtakeClaw.setTarget(mOuttakeClaw.OPEN);
             }
+            isOuttakeClawOpen = !isOuttakeClawOpen;
             leftWasPressed = true;
         } else if(!gamepad2.left_bumper){
             leftWasPressed = false;
         }
+//        if (gamepad2.right_bumper && !rightWasPressed && !gamepad2.left_bumper) {
+//            if(intakeClawOpen){
+//                bot.intakeClaw.setTarget(mIntakeClaw.CLOSE);
+//            }else{
+//                bot.intakeClaw.setTarget(mIntakeClaw.OPEN);
+//            }
+//            rightWasPressed = true;
+//        } else if(!gamepad2.right_bumper){
+//            rightWasPressed = false;
+//        }
+//        if(gamepad2.left_bumper && !leftWasPressed){
+//            if(outtakeClawOpen){
+//                bot.outtakeClaw.setTarget(mOuttakeClaw.CLOSE);
+//            }else{
+//                bot.outtakeClaw.setTarget(mOuttakeClaw.OPEN);
+//            }
+//            leftWasPressed = true;
+//        } else if(!gamepad2.left_bumper){
+//            leftWasPressed = false;
+//        }
 
         /*
            SCORING LOGIC:
@@ -234,6 +261,7 @@ public class TeleOpStates extends LinearOpMode {
                 bot.outtakeSlides.setTarget(outtakeSlidesPosition);
                 bot.outtakeV4B.setTarget(outtakeV4BPosition);
                 bot.outtakeWrist.setTarget(outtakeWristPosition);
+                break;
 
         }
         switch (intakeState) {
@@ -250,5 +278,11 @@ public class TeleOpStates extends LinearOpMode {
         }
     }
     private void manual2(){
+        double joystickL = gamepad2.left_stick_y;
+        double joystickR = gamepad2.right_stick_y;
+        bot.outtakeSlides.setVelocity(0.5);
+        bot.outtakeSlides.setTarget(Range.clip(bot.outtakeSlides.getCurrentPosition() + (100/2)*(Math.signum(-joystickR)*(Math.pow(2,Math.abs(-joystickR) * 2)) - 1), 0, mOuttakeSlides.MAX));
+
+        bot.linkage.setTarget(Range.clip(bot.linkage.getCurrentPosition() + (0.01)*(Math.signum(-joystickL)*(Math.pow(2,Math.abs(-joystickL) * 2)) - 1), 0, mLinkage.MAX));
     }
 }
