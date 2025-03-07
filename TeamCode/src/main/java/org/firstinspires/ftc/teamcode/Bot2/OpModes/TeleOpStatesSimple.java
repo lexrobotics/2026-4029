@@ -115,6 +115,9 @@ public class TeleOpStatesSimple extends LinearOpMode {
 
     double intakeSlidesPosition = mLinkage.INIT;
 
+    double intakeSlidesIncrement = 0.1;
+    double outtakeSlidesIncrement = 0.1;
+
     private void driver2() {
 
         /*
@@ -173,23 +176,23 @@ public class TeleOpStatesSimple extends LinearOpMode {
             case REST:
                 bot.setRest();
                 break;
-            case SCORE_PREP_SAMPLE:
-                bot.outtakeSlides.setTarget(outtakeSlidesPosition);
-                bot.outtakeV4B.setTarget(outtakeV4BPosition);
-                bot.outtakeWrist.setTarget(outtakeWristPosition);
-                bot.outtakeClaw.setTarget(mOuttakeClaw.CLOSE);
-//                bot.intakeClaw.setTarget(mIntakeClaw.OPEN);
-                bot.linkage.setTarget(mLinkage.TRANSFER);
-                bot.turret.setTarget(mTurret.TRANSFER);
-                bot.intakeWrist.setTarget(mIntakeWrist.TRANSFER);
-                break;
+//            case SCORE_PREP_SAMPLE:
+//                bot.outtakeSlides.setTarget(outtakeSlidesPosition);
+//                bot.outtakeV4B.setTarget(outtakeV4BPosition);
+//                bot.outtakeWrist.setTarget(outtakeWristPosition);
+//                bot.outtakeClaw.setTarget(mOuttakeClaw.CLOSE);
+////                bot.intakeClaw.setTarget(mIntakeClaw.OPEN);
+//                bot.linkage.setTarget(mLinkage.TRANSFER);
+//                bot.turret.setTarget(mTurret.TRANSFER);
+//                bot.intakeWrist.setTarget(mIntakeWrist.TRANSFER);
+//                break;
             case SCORE_PREP_SPEC:
                 bot.outtakeSlides.setTarget(outtakeSlidesPosition);
                 bot.outtakeV4B.setTarget(outtakeV4BPosition);
                 bot.outtakeWrist.setTarget(outtakeWristPosition);
                 bot.outtakeClaw.setTarget(mOuttakeClaw.CLOSE);
 //                bot.intakeClaw.setTarget(mIntakeClaw.OPEN);
-                bot.linkage.setTarget(mLinkage.REST);
+                bot.linkage.setTarget(mLinkage.TRANSFER);
                 bot.turret.setTarget(mTurret.TRANSFER);
                 bot.intakeWrist.setTarget(mIntakeWrist.TRANSFER);
                 break;
@@ -242,17 +245,22 @@ public class TeleOpStatesSimple extends LinearOpMode {
     boolean rightWasPressed = false;
     boolean leftWasPressed = false;
     private void manual2(){
-        if(gamepad2.right_stick_y > 0.3){
-            mechanismStates = MechanismStates.MANUAL_OUT_SLIDES;
-            bot.outtakeSlides.setTarget(Range.clip(bot.outtakeSlides.getCurrentPosition() - MANUAL_OUTTAKE_SLIDES_INCREMENT, 0, mOuttakeSlides.MAX));
-        } else if(gamepad2.right_stick_y < -0.3){
-            mechanismStates = MechanismStates.MANUAL_OUT_SLIDES;
-            bot.outtakeSlides.setTarget(Range.clip(bot.outtakeSlides.getCurrentPosition() + MANUAL_OUTTAKE_SLIDES_INCREMENT, 0, mOuttakeSlides.MAX));
-        }
 
-        if(Math.abs(gamepad2.left_stick_y) > 0.3 ){
+        double joystickL = gamepad2.left_stick_y;
+        if(Math.abs(joystickL) > 0.05) {
+            bot.outtakeSlides.setTarget(Range.clip(bot.outtakeSlides.getCurrentPosition() + (100 / 2) * (Math.signum(-joystickL) * (Math.pow(2, Math.abs(-joystickL) * 2)) - 1), 0, mOuttakeSlides.MAX));
+        }
+        //        if(gamepad2.right_stick_y > 0.3){
+//            mechanismStates = MechanismStates.MANUAL_OUT_SLIDES;
+//            bot.outtakeSlides.setTarget(Range.clip(bot.outtakeSlides.getCurrentPosition() - MANUAL_OUTTAKE_SLIDES_INCREMENT, 0, mOuttakeSlides.MAX));
+//        } else if(gamepad2.right_stick_y < -0.3){
+//            mechanismStates = MechanismStates.MANUAL_OUT_SLIDES;
+//            bot.outtakeSlides.setTarget(Range.clip(bot.outtakeSlides.getCurrentPosition() + MANUAL_OUTTAKE_SLIDES_INCREMENT, 0, mOuttakeSlides.MAX));
+//        }
+
+        if(Math.abs(gamepad2.right_stick_y) > 0.3 ){
             mechanismStates = MechanismStates.MANUAL_IN_SLIDES;
-            bot.linkage.setTarget(Range.clip(-gamepad2.left_stick_y, 0.05,0.4));
+            bot.linkage.setTarget(Range.clip(-gamepad2.right_stick_y, 0.05,0.4));
         }
 
         if(gamepad2.right_bumper && !rightWasPressed){
