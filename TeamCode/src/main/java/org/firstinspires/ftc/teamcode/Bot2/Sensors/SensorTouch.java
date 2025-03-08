@@ -1,6 +1,6 @@
 package org.firstinspires.ftc.teamcode.Bot2.Sensors;
 
-import static org.firstinspires.ftc.teamcode.DEADBot.Old.Setup1.hardwareMap;
+import static org.firstinspires.ftc.teamcode.Bot2.Setup.hardwareMap;
 
 import androidx.annotation.NonNull;
 

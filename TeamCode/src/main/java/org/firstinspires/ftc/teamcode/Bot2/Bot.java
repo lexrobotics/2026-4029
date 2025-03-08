@@ -113,7 +113,7 @@ public class Bot implements Robot {
         linkage.init(mLinkage.INIT);
         turret.init(mTurret.INIT);
         intakeWrist.init(mIntakeWrist.INIT);
-        outtakeClaw.init(mOuttakeClaw.INIT);
+        outtakeClaw.init(mOuttakeClaw.CLOSE);
         outtakeSlides.init(mOuttakeSlides.INIT);
         outtakeV4B.init(mOuttakeV4B.INIT);
         outtakeWrist.init(mOuttakeWrist.INIT);

@@ -1,6 +1,6 @@
 package org.firstinspires.ftc.teamcode.Bot2.Drivetrain;
 
-import static org.firstinspires.ftc.teamcode.DEADBot.Old.Setup1.telemetry;
+import static org.firstinspires.ftc.teamcode.Bot2.Setup.telemetry;
 import static org.firstinspires.ftc.teamcode.roadrunner.drive.SampleMecanumDrive.getAccelerationConstraint;
 import static org.firstinspires.ftc.teamcode.roadrunner.drive.SampleMecanumDrive.getVelocityConstraint;
 

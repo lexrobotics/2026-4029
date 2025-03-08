@@ -6,6 +6,7 @@ import com.qualcomm.robotcore.util.ElapsedTime;
 import com.qualcomm.robotcore.util.Range;
 
 import org.firstinspires.ftc.teamcode.Bot2.Mechanisms.mIntakeClaw;
+import org.firstinspires.ftc.teamcode.Bot2.Mechanisms.mSlidesSmart;
 import org.firstinspires.ftc.teamcode.Bot2.Mechanisms.mTurret;
 import org.firstinspires.ftc.teamcode.Bot2.Mechanisms.mLinkage;
 import org.firstinspires.ftc.teamcode.Bot2.Mechanisms.mIntakeWrist;
@@ -25,7 +26,7 @@ public class FlexibleTestOld extends LinearOpMode {
             outtakeV4B = new mOuttakeV4B(),
             outtakeWrist = new mOuttakeWrist(),
             outtakeClaw = new mOuttakeClaw(),
-            outtakeSlides = new mOuttakeSlides(),
+//            outtakeSlides = new mSlidesSmart(),
             intakeSlides = new mLinkage(),
             intakeRot = new mTurret(),
             intakeWrist = new mIntakeWrist(),
@@ -49,7 +50,7 @@ public class FlexibleTestOld extends LinearOpMode {
                 outtakeV4B,
                 outtakeWrist,
                 outtakeClaw,
-                outtakeSlides,
+//                outtakeSlides,
                 intakeSlides,
                 intakeRot,
                 intakeWrist,
@@ -59,7 +60,7 @@ public class FlexibleTestOld extends LinearOpMode {
                 0.5,
                 0.5,
                 0.5,
-                0.5,
+//                0.5,
                 0.5,
                 0.5,
                 0.5,
@@ -69,7 +70,7 @@ public class FlexibleTestOld extends LinearOpMode {
                 true,
                 true,
                 true,
-                false,
+//                false,
                 true,
                 true,
                 true,
