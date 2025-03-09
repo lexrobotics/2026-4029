@@ -188,7 +188,7 @@ public class TeleOpStatesSimple extends LinearOpMode {
         switch (mechanismStates) {
             case REST:
                 bot.setRest();
-                bot.intakeClaw.setTarget(mIntakeClaw.OPEN);
+//                bot.intakeClaw.setTarget(mIntakeClaw.OPEN);
                 isIntakeClawOpen = false;
                 break;
             case SCORE_PREP_SAMPLE:
@@ -223,12 +223,18 @@ public class TeleOpStatesSimple extends LinearOpMode {
                 }                break;
             case INTAKE_EXTEND:
                 if(timer.seconds()>0.5){
-                    bot.intakeWrist.setTarget(mIntakeWrist.INTAKE);
+                    if(-gamepad2.right_stick_y>0.3){
+
+                        bot.intakeWrist.setTarget(mIntakeWrist.TRANSFER);
+                    } else {
+
+                        bot.intakeWrist.setTarget(mIntakeWrist.INTAKE);
+                    }
                 }
                 bot.outtakeSlides.setTarget(mOuttakeSlides.REST);
                 bot.outtakeV4B.setTarget(mOuttakeV4B.INIT);
                 bot.outtakeWrist.setTarget(mOuttakeWrist.TRANSFER);
-                bot.outtakeClaw.setTarget(mOuttakeClaw.OPEN);
+//                bot.outtakeClaw.setTarget(mOuttakeClaw.OPEN);
                 bot.linkage.setTarget(mLinkage.EXTEND);
                 intakeSlidesPosition = mLinkage.EXTEND;
                 bot.turret.setTarget(mTurret.INIT);
@@ -239,8 +245,8 @@ public class TeleOpStatesSimple extends LinearOpMode {
                 bot.outtakeSlides.setTarget(mOuttakeSlides.INIT);
                 bot.outtakeV4B.setTarget(mOuttakeV4B.INTAKE_SPEC_BACK);
                 bot.outtakeWrist.setTarget(mOuttakeWrist.INTAKE_SPEC_BACK);
-                bot.outtakeClaw.setTarget(mOuttakeClaw.CLOSE);
-                bot.intakeClaw.setTarget(mIntakeClaw.OPEN);
+//                bot.outtakeClaw.setTarget(mOuttakeClaw.CLOSE);
+//                bot.intakeClaw.setTarget(mIntakeClaw.OPEN);
                 bot.linkage.setTarget(mLinkage.REST);
                 intakeSlidesPosition = mLinkage.REST;
                 bot.turret.setTarget(mTurret.TRANSFER);
@@ -251,7 +257,7 @@ public class TeleOpStatesSimple extends LinearOpMode {
                 bot.outtakeSlides.setTarget(mOuttakeSlides.INIT);
                 bot.outtakeV4B.setTarget(mOuttakeV4B.INTAKE_SPEC_FRONT);
                 bot.outtakeWrist.setTarget(mOuttakeWrist.INTAKE_SPEC_FRONT);
-                bot.intakeClaw.setTarget(mIntakeClaw.OPEN);
+//                bot.intakeClaw.setTarget(mIntakeClaw.OPEN);
                 bot.linkage.setTarget(mLinkage.REST);
                 intakeSlidesPosition = mLinkage.REST;
                 bot.turret.setTarget(mTurret.TRANSFER);
@@ -260,21 +266,22 @@ public class TeleOpStatesSimple extends LinearOpMode {
 
             case TRANSFER:
                 bot.outtakeSlides.setTarget(mOuttakeSlides.REST);
-                bot.outtakeClaw.setTarget(mOuttakeClaw.OPEN);
+//                bot.outtakeClaw.setTarget(mOuttakeClaw.OPEN);
                 if(timer.seconds() > 0.3){
                     bot.linkage.setTarget(mLinkage.TRANSFER);
                     intakeSlidesPosition = mLinkage.TRANSFER;
                 }
                 bot.turret.setTarget(mTurret.TRANSFER);
+                bot.outtakeWrist.setTarget(mOuttakeWrist.TRANSFER);
                 bot.intakeWrist.setTarget(mIntakeWrist.TRANSFER);
-                bot.intakeClaw.setTarget(mIntakeClaw.CLOSE);
+//                bot.intakeClaw.setTarget(mIntakeClaw.CLOSE);
                 if(timer.seconds()<0.5){
                     bot.outtakeV4B.setTarget(mOuttakeV4B.TRANSFER_PREP);
                 }else{
                     bot.outtakeV4B.setTarget(mOuttakeV4B.TRANSFER);
                 }
-                isIntakeClawOpen = true;
-                isOuttakeClawOpen = false;
+//                isIntakeClawOpen = true;
+//                isOuttakeClawOpen = false;
                 break;
 
         }
@@ -312,7 +319,6 @@ public class TeleOpStatesSimple extends LinearOpMode {
         }
 
         if(gamepad2.left_bumper && !leftWasPressed){
-
             isOuttakeClawOpen = !isOuttakeClawOpen;
             leftWasPressed = true;
         } else if(!gamepad2.left_bumper){

@@ -12,9 +12,9 @@ public class mOuttakeClaw extends ServoMechanism {
     public static double MIN = 0;
     public static double INTAKE = 0;
     public static double INIT = 0.831;
-    public static double REST = 0.0393;
+    public static double REST = .3;
     public static double CLOSE = 0.831;
-    public static double OPEN = 0.05;
+    public static double OPEN = .3;
     public static double TRANSFER = CLOSE;
     public static double TRANSFER_PREP = OPEN;
 }

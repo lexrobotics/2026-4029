@@ -22,7 +22,7 @@ public class mOuttakeV4B extends ServoMechanism {
     public static final double SPECIMEN = 0.6002;
     public static final double SPECIMEN_PREP = 0.591;
     public static final double HANG = 0.634;
-    public static final double TRANSFER = 0.943;
+    public static final double TRANSFER = 0.923;//943
     public static final double HIGH_BUCKET = 0.551;
     public static final double HIGH_SPECIMEN = 0.634;
     public static final double LOW_BUCKET = 0.634;
