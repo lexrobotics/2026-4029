@@ -139,7 +139,6 @@ public class TeleOpStatesSimple extends LinearOpMode {
             mechanismStates = MechanismStates.SCORE_PREP_SAMPLE;
             outtakeSlidesPosition = mOuttakeSlides.HIGH_BUCKET;
             outtakeV4BPosition = mOuttakeV4B.HIGH_BUCKET;
-            outtakeV4BPosition = mOuttakeV4B.HIGH_BUCKET;
             outtakeWristPosition = mOuttakeWrist.BUCKET;
         }else if(gamepad2.x){
             transferTimer.reset();
@@ -151,7 +150,7 @@ public class TeleOpStatesSimple extends LinearOpMode {
             transferTimer.reset();
             mechanismStates = MechanismStates.SCORE_PREP_SPEC;
             outtakeSlidesPosition = mOuttakeSlides.LOW_BUCKET;
-            outtakeV4BPosition = mOuttakeV4B.LOW_BUCKET;
+            outtakeV4BPosition = mOuttakeV4B.HIGH_BUCKET;
             outtakeWristPosition = mOuttakeWrist.BUCKET;
         }
 

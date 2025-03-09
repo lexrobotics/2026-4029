@@ -10,7 +10,7 @@ public class mOuttakeWrist extends ServoMechanism {
     public mOuttakeWrist() {
         super("OuttakeWrist");
     }
-    public static double INIT = 0.4055;
+    public static double INIT = 0.80;
 
     public static final double MAX = 1;
     public static final double MIN = 0;
@@ -25,8 +25,8 @@ public class mOuttakeWrist extends ServoMechanism {
     public static final double SPECIMEN_SCORE = 1; // new pos
 
     public static final double REST = 0.298;
-    public static final double BUCKET = 0.7895;
-    public static final double BUCKET2 = 0.395;
+    public static final double BUCKET = 0.822;
+    public static final double BUCKET2 = 0.822;
 
     public static final double HANG = 1;
 }

@@ -39,39 +39,125 @@ public class RightAuto extends LinearOpMode {
 
 
         waitForStart();
-
         if (isStopRequested()) return;
-        Trajectory traj = drive.trajectoryBuilder(new Pose2d())
-                .back(30)
-                .build();
 
-        bot.outtakeSlides.setTarget(mOuttakeSlides.HIGH_SPECIMEN);
-        bot.outtakeV4B.setTarget(mOuttakeV4B.SPECIMEN);
-        bot.outtakeWrist.setTarget(mOuttakeWrist.SPECIMEN);
-        bot.outtakeClaw.setTarget(mOuttakeClaw.CLOSE);
+        bot.outtakeV4B.setTarget(mOuttakeV4B.TRANSFER);
+        while(opModeIsActive() && timer.seconds()<0.5){
+            bot.update();
+        }
+
+        drive.setPoseEstimate(new Pose2d(6, -(72-6), Math.toRadians(-90)));
+        Trajectory traj = drive.trajectoryBuilder(drive.getPoseEstimate())
+                .lineToLinearHeading(new Pose2d(4, -37, Math.toRadians(-90)))
+                .build();
         drive.followTrajectory(traj);
 
         timer.reset();
-        while(opModeIsActive() && timer.seconds()<3){
+        bot.outtakeSlides.setTarget(mOuttakeSlides.HIGH_SPECIMEN);
+        bot.outtakeV4B.setTarget(mOuttakeV4B.SPECIMEN_AUTO);
+        bot.outtakeWrist.setTarget(mOuttakeWrist.SPECIMEN);
+        bot.outtakeClaw.setTarget(mOuttakeClaw.CLOSE);
+        while(opModeIsActive() && timer.seconds()<1){
             bot.update();
         }
 
         timer.reset();
-        bot.outtakeSlides.setTarget(mOuttakeSlides.HIGH_SPECIMEN+200);
-        while(opModeIsActive() && timer.seconds()<3){
+        bot.outtakeSlides.setTarget(mOuttakeSlides.HIGH_SPECIMEN+830);
+        bot.outtakeV4B.setTarget(mOuttakeV4B.SPECIMEN_AUTO);
+        while(opModeIsActive() && timer.seconds()<0.5){
             bot.update();
         }
-
+        timer.reset();
         bot.outtakeClaw.setTarget(mOuttakeClaw.OPEN);
-        while(opModeIsActive() && timer.seconds()<3){
+        while(opModeIsActive() && timer.seconds()<0.5){
             bot.update();
         }
-
+        timer.reset();
+        bot.outtakeSlides.setTarget(mOuttakeSlides.HIGH_SPECIMEN);
+        while(opModeIsActive() && timer.seconds()<0.5){
+            bot.update();
+        }
+        timer.reset();
         bot.setRest();
+        bot.outtakeV4B.setTarget(mOuttakeV4B.INTAKE_SPEC_FRONT);
         bot.outtakeClaw.setTarget(mOuttakeClaw.OPEN);
-        while(opModeIsActive() && timer.seconds()<3){
+        while(opModeIsActive() && timer.seconds()<0.5){
+            bot.update();
+        }
+        Trajectory traj2 = drive.trajectoryBuilder(drive.getPoseEstimate())
+                .splineToConstantHeading(new Vector2d(27, -35), Math.toRadians(90))
+                .splineToConstantHeading(new Vector2d(41, -20), Math.toRadians(-90))
+                .build();
+        drive.followTrajectory(traj2);
+
+        Trajectory traj0 = drive.trajectoryBuilder(drive.getPoseEstimate())
+                .lineToLinearHeading(new Pose2d(41, -62, Math.toRadians(-90)))
+                .build();
+        drive.followTrajectory(traj0);
+
+        Trajectory traj3 = drive.trajectoryBuilder(drive.getPoseEstimate())
+                .lineToLinearHeading(new Pose2d(41, -49, Math.toRadians(-90)))
+                .build();
+        drive.followTrajectory(traj3);
+
+        sleep(3500);
+
+        Trajectory traj4 = drive.trajectoryBuilder(drive.getPoseEstimate())
+                .lineToLinearHeading(new Pose2d(41, -64, Math.toRadians(-90)))
+                .build();
+        drive.followTrajectory(traj4);
+        timer.reset();
+        bot.outtakeWrist.setTarget(mOuttakeWrist.INTAKE_SPEC_FRONT);
+        bot.outtakeV4B.setTarget(mOuttakeV4B.INTAKE_SPEC_FRONT);
+        bot.outtakeClaw.setTarget(mOuttakeClaw.OPEN);
+        while(opModeIsActive() && timer.seconds()<1){
+            bot.update();
+        }
+        timer.reset();
+        bot.outtakeClaw.setTarget(mOuttakeClaw.CLOSE);
+        while(opModeIsActive() && timer.seconds()<1){
             bot.update();
         }
 
+        bot.outtakeSlides.setTarget(mOuttakeSlides.HIGH_SPECIMEN);
+        bot.outtakeV4B.setTarget(mOuttakeV4B.SPECIMEN_AUTO);
+        bot.outtakeWrist.setTarget(mOuttakeWrist.SPECIMEN);
+        bot.outtakeClaw.setTarget(mOuttakeClaw.CLOSE);
+
+        timer.reset();
+        while(opModeIsActive() && timer.seconds()<2){
+            bot.update();
+        }
+
+        Trajectory traj5 = drive.trajectoryBuilder(drive.getPoseEstimate(), true)
+                .splineToLinearHeading(new Pose2d(1, -33, Math.toRadians(-90)), Math.toRadians(90))
+                .build();
+        drive.followTrajectory(traj5);
+        timer.reset();
+        bot.outtakeSlides.setTarget(mOuttakeSlides.HIGH_SPECIMEN+830);
+        while(opModeIsActive() && timer.seconds()<0.5){
+            bot.update();
+        }
+        timer.reset();
+        bot.outtakeClaw.setTarget(mOuttakeClaw.CLOSE);
+        while(opModeIsActive() && timer.seconds()<0.5){
+            bot.update();
+        }
+        timer.reset();
+        bot.outtakeSlides.setTarget(mOuttakeSlides.HIGH_SPECIMEN);
+        while(opModeIsActive() && timer.seconds()<0.5){
+            bot.update();
+        }
+        timer.reset();
+        bot.setRest();
+        bot.outtakeV4B.setTarget(mOuttakeV4B.INTAKE_SPEC_FRONT);
+        bot.outtakeClaw.setTarget(mOuttakeClaw.OPEN);
+        while(opModeIsActive() && timer.seconds()<1){
+            bot.update();
+        }
+        Trajectory traj6 = drive.trajectoryBuilder(drive.getPoseEstimate())
+                .splineToLinearHeading(new Pose2d(41, -61, Math.toRadians(90)), Math.toRadians(-90))
+                .build();
+        drive.followTrajectory(traj6);
     }
 }

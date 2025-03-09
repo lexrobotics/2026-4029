@@ -9,13 +9,13 @@ public class mIntakeWrist extends ServoMechanism {
         super("IntakeWrist");
     }
     public static double INIT = 1;
-    public static double TRANSFER = 0.9;
+    public static double TRANSFER = 0.93;
 
     public static final double MAX = 1;
     public static final double MIN = 0;
 
-    public static final double INTAKE = 0.12;//0.089
-    public static final double INTAKE_PREP = 0.661;
+    public static final double INTAKE = 0;//0.089
+    public static final double INTAKE_PREP = 0;
 
 //    public static final double SPECIMEN_GRAB = 0.395;
 //    public static final double SPECIMEN_GRAB_FRONT = 1;
