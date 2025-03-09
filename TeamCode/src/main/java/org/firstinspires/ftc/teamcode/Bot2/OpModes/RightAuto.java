@@ -85,7 +85,7 @@ public class RightAuto extends LinearOpMode {
             bot.update();
         }
         Trajectory traj2 = drive.trajectoryBuilder(drive.getPoseEstimate())
-                .splineToConstantHeading(new Vector2d(27, -35), Math.toRadians(90))
+                .splineToConstantHeading(new Vector2d(32, -35), Math.toRadians(90))
                 .splineToConstantHeading(new Vector2d(41, -20), Math.toRadians(-90))
                 .build();
         drive.followTrajectory(traj2);
@@ -134,7 +134,7 @@ public class RightAuto extends LinearOpMode {
                 .build();
         drive.followTrajectory(traj5);
         timer.reset();
-        bot.outtakeSlides.setTarget(mOuttakeSlides.HIGH_SPECIMEN+830);
+        bot.outtakeSlides.setTarget(mOuttakeSlides.HIGH_SPECIMEN+800);
         while(opModeIsActive() && timer.seconds()<0.5){
             bot.update();
         }

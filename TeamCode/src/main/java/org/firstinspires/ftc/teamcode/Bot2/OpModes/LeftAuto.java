@@ -70,7 +70,7 @@ public class LeftAuto extends LinearOpMode {
         outtakeAndRest();
         //go to sample
         Trajectory traj2 = drive.trajectoryBuilder(drive.getPoseEstimate())
-                .lineToLinearHeading(new Pose2d(-45.5, -54, Math.toRadians(90)))
+                .lineToLinearHeading(new Pose2d(-45, -53.5, Math.toRadians(90)))
                 .build();
         drive.followTrajectory(traj2);
 
@@ -86,7 +86,7 @@ public class LeftAuto extends LinearOpMode {
 
         //second sample
         Trajectory traj0 = drive.trajectoryBuilder(drive.getPoseEstimate())
-                .lineToLinearHeading(new Pose2d(-56.5, -53.5, Math.toRadians(90)))
+                .lineToLinearHeading(new Pose2d(-57, -53, Math.toRadians(90)))
                 .build();
         drive.followTrajectory(traj0);
 
@@ -102,7 +102,7 @@ public class LeftAuto extends LinearOpMode {
         outtakeAndRest();
 
         Trajectory trajp = drive.trajectoryBuilder(drive.getPoseEstimate())
-                .splineToLinearHeading(new Pose2d(-10, -17, Math.toRadians(90)), Math.toRadians(-90))
+                .splineToLinearHeading(new Pose2d(-17, -25, Math.toRadians(90)), Math.toRadians(-90))
                 .build();
         drive.followTrajectory(trajp);
 
