@@ -3,7 +3,6 @@ package org.firstinspires.ftc.teamcode.Bot2.OpModes;
 import com.acmerobotics.dashboard.FtcDashboard;
 import com.acmerobotics.dashboard.telemetry.MultipleTelemetry;
 import com.acmerobotics.roadrunner.geometry.Pose2d;
-import com.acmerobotics.roadrunner.geometry.Vector2d;
 import com.acmerobotics.roadrunner.trajectory.Trajectory;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
@@ -11,14 +10,6 @@ import com.qualcomm.robotcore.util.ElapsedTime;
 
 import org.firstinspires.ftc.robotcore.external.Telemetry;
 import org.firstinspires.ftc.teamcode.Bot2.Bot;
-import org.firstinspires.ftc.teamcode.Bot2.Mechanisms.mIntakeClaw;
-import org.firstinspires.ftc.teamcode.Bot2.Mechanisms.mIntakeWrist;
-import org.firstinspires.ftc.teamcode.Bot2.Mechanisms.mLinkage;
-import org.firstinspires.ftc.teamcode.Bot2.Mechanisms.mOuttakeClaw;
-import org.firstinspires.ftc.teamcode.Bot2.Mechanisms.mOuttakeSlides;
-import org.firstinspires.ftc.teamcode.Bot2.Mechanisms.mOuttakeV4B;
-import org.firstinspires.ftc.teamcode.Bot2.Mechanisms.mOuttakeWrist;
-import org.firstinspires.ftc.teamcode.Bot2.Mechanisms.mTurret;
 import org.firstinspires.ftc.teamcode.Bot2.Setup;
 import org.firstinspires.ftc.teamcode.roadrunner.drive.SampleMecanumDrive;
 

@@ -7,26 +7,21 @@ import android.util.Log;
 import com.acmerobotics.roadrunner.geometry.Pose2d;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
-import org.firstinspires.ftc.teamcode.Bot2.Mechanisms.mIntakeClaw;
-import org.firstinspires.ftc.teamcode.Bot2.Mechanisms.mOuttakeWrist;
-import org.firstinspires.ftc.teamcode.Bot2.Mechanisms.mSlidesSmart;
-import org.firstinspires.ftc.teamcode.Bot2.Mechanisms.mTurret;
-import org.firstinspires.ftc.teamcode.Bot2.Mechanisms.mLinkage;
-import org.firstinspires.ftc.teamcode.Bot2.Mechanisms.mIntakeWrist;
-import org.firstinspires.ftc.teamcode.Bot2.Mechanisms.mOuttakeClaw;
-import org.firstinspires.ftc.teamcode.Bot2.Mechanisms.mOuttakeSlides;
-import org.firstinspires.ftc.teamcode.Bot2.Mechanisms.mOuttakeV4B;
+import org.firstinspires.ftc.teamcode.Bot2.Mechanisms.mIntake;
+import org.firstinspires.ftc.teamcode.Bot2.Mechanisms.mOuttake;
+import org.firstinspires.ftc.teamcode.Bot2.Mechanisms.mTransfer;
 import org.firstinspires.ftc.teamcode.Bot2.Sensors.SensorSwitch;
 import org.firstinspires.ftc.teamcode.Bot2.Mechanisms.AbstractMechanisms.Mechanism;
 import org.firstinspires.ftc.teamcode.Bot2.Drivetrain.Drivetrain;
 import org.firstinspires.ftc.teamcode.Bot2.InitStates.HardwareStates;
 import org.firstinspires.ftc.teamcode.Bot2.Mechanisms.Sensors1;
+import org.firstinspires.ftc.teamcode.Bot2.Mechanisms.mCarousel;
 
 import java.util.HashMap;
 
 public class Bot implements Robot {
     public Drivetrain drivetrain;
-    public Mechanism intakeClaw, intakeWrist, turret, linkage, outtakeClaw, outtakeSlides, outtakeV4B, outtakeWrist;
+    public Mechanism carousel, transfer, intake, outtake;
     public Sensors1 sensors;
     public SensorSwitch slidesSwitch, intakeSlidesSwitch;
 
@@ -43,50 +38,31 @@ public class Bot implements Robot {
             Log.d("HAI", "DRIVETRAIN NULL");
             drivetrain = null;
         }
-        if(hardwareStates.get("IntakeClaw").isEnabled){
-            intakeClaw = new mIntakeClaw();
+
+        if(hardwareStates.get("Carousel").isEnabled){
+            carousel = new mCarousel();
         } else {
-            intakeClaw = new Mechanism("IntakeClaw");
+            carousel = new Mechanism("Carousel");
         }
 
-        if(hardwareStates.get("IntakeWrist").isEnabled){
-            intakeWrist = new mIntakeWrist();
+        if(hardwareStates.get("Transfer").isEnabled){
+            transfer = new mTransfer();
         } else {
-            intakeWrist = new Mechanism("IntakeWrist");
-        }
-        if(hardwareStates.get("OuttakeClaw").isEnabled){
-            outtakeClaw = new mOuttakeClaw();
-        } else {
-            outtakeClaw = new Mechanism("OuttakeClaw");
-        }
-        if(hardwareStates.get("OuttakeSlides").isEnabled){
-            outtakeSlides = new mSlidesSmart();
-        } else {
-            outtakeSlides = new Mechanism("slides");
-        }
-        if(hardwareStates.get("OuttakeV4B").isEnabled){
-            outtakeV4B = new mOuttakeV4B();
-        } else {
-            outtakeV4B = new Mechanism("V4B");
+            transfer = new Mechanism("Transfer");
         }
 
-        if(hardwareStates.get("Turret").isEnabled){
-            turret = new mTurret();
+        if(hardwareStates.get("Intake").isEnabled){
+            intake = new mIntake();
         } else {
-            turret = new Mechanism("Turret");
+            intake = new Mechanism("Intake");
         }
 
-        if(hardwareStates.get("Linkage").isEnabled){
-            linkage = new mLinkage();
+        if(hardwareStates.get("Outtake").isEnabled){
+            outtake = new mOuttake();
         } else {
-            linkage = new Mechanism("Linkage");
+            outtake = new Mechanism("Outtake");
         }
 
-        if(hardwareStates.get("OuttakeWrist").isEnabled){
-            outtakeWrist = new mOuttakeWrist();
-        } else {
-            outtakeWrist = new Mechanism("OuttakeWrist");
-        }
 //        if(sensorStates.get("IntakeCDSensor").isEnabled){
 //            sensors.addSensor(ColorSensor.class, "IntakeCDSensor", 0);
 //            sensors.addSensor(DistanceSensor.class, "IntakeCDSensor", 0);
@@ -109,81 +85,62 @@ public class Bot implements Robot {
     public void init(){
         ElapsedTime timer = new ElapsedTime();
         timer.reset();
-        intakeClaw.init(mIntakeClaw.INIT);
-        linkage.init(mLinkage.INIT);
-        turret.init(mTurret.INIT);
-        intakeWrist.init(mIntakeWrist.INIT);
-        outtakeClaw.init(mOuttakeClaw.CLOSE);
-        outtakeSlides.init(mOuttakeSlides.INIT);
-        outtakeV4B.init(mOuttakeV4B.INIT);
-        outtakeWrist.init(mOuttakeWrist.INIT);
+        carousel.init(mCarousel.INIT);
+        transfer.init(mTransfer.INIT);
+        intake.init(mIntake.INIT);
+        outtake.init(mOuttake.INIT);
         drivetrain.init(new Pose2d(0, 0, 0));
     }
     public void init(Pose2d startPos){
         ElapsedTime timer = new ElapsedTime();
         timer.reset();
-        intakeClaw.init(mIntakeClaw.INIT);
-        linkage.init(mLinkage.INIT);
-        turret.init(mTurret.INIT);
-        intakeWrist.init(mIntakeWrist.INIT);
-        outtakeClaw.init(mOuttakeClaw.INIT);
-        outtakeSlides.init(mOuttakeSlides.INIT);
-        outtakeV4B.init(mOuttakeV4B.INIT);
-        outtakeWrist.init(mOuttakeWrist.INIT);
+        carousel.init(mCarousel.INIT);
+        transfer.init(mTransfer.INIT);
+        intake.init(mIntake.INIT);
+        outtake.init(mOuttake.INIT);
         drivetrain.init(startPos);
     }
 
     @Override
     public void update(){
-        intakeClaw.update();
-        linkage.update();
-        turret.update();
-        intakeWrist.update();
-        outtakeClaw.update();
-        outtakeSlides.update();
-        outtakeV4B.update();
-        outtakeWrist.update();
+        carousel.update();
+        transfer.update();
+        intake.update();
+        outtake.update();
         drivetrain.update();
     }
 
     @Override
     public void telemetry(){
-        intakeClaw.telemetry();
-        linkage.telemetry();
-        turret.telemetry();
-        intakeWrist.telemetry();
-        outtakeClaw.telemetry();
-        outtakeSlides.telemetry();
-        outtakeV4B.telemetry();
-        outtakeWrist.telemetry();
+        carousel.telemetry();
+        transfer.telemetry();
+        intake.telemetry();
+        outtake.telemetry();
         drivetrain.telemetry();
 
     }
 
     @Override
     public boolean isBusy(){
-        return intakeClaw.isBusy() || turret.isBusy() ||  intakeWrist.isBusy() || linkage.isBusy() || drivetrain.isBusy() || outtakeClaw.isBusy() || outtakeSlides.isBusy() || outtakeV4B.isBusy() || outtakeWrist.isBusy();
+        return carousel.isBusy() || transfer.isBusy() || intake.isBusy() || outtake.isBusy() || drivetrain.isBusy();
     }
 
     public void setRest(){
-        intakeClaw.setTarget(mIntakeClaw.REST);
-        turret.setTarget(mTurret.REST);
-        intakeWrist.setTarget(mIntakeWrist.REST);
-        linkage.setTarget(mLinkage.REST);
-        outtakeClaw.setTarget(mOuttakeClaw.REST);
-        outtakeSlides.setTarget(mOuttakeSlides.REST);
-        outtakeV4B.setTarget(mOuttakeV4B.REST);
-        outtakeWrist.setTarget(mOuttakeWrist.REST);
+        carousel.setTarget(mCarousel.REST);
+        transfer.setTarget(mTransfer.REST);
+        intake.setTarget(mIntake.REST);
+        outtake.setTarget(mOuttake.REST);
+
     }
 
-    public void setTransfer(){
-        // prepares transfer position without moving claw
-        turret.setTarget(mTurret.TRANSFER);
-        intakeWrist.setTarget(mIntakeWrist.TRANSFER);
-        linkage.setTarget(mLinkage.TRANSFER);
-        outtakeSlides.setTarget(mOuttakeSlides.TRANSFER);
-        outtakeV4B.setTarget(mOuttakeV4B.TRANSFER);
-        outtakeWrist.setTarget(mOuttakeWrist.TRANSFER);
-    }
+//    public void setTransfer(){
+//        // prepares transfer position without moving claw
+//        turret.setTarget(mTurret.TRANSFER);
+//        intakeWrist.setTarget(mIntakeWrist.TRANSFER);
+//        linkage.setTarget(mLinkage.TRANSFER);
+//        outtakeSlides.setTarget(mOuttakeSlides.TRANSFER);
+//        outtakeV4B.setTarget(mOuttakeV4B.TRANSFER);
+//        outtakeWrist.setTarget(mOuttakeWrist.TRANSFER);
+//    }
 
 }

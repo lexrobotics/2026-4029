@@ -1,19 +1,10 @@
 package org.firstinspires.ftc.teamcode.Bot2.OpModes.Tests;
 
 import com.acmerobotics.dashboard.config.Config;
-import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 
 import org.firstinspires.ftc.teamcode.Bot2.Bot;
-import org.firstinspires.ftc.teamcode.Bot2.Mechanisms.mIntakeClaw;
-import org.firstinspires.ftc.teamcode.Bot2.Mechanisms.mIntakeWrist;
-import org.firstinspires.ftc.teamcode.Bot2.Mechanisms.mLinkage;
-import org.firstinspires.ftc.teamcode.Bot2.Mechanisms.mOuttakeClaw;
-import org.firstinspires.ftc.teamcode.Bot2.Mechanisms.mOuttakeSlides;
-import org.firstinspires.ftc.teamcode.Bot2.Mechanisms.mOuttakeV4B;
-import org.firstinspires.ftc.teamcode.Bot2.Mechanisms.mOuttakeWrist;
-import org.firstinspires.ftc.teamcode.Bot2.Mechanisms.mTurret;
 import org.firstinspires.ftc.teamcode.Bot2.Setup;
 
 

@@ -11,10 +11,6 @@ import com.qualcomm.robotcore.util.ElapsedTime;
 
 import org.firstinspires.ftc.robotcore.external.Telemetry;
 import org.firstinspires.ftc.teamcode.Bot2.Bot;
-import org.firstinspires.ftc.teamcode.Bot2.Mechanisms.mOuttakeClaw;
-import org.firstinspires.ftc.teamcode.Bot2.Mechanisms.mOuttakeSlides;
-import org.firstinspires.ftc.teamcode.Bot2.Mechanisms.mOuttakeV4B;
-import org.firstinspires.ftc.teamcode.Bot2.Mechanisms.mOuttakeWrist;
 import org.firstinspires.ftc.teamcode.Bot2.Setup;
 import org.firstinspires.ftc.teamcode.roadrunner.drive.SampleMecanumDrive;
 

@@ -5,16 +5,7 @@ import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.util.ElapsedTime;
 import com.qualcomm.robotcore.util.Range;
 
-import org.firstinspires.ftc.teamcode.Bot2.Mechanisms.mIntakeClaw;
-import org.firstinspires.ftc.teamcode.Bot2.Mechanisms.mSlidesSmart;
-import org.firstinspires.ftc.teamcode.Bot2.Mechanisms.mTurret;
-import org.firstinspires.ftc.teamcode.Bot2.Mechanisms.mLinkage;
-import org.firstinspires.ftc.teamcode.Bot2.Mechanisms.mIntakeWrist;
 import org.firstinspires.ftc.teamcode.Bot2.Mechanisms.AbstractMechanisms.Mechanism;
-import org.firstinspires.ftc.teamcode.Bot2.Mechanisms.mOuttakeClaw;
-import org.firstinspires.ftc.teamcode.Bot2.Mechanisms.mOuttakeSlides;
-import org.firstinspires.ftc.teamcode.Bot2.Mechanisms.mOuttakeV4B;
-import org.firstinspires.ftc.teamcode.Bot2.Mechanisms.mOuttakeWrist;
 import org.firstinspires.ftc.teamcode.Bot2.Setup;
 
 @TeleOp(name = "flexible test HEREHEREHEREHEREHEREHEREHEREHEREHEREHEREHEREHEREHERE", group = "tele-op")

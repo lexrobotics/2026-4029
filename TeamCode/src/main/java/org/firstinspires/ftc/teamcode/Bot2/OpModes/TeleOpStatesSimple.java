@@ -6,14 +6,6 @@ import com.qualcomm.robotcore.util.ElapsedTime;
 import com.qualcomm.robotcore.util.Range;
 
 import org.firstinspires.ftc.teamcode.Bot2.Bot;
-import org.firstinspires.ftc.teamcode.Bot2.Mechanisms.mIntakeClaw;
-import org.firstinspires.ftc.teamcode.Bot2.Mechanisms.mIntakeWrist;
-import org.firstinspires.ftc.teamcode.Bot2.Mechanisms.mLinkage;
-import org.firstinspires.ftc.teamcode.Bot2.Mechanisms.mOuttakeClaw;
-import org.firstinspires.ftc.teamcode.Bot2.Mechanisms.mOuttakeSlides;
-import org.firstinspires.ftc.teamcode.Bot2.Mechanisms.mOuttakeV4B;
-import org.firstinspires.ftc.teamcode.Bot2.Mechanisms.mOuttakeWrist;
-import org.firstinspires.ftc.teamcode.Bot2.Mechanisms.mTurret;
 import org.firstinspires.ftc.teamcode.Bot2.Setup;
 
 @TeleOp(name = "STATES TELEOP SIMPLE", group = "0")
@@ -85,19 +77,19 @@ public class TeleOpStatesSimple extends LinearOpMode {
         x = Math.cos(angle) * translateMag;
         y = Math.sin(angle) * translateMag;
 
-        if (gamepad1.left_bumper) {
-            x *= 0.25;
-            y *= 0.25;
-            spin *= 0.25;
-        } else if(bot.outtakeSlides.getCurrentPosition()>900){
-            x *= 0.7;
-            y *= 0.7;
-            spin *= 0.4;
-        } else {
-            x *= .95;
-            y *= 1;
-            spin *= .7;
-        }
+//        if (gamepad1.left_bumper) {
+//            x *= 0.25;
+//            y *= 0.25;
+//            spin *= 0.25;
+//        } else if(bot.outtakeSlides.getCurrentPosition()>900){
+//            x *= 0.7;
+//            y *= 0.7;
+//            spin *= 0.4;
+//        } else {
+//            x *= .95;
+//            y *= 1;
+//            spin *= .7;
+//        }
 
         bot.drivetrain.setTeleOpTargets(x,y,spin);
         telemetry.addData("translateMag", translateMag);
@@ -116,11 +108,6 @@ public class TeleOpStatesSimple extends LinearOpMode {
     boolean scorePrepPressed = false;
     boolean transferring = true;
 
-    double outtakeSlidesPosition = mOuttakeSlides.INIT;
-    double outtakeWristPosition = mOuttakeWrist.INIT;
-    double outtakeV4BPosition = mOuttakeV4B.INIT;
-
-    double intakeSlidesPosition = mLinkage.INIT;
 
     double intakeSlidesIncrement = 0.1;
     double outtakeSlidesIncrement = 0.1;
@@ -137,21 +124,15 @@ public class TeleOpStatesSimple extends LinearOpMode {
         if (gamepad2.b) {
             transferTimer.reset();
             mechanismStates = MechanismStates.SCORE_PREP_SAMPLE;
-            outtakeSlidesPosition = mOuttakeSlides.HIGH_BUCKET;
-            outtakeV4BPosition = mOuttakeV4B.HIGH_BUCKET;
-            outtakeWristPosition = mOuttakeWrist.BUCKET;
+
         }else if(gamepad2.x){
             transferTimer.reset();
             mechanismStates = MechanismStates.SCORE_PREP_SPEC;
-            outtakeSlidesPosition = mOuttakeSlides.HIGH_SPECIMEN;
-            outtakeV4BPosition = mOuttakeV4B.SPECIMEN;
-            outtakeWristPosition = mOuttakeWrist.SPECIMEN;
+
         }else if (gamepad2.y){
             transferTimer.reset();
             mechanismStates = MechanismStates.SCORE_PREP_SPEC;
-            outtakeSlidesPosition = mOuttakeSlides.LOW_BUCKET;
-            outtakeV4BPosition = mOuttakeV4B.HIGH_BUCKET;
-            outtakeWristPosition = mOuttakeWrist.BUCKET;
+
         }
 
 
@@ -166,7 +147,7 @@ public class TeleOpStatesSimple extends LinearOpMode {
         if(gamepad2.dpad_down){
             timer.reset();
             mechanismStates = MechanismStates.INTAKE_EXTEND;
-            intakeSlidesPosition = mLinkage.EXTEND;
+
         }
 
         //INTAKE WALL SPEC FRONT
@@ -175,7 +156,7 @@ public class TeleOpStatesSimple extends LinearOpMode {
         }
         //INTAKE WALL SPEC BACK
         if(gamepad2.dpad_left){
-            mechanismStates = MechanismStates.INTAKE_SPEC_BACK; //TODO: GET POSITIONS FOR THIS
+            mechanismStates = MechanismStates.INTAKE_SPEC_BACK;
 
         }
 
@@ -193,23 +174,11 @@ public class TeleOpStatesSimple extends LinearOpMode {
                 break;
             case SCORE_PREP_SAMPLE:
                 if(outtakeClawOpen){
-                    bot.outtakeSlides.setTarget(outtakeSlidesPosition);
-                    bot.outtakeV4B.setTarget(outtakeV4BPosition);
-                    bot.outtakeWrist.setTarget(outtakeWristPosition);
-                    bot.linkage.setTarget(mLinkage.TRANSFER);
-                    bot.turret.setTarget(mTurret.TRANSFER);
-                    bot.intakeWrist.setTarget(mIntakeWrist.TRANSFER);
-                    intakeSlidesPosition = mLinkage.TRANSFER;
+
                     isIntakeClawOpen = false;
                 }else {
                     if (transferTimer.seconds() > 0.5 && transferTimer.seconds() < 0.9) {
-                        bot.outtakeSlides.setTarget(outtakeSlidesPosition);
-                        bot.outtakeV4B.setTarget(outtakeV4BPosition);
-                        bot.outtakeWrist.setTarget(outtakeWristPosition);
-                        bot.linkage.setTarget(mLinkage.TRANSFER);
-                        bot.turret.setTarget(mTurret.TRANSFER);
-                        bot.intakeWrist.setTarget(mIntakeWrist.TRANSFER);
-                        intakeSlidesPosition = mLinkage.TRANSFER;
+
                         isIntakeClawOpen = false;
                     }
                     if (transferTimer.seconds() < 0.9) {
@@ -219,23 +188,11 @@ public class TeleOpStatesSimple extends LinearOpMode {
                 break;
             case SCORE_PREP_SPEC:
                 if(isOuttakeClawOpen){
-                    bot.outtakeSlides.setTarget(outtakeSlidesPosition);
-                    bot.outtakeV4B.setTarget(outtakeV4BPosition);
-                    bot.outtakeWrist.setTarget(outtakeWristPosition);
-                    bot.linkage.setTarget(mLinkage.REST);
-                    intakeSlidesPosition = mLinkage.REST;
-                    bot.turret.setTarget(mTurret.TRANSFER);
-                    bot.intakeWrist.setTarget(mIntakeWrist.TRANSFER);
+
                     isIntakeClawOpen = false;
                 } else {
                     if (transferTimer.seconds() > 0.5 && transferTimer.seconds() < 0.9) {
-                        bot.outtakeSlides.setTarget(outtakeSlidesPosition);
-                        bot.outtakeV4B.setTarget(outtakeV4BPosition);
-                        bot.outtakeWrist.setTarget(outtakeWristPosition);
-                        bot.linkage.setTarget(mLinkage.REST);
-                        intakeSlidesPosition = mLinkage.REST;
-                        bot.turret.setTarget(mTurret.TRANSFER);
-                        bot.intakeWrist.setTarget(mIntakeWrist.TRANSFER);
+
                         isIntakeClawOpen = false;
 
                     }
@@ -245,63 +202,20 @@ public class TeleOpStatesSimple extends LinearOpMode {
                 }
                 break;
             case INTAKE_EXTEND:
-                if(timer.seconds()>0.5){
-                    bot.intakeWrist.setTarget(mIntakeWrist.INTAKE);
-                }
-                if(-gamepad2.right_stick_y>0.3){
-                    bot.intakeWrist.setTarget(mIntakeWrist.TRANSFER);
-                }
-                bot.outtakeSlides.setTarget(mOuttakeSlides.REST);
-                bot.outtakeV4B.setTarget(mOuttakeV4B.INIT);
-                bot.outtakeWrist.setTarget(mOuttakeWrist.TRANSFER);
-//                bot.outtakeClaw.setTarget(mOuttakeClaw.OPEN);
-                bot.linkage.setTarget(mLinkage.EXTEND);
-                intakeSlidesPosition = mLinkage.EXTEND;
-                bot.turret.setTarget(mTurret.INIT);
+
                 isOuttakeClawOpen = false;
                 break;
 
             case INTAKE_SPEC_BACK:
-                bot.outtakeSlides.setTarget(mOuttakeSlides.INIT);
-                bot.outtakeV4B.setTarget(mOuttakeV4B.INTAKE_SPEC_BACK);
-                bot.outtakeWrist.setTarget(mOuttakeWrist.INTAKE_SPEC_BACK);
-//                bot.outtakeClaw.setTarget(mOuttakeClaw.CLOSE);
-//                bot.intakeClaw.setTarget(mIntakeClaw.OPEN);
-                bot.linkage.setTarget(mLinkage.REST);
-                intakeSlidesPosition = mLinkage.REST;
-                bot.turret.setTarget(mTurret.TRANSFER);
-                bot.intakeWrist.setTarget(mIntakeWrist.TRANSFER);
+
                 break;
 
             case INTAKE_SPEC_FRONT:
-                bot.outtakeSlides.setTarget(mOuttakeSlides.INIT);
-                bot.outtakeV4B.setTarget(mOuttakeV4B.INTAKE_SPEC_FRONT);
-                bot.outtakeWrist.setTarget(mOuttakeWrist.INTAKE_SPEC_FRONT);
-//                bot.intakeClaw.setTarget(mIntakeClaw.OPEN);
-                bot.linkage.setTarget(mLinkage.REST);
-                intakeSlidesPosition = mLinkage.REST;
-                bot.turret.setTarget(mTurret.TRANSFER);
-                bot.intakeWrist.setTarget(mIntakeWrist.TRANSFER);
+
                 break;
 
             case TRANSFER:
-                bot.outtakeSlides.setTarget(mOuttakeSlides.REST);
-//                bot.outtakeClaw.setTarget(mOuttakeClaw.OPEN);
-                if(timer.seconds() > 0.3){
-                    bot.linkage.setTarget(mLinkage.TRANSFER);
-                    intakeSlidesPosition = mLinkage.TRANSFER;
-                }
-                bot.turret.setTarget(mTurret.TRANSFER);
-                bot.outtakeWrist.setTarget(mOuttakeWrist.TRANSFER);
-                bot.intakeWrist.setTarget(mIntakeWrist.TRANSFER);
-//                bot.intakeClaw.setTarget(mIntakeClaw.CLOSE);
-                if(timer.seconds()<0.5){
-                    bot.outtakeV4B.setTarget(mOuttakeV4B.TRANSFER_PREP);
-                }else{
-                    bot.outtakeV4B.setTarget(mOuttakeV4B.TRANSFER);
-                }
-//                isIntakeClawOpen = true;
-//                isOuttakeClawOpen = false;
+
                 break;
 
         }
@@ -311,7 +225,7 @@ public class TeleOpStatesSimple extends LinearOpMode {
 
         double joystickL = gamepad2.left_stick_y;
         if(Math.abs(joystickL) > 0.05) {
-            bot.outtakeSlides.setTarget(Range.clip(bot.outtakeSlides.getCurrentPosition() + MANUAL_OUTTAKE_SLIDES_INCREMENT, 0, mOuttakeSlides.MAX));
+
 //            bot.outtakeSlides.setTarget(Range.clip(bot.outtakeSlides.getCurrentPosition() + (100 / 2) * (Math.signum(-joystickL) * (Math.pow(2, Math.abs(-joystickL) * 2)) - 1), 0, mOuttakeSlides.MAX));
         }
         //        if(gamepad2.right_stick_y > 0.3){
@@ -332,11 +246,7 @@ public class TeleOpStatesSimple extends LinearOpMode {
         } else if(!gamepad2.right_bumper){
             rightWasPressed = false;
         }
-        if(isIntakeClawOpen ){
-            bot.intakeClaw.setTarget(mIntakeClaw.CLOSE);
-        } else {
-            bot.intakeClaw.setTarget(mIntakeClaw.OPEN);
-        }
+
 
         if(gamepad2.left_bumper && !leftWasPressed){
             isOuttakeClawOpen = !isOuttakeClawOpen;
@@ -344,19 +254,8 @@ public class TeleOpStatesSimple extends LinearOpMode {
         } else if(!gamepad2.left_bumper){
             leftWasPressed = false;
         }
-        if(isOuttakeClawOpen){
-            bot.outtakeClaw.setTarget(mOuttakeClaw.CLOSE);
-        } else {
-            bot.outtakeClaw.setTarget(mOuttakeClaw.OPEN);
-        }
+
         telemetry.addLine("OUTST: " + isOuttakeClawOpen + " INTST: " + isIntakeClawOpen);
 
-        if(gamepad2.right_trigger > 0.5){
-            bot.turret.setTarget(mTurret.DIAGONAL_RIGHT);
-        }else if(gamepad2.left_trigger > 0.5){
-            bot.turret.setTarget(mTurret.DIAGONAL_LEFT);
-        }else if(gamepad2.right_trigger < 0.5 && gamepad2.left_trigger < 0.5){
-            bot.turret.setTarget(mTurret.INIT);
-        }
     }
 }
