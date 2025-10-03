@@ -5,6 +5,10 @@ import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 
 import org.firstinspires.ftc.teamcode.Bot2.Bot;
+import org.firstinspires.ftc.teamcode.Bot2.Mechanisms.mCarousel;
+import org.firstinspires.ftc.teamcode.Bot2.Mechanisms.mIntake;
+import org.firstinspires.ftc.teamcode.Bot2.Mechanisms.mOuttake;
+import org.firstinspires.ftc.teamcode.Bot2.Mechanisms.mTransfer;
 import org.firstinspires.ftc.teamcode.Bot2.Setup;
 
 
@@ -33,14 +37,10 @@ public class InitTest extends LinearOpMode {
 
         while(opModeIsActive()){
             driver1();
-            bot.intakeClaw.init(mIntakeClaw.INIT);
-            bot.linkage.init(mLinkage.INIT);
-            bot.turret.init(mTurret.INIT);
-            bot.intakeWrist.init(mIntakeWrist.INIT);
-            bot.outtakeClaw.init(mOuttakeClaw.INIT);
-            bot.outtakeSlides.init(mOuttakeSlides.INIT);
-            bot.outtakeV4B.init(mOuttakeV4B.INIT);
-            bot.outtakeWrist.init(mOuttakeWrist.INIT);
+            bot.carousel.init(mCarousel.INIT);
+            bot.intake.init(mIntake.INIT);
+            bot.outtake.init(mOuttake.INIT);
+            bot.transfer.init(mTransfer.INIT);
             bot.update();
         }
 
@@ -67,10 +67,6 @@ public class InitTest extends LinearOpMode {
             x *= 0.25;
             y *= 0.25;
             spin *= 0.25;
-        } else if(bot.outtakeSlides.getCurrentPosition()>100){
-            x *= 0.7;
-            y *= 0.7;
-            spin *= 0.4;
         } else {
             x *= .95;
             y *= 1;

@@ -6,6 +6,10 @@ import com.qualcomm.robotcore.util.ElapsedTime;
 import com.qualcomm.robotcore.util.Range;
 
 import org.firstinspires.ftc.teamcode.Bot2.Mechanisms.AbstractMechanisms.Mechanism;
+import org.firstinspires.ftc.teamcode.Bot2.Mechanisms.mCarousel;
+import org.firstinspires.ftc.teamcode.Bot2.Mechanisms.mIntake;
+import org.firstinspires.ftc.teamcode.Bot2.Mechanisms.mOuttake;
+import org.firstinspires.ftc.teamcode.Bot2.Mechanisms.mTransfer;
 import org.firstinspires.ftc.teamcode.Bot2.Setup;
 
 @TeleOp(name = "flexible test HEREHEREHEREHEREHEREHEREHEREHEREHEREHEREHEREHEREHERE", group = "tele-op")
@@ -14,14 +18,11 @@ public class FlexibleTestOld extends LinearOpMode {
 
     Mechanism mechanism;
     Mechanism
-            outtakeV4B = new mOuttakeV4B(),
-            outtakeWrist = new mOuttakeWrist(),
-            outtakeClaw = new mOuttakeClaw(),
-//            outtakeSlides = new mSlidesSmart(),
-            intakeSlides = new mLinkage(),
-            intakeRot = new mTurret(),
-            intakeWrist = new mIntakeWrist(),
-            intakeClaw = new mIntakeClaw();
+            carousel = new mCarousel(),
+            intake = new mIntake(),
+            outtake = new mOuttake(),
+            transfer = new mTransfer();
+
     Mechanism[] mechanisms;
     boolean[] isServo;
     double[] initPositions;
@@ -38,34 +39,22 @@ public class FlexibleTestOld extends LinearOpMode {
         setup = new Setup(hardwareMap, telemetry, false, this, Setup.OpModeType.AUTO, Setup.Team.Q1);
         mechanism = new Mechanism("mechanism");
         mechanisms = new Mechanism[]{
-                outtakeV4B,
-                outtakeWrist,
-                outtakeClaw,
-//                outtakeSlides,
-                intakeSlides,
-                intakeRot,
-                intakeWrist,
-                intakeClaw
+                carousel,
+                intake,
+                outtake,
+                transfer
         };
         initPositions = new double[]{
                 0.5,
                 0.5,
                 0.5,
-//                0.5,
                 0.5,
-                0.5,
-                0.5,
-                0.5
         };
         isServo = new boolean[]{
                 true,
                 true,
+                false, //UNSURE
                 true,
-//                false,
-                true,
-                true,
-                true,
-                true
         };
 
         telemetry.update();
