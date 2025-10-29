@@ -1,5 +1,7 @@
 package org.firstinspires.ftc.teamcode.Bot2;
 
+import android.view.contentcapture.DataShareWriteAdapter;
+
 import com.acmerobotics.dashboard.FtcDashboard;
 import com.acmerobotics.dashboard.telemetry.MultipleTelemetry;
 import com.qualcomm.hardware.lynx.LynxModule;
@@ -73,23 +75,18 @@ public class Setup {
         }
     }
     private void addMechanisms(){
-        mechStates.put("IntakeClaw", new HardwareStates(true));
-        mechStates.put("Turret", new HardwareStates(true));
-        mechStates.put("Linkage", new HardwareStates(true));
-        mechStates.put("IntakeWrist", new HardwareStates(true));
-        mechStates.put("OuttakeClaw", new HardwareStates(true));
-        mechStates.put("OuttakeSlides", new HardwareStates(true));
-        mechStates.put("OuttakeWrist", new HardwareStates(true));
-        mechStates.put("OuttakeV4B", new HardwareStates(true));
-        mechStates.put("drivetrain", new HardwareStates(true));
+        mechStates.put("Carousel", new HardwareStates(true));
+        mechStates.put("Intake", new HardwareStates(true));
+        mechStates.put("Outtake", new HardwareStates(true));
+        mechStates.put("Transfer", new HardwareStates(true));
 
     }
 
     private void addSensors(){
         sensorStates.put("webcam", new HardwareStates(false));
-        sensorStates.put("SlidesSwitch", new HardwareStates(true));
-        sensorStates.put("IntakeCDSensor", new HardwareStates(true));
-        sensorStates.put("IntakeTouchSensor", new HardwareStates(true));
+        sensorStates.put("CarouselCDSensor1", new HardwareStates(true));
+        sensorStates.put("CarouselCDSensor2", new HardwareStates(true));
+        sensorStates.put("CarouselCDSensor3", new HardwareStates(true));
     }
 
     public void disableMechanism(String mechanismName){

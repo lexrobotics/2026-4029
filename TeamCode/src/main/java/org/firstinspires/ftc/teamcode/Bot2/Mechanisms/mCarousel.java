@@ -15,4 +15,5 @@ public class mCarousel extends ServoMechanism {
     public static final double INTAKE1 = 0;
     public static final double INTAKE2 = 0;
     public static final double INTAKE3 = 0;
+
 }
