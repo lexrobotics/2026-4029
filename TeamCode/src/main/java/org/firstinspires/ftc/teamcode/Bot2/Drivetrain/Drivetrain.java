@@ -78,7 +78,8 @@ public class Drivetrain {
             double x = teleOpTargets[0];
             double y = teleOpTargets[1];
             double spin = teleOpTargets[2];
-            drive.setMotorPowers(Range.clip(y + x, -1, 1) + spin,
+            drive.setMotorPowers(
+                    Range.clip(y + x, -1, 1) + spin,
                     Range.clip(y - x, -1, 1) + spin,
                     Range.clip(y + x, -1, 1) - spin,
                     Range.clip(y - x, -1, 1) - spin);

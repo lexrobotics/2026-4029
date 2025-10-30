@@ -106,37 +106,39 @@ public class Qual1Teleop extends LinearOpMode{
             spin *= 1;  // WAS 0.7
         }
 
+        bot.drivetrain.setTeleOpTargets(x, y, spin);
+
         telemetry.addData("translateMag", translateMag);
         telemetry.addData("x", x);
         telemetry.addData("y", y);
         telemetry.addData("spin", spin);
         telemetry.addData("angle", angle);
 
-        if (gamepad1.options) {
-            imu.resetYaw();
-        }
-
-        botHeading = imu.getRobotYawPitchRollAngles().getYaw(AngleUnit.RADIANS);
-
-        // Rotate the movement direction counter to the bot's rotation
-        double rotX = x * Math.cos(-botHeading) - y * Math.sin(-botHeading);
-        double rotY = x * Math.sin(-botHeading) + y * Math.cos(-botHeading);
-
-        rotX = rotX * 1.1;  // Counteract imperfect strafing
-
-        // Denominator is the largest motor power (absolute value) or 1
-        // This ensures all the powers maintain the same ratio,
-        // but only if at least one is out of the range [-1, 1]
-        double denominator = Math.max(Math.abs(rotY) + Math.abs(rotX) + Math.abs(rx), 1);
-        double frontLeftPower = (rotY + rotX + rx) / denominator;
-        double backLeftPower = (rotY - rotX + rx) / denominator;
-        double frontRightPower = (rotY - rotX - rx) / denominator;
-        double backRightPower = (rotY + rotX - rx) / denominator;
-
-        frontLeftMotor.setPower(frontLeftPower);
-        backLeftMotor.setPower(backLeftPower);
-        frontRightMotor.setPower(frontRightPower);
-        backRightMotor.setPower(backRightPower);
+//        if (gamepad1.options) {
+//            imu.resetYaw();
+//        }
+//
+//        botHeading = imu.getRobotYawPitchRollAngles().getYaw(AngleUnit.RADIANS);
+//
+//        // Rotate the movement direction counter to the bot's rotation
+//        double rotX = x * Math.cos(-botHeading) - y * Math.sin(-botHeading);
+//        double rotY = x * Math.sin(-botHeading) + y * Math.cos(-botHeading);
+//
+//        rotX = rotX * 1.1;  // Counteract imperfect strafing
+//
+//        // Denominator is the largest motor power (absolute value) or 1
+//        // This ensures all the powers maintain the same ratio,
+//        // but only if at least one is out of the range [-1, 1]
+//        double denominator = Math.max(Math.abs(rotY) + Math.abs(rotX) + Math.abs(rx), 1);
+//        double frontLeftPower = (rotY + rotX + rx) / denominator;
+//        double backLeftPower = (rotY - rotX + rx) / denominator;
+//        double frontRightPower = (rotY - rotX - rx) / denominator;
+//        double backRightPower = (rotY + rotX - rx) / denominator;
+//
+//        frontLeftMotor.setPower(frontLeftPower);
+//        backLeftMotor.setPower(backLeftPower);
+//        frontRightMotor.setPower(frontRightPower);
+//        backRightMotor.setPower(backRightPower);
 
     }
 
