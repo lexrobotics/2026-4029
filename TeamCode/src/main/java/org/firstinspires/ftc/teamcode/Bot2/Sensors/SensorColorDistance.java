@@ -1,7 +1,7 @@
 package org.firstinspires.ftc.teamcode.Bot2.Sensors;
 
 
-//import com.qualcomm.robotcore.hardware.ColorRangeSensor;
+import com.qualcomm.robotcore.hardware.ColorRangeSensor;
 import static org.firstinspires.ftc.teamcode.Bot2.Setup.hardwareMap;
 
 import com.qualcomm.robotcore.hardware.ColorSensor;
