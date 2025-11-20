@@ -54,7 +54,6 @@ public class Qual1Teleop extends LinearOpMode{
         frontRightMotor = hardwareMap.dcMotor.get("leftFront");
         backRightMotor = hardwareMap.dcMotor.get("rightRear");
 
-        //This may need to swap. If bot goes backwards, try swapping
         backRightMotor.setDirection(DcMotorSimple.Direction.REVERSE);
         frontRightMotor.setDirection(DcMotorSimple.Direction.REVERSE);
 
@@ -75,7 +74,7 @@ public class Qual1Teleop extends LinearOpMode{
         while (opModeIsActive()) {
 
             driver1();
-            driver2();
+//            driver2();
             bot.update();
 
         }
@@ -142,42 +141,42 @@ public class Qual1Teleop extends LinearOpMode{
 
     }
 
-    private void driver2() {
-
-        //colors need to be defined
-        if(gamepad2.a){
-            outtakePurple(colors);
-        }
-        if(gamepad2.b){
-            outtakeGreen(colors);
-        }
-        if(gamepad2.x){
-            intakeEmpty(colors);
-        }
-        if(gamepad2.y) {
-            bot.transfer.setTarget(mTransfer.TRANSFER);
-        } else {
-            bot.transfer.setTarget(mTransfer.REST);
-        }
-
-        if(gamepad2.right_bumper) {
-            //outtake
-            bot.outtake.setVelocity(mOuttake.SLOW);
-        } else if(gamepad2.right_trigger>0.5){
-            bot.outtake.setVelocity(mOuttake.FAST);
-        } else {
-            bot.outtake.setVelocity(mOuttake.REST);
-        }
-
-        if(gamepad2.left_bumper) {
-            bot.intake.setVelocity(mIntake.SLOW);
-        } else if(gamepad2.right_trigger > 0.5){
-            bot.intake.setVelocity(mIntake.FAST);
-        } else {
-            bot.intake.setVelocity(mIntake.REST);
-        }
-
-    }
+//    private void driver2() {
+//
+//        //colors need to be defined
+//        if(gamepad2.a){
+//            outtakePurple(colors);
+//        }
+//        if(gamepad2.b){
+//            outtakeGreen(colors);
+//        }
+//        if(gamepad2.x){
+//            intakeEmpty(colors);
+//        }
+//        if(gamepad2.y) {
+//            bot.transfer.setTarget(mTransfer.TRANSFER);
+//        } else {
+//            bot.transfer.setTarget(mTransfer.REST);
+//        }
+//
+//        if(gamepad2.right_bumper) {
+//            //outtake
+//            bot.outtake.setVelocity(mOuttake.SLOW);
+//        } else if(gamepad2.right_trigger>0.5){
+//            bot.outtake.setVelocity(mOuttake.FAST);
+//        } else {
+//            bot.outtake.setVelocity(mOuttake.REST);
+//        }
+//
+//        if(gamepad2.left_bumper) {
+//            bot.intake.setVelocity(mIntake.SLOW);
+//        } else if(gamepad2.right_trigger > 0.5){
+//            bot.intake.setVelocity(mIntake.FAST);
+//        } else {
+//            bot.intake.setVelocity(mIntake.REST);
+//        }
+//
+//    }
 
     public boolean outtakePurple(String[] colors) {
         boolean found = false;

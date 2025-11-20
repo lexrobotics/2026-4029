@@ -1,6 +1,6 @@
 package org.firstinspires.ftc.teamcode.Bot2;
 
-import static org.firstinspires.ftc.teamcode.Bot2.Setup.telemetry;
+//import static org.firstinspires.ftc.teamcode.Bot2.Setup.telemetry;
 
 import android.util.Log;
 
@@ -31,7 +31,7 @@ public class Bot implements Robot {
          */
         sensors = new Sensors1(1,1,0,1,true);
 
-        telemetry.addLine("robot");
+        //telemetry.addLine("robot");
         if(hardwareStates.get("drivetrain").isEnabled){
             drivetrain = new Drivetrain();
         } else {
@@ -57,10 +57,10 @@ public class Bot implements Robot {
             intake = new Mechanism("Intake");
         }
 
-        if(hardwareStates.get("Outtake").isEnabled){
+        if(hardwareStates.get("OuttakeRight").isEnabled){
             outtake = new mOuttake();
         } else {
-            outtake = new Mechanism("Outtake");
+            outtake = new Mechanism("OuttakeRight");
         }
 
 //        if(sensorStates.get("IntakeCDSensor").isEnabled){
@@ -77,7 +77,6 @@ public class Bot implements Robot {
     public void initDrivetrain(Pose2d pose){
         if(drivetrain != null) {
             drivetrain.init(pose);
-        } else {
         }
     }
 
