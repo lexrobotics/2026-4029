@@ -103,7 +103,7 @@ public class Qual1Teleop extends LinearOpMode{
         } else {  // ADJUST THESE VALUES AS NEEDED
             x *= 1;
             y *= 1;
-            spin *= 1;  // WAS 0.7
+            spin *= .7;  // WAS 0.7
         }
 
         bot.drivetrain.setTeleOpTargets(x, y, spin);
