@@ -1,17 +1,28 @@
 package org.firstinspires.ftc.teamcode.Bot2.OpModes.Tests;
 
+// com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.Servo;
 
 @TeleOp
-public class CarouselTest extends LinearOpMode{
-    private Servo centralServo; //Doesn't work why?
+public class EVERYTHINGTest extends LinearOpMode{
+    // Carousel
+    private Servo centralServo;
+
+    // Outtake
+
+
+    // Intake
+
+
+    // Transfer (Gate)
+
 
     @Override
     public void runOpMode() throws InterruptedException {
+        // Carousel
         centralServo = hardwareMap.get(Servo.class, "centralServo");
-
 
         // Setting the servo // O is for outtake and I is for intake
         //Positions
@@ -31,10 +42,19 @@ public class CarouselTest extends LinearOpMode{
         telemetry.addLine("Position set!");
         telemetry.update();
 
+        // Outtake
+
+
+        // Intake
+
+
+        // Transfer (Gate)
+
+
         waitForStart();
 
         while(opModeIsActive()) {
-            // Intake and color detection code here
+            // Carousel
             if(gamepad1.a){ // When a is pressed, do outtake
                 //outtake mode 1 (if all the colors needed for the bonus are present)
                 if ((slot_colors[0] + slot_colors[1] + slot_colors[2]) == (point_colors[0] + point_colors[1] + point_colors[2])) {
@@ -49,10 +69,11 @@ public class CarouselTest extends LinearOpMode{
                                     centralServo.setPosition(pos_O_3);
                                 }
                                 slot_colors[j] = -1;
-                                telemetry.addLine("i = " + i);
-                                telemetry.addLine("j = " + j);
+                                // telemetry.addLine("i = " + i);
+                                //telemetry.addLine("j = " + j);
                                 // Outake here
-                                telemetry.addLine("Outake!");
+                                // telemetry.addLine("Outake!");
+                                telemetry.addLine("Position " + i + "set!");
                                 telemetry.addLine("");
                                 sleep(1000);
                                 break;
@@ -61,42 +82,53 @@ public class CarouselTest extends LinearOpMode{
                     }
                     telemetry.update();
                 } else { //outtake mode 2 (if all the colors needed for the bonus are not present - launch as fast as possible)
-                    for(int a = 0; a < 3; a++) {
-                        if (a == 0) {
+                    for(int i = 0; i < 3; i++) {
+                        if (i == 0) {
                             centralServo.setPosition(pos_O_1);
-                        } else if (a == 1) {
+                        } else if (i == 1) {
                             centralServo.setPosition(pos_O_2);
-                        } else if (a == 2) {
+                        } else if (i == 2) {
                             centralServo.setPosition(pos_O_3);
                         }
-                        slot_colors[a] = -1;
-                        telemetry.addLine("i = " + a);
+                        slot_colors[i] = -1;
+                        // telemetry.addLine("a = " + a);
                         // Outake here
-                        telemetry.addLine("Outake!");
+                        // telemetry.addLine("Outake!");
+                        telemetry.addLine("Position " + i + "set!");
                         telemetry.addLine("");
                         sleep(1000);
                     }
                 }
-                /*if(gamepad1.b){
-                    if (slot_colors[j] == point_colors[i]) {
-                        if(j == 0){
+                if(gamepad1.b){
+                    for(int i = 0; i < 3; i++) {
+                        if (i == 0) {
                             centralServo.setPosition(pos_O_1);
-                        } else if(j == 1){
+                        } else if (i == 1) {
                             centralServo.setPosition(pos_O_2);
-                        } else if(j == 2){
+                        } else if (i == 2) {
                             centralServo.setPosition(pos_O_3);
                         }
-                        slot_colors[j] = -1;
-                        telemetry.addLine("i = " + i);
-                        telemetry.addLine("j = " + j);
-                        // Outake here
-                        telemetry.addLine("Outake!");
+                        slot_colors[i] = -1;
+                        // telemetry.addLine("i = " + i);
+                        // Intake here
+                        // telemetry.addLine("Intake!");
+                        telemetry.addLine("Position " + i + "set!");
                         telemetry.addLine("");
                         sleep(1000);
                         break;
                     }
-                }*/
+                    telemetry.update();
+                }
             }
+
+            // Outtake
+
+
+            // Intake
+
+
+            // Transfer (Gate)
+
         }
     }
 }

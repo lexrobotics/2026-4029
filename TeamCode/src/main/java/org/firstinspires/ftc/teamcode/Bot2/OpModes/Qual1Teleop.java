@@ -10,6 +10,7 @@ import com.qualcomm.robotcore.hardware.IMU;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
 import org.firstinspires.ftc.robotcore.external.navigation.AngleUnit;
+import org.firstinspires.ftc.robotcore.external.navigation.DistanceUnit;
 import org.firstinspires.ftc.teamcode.Bot2.Bot;
 import org.firstinspires.ftc.teamcode.Bot2.Mechanisms.mCarousel;
 import org.firstinspires.ftc.teamcode.Bot2.Mechanisms.mIntake;
@@ -17,7 +18,6 @@ import org.firstinspires.ftc.teamcode.Bot2.Mechanisms.mOuttake;
 import org.firstinspires.ftc.teamcode.Bot2.Mechanisms.mTransfer;
 import org.firstinspires.ftc.teamcode.Bot2.Setup;
 
-@Disabled
 @TeleOp
 public class Qual1Teleop extends LinearOpMode{
 
@@ -46,8 +46,8 @@ public class Qual1Teleop extends LinearOpMode{
     @Override
     public void runOpMode() throws InterruptedException {
 
-        bot = new Bot(Setup.mechStates, Setup.sensorStates);
         setup = new Setup(hardwareMap, telemetry, true, this, Setup.OpModeType.AUTO, Setup.Team.Q1);
+        bot = new Bot(Setup.mechStates, Setup.sensorStates);
 
         frontLeftMotor = hardwareMap.dcMotor.get("rightFront");
         backLeftMotor = hardwareMap.dcMotor.get("leftRear");
@@ -142,9 +142,33 @@ public class Qual1Teleop extends LinearOpMode{
     }
 
     private void driver2() {
-
-        colors[0] = null;
-        bot.CD1.getColor();
+        if(bot.CD1.getDistance(DistanceUnit.CM) < 0.7){
+            if(bot.CD1.getColor()[1] > bot.CD1.getColor()[2]){
+                colors[0] = "purple";
+            } else {
+                colors[0] = "green";
+            }
+        } else {
+            colors[0] = null;
+        }
+        if(bot.CD2.getDistance(DistanceUnit.CM) < 0.7){
+            if(bot.CD2.getColor()[1] > bot.CD2.getColor()[2]){
+                colors[1] = "purple";
+            } else {
+                colors[1] = "green";
+            }
+        } else {
+            colors[1] = null;
+        }
+        if(bot.CD3.getDistance(DistanceUnit.CM) < 0.7){
+            if(bot.CD3.getColor()[1] > bot.CD3.getColor()[2]){
+                colors[2] = "purple";
+            } else {
+                colors[2] = "green";
+            }
+        } else {
+            colors[2] = null;
+        }
 
         //colors need to be defined
         if(gamepad2.a){

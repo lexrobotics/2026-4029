@@ -110,9 +110,9 @@ public class Bot implements Robot {
     @Override
     public void update(){
         carousel.update();
-        transfer.update();
-        intake.update();
-        outtake.update();
+        //transfer.update();
+        //intake.update();
+        //outtake.update();
         drivetrain.update();
     }
 
