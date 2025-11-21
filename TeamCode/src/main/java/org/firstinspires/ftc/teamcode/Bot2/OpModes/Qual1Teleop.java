@@ -33,7 +33,7 @@ public class Qual1Teleop extends LinearOpMode{
     private double botAngle = 0;
     private double translateMag;
     private double spin;
-    private String[] colors;
+    private String[] colors = new String[3];
 
     private DcMotor frontLeftMotor;
     private DcMotor backLeftMotor;
@@ -74,7 +74,7 @@ public class Qual1Teleop extends LinearOpMode{
         while (opModeIsActive()) {
 
             driver1();
-//            driver2();
+            driver2();
             bot.update();
 
         }
@@ -141,42 +141,44 @@ public class Qual1Teleop extends LinearOpMode{
 
     }
 
-//    private void driver2() {
-//
-//        //colors need to be defined
-//        if(gamepad2.a){
-//            outtakePurple(colors);
-//        }
-//        if(gamepad2.b){
-//            outtakeGreen(colors);
-//        }
-//        if(gamepad2.x){
-//            intakeEmpty(colors);
-//        }
-//        if(gamepad2.y) {
-//            bot.transfer.setTarget(mTransfer.TRANSFER);
-//        } else {
-//            bot.transfer.setTarget(mTransfer.REST);
-//        }
-//
-//        if(gamepad2.right_bumper) {
-//            //outtake
-//            bot.outtake.setVelocity(mOuttake.SLOW);
-//        } else if(gamepad2.right_trigger>0.5){
-//            bot.outtake.setVelocity(mOuttake.FAST);
-//        } else {
-//            bot.outtake.setVelocity(mOuttake.REST);
-//        }
-//
-//        if(gamepad2.left_bumper) {
-//            bot.intake.setVelocity(mIntake.SLOW);
-//        } else if(gamepad2.right_trigger > 0.5){
-//            bot.intake.setVelocity(mIntake.FAST);
-//        } else {
-//            bot.intake.setVelocity(mIntake.REST);
-//        }
-//
-//    }
+    private void driver2() {
+
+        colors[0] = null;
+
+        //colors need to be defined
+        if(gamepad2.a){
+            outtakePurple(colors);
+        }
+        if(gamepad2.b){
+            outtakeGreen(colors);
+        }
+        if(gamepad2.x){
+            intakeEmpty(colors);
+        }
+        if(gamepad2.y) {
+            bot.transfer.setTarget(mTransfer.TRANSFER);
+        } else {
+            bot.transfer.setTarget(mTransfer.REST);
+        }
+
+        if(gamepad2.right_bumper) {
+            //outtake
+            bot.outtake.setVelocity(mOuttake.SLOW);
+        } else if(gamepad2.right_trigger>0.5){
+            bot.outtake.setVelocity(mOuttake.FAST);
+        } else {
+            bot.outtake.setVelocity(mOuttake.REST);
+        }
+
+        if(gamepad2.left_bumper) {
+            bot.intake.setVelocity(mIntake.SLOW);
+        } else if(gamepad2.right_trigger > 0.5){
+            bot.intake.setVelocity(mIntake.FAST);
+        } else {
+            bot.intake.setVelocity(mIntake.REST);
+        }
+
+    }
 
     public boolean outtakePurple(String[] colors) {
         boolean found = false;
@@ -212,13 +214,13 @@ public class Qual1Teleop extends LinearOpMode{
 
     public boolean intakeEmpty(String[] colors) {
         boolean found = false;
-        if (colors[0] == "null") {
+        if (colors[0] == null) {
             bot.carousel.setTarget(mCarousel.INTAKE1);
             found = true;
-        } else if (colors[1] == "null") {
+        } else if (colors[1] == null) {
             bot.carousel.setTarget(mCarousel.INTAKE2);
             found = true;
-        } else if (colors[2] == "null") {
+        } else if (colors[2] == null) {
             bot.carousel.setTarget(mCarousel.INTAKE3);
             found = true;
         }

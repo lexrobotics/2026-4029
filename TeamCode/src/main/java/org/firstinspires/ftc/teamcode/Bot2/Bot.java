@@ -10,6 +10,9 @@ import com.qualcomm.robotcore.util.ElapsedTime;
 import org.firstinspires.ftc.teamcode.Bot2.Mechanisms.mIntake;
 import org.firstinspires.ftc.teamcode.Bot2.Mechanisms.mOuttake;
 import org.firstinspires.ftc.teamcode.Bot2.Mechanisms.mTransfer;
+import org.firstinspires.ftc.teamcode.Bot2.Sensors.SensorColor;
+import org.firstinspires.ftc.teamcode.Bot2.Sensors.SensorColorDistance;
+import org.firstinspires.ftc.teamcode.Bot2.Sensors.SensorDistance;
 import org.firstinspires.ftc.teamcode.Bot2.Sensors.SensorSwitch;
 import org.firstinspires.ftc.teamcode.Bot2.Mechanisms.AbstractMechanisms.Mechanism;
 import org.firstinspires.ftc.teamcode.Bot2.Drivetrain.Drivetrain;
@@ -22,14 +25,14 @@ import java.util.HashMap;
 public class Bot implements Robot {
     public Drivetrain drivetrain;
     public Mechanism carousel, transfer, intake, outtake;
-    public Sensors1 sensors;
+    public SensorColorDistance CD1, CD2, CD3;
     public SensorSwitch slidesSwitch, intakeSlidesSwitch;
 
     public Bot(HashMap<String, HardwareStates> hardwareStates, HashMap<String, HardwareStates> sensorStates){
         /*
         Bot constructor creates all mechanisms in Mechanism objects if they are enabled
          */
-        sensors = new Sensors1(1,1,0,1,true);
+//        sensors = new Sensors1(3,3,0,0,true);
 
         //telemetry.addLine("robot");
         if(hardwareStates.get("drivetrain").isEnabled){
@@ -63,13 +66,17 @@ public class Bot implements Robot {
             outtake = new Mechanism("OuttakeRight");
         }
 
-//        if(sensorStates.get("IntakeCDSensor").isEnabled){
-//            sensors.addSensor(ColorSensor.class, "IntakeCDSensor", 0);
-//            sensors.addSensor(DistanceSensor.class, "IntakeCDSensor", 0);
-//        }
-//        if(sensorStates.get("IntakeTouchSensor").isEnabled){
-//            sensors.addSensor(TouchSensor.class, "IntakeTouchSensor", 0);
-//        }
+        if(sensorStates.get("CarouselCDSensor1").isEnabled){
+            CD1 = new SensorColorDistance("CarouselCDSensor1");
+        }
+
+        if(sensorStates.get("CarouselCDSensor2").isEnabled){
+            CD2 = new SensorColorDistance("CarouselCDSensor2");
+        }
+
+        if(sensorStates.get("CarouselCDSensor3").isEnabled){
+            CD3 = new SensorColorDistance("CarouselCDSensor3");
+        }
 
         init();
     }
