@@ -144,6 +144,7 @@ public class Qual1Teleop extends LinearOpMode{
     private void driver2() {
 
         colors[0] = null;
+        bot.CD1.getColor();
 
         //colors need to be defined
         if(gamepad2.a){
