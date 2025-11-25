@@ -181,6 +181,9 @@ public class Qual1Teleop extends LinearOpMode{
             intakeEmpty(colors);
         }
         if(gamepad2.y) {
+            outtakeEmpty(colors);
+        }
+        if(gamepad2.dpad_up){
             bot.transfer.setTarget(mTransfer.TRANSFER);
         } else {
             bot.transfer.setTarget(mTransfer.REST);
@@ -214,6 +217,23 @@ public class Qual1Teleop extends LinearOpMode{
             bot.carousel.setTarget(mCarousel.OUTTAKE2);
             found = true;
         } else if (colors[2] == "purple") {
+            bot.carousel.setTarget(mCarousel.OUTTAKE3);
+            found = true;
+        }
+
+        return found;
+    }
+
+    //For intaking from human player
+    public boolean outtakeEmpty(String[] colors) {
+        boolean found = false;
+        if (colors[0] == null) {
+            bot.carousel.setTarget(mCarousel.OUTTAKE1);
+            found = true;
+        } else if (colors[1] == null) {
+            bot.carousel.setTarget(mCarousel.OUTTAKE2);
+            found = true;
+        } else if (colors[2] == null) {
             bot.carousel.setTarget(mCarousel.OUTTAKE3);
             found = true;
         }
