@@ -76,6 +76,7 @@ public class Qual1Teleop extends LinearOpMode{
             driver1();
             driver2();
             bot.update();
+            telemetry.update();
 
         }
 
@@ -142,6 +143,7 @@ public class Qual1Teleop extends LinearOpMode{
     }
 
     private void driver2() {
+
         if(bot.CD1.getDistance(DistanceUnit.CM) < 0.7){
             if(bot.CD1.getColor()[1] > bot.CD1.getColor()[2]){
                 colors[0] = "purple";
@@ -172,37 +174,49 @@ public class Qual1Teleop extends LinearOpMode{
 
         //colors need to be defined
         if(gamepad2.a){
+            telemetry.addLine("a is pressed");
             outtakePurple(colors);
         }
         if(gamepad2.b){
+            telemetry.addLine("b is pressed");
             outtakeGreen(colors);
         }
         if(gamepad2.x){
+            telemetry.addLine("x is pressed");
             intakeEmpty(colors);
         }
         if(gamepad2.y) {
+            telemetry.addLine("y is pressed");
             outtakeEmpty(colors);
         }
         if(gamepad2.dpad_up){
+            telemetry.addLine("dpad up is pressed");
             bot.transfer.setTarget(mTransfer.TRANSFER);
         } else {
+            telemetry.addLine("dpad up is not pressed");
             bot.transfer.setTarget(mTransfer.REST);
         }
 
         if(gamepad2.right_bumper) {
             //outtake
+            telemetry.addLine("right bumper is pressed");
             bot.outtake.setVelocity(mOuttake.SLOW);
         } else if(gamepad2.right_trigger>0.5){
+            telemetry.addLine("right trigger is pressed");
             bot.outtake.setVelocity(mOuttake.FAST);
         } else {
+            telemetry.addLine("right bumper and right trigger are not pressed");
             bot.outtake.setVelocity(mOuttake.REST);
         }
 
         if(gamepad2.left_bumper) {
+            telemetry.addLine("left bumper is pressed");
             bot.intake.setVelocity(mIntake.SLOW);
-        } else if(gamepad2.right_trigger > 0.5){
+        } else if(gamepad2.left_trigger > 0.5){
+            telemetry.addLine("left trigger is pressed");
             bot.intake.setVelocity(mIntake.FAST);
         } else {
+            telemetry.addLine("left bumper and left trigger are not pressed");
             bot.intake.setVelocity(mIntake.REST);
         }
 
