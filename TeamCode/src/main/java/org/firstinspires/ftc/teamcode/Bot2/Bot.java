@@ -67,15 +67,15 @@ public class Bot implements Robot {
         }
 
         if(sensorStates.get("CarouselCDSensor1").isEnabled){
-            CD1 = new SensorColorDistance("CarouselCDSensor1");
+            CD1 = new SensorColorDistance("CDS1");
         }
 
         if(sensorStates.get("CarouselCDSensor2").isEnabled){
-            CD2 = new SensorColorDistance("CarouselCDSensor2");
+            CD2 = new SensorColorDistance("CDS2");
         }
 
         if(sensorStates.get("CarouselCDSensor3").isEnabled){
-            CD3 = new SensorColorDistance("CarouselCDSensor3");
+            CD3 = new SensorColorDistance("CDS3");
         }
 
         init();
@@ -110,7 +110,7 @@ public class Bot implements Robot {
     @Override
     public void update(){
         carousel.update();
-        //transfer.update();
+        transfer.update();
         //intake.update();
         //outtake.update();
         drivetrain.update();

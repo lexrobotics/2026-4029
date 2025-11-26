@@ -6,5 +6,5 @@ public class mTransfer extends ServoMechanism {
     public mTransfer() {super("Transfer");}
     public static double INIT = 0;
     public static double REST = 0;
-    public static double TRANSFER = 0;
+    public static double TRANSFER = 0.4;
 }
