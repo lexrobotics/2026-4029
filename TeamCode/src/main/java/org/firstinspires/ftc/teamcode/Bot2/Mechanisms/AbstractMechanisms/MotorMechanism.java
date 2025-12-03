@@ -16,8 +16,22 @@ public abstract class MotorMechanism extends Mechanism {
     }
     @Override
     public void init(double target, DcMotor.ZeroPowerBehavior zeroPowerBehavior){
-        motor = Setup.hardwareMap.get(DcMotorEx.class, name);
-        motor.setZeroPowerBehavior(zeroPowerBehavior);
+        motor = null;
+        try {
+            motor = Setup.hardwareMap.get(DcMotorEx.class, name);
+        } catch(Exception e) {
+            Setup.telemetry.addData("Motor Lookup Failed", name);
+        }
+        if(motor == null) {
+            Setup.telemetry.addData("Motor is null", name);
+            Setup.telemetry.update();
+        } else {
+            motor.setZeroPowerBehavior(zeroPowerBehavior);
+        }
+
+
+        //motor = Setup.hardwareMap.get(DcMotorEx.class, name);
+        //motor.setZeroPowerBehavior(zeroPowerBehavior);
     }
     @Override
     public void reverse(boolean isReversed){

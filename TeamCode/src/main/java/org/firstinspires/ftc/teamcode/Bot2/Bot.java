@@ -5,8 +5,11 @@ package org.firstinspires.ftc.teamcode.Bot2;
 import android.util.Log;
 
 import com.acmerobotics.roadrunner.geometry.Pose2d;
+import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
+import org.firstinspires.ftc.teamcode.Bot2.Mechanisms.AbstractMechanisms.MotorMechanism;
+import org.firstinspires.ftc.teamcode.Bot2.Mechanisms.AbstractMechanisms.ServoMechanism;
 import org.firstinspires.ftc.teamcode.Bot2.Mechanisms.mIntake;
 import org.firstinspires.ftc.teamcode.Bot2.Mechanisms.mOuttake;
 import org.firstinspires.ftc.teamcode.Bot2.Mechanisms.mTransfer;
@@ -24,8 +27,9 @@ import java.util.HashMap;
 
 public class Bot implements Robot {
     public Drivetrain drivetrain;
-    public Mechanism carousel, transfer, intake, outtake;
-    public SensorColorDistance CD1, CD2, CD3;
+    public ServoMechanism carousel, transfer;
+    public MotorMechanism intake, outtake;
+    public SensorColorDistance CDSensor;
     public SensorSwitch slidesSwitch, intakeSlidesSwitch;
 
     public Bot(HashMap<String, HardwareStates> hardwareStates, HashMap<String, HardwareStates> sensorStates){
@@ -45,38 +49,35 @@ public class Bot implements Robot {
         if(hardwareStates.get("Carousel").isEnabled){
             carousel = new mCarousel();
         } else {
-            carousel = new Mechanism("Carousel");
+            carousel = new ServoMechanism("Carousel") {
+            };
         }
 
         if(hardwareStates.get("Transfer").isEnabled){
             transfer = new mTransfer();
         } else {
-            transfer = new Mechanism("Transfer");
+            transfer = new ServoMechanism("Transfer") {
+            };
         }
 
         if(hardwareStates.get("Intake").isEnabled){
             intake = new mIntake();
         } else {
-            intake = new Mechanism("Intake");
+            intake = new MotorMechanism("Intake") {
+            };
         }
 
         if(hardwareStates.get("OuttakeRight").isEnabled){
             outtake = new mOuttake();
         } else {
-            outtake = new Mechanism("OuttakeRight");
+            outtake = new MotorMechanism("OuttakeRight") {
+            };
         }
 
-        if(sensorStates.get("CarouselCDSensor1").isEnabled){
-            CD1 = new SensorColorDistance("CDS1");
-        }
+//        if(sensorStates.get("CDSensor").isEnabled){
+//            CDSensor = new SensorColorDistance("CDSensor");
+//        }
 
-        if(sensorStates.get("CarouselCDSensor2").isEnabled){
-            CD2 = new SensorColorDistance("CDS2");
-        }
-
-        if(sensorStates.get("CarouselCDSensor3").isEnabled){
-            CD3 = new SensorColorDistance("CDS3");
-        }
 
         init();
     }
@@ -102,8 +103,8 @@ public class Bot implements Robot {
         timer.reset();
         carousel.init(mCarousel.INIT);
         transfer.init(mTransfer.INIT);
-        intake.init(mIntake.INIT);
-        outtake.init(mOuttake.INIT);
+        intake.init(mIntake.INIT, DcMotor.ZeroPowerBehavior.BRAKE);
+        outtake.init(mOuttake.INIT, DcMotor.ZeroPowerBehavior.BRAKE);
         drivetrain.init(startPos);
     }
 
@@ -111,8 +112,8 @@ public class Bot implements Robot {
     public void update(){
         carousel.update();
         transfer.update();
-        //intake.update();
-        //outtake.update();
+        intake.update();
+        outtake.update();
         drivetrain.update();
     }
 

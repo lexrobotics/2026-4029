@@ -84,10 +84,8 @@ public class Setup {
     }
 
     private void addSensors(){
-        sensorStates.put("webcam", new HardwareStates(false));
-        sensorStates.put("CarouselCDSensor1", new HardwareStates(true));
-        sensorStates.put("CarouselCDSensor2", new HardwareStates(true));
-        sensorStates.put("CarouselCDSensor3", new HardwareStates(true));
+//        sensorStates.put("webcam", new HardwareStates(false));
+//        sensorStates.put("CDSensor", new HardwareStates(true));
     }
 
     public void disableMechanism(String mechanismName){
