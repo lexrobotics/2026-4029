@@ -204,15 +204,15 @@ public class Qual1Teleop extends LinearOpMode{
         if(gamepad2.right_bumper) {
             //outtake
             telemetry.addLine("right bumper is pressed");
-            bot.outtakeLeft.setVelocity(mOuttake.SLOW);
+            bot.outtakeLeft.setVelocity(-mOuttake.SLOW);
             bot.outtakeRight.setVelocity(mOuttake.SLOW);
         } else if(gamepad2.right_trigger>0.5){
             telemetry.addLine("right trigger is pressed");
-            bot.outtakeLeft.setVelocity(mOuttake.FAST);
+            bot.outtakeLeft.setVelocity(-mOuttake.FAST);
             bot.outtakeRight.setVelocity(mOuttake.FAST);
         } else {
             telemetry.addLine("right bumper and right trigger are not pressed");
-            bot.outtakeLeft.setVelocity(mOuttake.REST);
+            bot.outtakeLeft.setVelocity(-mOuttake.REST);
             bot.outtakeRight.setVelocity(mOuttake.REST);
         }
 

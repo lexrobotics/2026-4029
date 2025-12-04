@@ -46,7 +46,7 @@ public abstract class MotorMechanism extends Mechanism {
         if (motor == null) return; //stops the rest of the update to avoid crash
 
 
-        double actualPower = motor.getPower();            // requested power the controller thinks it has
+        double actualPower = motor.getPower();
         double actualVel = 0;
         try {
             actualVel = ((DcMotorEx)motor).getVelocity();

@@ -80,7 +80,6 @@ public class Bot implements Robot {
             outtakeLeft = new MotorMechanism("OuttakeLeft") {
             };
         }
-
 //
 //
 //        if(sensorStates.get("CDSensor").isEnabled){
