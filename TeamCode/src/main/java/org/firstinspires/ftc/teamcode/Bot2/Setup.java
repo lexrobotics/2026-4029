@@ -77,6 +77,7 @@ public class Setup {
     private void addMechanisms(){
         mechStates.put("Carousel", new HardwareStates(true));
         mechStates.put("Intake", new HardwareStates(true));
+        mechStates.put("OuttakeLeft", new HardwareStates(true));
         mechStates.put("OuttakeRight", new HardwareStates(true));
         mechStates.put("Transfer", new HardwareStates(true));
         mechStates.put("drivetrain", new HardwareStates(true));

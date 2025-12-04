@@ -28,7 +28,7 @@ import java.util.HashMap;
 public class Bot implements Robot {
     public Drivetrain drivetrain;
     public ServoMechanism carousel, transfer;
-    public MotorMechanism intake, outtake;
+    public MotorMechanism intake, outtakeLeft, outtakeRight;
     public SensorColorDistance CDSensor;
     public SensorSwitch slidesSwitch, intakeSlidesSwitch;
 
@@ -68,12 +68,21 @@ public class Bot implements Robot {
         }
 
         if(hardwareStates.get("OuttakeRight").isEnabled){
-            outtake = new mOuttake();
+            outtakeRight = new mOuttake("OuttakeRight");
         } else {
-            outtake = new MotorMechanism("OuttakeRight") {
+            outtakeRight = new MotorMechanism("OuttakeRight") {
             };
         }
 
+        if(hardwareStates.get("OuttakeLeft").isEnabled){
+            outtakeLeft = new mOuttake("OuttakeLeft");
+        } else {
+            outtakeLeft = new MotorMechanism("OuttakeLeft") {
+            };
+        }
+
+//
+//
 //        if(sensorStates.get("CDSensor").isEnabled){
 //            CDSensor = new SensorColorDistance("CDSensor");
 //        }
@@ -95,7 +104,8 @@ public class Bot implements Robot {
         carousel.init(mCarousel.INIT);
         transfer.init(mTransfer.INIT);
         intake.init(mIntake.INIT);
-        outtake.init(mOuttake.INIT);
+        outtakeLeft.init(mOuttake.INIT);
+        outtakeRight.init(mOuttake.INIT);
         drivetrain.init(new Pose2d(0, 0, 0));
     }
     public void init(Pose2d startPos){
@@ -104,7 +114,8 @@ public class Bot implements Robot {
         carousel.init(mCarousel.INIT);
         transfer.init(mTransfer.INIT);
         intake.init(mIntake.INIT, DcMotor.ZeroPowerBehavior.BRAKE);
-        outtake.init(mOuttake.INIT, DcMotor.ZeroPowerBehavior.BRAKE);
+        outtakeLeft.init(mOuttake.INIT, DcMotor.ZeroPowerBehavior.BRAKE);
+        outtakeRight.init(mOuttake.INIT, DcMotor.ZeroPowerBehavior.BRAKE);
         drivetrain.init(startPos);
     }
 
@@ -113,7 +124,8 @@ public class Bot implements Robot {
         carousel.update();
         transfer.update();
         intake.update();
-        outtake.update();
+        outtakeLeft.update();
+        outtakeRight.update();
         drivetrain.update();
     }
 
@@ -122,21 +134,23 @@ public class Bot implements Robot {
         carousel.telemetry();
         transfer.telemetry();
         intake.telemetry();
-        outtake.telemetry();
+        outtakeLeft.telemetry();
+        outtakeRight.telemetry();
         drivetrain.telemetry();
 
     }
 
     @Override
     public boolean isBusy(){
-        return carousel.isBusy() || transfer.isBusy() || intake.isBusy() || outtake.isBusy() || drivetrain.isBusy();
+        return carousel.isBusy() || transfer.isBusy() || intake.isBusy() || outtakeLeft.isBusy() || outtakeRight.isBusy() || drivetrain.isBusy();
     }
 
     public void setRest(){
         carousel.setTarget(mCarousel.REST);
         transfer.setTarget(mTransfer.REST);
         intake.setTarget(mIntake.REST);
-        outtake.setTarget(mOuttake.REST);
+        outtakeLeft.setTarget(mOuttake.REST);
+        outtakeRight.setTarget(mOuttake.REST);
 
     }
 

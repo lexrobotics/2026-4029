@@ -14,24 +14,20 @@ public abstract class MotorMechanism extends Mechanism {
         super(name);
         velocity = 1;
     }
+
+    @Override
+    public void init(double target){
+        init(target, DcMotor.ZeroPowerBehavior.BRAKE);
+    }
     @Override
     public void init(double target, DcMotor.ZeroPowerBehavior zeroPowerBehavior){
-        motor = null;
-        try {
-            motor = Setup.hardwareMap.get(DcMotorEx.class, name);
-        } catch(Exception e) {
-            Setup.telemetry.addData("Motor Lookup Failed", name);
-        }
-        if(motor == null) {
-            Setup.telemetry.addData("Motor is null", name);
-            Setup.telemetry.update();
-        } else {
+        motor = Setup.hardwareMap.get(DcMotorEx.class, name);
+        if(motor != null) {
             motor.setZeroPowerBehavior(zeroPowerBehavior);
+            motor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+            motor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
         }
-
-
-        //motor = Setup.hardwareMap.get(DcMotorEx.class, name);
-        //motor.setZeroPowerBehavior(zeroPowerBehavior);
+        setTarget(target);
     }
     @Override
     public void reverse(boolean isReversed){
@@ -47,10 +43,48 @@ public abstract class MotorMechanism extends Mechanism {
 
     @Override
     public void update(){
-        targetPower = targetPos;
+        if (motor == null) return; //stops the rest of the update to avoid crash
+
+
+        double actualPower = motor.getPower();            // requested power the controller thinks it has
+        double actualVel = 0;
+        try {
+            actualVel = ((DcMotorEx)motor).getVelocity();
+        } catch (Exception ignored) {}
+
+        Setup.telemetry.addData(name + " requestedPower", targetPower);
+        Setup.telemetry.addData(name + " actualPower", actualPower);
+        Setup.telemetry.addData(name + " actualVelocityTicksPerSec", actualVel);
+        Setup.telemetry.addData(name + " motorMode", motor.getMode());
+
+
+
+
+        targetPower = velocity;
         currentPower = motor.getPower();
-        motor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+
+        //motor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
         motor.setPower(targetPower);
+
+        // Telemetry
+        Setup.telemetry.addData(name + " targetPower", targetPower);
+        Setup.telemetry.addData(name + " currentPower", currentPower);
+        Setup.telemetry.addData(name + " motor mode", motor.getMode());
+
+//        targetPower = targetPos;
+//        currentPower = motor.getPower();
+//        motor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+//        motor.setPower(targetPower);
+//
+//        if(motor == null){  // safety check
+//            Setup.telemetry.addData("Motor null in update()", name);
+//            Setup.telemetry.update();
+//            return;
+//        }
+//        targetPower = targetPos; //<<<OLD
+//        currentPower = motor.getPower();
+//        motor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+//        motor.setPower(targetPower);
     }
 
     @Override

@@ -76,6 +76,8 @@ public class Qual1Teleop extends LinearOpMode{
             driver1();
             driver2();
             bot.update();
+            telemetry.addData("Intake velocity", bot.intake.getVelocity());
+            Setup.telemetry.addData("Outtake velocity", bot.outtakeRight.getVelocity());
             telemetry.update();
 
         }
@@ -189,6 +191,8 @@ public class Qual1Teleop extends LinearOpMode{
 //            telemetry.addLine("y is pressed");
 //            outtakeEmpty(colors);
 //        }
+
+
         if(gamepad2.dpad_up){
             telemetry.addLine("dpad up is pressed");
             bot.transfer.setTarget(mTransfer.TRANSFER);
@@ -200,13 +204,16 @@ public class Qual1Teleop extends LinearOpMode{
         if(gamepad2.right_bumper) {
             //outtake
             telemetry.addLine("right bumper is pressed");
-            bot.outtake.setVelocity(mOuttake.SLOW);
+            bot.outtakeLeft.setVelocity(mOuttake.SLOW);
+            bot.outtakeRight.setVelocity(mOuttake.SLOW);
         } else if(gamepad2.right_trigger>0.5){
             telemetry.addLine("right trigger is pressed");
-            bot.outtake.setVelocity(mOuttake.FAST);
+            bot.outtakeLeft.setVelocity(mOuttake.FAST);
+            bot.outtakeRight.setVelocity(mOuttake.FAST);
         } else {
             telemetry.addLine("right bumper and right trigger are not pressed");
-            bot.outtake.setVelocity(mOuttake.REST);
+            bot.outtakeLeft.setVelocity(mOuttake.REST);
+            bot.outtakeRight.setVelocity(mOuttake.REST);
         }
 
         if(gamepad2.left_bumper) {
