@@ -45,7 +45,6 @@ public abstract class MotorMechanism extends Mechanism {
     public void update(){
         if (motor == null) return; //stops the rest of the update to avoid crash
 
-
         double actualPower = motor.getPower();
         double actualVel = 0;
         try {

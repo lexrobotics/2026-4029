@@ -18,13 +18,13 @@ public class EverythingTest extends LinearOpMode{
     DcMotor outtakeRight;
     DcMotor outtakeLeft;
     private int targetPositionOuttake = 50;
-    private double velocityOuttake = 1;
+    private double velocityOuttake = 0.5;
 
 
     // Intake
     DcMotor intake;
     private int targetPositionIntake = 25;
-    private double velocityIntake = 1;
+    private double velocityIntake = 0.5;
     boolean intake_running = false;
 
     // Transfer (Gate)
@@ -60,18 +60,15 @@ public class EverythingTest extends LinearOpMode{
         // Outtake
         outtakeRight = hardwareMap.get(DcMotor.class, "OuttakeRight");
         outtakeRight.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
-        outtakeRight.setMode(DcMotor.RunMode.RUN_TO_POSITION);
 
         outtakeLeft = hardwareMap.get(DcMotor.class, "OuttakeLeft");
         outtakeLeft.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
-        outtakeLeft.setMode(DcMotor.RunMode.RUN_TO_POSITION);
         outtakeLeft.setDirection(DcMotorSimple.Direction.REVERSE); // Might have to switch it to the other motor
 
 
         // Intake
         intake = hardwareMap.get(DcMotor.class, "Intake");
         intake.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
-        intake.setMode(DcMotor.RunMode.RUN_TO_POSITION);
         intake.setDirection(DcMotorSimple.Direction.REVERSE);
 
         // Transfer (Gate)
@@ -157,24 +154,26 @@ public class EverythingTest extends LinearOpMode{
             // Outtake
             if (gamepad1.dpad_up) {
                 //velocity = Range.clip(velocity + 0.025, -1, 1);
-                targetPositionOuttake += 1;
+                velocityOuttake += 0.01;
                 sleep(500);
             }
             if (gamepad1.dpad_down) {
                 //velocity = velocity - 0.025;
-                targetPositionOuttake -= 1;
+                velocityOuttake -= 0.01;
                 sleep(500);
             }
 
             if(gamepad1.right_bumper) {
-                outtakeRight.setTargetPosition(targetPositionOuttake);
+                //outtakeRight.setTargetPosition(targetPositionOuttake);
+                //outtakeRight.setMode(DcMotor.RunMode.RUN_TO_POSITION);
                 outtakeRight.setPower(Range.clip(velocityOuttake, -1, 1));
             } else{
                 outtakeRight.setPower(0);
             }
 
-            if (gamepad1.left_bumper) {
-                outtakeLeft.setTargetPosition(targetPositionOuttake);
+            if (gamepad1.right_bumper) {
+                //outtakeLeft.setTargetPosition(targetPositionOuttake);
+                //outtakeLeft.setMode(DcMotor.RunMode.RUN_TO_POSITION);
                 outtakeLeft.setPower(Range.clip(velocityOuttake, -1, 1));
             } else{
                 outtakeLeft.setPower(0);
@@ -186,11 +185,11 @@ public class EverythingTest extends LinearOpMode{
 
             // Intake
             if (gamepad1.dpad_right) {
-                targetPositionIntake += 1;
+                velocityIntake += 0.01;
                 sleep(500);
             }
             if (gamepad1.dpad_left) {
-                targetPositionIntake -= 1;
+                velocityIntake -= 0.01;
                 sleep(500);
             }
 
@@ -200,10 +199,12 @@ public class EverythingTest extends LinearOpMode{
             }
 
             if(intake_running && timer.seconds() < 3){
-                intake.setTargetPosition(targetPositionIntake);
+                //intake.setTargetPosition(targetPositionIntake);
+                //intake.setMode(DcMotor.RunMode.RUN_TO_POSITION);
                 intake.setPower(Range.clip(velocityIntake, -1, 1));
             } else {
                 intake.setPower(0);
+                intake_running = false;
                 timer.reset();
             }
 
@@ -215,7 +216,7 @@ public class EverythingTest extends LinearOpMode{
             // Postions to be found
             if(gamepad1.y) {
                 if (gate_open == false) {
-                    transfer.setPosition(0.0); // Set to open position
+                    transfer.setPosition(0.2); // Set to open position
                     gate_open = true;
                 } else {
                     transfer.setPosition(0.0); // Set to closed position
