@@ -43,6 +43,8 @@ public class Qual1Teleop extends LinearOpMode{
     private IMU imu;
     private double botHeading;
 
+    //private double velocity_shift = 0.0;
+
     @Override
     public void runOpMode() throws InterruptedException {
 
@@ -90,13 +92,13 @@ public class Qual1Teleop extends LinearOpMode{
 
         gamepadX = Math.abs(gamepad1.left_stick_x)>0.04 ? gamepad1.left_stick_x : 0;
         gamepadY = Math.abs(gamepad1.left_stick_y)>0.04 ? -gamepad1.left_stick_y : 0;
-        spin = Math.abs(gamepad1.right_stick_x) > 0.04 ? gamepad1.right_stick_x : 0;
+        spin = Math.abs(gamepad1.right_stick_x) > 0.04 ? gamepad1.right_stick_x : 0;//
         translateMag = Math.sqrt(gamepadX*gamepadX + gamepadY*gamepadY);
         angle = Math.atan2(gamepadY, gamepadX);
         botAngle += angle;
 
-        x = Math.cos(angle) * translateMag;
-        y = Math.sin(angle) * translateMag;
+        x = -Math.cos(angle) * translateMag;
+        y = -Math.sin(angle) * translateMag;
 
         if (gamepad1.left_bumper) {  // Slowmode
             x *= 0.25;
@@ -191,41 +193,89 @@ public class Qual1Teleop extends LinearOpMode{
 //            telemetry.addLine("y is pressed");
 //            outtakeEmpty(colors);
 //        }
+        if(gamepad2.x){
+            bot.carousel.setTarget(mCarousel.OUTTAKE1);
+        }
+        if(gamepad2.a){
+            bot.carousel.setTarget(mCarousel.OUTTAKE2);
+        }
+        if(gamepad2.b){
+            bot.carousel.setTarget(mCarousel.OUTTAKE3);
+        }
 
 
-        if(gamepad2.dpad_up){
-            telemetry.addLine("dpad up is pressed");
+
+        if(gamepad2.dpad_left){
+            bot.carousel.setTarget(mCarousel.INTAKE1);
+        }
+        else if(gamepad2.dpad_down){
+            bot.carousel.setTarget(mCarousel.INTAKE2);
+        }
+        else if(gamepad2.dpad_right){
+            bot.carousel.setTarget(mCarousel.INTAKE3);
+        }
+
+        if(gamepad2.y){
             bot.transfer.setTarget(mTransfer.TRANSFER);
         } else {
-            telemetry.addLine("dpad up is not pressed");
             bot.transfer.setTarget(mTransfer.REST);
         }
 
+        /*if(gamepad2.right_stick_button){ // New code - allows to change velocity of outtake motors by driver 2
+            velocity_shift += 0.005;
+        } else if (gamepad2.left_stick_button){
+            velocity_shift -= 0.005;
+        } // Need telemtry or already present?
         if(gamepad2.right_bumper) {
             //outtake
-            telemetry.addLine("right bumper is pressed");
+            if((-mOuttake.SLOW + velocity_shift) <= 1 || (-mOuttake.SLOW + velocity_shift) >= 0){
+                bot.outtakeLeft.setVelocity(-mOuttake.SLOW + velocity_shift);
+                bot.outtakeRight.setVelocity(mOuttake.SLOW + velocity_shift);
+            } else if ((-mOuttake.SLOW + velocity_shift) < 0){
+                bot.outtakeLeft.setVelocity(-mOuttake.REST);
+                bot.outtakeRight.setVelocity(mOuttake.REST);
+            } else if ((-mOuttake.SLOW + velocity_shift) > 1){
+                bot.outtakeLeft.setVelocity(-mOuttake.FAST);
+                bot.outtakeRight.setVelocity(mOuttake.FAST);
+            }
+        } else if(gamepad2.right_trigger>0.5){
+            if((-mOuttake.FAST + velocity_shift) <= 1 || (-mOuttake.FAST + velocity_shift) >= 0){
+                bot.outtakeLeft.setVelocity(-mOuttake.FAST + velocity_shift);
+                bot.outtakeRight.setVelocity(mOuttake.FAST + velocity_shift);
+            } else if ((-mOuttake.FAST + velocity_shift) < 0){
+                bot.outtakeLeft.setVelocity(-mOuttake.REST);
+                bot.outtakeRight.setVelocity(mOuttake.REST);
+            } else if ((-mOuttake.FAST + velocity_shift) > 1){
+                bot.outtakeLeft.setVelocity(-mOuttake.FAST);
+                bot.outtakeRight.setVelocity(mOuttake.FAST);
+            }
+        } else {
+            bot.outtakeLeft.setVelocity(-mOuttake.REST);
+            bot.outtakeRight.setVelocity(mOuttake.REST);
+        }*/
+
+        if(gamepad2.right_bumper) {
+            //outtake
             bot.outtakeLeft.setVelocity(-mOuttake.SLOW);
             bot.outtakeRight.setVelocity(mOuttake.SLOW);
         } else if(gamepad2.right_trigger>0.5){
-            telemetry.addLine("right trigger is pressed");
             bot.outtakeLeft.setVelocity(-mOuttake.FAST);
             bot.outtakeRight.setVelocity(mOuttake.FAST);
         } else {
-            telemetry.addLine("right bumper and right trigger are not pressed");
             bot.outtakeLeft.setVelocity(-mOuttake.REST);
             bot.outtakeRight.setVelocity(mOuttake.REST);
         }
 
-        if(gamepad2.left_bumper) {
-            telemetry.addLine("left bumper is pressed");
-            bot.intake.setVelocity(mIntake.SLOW);
-        } else if(gamepad2.left_trigger > 0.5){
-            telemetry.addLine("left trigger is pressed");
-            bot.intake.setVelocity(mIntake.FAST);
-        } else {
-            telemetry.addLine("left bumper and left trigger are not pressed");
-            bot.intake.setVelocity(mIntake.REST);
-        }
+            if (gamepad2.left_bumper) {
+                bot.intake.setVelocity(mIntake.SLOW);
+            } else if (gamepad2.left_trigger > 0.5) {
+                bot.intake.setVelocity(mIntake.FAST);
+            } else if(gamepad2.dpad_up){
+                bot.intake.setVelocity(mIntake.EJECT);
+            } else {
+                bot.intake.setVelocity(mIntake.REST);
+            }
+
 
     }
 

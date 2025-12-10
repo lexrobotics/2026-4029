@@ -6,7 +6,7 @@ public class mOuttake extends MotorMechanism {
     public mOuttake (String name) {super(name);}
     public static double INIT = 0;
     public static double REST = 0;
-    public static final double FAST = 1;
-    public static final double SLOW = 0.5;
+    public static final double FAST = 0.443;
+    public static final double SLOW = 0.41;
 
 }

@@ -41,12 +41,12 @@ public class EverythingTest extends LinearOpMode{
 
         // Setting the servo // O is for outtake and I is for intake
         //Positions
-        double pos_O_1 = 0.0;
-        double pos_O_2 = 0.675;
-        double pos_O_3 = 0.34;
-        double pos_I_1 = 0.51;
-        double pos_I_2 = 0.17;
-        double pos_I_3 = 0.845;
+        double pos_O_1 = 0.7460;
+        double pos_O_2 = 0.029;
+        double pos_O_3 = 0.381;
+        double pos_I_1 = 0.23;
+        double pos_I_2 = 0.589;
+        double pos_I_3 = 0.969;
 
         //Color Position // 0 = Green, 1 = Purple, -1 = There is nothing in that slot
         // Predefined extra points combo until I code the color sensor code
@@ -145,7 +145,6 @@ public class EverythingTest extends LinearOpMode{
                         //telemetry.addLine("Position " + i + "set!");
                         //telemetry.addLine("");
                         sleep(1000);
-                        break;
                     }
                     //telemetry.update();
                 }
