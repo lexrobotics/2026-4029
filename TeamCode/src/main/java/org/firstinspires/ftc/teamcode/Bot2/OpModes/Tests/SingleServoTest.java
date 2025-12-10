@@ -8,7 +8,7 @@ import com.qualcomm.robotcore.hardware.Servo;
 //@Disabled
 @TeleOp
 public class SingleServoTest extends LinearOpMode{
-    private final double amount = 0.001;
+    private final double amount = 0.0005;
     private Servo servo;
     private double currentPosition=0;
     @Override
@@ -40,7 +40,7 @@ public class SingleServoTest extends LinearOpMode{
 
 
             servo.setPosition(currentPosition);
-            telemetry.addLine("Current Position: " + currentPosition);
+            telemetry.addLine("Current Position: "+currentPosition);
 
             telemetry.update();
         }
