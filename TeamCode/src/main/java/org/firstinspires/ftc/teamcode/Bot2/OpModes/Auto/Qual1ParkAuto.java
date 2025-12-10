@@ -21,7 +21,7 @@ import org.firstinspires.ftc.teamcode.Bot2.Bot;
 import org.firstinspires.ftc.teamcode.Bot2.Drivetrain.Drivetrain;
 import org.firstinspires.ftc.teamcode.Bot2.Setup;
 
-@Autonomous(name = "parkauto", group = "1")
+@Autonomous(name = "Qual1ParkAuto", group = "1")
 public class Qual1ParkAuto extends LinearOpMode{
     //private Setup setup;
     private ElapsedTime timer;
