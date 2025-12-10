@@ -42,6 +42,7 @@ public class Qual1Teleop extends LinearOpMode{
 
     private IMU imu;
     private double botHeading;
+    private int carouselIntakePosition;
 
     //private double velocity_shift = 0.0;
 
@@ -147,17 +148,27 @@ public class Qual1Teleop extends LinearOpMode{
     }
 
     private void driver2() {
-
-
-//        if(bot.CD1.getDistance(DistanceUnit.CM) < 0.7){
-//            if(bot.CD1.getColor()[1] > bot.CD1.getColor()[2]){
-//                colors[0] = "purple";
-//            } else {
-//                colors[0] = "green";
-//            }
-//        } else {
-//            colors[0] = null;
-//        }
+        if (bot.CDSensor.getDistance(DistanceUnit.CM) < 6.5) {
+            carouselIntakePosition = -1;
+            if(bot.carousel.getCurrentPosition()==mCarousel.INTAKE1){
+                carouselIntakePosition=0;
+            } else if(bot.carousel.getCurrentPosition()==mCarousel.INTAKE2){
+                carouselIntakePosition=1;
+            } else if(bot.carousel.getCurrentPosition()==mCarousel.INTAKE3){
+                carouselIntakePosition=2;
+            }
+            if(carouselIntakePosition != -1){
+                if (bot.CDSensor.getColor()[1] > bot.CDSensor.getColor()[2]) {
+                    colors[carouselIntakePosition] = "purple";
+                } else {
+                    colors[carouselIntakePosition] = "green";
+                }
+            }
+        }
+        telemetry.addData("Color Sensor Color Red", bot.CDSensor.getColor()[1]);
+        telemetry.addData("Color Sensor Color Green", bot.CDSensor.getColor()[2]);
+        telemetry.addData("Color Sensor Color Stored", colors[0]);
+        telemetry.addData("Color Sensor Distance", bot.CDSensor.getDistance(DistanceUnit.CM));
 //        if(bot.CD2.getDistance(DistanceUnit.CM) < 0.7){
 //            if(bot.CD2.getColor()[1] > bot.CD2.getColor()[2]){
 //                colors[1] = "purple";
@@ -176,50 +187,42 @@ public class Qual1Teleop extends LinearOpMode{
 //        } else {
 //            colors[2] = null;
 //        }
-//
-//        if(gamepad2.a){
-//            telemetry.addLine("a is pressed");
-//            outtakePurple(colors);
-//        }
-//        if(gamepad2.b){
-//            telemetry.addLine("b is pressed");
-//            outtakeGreen(colors);
-//        }
-//        if(gamepad2.x){
-//            telemetry.addLine("x is pressed");
-//            intakeEmpty(colors);
-//        }
-//        if(gamepad2.y) {
-//            telemetry.addLine("y is pressed");
-//            outtakeEmpty(colors);
-//        }
-        if(gamepad2.x){
-            bot.carousel.setTarget(mCarousel.OUTTAKE1);
-        }
+
         if(gamepad2.a){
-            bot.carousel.setTarget(mCarousel.OUTTAKE2);
+            outtakePurple(colors);
         }
         if(gamepad2.b){
-            bot.carousel.setTarget(mCarousel.OUTTAKE3);
+            outtakeGreen(colors);
         }
-
-
-
-        if(gamepad2.dpad_left){
-            bot.carousel.setTarget(mCarousel.INTAKE1);
+        if(gamepad2.dpad_down){
+            intakeEmpty(colors);
         }
-        else if(gamepad2.dpad_down){
-            bot.carousel.setTarget(mCarousel.INTAKE2);
-        }
-        else if(gamepad2.dpad_right){
-            bot.carousel.setTarget(mCarousel.INTAKE3);
-        }
-
-        if(gamepad2.y){
+        if (gamepad2.y) {
             bot.transfer.setTarget(mTransfer.TRANSFER);
         } else {
             bot.transfer.setTarget(mTransfer.REST);
         }
+
+//        if (gamepad2.x) {
+//            bot.carousel.setTarget(mCarousel.OUTTAKE1);
+//        }
+//        if (gamepad2.a) {
+//            bot.carousel.setTarget(mCarousel.OUTTAKE2);
+//        }
+//        if (gamepad2.b) {
+//            bot.carousel.setTarget(mCarousel.OUTTAKE3);
+//        }
+//
+//
+//        if (gamepad2.dpad_left) {
+//            bot.carousel.setTarget(mCarousel.INTAKE1);
+//        } else if (gamepad2.dpad_down) {
+//            bot.carousel.setTarget(mCarousel.INTAKE2);
+//        } else if (gamepad2.dpad_right) {
+//            bot.carousel.setTarget(mCarousel.INTAKE3);
+//        }
+
+
 
         /*if(gamepad2.right_stick_button){ // New code - allows to change velocity of outtake motors by driver 2
             velocity_shift += 0.005;
@@ -254,11 +257,11 @@ public class Qual1Teleop extends LinearOpMode{
             bot.outtakeRight.setVelocity(mOuttake.REST);
         }*/
 
-        if(gamepad2.right_bumper) {
+        if (gamepad2.right_bumper) {
             //outtake
             bot.outtakeLeft.setVelocity(-mOuttake.SLOW);
             bot.outtakeRight.setVelocity(mOuttake.SLOW);
-        } else if(gamepad2.right_trigger>0.5){
+        } else if (gamepad2.right_trigger > 0.5) {
             bot.outtakeLeft.setVelocity(-mOuttake.FAST);
             bot.outtakeRight.setVelocity(mOuttake.FAST);
         } else {
@@ -266,36 +269,34 @@ public class Qual1Teleop extends LinearOpMode{
             bot.outtakeRight.setVelocity(mOuttake.REST);
         }
 
-            if (gamepad2.left_bumper) {
-                bot.intake.setVelocity(mIntake.SLOW);
-            } else if (gamepad2.left_trigger > 0.5) {
-                bot.intake.setVelocity(mIntake.FAST);
-            } else if(gamepad2.dpad_up){
-                bot.intake.setVelocity(mIntake.EJECT);
-            } else {
-                bot.intake.setVelocity(mIntake.REST);
-            }
-
-
+        if (gamepad2.left_bumper) {
+            bot.intake.setVelocity(mIntake.SLOW);
+        } else if (gamepad2.left_trigger > 0.5) {
+            bot.intake.setVelocity(mIntake.FAST);
+        } else if (gamepad2.dpad_up) {
+            bot.intake.setVelocity(mIntake.EJECT);
+        } else {
+            bot.intake.setVelocity(mIntake.REST);
+        }
     }
 
-//    public boolean outtakePurple(String[] colors) {
-//        boolean found = false;
-//        if (colors[0] == "purple") {
-//            bot.carousel.setTarget(mCarousel.OUTTAKE1);
-//            found = true;
-//        } else if (colors[1] == "purple") {
-//            bot.carousel.setTarget(mCarousel.OUTTAKE2);
-//            found = true;
-//        } else if (colors[2] == "purple") {
-//            bot.carousel.setTarget(mCarousel.OUTTAKE3);
-//            found = true;
-//        }
-//
-//        return found;
-//    }
-//
-    //For intaking from human player
+    public boolean outtakePurple(String[] colors) {
+        boolean found = false;
+        if (colors[0] == "purple") {
+            bot.carousel.setTarget(mCarousel.OUTTAKE1);
+            found = true;
+        } else if (colors[1] == "purple") {
+            bot.carousel.setTarget(mCarousel.OUTTAKE2);
+            found = true;
+        } else if (colors[2] == "purple") {
+            bot.carousel.setTarget(mCarousel.OUTTAKE3);
+            found = true;
+        }
+
+        return found;
+    }
+
+//    //For intaking from human player
 //    public boolean outtakeEmpty(String[] colors) {
 //        boolean found = false;
 //        if (colors[0] == null) {
@@ -311,36 +312,36 @@ public class Qual1Teleop extends LinearOpMode{
 //
 //        return found;
 //    }
-//
-//    public boolean outtakeGreen(String[] colors) {
-//        boolean found = false;
-//        if (colors[0] == "green") {
-//            bot.carousel.setTarget(mCarousel.OUTTAKE1);
-//            found = true;
-//        } else if (colors[1] == "green") {
-//            bot.carousel.setTarget(mCarousel.OUTTAKE2);
-//            found = true;
-//        } else if (colors[2] == "green") {
-//            bot.carousel.setTarget(mCarousel.OUTTAKE3);
-//            found = true;
-//        }
-//
-//        return found;
-//    }
-//
-//    public boolean intakeEmpty(String[] colors) {
-//        boolean found = false;
-//        if (colors[0] == null) {
-//            bot.carousel.setTarget(mCarousel.INTAKE1);
-//            found = true;
-//        } else if (colors[1] == null) {
-//            bot.carousel.setTarget(mCarousel.INTAKE2);
-//            found = true;
-//        } else if (colors[2] == null) {
-//            bot.carousel.setTarget(mCarousel.INTAKE3);
-//            found = true;
-//        }
-//
-//        return found;
-//    }
+
+    public boolean outtakeGreen(String[] colors) {
+        boolean found = false;
+        if (colors[0] == "green") {
+            bot.carousel.setTarget(mCarousel.OUTTAKE1);
+            found = true;
+        } else if (colors[1] == "green") {
+            bot.carousel.setTarget(mCarousel.OUTTAKE2);
+            found = true;
+        } else if (colors[2] == "green") {
+            bot.carousel.setTarget(mCarousel.OUTTAKE3);
+            found = true;
+        }
+
+        return found;
+    }
+
+    public boolean intakeEmpty(String[] colors) {
+        boolean found = false;
+        if (colors[0] == null) {
+            bot.carousel.setTarget(mCarousel.INTAKE1);
+            found = true;
+        } else if (colors[1] == null) {
+            bot.carousel.setTarget(mCarousel.INTAKE2);
+            found = true;
+        } else if (colors[2] == null) {
+            bot.carousel.setTarget(mCarousel.INTAKE3);
+            found = true;
+        }
+
+        return found;
+    }
 }
