@@ -15,7 +15,7 @@
 //import org.firstinspires.ftc.teamcode.Bot2.Bot;
 //import org.firstinspires.ftc.teamcode.Bot2.StartPositions;
 //import org.firstinspires.ftc.teamcode.PedroPathing.constants.FConstants;
-//import org.firstinspires.ftc.teamcode.PedroPathing.constants.LConstants;
+////import org.firstinspires.ftc.teamcode.PedroPathing.constants.LConstants;
 //
 //@Autonomous (name = "Auto Blue Left", group = "Qual 2")
 //public class AutoTestQual1 extends OpMode {
@@ -38,7 +38,7 @@
 //
 //    private final Pose parkPose = new Pose(60,90,Math.toRadians(270));
 //
-//    private final Pose startPose = StartPositions.blueLeftDrivePos;
+//    private final Pose startPose = StartPositions.pose1;
 //
 //    private Path park;
 //    private PathChain scorePreload, getSample1, scoreSample1, getSample2, scoreSample2, getSample3, scoreSample3;

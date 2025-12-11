@@ -42,7 +42,7 @@ public class Qual1Teleop extends LinearOpMode{
 
     private IMU imu;
     private double botHeading;
-    private int carouselIntakePosition;
+    private double carouselPosition;
 
     //private double velocity_shift = 0.0;
 
@@ -148,20 +148,27 @@ public class Qual1Teleop extends LinearOpMode{
     }
 
     private void driver2() {
+        carouselPosition = bot.carousel.getCurrentPosition();
         if (bot.CDSensor.getDistance(DistanceUnit.CM) < 6.5) {
-            carouselIntakePosition = -1;
-            if(bot.carousel.getCurrentPosition()==mCarousel.INTAKE1){
-                carouselIntakePosition=0;
-            } else if(bot.carousel.getCurrentPosition()==mCarousel.INTAKE2){
-                carouselIntakePosition=1;
-            } else if(bot.carousel.getCurrentPosition()==mCarousel.INTAKE3){
-                carouselIntakePosition=2;
-            }
-            if(carouselIntakePosition != -1){
-                if (bot.CDSensor.getColor()[1] > bot.CDSensor.getColor()[2]) {
-                    colors[carouselIntakePosition] = "purple";
-                } else {
-                    colors[carouselIntakePosition] = "green";
+            if (bot.CDSensor.getColor()[1] > bot.CDSensor.getColor()[2]) {
+                if(carouselPosition == mCarousel.INTAKE1) {
+                    colors[0] = "purple";
+                }
+                if(carouselPosition == mCarousel.INTAKE2) {
+                    colors[1] = "purple";
+                }
+                if(carouselPosition == mCarousel.INTAKE3) {
+                    colors[2] = "purple";
+                }
+            } else {
+                if(carouselPosition == mCarousel.INTAKE1) {
+                    colors[0] = "green";
+                }
+                if(carouselPosition == mCarousel.INTAKE2) {
+                    colors[1] = "green";
+                }
+                if(carouselPosition == mCarousel.INTAKE3) {
+                    colors[2] = "green";
                 }
             }
         }
@@ -193,6 +200,18 @@ public class Qual1Teleop extends LinearOpMode{
         }
         if(gamepad2.b){
             outtakeGreen(colors);
+        }
+        if(gamepad2.x){
+            //confirm outtake
+            if(carouselPosition == mCarousel.OUTTAKE1) {
+                colors[0] = null;
+            }
+            if(carouselPosition == mCarousel.OUTTAKE2){
+                colors[1] = null;
+            }
+            if(carouselPosition == mCarousel.OUTTAKE3){
+                colors[2] = null;
+            }
         }
         if(gamepad2.dpad_down){
             intakeEmpty(colors);

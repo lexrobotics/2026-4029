@@ -4,5 +4,5 @@ import com.pedropathing.localization.Pose;
 
 public class StartPositions {
 
-    private static Pose pose1;
+    private static Pose POSE1;
 }
