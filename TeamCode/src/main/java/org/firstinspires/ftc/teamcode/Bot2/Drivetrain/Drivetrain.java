@@ -56,20 +56,20 @@ public class Drivetrain {
 
     }
 
-    public void update(boolean usePeP){
-        if(usePeP){
-//            follower.setMovementVectors(follower.getCentripetalForceCorrection(), targetHeadingVector, targetDriveVector);
-//            follower.update();
-        }else{
-            double x = teleOpTargets[0];
-            double y = teleOpTargets[1];
-            double spin = teleOpTargets[2];
-            drive.setMotorPowers(Range.clip(y + x, -1, 1) + spin,
-                    Range.clip(y - x, -1, 1) + spin,
-                    Range.clip(y + x, -1, 1) - spin,
-                    Range.clip(y - x, -1, 1) - spin);
-        }
-    }
+//    public void update(boolean usePeP){
+//        if(usePeP){
+////            follower.setMovementVectors(follower.getCentripetalForceCorrection(), targetHeadingVector, targetDriveVector);
+////            follower.update();
+//        }else{
+//            double x = teleOpTargets[0];
+//            double y = teleOpTargets[1];
+//            double spin = teleOpTargets[2];
+//            drive.setMotorPowers(Range.clip(y + x, -1, 1) + spin,
+//                    Range.clip(y - x, -1, 1) + spin,
+//                    Range.clip(y + x, -1, 1) - spin,
+//                    Range.clip(y - x, -1, 1) - spin);
+//        }
+//    }
     public void update() {
         currentPos = drive.getPoseEstimate();
         if (state == DriveState.TRAJECTORY_RR) {

@@ -1,5 +1,7 @@
 package org.firstinspires.ftc.teamcode.roadrunner.drive;
 
+import android.util.Log;
+
 import androidx.annotation.NonNull;
 
 import com.acmerobotics.dashboard.config.Config;
@@ -32,7 +34,7 @@ public class StandardTrackingWheelLocalizer extends ThreeTrackingWheelLocalizer 
     public static double GEAR_RATIO = 1; // output (wheel) speed / input (encoder) speed
 
     public static double LATERAL_DISTANCE = 12.195; // in; distance between the left and right wheels
-    public static double FORWARD_OFFSET = -4.75; // in; offset of the lateral wheel
+    public static double FORWARD_OFFSET = 4.75; // in; offset of the lateral wheel
 
     public static double X_MULTIPLIER = 40/40.8807;
     public static double Y_MULTIPLIER = 40/40.8308;
@@ -51,15 +53,15 @@ public class StandardTrackingWheelLocalizer extends ThreeTrackingWheelLocalizer 
         lastEncPositions = lastTrackingEncPositions;
         lastEncVels = lastTrackingEncVels;
 
-        leftEncoder = new Encoder(hardwareMap.get(DcMotorEx.class, "rightRear"));
-        rightEncoder = new Encoder(hardwareMap.get(DcMotorEx.class, "leftRear"));
-        frontEncoder = new Encoder(hardwareMap.get(DcMotorEx.class, "leftFront"));
+        leftEncoder = new Encoder(hardwareMap.get(DcMotorEx.class, "rightRear")); // C3
+        rightEncoder = new Encoder(hardwareMap.get(DcMotorEx.class, "leftRear")); // E1
+        frontEncoder = new Encoder(hardwareMap.get(DcMotorEx.class, "leftFront")); // C0
 
         // TODO: reverse any encoders using Encoder.setDirection(Encoder.Direction.REVERSE)
 
-        leftEncoder.setDirection(Encoder.Direction.REVERSE);
+        leftEncoder.setDirection(Encoder.Direction.FORWARD);
         rightEncoder.setDirection(Encoder.Direction.REVERSE);
-        frontEncoder.setDirection(Encoder.Direction.REVERSE);
+        frontEncoder.setDirection(Encoder.Direction.FORWARD);
     }
 
     public static double encoderTicksToInches(double ticks) {
@@ -72,6 +74,8 @@ public class StandardTrackingWheelLocalizer extends ThreeTrackingWheelLocalizer 
         int leftPos = leftEncoder.getCurrentPosition();
         int rightPos = rightEncoder.getCurrentPosition();
         int frontPos = frontEncoder.getCurrentPosition();
+
+        Log.i("StandardTrackingWheel", String.format("enc (LRF): %s %s %s", leftPos, rightPos, frontPos));
 
         lastEncPositions.clear();
         lastEncPositions.add(leftPos);
