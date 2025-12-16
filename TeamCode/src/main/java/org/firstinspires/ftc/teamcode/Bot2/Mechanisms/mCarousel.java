@@ -10,10 +10,10 @@ public class mCarousel extends ServoMechanism {
     public static double INIT = 0;
     public static double REST = 0;
     public static final double OUTTAKE1 = 1; //  (blue)
-    public static final double OUTTAKE2 = 0.25; //  (green) (done)
-    public static final double OUTTAKE3 = 0.625; //  (red) (12 -> 13)
-    public static final double INTAKE1 = 0.42; //
-    public static final double INTAKE2 = 0.8; // (done)
-    public static final double INTAKE3 = 0.05; // (done)
+    public static final double OUTTAKE2 = 0.25; //  (green)
+    public static final double OUTTAKE3 = 0.625; //  (red)
+    public static final double INTAKE1 = 0.42; // (blue)
+    public static final double INTAKE2 = 0.8; // (green)
+    public static final double INTAKE3 = 0.05; // (red)
 
 }
