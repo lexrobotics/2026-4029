@@ -49,7 +49,7 @@ public class Qual1Teleop extends LinearOpMode{
     @Override
     public void runOpMode() throws InterruptedException {
 
-        setup = new Setup(hardwareMap, telemetry, true, this, Setup.OpModeType.AUTO, Setup.Team.Q1);
+        setup = new Setup(hardwareMap, telemetry, true, this, Setup.OpModeType.TELEOP, Setup.Team.Q1);
         bot = new Bot(Setup.mechStates, Setup.sensorStates);
 
         frontLeftMotor = hardwareMap.dcMotor.get("rightFront");

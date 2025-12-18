@@ -56,9 +56,12 @@ public class Qual1TeleopRevised extends LinearOpMode{
 
     private Integer index = 0;
 
-
-
     private double[] states = { INTAKE3, OUTTAKE2, INTAKE1, OUTTAKE3, INTAKE2, OUTTAKE1 };
+
+    // Velocity testing
+    private double outtake_speed_change = 0.0;
+    private boolean prevDriver2O1;
+    private boolean prevDriver2O2;
 
 
     @Override
@@ -126,7 +129,7 @@ public class Qual1TeleopRevised extends LinearOpMode{
         } else {  // ADJUST THESE VALUES AS NEEDED
             x *= 1;
             y *= 1;
-            spin *= .7;  // WAS 0.7
+            spin *= 0.7;
         }
 
         bot.drivetrain.setTeleOpTargets(x, y, spin);
@@ -134,6 +137,22 @@ public class Qual1TeleopRevised extends LinearOpMode{
     }
 
     private void driver2() {
+        // This is for velocity testing
+        if (gamepad2.dpad_right && !prevDriver2O1){
+            outtake_speed_change += 0.005;
+            prevDriver2O1 = true;
+        } else if (!gamepad2.dpad_right && prevDriver2O1) {
+            prevDriver2O1 = false;
+        }
+
+        if (gamepad2.dpad_left && !prevDriver2O2){
+            outtake_speed_change -= 0.005;
+            prevDriver2O2 = true;
+        } else if (!gamepad2.dpad_left && prevDriver2O2) {
+            prevDriver2O2 = false;
+        }
+        telemetry.addData("outtake_speed_change", outtake_speed_change);
+
         bot.carousel.getCurrentPosition();
 
         if (gamepad2.x && !prevDriver2X) {
@@ -158,11 +177,11 @@ public class Qual1TeleopRevised extends LinearOpMode{
 
         if (gamepad2.right_bumper) {
             //outtake
-            bot.outtakeLeft.setVelocity(-mOuttake.SLOW);
-            bot.outtakeRight.setVelocity(mOuttake.SLOW);
+            bot.outtakeLeft.setVelocity(-(mOuttake.SLOW + outtake_speed_change));
+            bot.outtakeRight.setVelocity((mOuttake.SLOW + outtake_speed_change));
         } else if (gamepad2.right_trigger > 0.5) {
-            bot.outtakeLeft.setVelocity(-mOuttake.FAST);
-            bot.outtakeRight.setVelocity(mOuttake.FAST);
+            bot.outtakeLeft.setVelocity(-(mOuttake.FAST + outtake_speed_change));
+            bot.outtakeRight.setVelocity((mOuttake.FAST + outtake_speed_change));
         } else {
             bot.outtakeLeft.setVelocity(-mOuttake.REST);
             bot.outtakeRight.setVelocity(mOuttake.REST);
@@ -178,7 +197,7 @@ public class Qual1TeleopRevised extends LinearOpMode{
             bot.intake.setVelocity(mIntake.REST);
         }
 
-        if (gamepad2.y) {
+        if (gamepad2.y && (gamepad2.right_trigger > 0.5 || gamepad2.right_bumper)) {
             bot.transfer.setTarget(mTransfer.TRANSFER);
         } else {
             bot.transfer.setTarget(mTransfer.REST);

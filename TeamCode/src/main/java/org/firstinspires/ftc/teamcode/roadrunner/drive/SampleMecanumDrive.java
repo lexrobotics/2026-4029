@@ -126,16 +126,16 @@ public class SampleMecanumDrive extends MecanumDrive {
         }
 
         // TODO: reverse any motors using DcMotor.setDirection()
-        rightRear.setDirection(DcMotorSimple.Direction.REVERSE);
-        leftFront.setDirection(DcMotorSimple.Direction.FORWARD);
-        rightFront.setDirection(DcMotorSimple.Direction.REVERSE); //todo
-        leftRear.setDirection(DcMotorSimple.Direction.FORWARD);
+        rightRear.setDirection(DcMotorSimple.Direction.FORWARD);
+        leftFront.setDirection(DcMotorSimple.Direction.REVERSE);
+        rightFront.setDirection(DcMotorSimple.Direction.FORWARD); //todo
+        leftRear.setDirection(DcMotorSimple.Direction.REVERSE);
 
 
-        leftRear.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.FLOAT);
-        leftFront.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.FLOAT);
-        rightFront.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.FLOAT);
-        rightRear.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.FLOAT);
+        leftRear.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        leftFront.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        rightFront.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        rightRear.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE); // Set to BREAK?
 
 
         List<Integer> lastTrackingEncPositions = new ArrayList<>();
