@@ -20,23 +20,15 @@ import org.firstinspires.ftc.teamcode.Bot2.Mechanisms.mIntake;
 import org.firstinspires.ftc.teamcode.Bot2.Mechanisms.mOuttake;
 import org.firstinspires.ftc.teamcode.Bot2.Mechanisms.mTransfer;
 
-// What does the group thing do?
 @Autonomous(group = "1")
-public class TopAuto extends LinearOpMode{
+public class BlueTopAuto extends LinearOpMode{
     private Bot bot;
     private ElapsedTime timer;
     private Setup setup;
-
-    // Notes for Qual 1:
-    // Need to figure out why intake is spinning during auto
-    // If there is a problem with movment it might be that the pose buliding adds to the position and doesn't adjust for it
-    // If the robot goes right when it goes left (or the opposite) its a contradiction but just roll with it
-    // Get right robot messuerments?
     @Override
     public void runOpMode() throws InterruptedException {
         // Do we need to set the zero power behavior of the motor for auto
         timer = new ElapsedTime();
-        // What does Setup.Team do?
         setup = new Setup(hardwareMap, telemetry, true, this, Setup.OpModeType.AUTO, Setup.Team.Q3);
 
         bot = new Bot(Setup.mechStates, Setup.sensorStates);
@@ -54,9 +46,9 @@ public class TopAuto extends LinearOpMode{
         bot.outtakeRight.setVelocity((mOuttake.SLOW));
         bot.update();
 
-        drive.setPoseEstimate(new Pose2d(0, 0, Math.toRadians(0))); // Facing +x / https://ftc-docs.firstinspires.org/en/latest/game_specific_resources/field_coordinate_system/field-coordinate-system.html
+        drive.setPoseEstimate(new Pose2d(7.5, 8.5, Math.toRadians(0))); // Facing +x / https://ftc-docs.firstinspires.org/en/latest/game_specific_resources/field_coordinate_system/field-coordinate-system.html
         Trajectory traj = drive.trajectoryBuilder(drive.getPoseEstimate())
-                .lineToLinearHeading(new Pose2d(35, 30, Math.toRadians(0))) // Robot (on the transparent plate sides) is 15.037 inches, 12 inches in a foot, the feild is 12 by 12 feet, each tile is 2 by 2 feet
+                .lineToLinearHeading(new Pose2d(72, 72, Math.toRadians(0))) // Robot (on the transparent plate sides) is 15.037 inches, 12 inches in a foot, the feild is 12 by 12 feet, each tile is 2 by 2 feet
                 .build();
         drive.followTrajectory(traj);
         drive.turn(Math.toRadians(135));
@@ -104,7 +96,7 @@ public class TopAuto extends LinearOpMode{
         drive.turn(Math.toRadians(-135));
         //drive.setPoseEstimate(new Pose2d(0, 0, Math.toRadians(0)));
         Trajectory traj2 = drive.trajectoryBuilder(drive.getPoseEstimate())
-                .lineToLinearHeading(new Pose2d(-54, -48, Math.toRadians(0))) // Robot (on the transparent plate sides) is 15.037 inches, 12 inches in a foot, the feild is 12 by 12 feet, each tile is 2 by 2 feet
+                .lineToLinearHeading(new Pose2d(100, 100, Math.toRadians(0))) // Robot (on the transparent plate sides) is 15.037 inches, 12 inches in a foot, the feild is 12 by 12 feet, each tile is 2 by 2 feet
                 .build();
         drive.followTrajectory(traj2);
 
@@ -114,3 +106,4 @@ public class TopAuto extends LinearOpMode{
         timer.reset();
     }
 }
+

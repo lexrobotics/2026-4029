@@ -119,8 +119,8 @@ public class Qual1TeleopRevised extends LinearOpMode{
         angle = Math.atan2(gamepadY, gamepadX);
         botAngle += angle;
 
-        x = -Math.cos(angle) * translateMag;
-        y = -Math.sin(angle) * translateMag;
+        x = Math.cos(angle) * translateMag;
+        y = Math.sin(angle) * translateMag;
 
         if (gamepad1.left_bumper) {  // Slowmode
             x *= 0.25;
@@ -187,9 +187,9 @@ public class Qual1TeleopRevised extends LinearOpMode{
             bot.outtakeRight.setVelocity(mOuttake.REST);
         }
 
-        if (gamepad2.left_bumper) {
+        if (gamepad2.left_bumper && bot.intake.getCurrentPosition() == INTAKE2 && bot.intake.getCurrentPosition() == INTAKE3 && bot.intake.getCurrentPosition() == INTAKE1) {
             bot.intake.setVelocity(mIntake.SLOW);
-        } else if (gamepad2.left_trigger > 0.5) {
+        } else if (gamepad2.left_trigger > 0.5 && bot.intake.getCurrentPosition() == INTAKE2 && bot.intake.getCurrentPosition() == INTAKE3 && bot.intake.getCurrentPosition() == INTAKE1) {
             bot.intake.setVelocity(mIntake.FAST);
         } else if (gamepad2.dpad_up) {
             bot.intake.setVelocity(mIntake.EJECT);
