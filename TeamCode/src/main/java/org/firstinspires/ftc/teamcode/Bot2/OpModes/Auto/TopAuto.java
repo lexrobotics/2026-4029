@@ -26,6 +26,12 @@ public class TopAuto extends LinearOpMode{
     private Bot bot;
     private ElapsedTime timer;
     private Setup setup;
+    private double power_add = 0.3;
+
+    private double X1 = 30;
+    private double Y1 = 30;
+    private double X2 = 58;
+    private double Y2 = 52;
 
     // Notes for Qual 1:
     // Need to figure out why intake is spinning during auto
@@ -50,13 +56,13 @@ public class TopAuto extends LinearOpMode{
         waitForStart();
         if (isStopRequested()) return;
 
-        bot.outtakeLeft.setVelocity(-(mOuttake.SLOW));
-        bot.outtakeRight.setVelocity((mOuttake.SLOW));
+        bot.outtakeLeft.setVelocity(-(mOuttake.SLOW + power_add));
+        bot.outtakeRight.setVelocity((mOuttake.SLOW + power_add));
         bot.update();
 
-        drive.setPoseEstimate(new Pose2d(0, 0, Math.toRadians(0))); // Facing +x / https://ftc-docs.firstinspires.org/en/latest/game_specific_resources/field_coordinate_system/field-coordinate-system.html
+        drive.setPoseEstimate(new Pose2d(0, 12, Math.toRadians(0))); // Facing +x / https://ftc-docs.firstinspires.org/en/latest/game_specific_resources/field_coordinate_system/field-coordinate-system.html
         Trajectory traj = drive.trajectoryBuilder(drive.getPoseEstimate())
-                .lineToLinearHeading(new Pose2d(35, 30, Math.toRadians(0))) // Robot (on the transparent plate sides) is 15.037 inches, 12 inches in a foot, the feild is 12 by 12 feet, each tile is 2 by 2 feet
+                .lineToLinearHeading(new Pose2d(X1, Y1, Math.toRadians(0))) // x: 35, y: 30 // Robot (on the transparent plate sides) is 15.037 inches, 12 inches in a foot, the feild is 12 by 12 feet, each tile is 2 by 2 feet
                 .build();
         drive.followTrajectory(traj);
         drive.turn(Math.toRadians(135));
@@ -85,8 +91,8 @@ public class TopAuto extends LinearOpMode{
             sleep(5);
         }
 
-        bot.carousel.setTarget(mCarousel.OUTTAKE1);
         bot.transfer.setTarget(mTransfer.INIT);
+        bot.carousel.setTarget(mCarousel.OUTTAKE1);
         bot.update();
 
         timer.reset();
@@ -104,7 +110,7 @@ public class TopAuto extends LinearOpMode{
         drive.turn(Math.toRadians(-135));
         //drive.setPoseEstimate(new Pose2d(0, 0, Math.toRadians(0)));
         Trajectory traj2 = drive.trajectoryBuilder(drive.getPoseEstimate())
-                .lineToLinearHeading(new Pose2d(-54, -48, Math.toRadians(0))) // Robot (on the transparent plate sides) is 15.037 inches, 12 inches in a foot, the feild is 12 by 12 feet, each tile is 2 by 2 feet
+                .lineToLinearHeading(new Pose2d(X2, Y2, Math.toRadians(0))) // Robot (on the transparent plate sides) is 15.037 inches, 12 inches in a foot, the feild is 12 by 12 feet, each tile is 2 by 2 feet
                 .build();
         drive.followTrajectory(traj2);
 

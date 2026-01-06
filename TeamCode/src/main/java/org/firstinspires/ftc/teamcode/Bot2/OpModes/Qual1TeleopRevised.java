@@ -125,11 +125,11 @@ public class Qual1TeleopRevised extends LinearOpMode{
         if (gamepad1.left_bumper) {  // Slowmode
             x *= 0.25;
             y *= 0.25;
-            spin *= 0.25;
+            spin *= -0.25; // Don't know why the spin reversed for some reason, had to set it to - to fix, I think issue is in SampleMecanumDrive
         } else {  // ADJUST THESE VALUES AS NEEDED
             x *= 1;
             y *= 1;
-            spin *= 0.7;
+            spin *= -0.7;
         }
 
         bot.drivetrain.setTeleOpTargets(x, y, spin);
@@ -187,9 +187,9 @@ public class Qual1TeleopRevised extends LinearOpMode{
             bot.outtakeRight.setVelocity(mOuttake.REST);
         }
 
-        if (gamepad2.left_bumper && bot.intake.getCurrentPosition() == INTAKE2 && bot.intake.getCurrentPosition() == INTAKE3 && bot.intake.getCurrentPosition() == INTAKE1) {
+        if (gamepad2.left_bumper){ // && (bot.intake.getCurrentPosition() == INTAKE2 || bot.intake.getCurrentPosition() == INTAKE3 || bot.intake.getCurrentPosition() == INTAKE1)) {
             bot.intake.setVelocity(mIntake.SLOW);
-        } else if (gamepad2.left_trigger > 0.5 && bot.intake.getCurrentPosition() == INTAKE2 && bot.intake.getCurrentPosition() == INTAKE3 && bot.intake.getCurrentPosition() == INTAKE1) {
+        } else if (gamepad2.left_trigger > 0.5){ // && (bot.intake.getCurrentPosition() == INTAKE2 || bot.intake.getCurrentPosition() == INTAKE3 || bot.intake.getCurrentPosition() == INTAKE1)) {
             bot.intake.setVelocity(mIntake.FAST);
         } else if (gamepad2.dpad_up) {
             bot.intake.setVelocity(mIntake.EJECT);
@@ -197,7 +197,7 @@ public class Qual1TeleopRevised extends LinearOpMode{
             bot.intake.setVelocity(mIntake.REST);
         }
 
-        if (gamepad2.y && (gamepad2.right_trigger > 0.5 || gamepad2.right_bumper)) {
+        if (gamepad2.y) {
             bot.transfer.setTarget(mTransfer.TRANSFER);
         } else {
             bot.transfer.setTarget(mTransfer.REST);
