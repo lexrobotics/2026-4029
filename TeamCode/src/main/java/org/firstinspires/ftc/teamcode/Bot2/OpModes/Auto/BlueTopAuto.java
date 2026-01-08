@@ -22,6 +22,7 @@ import org.firstinspires.ftc.teamcode.Bot2.Mechanisms.mTransfer;
 
 @Autonomous(group = "1")
 public class BlueTopAuto extends LinearOpMode{
+    // Start w/ outtake facing wall
     private Bot bot;
     private ElapsedTime timer;
     private Setup setup;
@@ -45,13 +46,12 @@ public class BlueTopAuto extends LinearOpMode{
         bot.outtakeLeft.setVelocity(-(mOuttake.SLOW));
         bot.outtakeRight.setVelocity((mOuttake.SLOW));
         bot.update();
-
-        drive.setPoseEstimate(new Pose2d(7.5, 8.5, Math.toRadians(0))); // Facing +x / https://ftc-docs.firstinspires.org/en/latest/game_specific_resources/field_coordinate_system/field-coordinate-system.html
+        drive.setPoseEstimate(new Pose2d(7.75, -30.38, Math.toRadians(0)));
         Trajectory traj = drive.trajectoryBuilder(drive.getPoseEstimate())
-                .lineToLinearHeading(new Pose2d(72, 72, Math.toRadians(0))) // Robot (on the transparent plate sides) is 15.037 inches, 12 inches in a foot, the feild is 12 by 12 feet, each tile is 2 by 2 feet
+                .lineToLinearHeading(new Pose2d(-72, -72, Math.toRadians(0)))
                 .build();
         drive.followTrajectory(traj);
-        drive.turn(Math.toRadians(135));
+        drive.turn(Math.toRadians(-45));
 
         bot.transfer.setTarget(mTransfer.TRANSFER);
         bot.update();
@@ -93,10 +93,10 @@ public class BlueTopAuto extends LinearOpMode{
         }
         timer.reset();
 
-        drive.turn(Math.toRadians(-135));
+        drive.turn(Math.toRadians(45)); // Necessary? - We already have the bot's rotation set to 0 degrees below
         //drive.setPoseEstimate(new Pose2d(0, 0, Math.toRadians(0)));
         Trajectory traj2 = drive.trajectoryBuilder(drive.getPoseEstimate())
-                .lineToLinearHeading(new Pose2d(100, 100, Math.toRadians(0))) // Robot (on the transparent plate sides) is 15.037 inches, 12 inches in a foot, the feild is 12 by 12 feet, each tile is 2 by 2 feet
+                .lineToLinearHeading(new Pose2d(-110.5, -105, Math.toRadians(0)))
                 .build();
         drive.followTrajectory(traj2);
 

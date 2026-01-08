@@ -48,12 +48,12 @@ public class BlueBottomAuto extends LinearOpMode{
         bot.outtakeRight.setVelocity((mOuttake.FAST));
         bot.update();
 
-        drive.setPoseEstimate(new Pose2d(9, 0, Math.toRadians(0))); // Facing +x / https://ftc-docs.firstinspires.org/en/latest/game_specific_resources/field_coordinate_system/field-coordinate-system.html
+        drive.setPoseEstimate(new Pose2d(7.5, 0, Math.toRadians(0)));
         Trajectory traj = drive.trajectoryBuilder(drive.getPoseEstimate())
-                .lineToLinearHeading(new Pose2d(24, -24, Math.toRadians(0))) // Robot (on the transparent plate sides) is 15.037 inches, 12 inches in a foot, the feild is 12 by 12 feet, each tile is 2 by 2 feet
+                .lineToLinearHeading(new Pose2d(24, -24, Math.toRadians(0)))
                 .build();
         drive.followTrajectory(traj);
-        drive.turn(Math.toRadians(45));
+        drive.turn(Math.toRadians(-45));
 
         bot.transfer.setTarget(mTransfer.TRANSFER);
         bot.update();
@@ -95,10 +95,10 @@ public class BlueBottomAuto extends LinearOpMode{
         }
         timer.reset();
 
-        drive.turn(Math.toRadians(-45));
+        drive.turn(Math.toRadians(45));
         //drive.setPoseEstimate(new Pose2d(0, 0, Math.toRadians(0)));
         Trajectory traj2 = drive.trajectoryBuilder(drive.getPoseEstimate())
-                .lineToLinearHeading(new Pose2d(32, -56, Math.toRadians(0))) // Robot (on the transparent plate sides) is 15.037 inches, 12 inches in a foot, the feild is 12 by 12 feet, each tile is 2 by 2 feet
+                .lineToLinearHeading(new Pose2d(33.5, -57, Math.toRadians(0)))
                 .build();
         drive.followTrajectory(traj2);
 

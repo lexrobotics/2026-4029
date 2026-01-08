@@ -20,29 +20,16 @@ import org.firstinspires.ftc.teamcode.Bot2.Mechanisms.mIntake;
 import org.firstinspires.ftc.teamcode.Bot2.Mechanisms.mOuttake;
 import org.firstinspires.ftc.teamcode.Bot2.Mechanisms.mTransfer;
 
-// What does the group thing do?
 @Autonomous(group = "1")
-public class RedTopAuto extends LinearOpMode {
+public class RedTopAuto extends LinearOpMode{
+    // Start w/ outtake facing wall
     private Bot bot;
     private ElapsedTime timer;
     private Setup setup;
-    private double power_add = 0.3;
-
-    private double X1 = 30;
-    private double Y1 = -30;
-    private double X2 = 58;
-    private double Y2 = -52;
-
-    // Notes for Qual 1:
-    // Need to figure out why intake is spinning during auto
-    // If there is a problem with movment it might be that the pose buliding adds to the position and doesn't adjust for it
-    // If the robot goes right when it goes left (or the opposite) its a contradiction but just roll with it
-    // Get right robot messuerments?
     @Override
     public void runOpMode() throws InterruptedException {
         // Do we need to set the zero power behavior of the motor for auto
         timer = new ElapsedTime();
-        // What does Setup.Team do?
         setup = new Setup(hardwareMap, telemetry, true, this, Setup.OpModeType.AUTO, Setup.Team.Q3);
 
         bot = new Bot(Setup.mechStates, Setup.sensorStates);
@@ -56,16 +43,15 @@ public class RedTopAuto extends LinearOpMode {
         waitForStart();
         if (isStopRequested()) return;
 
-        bot.outtakeLeft.setVelocity(-(mOuttake.SLOW + power_add));
-        bot.outtakeRight.setVelocity((mOuttake.SLOW + power_add));
+        bot.outtakeLeft.setVelocity(-(mOuttake.SLOW));
+        bot.outtakeRight.setVelocity((mOuttake.SLOW));
         bot.update();
-
-        drive.setPoseEstimate(new Pose2d(0, -12, Math.toRadians(0))); // Facing +x / https://ftc-docs.firstinspires.org/en/latest/game_specific_resources/field_coordinate_system/field-coordinate-system.html
+        drive.setPoseEstimate(new Pose2d(7.75, 30.38, Math.toRadians(0)));
         Trajectory traj = drive.trajectoryBuilder(drive.getPoseEstimate())
-                .lineToLinearHeading(new Pose2d(X1, Y1, Math.toRadians(0))) // x: 35, y: 30 // Robot (on the transparent plate sides) is 15.037 inches, 12 inches in a foot, the feild is 12 by 12 feet, each tile is 2 by 2 feet
+                .lineToLinearHeading(new Pose2d(-72, 72, Math.toRadians(0)))
                 .build();
         drive.followTrajectory(traj);
-        drive.turn(Math.toRadians(-135));
+        drive.turn(Math.toRadians(45));
 
         bot.transfer.setTarget(mTransfer.TRANSFER);
         bot.update();
@@ -91,8 +77,8 @@ public class RedTopAuto extends LinearOpMode {
             sleep(5);
         }
 
-        bot.transfer.setTarget(mTransfer.INIT);
         bot.carousel.setTarget(mCarousel.OUTTAKE1);
+        bot.transfer.setTarget(mTransfer.INIT);
         bot.update();
 
         timer.reset();
@@ -107,10 +93,10 @@ public class RedTopAuto extends LinearOpMode {
         }
         timer.reset();
 
-        drive.turn(Math.toRadians(135));
+        drive.turn(Math.toRadians(-45)); // Necessary? - We already have the bot's rotation set to 0 degrees below
         //drive.setPoseEstimate(new Pose2d(0, 0, Math.toRadians(0)));
         Trajectory traj2 = drive.trajectoryBuilder(drive.getPoseEstimate())
-                .lineToLinearHeading(new Pose2d(X2, Y2, Math.toRadians(0))) // Robot (on the transparent plate sides) is 15.037 inches, 12 inches in a foot, the feild is 12 by 12 feet, each tile is 2 by 2 feet
+                .lineToLinearHeading(new Pose2d(-110.5, 105, Math.toRadians(0)))
                 .build();
         drive.followTrajectory(traj2);
 
