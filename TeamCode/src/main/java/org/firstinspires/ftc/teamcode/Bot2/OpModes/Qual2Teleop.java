@@ -89,7 +89,7 @@ public class Qual2Teleop extends LinearOpMode{
 
         if (isStopRequested()) return;
 
-        bot.transfer.setTarget(states[index]);
+        //bot.transfer.setTarget(states[index]);
 
         while (opModeIsActive()) {
 
@@ -151,12 +151,11 @@ public class Qual2Teleop extends LinearOpMode{
         }
         telemetry.addData("outtake_speed_change", outtake_speed_change);
 
-//        bot.transfer.getCurrentPosition();
+        //bot.transfer.getCurrentPosition();
 
         if (gamepad2.x && !prevDriver2X) {
             // back
             index = (index - 1 + states.length) % states.length;
-            telemetry.addLine("The issue is line 160");
             bot.transfer.setTarget(states[index]);
             prevDriver2X = true;
         } else if (!gamepad2.x && prevDriver2X) {
@@ -167,7 +166,6 @@ public class Qual2Teleop extends LinearOpMode{
         if (gamepad2.b && !prevDriver2B) {
             // forwards
             index = (index + 1 + states.length) % states.length;
-            telemetry.addLine("The issue is line 171");
             bot.transfer.setTarget(states[index]);
             prevDriver2B = true;
         } else if (!gamepad2.b && prevDriver2B) {
