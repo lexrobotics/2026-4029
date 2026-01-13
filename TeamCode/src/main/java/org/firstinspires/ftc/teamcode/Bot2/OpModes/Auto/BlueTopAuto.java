@@ -1,23 +1,17 @@
 package org.firstinspires.ftc.teamcode.Bot2.OpModes.Auto;
 
-import com.acmerobotics.dashboard.FtcDashboard;
-import com.acmerobotics.dashboard.telemetry.MultipleTelemetry;
 import com.acmerobotics.roadrunner.geometry.Pose2d;
-import com.acmerobotics.roadrunner.geometry.Vector2d;
 import com.acmerobotics.roadrunner.trajectory.Trajectory;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
-import org.firstinspires.ftc.robotcore.external.Telemetry;
 import org.firstinspires.ftc.teamcode.Bot2.Bot;
+import org.firstinspires.ftc.teamcode.Bot2.Mechanisms.mGate;
 import org.firstinspires.ftc.teamcode.Bot2.Mechanisms.mOuttake;
 import org.firstinspires.ftc.teamcode.Bot2.Setup;
 import org.firstinspires.ftc.teamcode.roadrunner.drive.SampleMecanumDrive;
 
-import org.firstinspires.ftc.teamcode.Bot2.Mechanisms.mCarousel;
-import org.firstinspires.ftc.teamcode.Bot2.Mechanisms.mIntake;
-import org.firstinspires.ftc.teamcode.Bot2.Mechanisms.mOuttake;
 import org.firstinspires.ftc.teamcode.Bot2.Mechanisms.mTransfer;
 
 @Autonomous(group = "1")
@@ -37,8 +31,8 @@ public class BlueTopAuto extends LinearOpMode{
 
         SampleMecanumDrive drive = new SampleMecanumDrive(hardwareMap);
 
-        bot.transfer.setTarget(mTransfer.INIT);
-        bot.carousel.setTarget(mCarousel.OUTTAKE2);
+        bot.gate.setTarget(mGate.INIT);
+        bot.transfer.setTarget(mTransfer.OUTTAKE2);
 
         waitForStart();
         if (isStopRequested()) return;
@@ -53,7 +47,7 @@ public class BlueTopAuto extends LinearOpMode{
         drive.followTrajectory(traj);
         drive.turn(Math.toRadians(-45));
 
-        bot.transfer.setTarget(mTransfer.TRANSFER);
+        bot.gate.setTarget(mGate.OPEN);
         bot.update();
 
         timer.reset();
@@ -61,15 +55,15 @@ public class BlueTopAuto extends LinearOpMode{
             sleep(5);
         }
 
-        bot.transfer.setTarget(mTransfer.INIT);
-        bot.carousel.setTarget(mCarousel.OUTTAKE3);
+        bot.gate.setTarget(mGate.INIT);
+        bot.transfer.setTarget(mTransfer.OUTTAKE3);
         bot.update();
 
         timer.reset();
         while (opModeIsActive() && timer.milliseconds() < 2000) {
             sleep(5);
         }
-        bot.transfer.setTarget(mTransfer.TRANSFER);
+        bot.gate.setTarget(mGate.OPEN);
         bot.update();
 
         timer.reset();
@@ -77,15 +71,15 @@ public class BlueTopAuto extends LinearOpMode{
             sleep(5);
         }
 
-        bot.carousel.setTarget(mCarousel.OUTTAKE1);
-        bot.transfer.setTarget(mTransfer.INIT);
+        bot.transfer.setTarget(mTransfer.OUTTAKE1);
+        bot.gate.setTarget(mGate.INIT);
         bot.update();
 
         timer.reset();
         while (opModeIsActive() && timer.milliseconds() < 2000) {
             sleep(5);
         }
-        bot.transfer.setTarget(mTransfer.TRANSFER);
+        bot.gate.setTarget(mGate.OPEN);
         bot.update();
 
         while (opModeIsActive() && timer.milliseconds() < 4500) {

@@ -75,11 +75,11 @@ public class Setup {
         }
     }
     private void addMechanisms(){
-        mechStates.put("Carousel", new HardwareStates(true));
+        mechStates.put("Transfer", new HardwareStates(true));
         mechStates.put("Intake", new HardwareStates(true));
         mechStates.put("OuttakeLeft", new HardwareStates(true));
         mechStates.put("OuttakeRight", new HardwareStates(true));
-        mechStates.put("Transfer", new HardwareStates(true));
+        mechStates.put("Pusher", new HardwareStates(true));
         mechStates.put("Gate", new HardwareStates(true));
         mechStates.put("drivetrain", new HardwareStates(true));
 
@@ -87,8 +87,8 @@ public class Setup {
 
     private void addSensors(){
 //        sensorStates.put("webcam", new HardwareStates(false));
-        sensorStates.put("CDSensor", new HardwareStates(true));
-//        sensorStates.put("Webcam", new HardwareStates(true));
+//        sensorStates.put("CDSensor", new HardwareStates(true));
+        sensorStates.put("Webcam", new HardwareStates(true));
     }
 
     public void disableMechanism(String mechanismName){
