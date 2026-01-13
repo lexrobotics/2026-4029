@@ -89,7 +89,7 @@ public class Qual2Teleop extends LinearOpMode{
 
         if (isStopRequested()) return;
 
-        //bot.transfer.setTarget(states[index]);
+        bot.transfer.setTarget(states[index]);
 
         while (opModeIsActive()) {
 
@@ -136,24 +136,26 @@ public class Qual2Teleop extends LinearOpMode{
 
     private void driver2() {
         // This is for velocity testing
-        if (gamepad2.dpad_right && !prevDriver2O1){
-            outtake_speed_change += 0.005;
-            prevDriver2O1 = true;
-        } else if (!gamepad2.dpad_right && prevDriver2O1) {
-            prevDriver2O1 = false;
-        }
+//        if (gamepad2.dpad_right && !prevDriver2O1){
+//            outtake_speed_change += 0.005;
+//            prevDriver2O1 = true;
+//        } else if (!gamepad2.dpad_right && prevDriver2O1) {
+//            prevDriver2O1 = false;
+//        }
+//
+//        if (gamepad2.dpad_left && !prevDriver2O2){
+//            outtake_speed_change -= 0.005;
+//            prevDriver2O2 = true;
+//        } else if (!gamepad2.dpad_left && prevDriver2O2) {
+//            prevDriver2O2 = false;
+//        }
+//        telemetry.addData("outtake_speed_change", outtake_speed_change);
 
-        if (gamepad2.dpad_left && !prevDriver2O2){
-            outtake_speed_change -= 0.005;
-            prevDriver2O2 = true;
-        } else if (!gamepad2.dpad_left && prevDriver2O2) {
-            prevDriver2O2 = false;
-        }
-        telemetry.addData("outtake_speed_change", outtake_speed_change);
-
-        //bot.transfer.getCurrentPosition();
+//        bot.transfer.getCurrentPosition();
 
         if (gamepad2.x && !prevDriver2X) {
+            telemetry.addLine("The issue AAAAAAAAAAAAAAAAAAA");
+
             // back
             index = (index - 1 + states.length) % states.length;
             bot.transfer.setTarget(states[index]);
@@ -164,8 +166,10 @@ public class Qual2Teleop extends LinearOpMode{
 
 
         if (gamepad2.b && !prevDriver2B) {
+            telemetry.addLine("The issue BBBBBBBBBBBBBBBBBBBBBBBBB");
             // forwards
             index = (index + 1 + states.length) % states.length;
+            telemetry.addLine("The issue is line 171");
             bot.transfer.setTarget(states[index]);
             prevDriver2B = true;
         } else if (!gamepad2.b && prevDriver2B) {
@@ -174,36 +178,47 @@ public class Qual2Teleop extends LinearOpMode{
 
 
         if (gamepad2.right_bumper) {
+            telemetry.addLine("The issue CCCCCCCCCCCCCCCCCCCCCCCC");
             //outtake
             bot.outtakeLeft.setVelocity(-(mOuttake.SLOW + outtake_speed_change));
             bot.outtakeRight.setVelocity((mOuttake.SLOW + outtake_speed_change));
         } else if (gamepad2.right_trigger > 0.5) {
+            telemetry.addLine("The issue DDDDDDDDDDDDDDDDDDDDDDDDDDDD");
             bot.outtakeLeft.setVelocity(-(mOuttake.FAST + outtake_speed_change));
             bot.outtakeRight.setVelocity((mOuttake.FAST + outtake_speed_change));
         } else {
+            telemetry.addLine("The issue EEEEEEEEEEEEEEEEEEEEEEEEEEE");
             bot.outtakeLeft.setVelocity(-mOuttake.REST);
             bot.outtakeRight.setVelocity(mOuttake.REST);
         }
 
         if (gamepad2.left_bumper){ // && (bot.intake.getCurrentPosition() == INTAKE2 || bot.intake.getCurrentPosition() == INTAKE3 || bot.intake.getCurrentPosition() == INTAKE1)) {
+            telemetry.addLine("The issue FFFFFFFFFFFFFFFFFFFFFFFFFF");
             bot.intake.setVelocity(mIntake.SLOW);
         } else if (gamepad2.left_trigger > 0.5){ // && (bot.intake.getCurrentPosition() == INTAKE2 || bot.intake.getCurrentPosition() == INTAKE3 || bot.intake.getCurrentPosition() == INTAKE1)) {
+            telemetry.addLine("The issue GGGGGGGGGGGGGGGGGGGGGGGGGGG");
             bot.intake.setVelocity(mIntake.FAST);
         } else if (gamepad2.dpad_up) {
+            telemetry.addLine("The issue HHHHHHHHHHHHHHHHHHHHHHHH");
             bot.intake.setVelocity(mIntake.EJECT);
         } else {
+            telemetry.addLine("The issue IIIIIIIIIIIIIIIIIIIIIIIIII");
             bot.intake.setVelocity(mIntake.REST);
         }
 
         if (gamepad2.y) {
+            telemetry.addLine("The issue JJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJ");
             bot.gate.setTarget(mGate.OPEN);
         } else {
+            telemetry.addLine("The issue KKKKKKKKKKKKKKKKKKKKKKKKKKKKKKK");
             bot.gate.setTarget(mGate.REST);
         }
 
         if (gamepad2.a){
+            telemetry.addLine("The issue LLLLLLLLLLLLLLLLLLLLLLLLLLLLL");
             bot.pusher.setTarget(mPusher.PUSH);
         } else {
+            telemetry.addLine("The issue MMMMMMMMMMMMMMMMMMMMMMMMMM");
             bot.pusher.setTarget(mPusher.REST);
         }
 
