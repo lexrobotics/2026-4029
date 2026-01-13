@@ -13,23 +13,20 @@ import org.firstinspires.ftc.teamcode.Bot2.Mechanisms.AbstractMechanisms.ServoMe
 import org.firstinspires.ftc.teamcode.Bot2.Mechanisms.mGate;
 import org.firstinspires.ftc.teamcode.Bot2.Mechanisms.mIntake;
 import org.firstinspires.ftc.teamcode.Bot2.Mechanisms.mOuttake;
+import org.firstinspires.ftc.teamcode.Bot2.Mechanisms.mPusher;
 import org.firstinspires.ftc.teamcode.Bot2.Mechanisms.mTransfer;
-import org.firstinspires.ftc.teamcode.Bot2.Sensors.SensorColor;
 import org.firstinspires.ftc.teamcode.Bot2.Sensors.SensorColorDistance;
-import org.firstinspires.ftc.teamcode.Bot2.Sensors.SensorDistance;
 import org.firstinspires.ftc.teamcode.Bot2.Sensors.SensorSwitch;
-import org.firstinspires.ftc.teamcode.Bot2.Mechanisms.AbstractMechanisms.Mechanism;
 import org.firstinspires.ftc.teamcode.Bot2.Drivetrain.Drivetrain;
 import org.firstinspires.ftc.teamcode.Bot2.InitStates.HardwareStates;
-import org.firstinspires.ftc.teamcode.Bot2.Mechanisms.Sensors1;
-import org.firstinspires.ftc.teamcode.Bot2.Mechanisms.mCarousel;
+import org.firstinspires.ftc.teamcode.Bot2.Mechanisms.mPusher;
 import org.firstinspires.ftc.teamcode.Bot2.Sensors.Vision.Camera;
 
 import java.util.HashMap;
 
 public class Bot implements Robot {
     public Drivetrain drivetrain;
-    public ServoMechanism carousel, transfer, gate;
+    public ServoMechanism transfer, pusher, gate;
     public MotorMechanism intake, outtakeLeft, outtakeRight;
     public SensorColorDistance CDSensor;
     public Camera webcam;
@@ -49,17 +46,17 @@ public class Bot implements Robot {
             drivetrain = null;
         }
 
-        if(hardwareStates.get("Carousel").isEnabled){
-            carousel = new mCarousel();
-        } else {
-            carousel = new ServoMechanism("Carousel") {
-            };
-        }
-
         if(hardwareStates.get("Transfer").isEnabled){
             transfer = new mTransfer();
         } else {
             transfer = new ServoMechanism("Transfer") {
+            };
+        }
+
+        if(hardwareStates.get("Pusher").isEnabled){
+            pusher = new mPusher();
+        } else {
+            pusher = new ServoMechanism("Pusher") {
             };
         }
 
@@ -91,9 +88,9 @@ public class Bot implements Robot {
             };
         }
 
-        if(sensorStates.get("CDSensor").isEnabled){
+        /*if(sensorStates.get("CDSensor").isEnabled){
             CDSensor = new SensorColorDistance("CDSensor");
-        }
+        }*/
 
 //        if(sensorStates.get("Webcam").isEnabled){
 //            webcam = new Camera("Webcam", "Blue", );
@@ -113,8 +110,8 @@ public class Bot implements Robot {
     public void init(){
         ElapsedTime timer = new ElapsedTime();
         timer.reset();
-        carousel.init(mCarousel.INIT);
         transfer.init(mTransfer.INIT);
+        pusher.init(mPusher.INIT);
         gate.init(mGate.INIT);
         intake.init(mIntake.INIT);
         outtakeLeft.init(mOuttake.INIT);
@@ -124,8 +121,8 @@ public class Bot implements Robot {
     public void init(Pose2d startPos){
         ElapsedTime timer = new ElapsedTime();
         timer.reset();
-        carousel.init(mCarousel.INIT);
         transfer.init(mTransfer.INIT);
+        pusher.init(mPusher.INIT);
         gate.init(mGate.INIT);
         intake.init(mIntake.INIT, DcMotor.ZeroPowerBehavior.BRAKE);
         outtakeLeft.init(mOuttake.INIT, DcMotor.ZeroPowerBehavior.BRAKE);
@@ -135,8 +132,8 @@ public class Bot implements Robot {
 
     @Override
     public void update(){
-        carousel.update();
         transfer.update();
+        pusher.update();
         gate.update();
         intake.update();
         outtakeLeft.update();
@@ -146,8 +143,8 @@ public class Bot implements Robot {
 
     @Override
     public void telemetry(){
-        carousel.telemetry();
         transfer.telemetry();
+        pusher.telemetry();
         gate.telemetry();
         intake.telemetry();
         outtakeLeft.telemetry();
@@ -158,12 +155,12 @@ public class Bot implements Robot {
 
     @Override
     public boolean isBusy(){
-        return carousel.isBusy() || transfer.isBusy() || gate.isBusy() || intake.isBusy() || outtakeLeft.isBusy() || outtakeRight.isBusy() || drivetrain.isBusy();
+        return transfer.isBusy() || pusher.isBusy() || gate.isBusy() || intake.isBusy() || outtakeLeft.isBusy() || outtakeRight.isBusy() || drivetrain.isBusy();
     }
 
     public void setRest(){
-        carousel.setTarget(mCarousel.REST);
         transfer.setTarget(mTransfer.REST);
+        pusher.setTarget(mPusher.REST);
         gate.setTarget(mGate.REST);
         intake.setTarget(mIntake.REST);
         outtakeLeft.setTarget(mOuttake.REST);

@@ -1,11 +1,11 @@
 package org.firstinspires.ftc.teamcode.Bot2.OpModes;
 
-import static org.firstinspires.ftc.teamcode.Bot2.Mechanisms.mCarousel.INTAKE1;
-import static org.firstinspires.ftc.teamcode.Bot2.Mechanisms.mCarousel.INTAKE2;
-import static org.firstinspires.ftc.teamcode.Bot2.Mechanisms.mCarousel.INTAKE3;
-import static org.firstinspires.ftc.teamcode.Bot2.Mechanisms.mCarousel.OUTTAKE1;
-import static org.firstinspires.ftc.teamcode.Bot2.Mechanisms.mCarousel.OUTTAKE2;
-import static org.firstinspires.ftc.teamcode.Bot2.Mechanisms.mCarousel.OUTTAKE3;
+import static org.firstinspires.ftc.teamcode.Bot2.Mechanisms.mTransfer.INTAKE1;
+import static org.firstinspires.ftc.teamcode.Bot2.Mechanisms.mTransfer.INTAKE2;
+import static org.firstinspires.ftc.teamcode.Bot2.Mechanisms.mTransfer.INTAKE3;
+import static org.firstinspires.ftc.teamcode.Bot2.Mechanisms.mTransfer.OUTTAKE1;
+import static org.firstinspires.ftc.teamcode.Bot2.Mechanisms.mTransfer.OUTTAKE2;
+import static org.firstinspires.ftc.teamcode.Bot2.Mechanisms.mTransfer.OUTTAKE3;
 
 import com.qualcomm.hardware.rev.RevHubOrientationOnRobot;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
@@ -15,16 +15,13 @@ import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.IMU;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
-import org.firstinspires.ftc.robotcore.external.navigation.DistanceUnit;
 import org.firstinspires.ftc.teamcode.Bot2.Bot;
-import org.firstinspires.ftc.teamcode.Bot2.Mechanisms.mCarousel;
+import org.firstinspires.ftc.teamcode.Bot2.Mechanisms.mTransfer;
 import org.firstinspires.ftc.teamcode.Bot2.Mechanisms.mGate;
 import org.firstinspires.ftc.teamcode.Bot2.Mechanisms.mIntake;
 import org.firstinspires.ftc.teamcode.Bot2.Mechanisms.mOuttake;
-import org.firstinspires.ftc.teamcode.Bot2.Mechanisms.mTransfer;
+import org.firstinspires.ftc.teamcode.Bot2.Mechanisms.mPusher;
 import org.firstinspires.ftc.teamcode.Bot2.Setup;
-
-import java.util.Arrays;
 
 @TeleOp
 public class Qual2Teleop extends LinearOpMode{
@@ -60,7 +57,7 @@ public class Qual2Teleop extends LinearOpMode{
     private double[] states = { INTAKE3, OUTTAKE2, INTAKE1, OUTTAKE3, INTAKE2, OUTTAKE1 };
 
     // Velocity testing
-    private double outtake_speed_change = 0.0;
+    private double outtake_speed_change = 0.05;
     private boolean prevDriver2O1;
     private boolean prevDriver2O2;
 
@@ -92,15 +89,15 @@ public class Qual2Teleop extends LinearOpMode{
 
         if (isStopRequested()) return;
 
-        bot.carousel.setTarget(states[index]);
+        bot.transfer.setTarget(states[index]);
 
         while (opModeIsActive()) {
 
             driver1();
             driver2();
             bot.update();
-            telemetry.addData("Color", Arrays.toString(bot.CDSensor.getColor()));
-            telemetry.addData("Distance", bot.CDSensor.getDistance(DistanceUnit.CM));
+            //telemetry.addData("Color", Arrays.toString(bot.CDSensor.getColor()));
+            //telemetry.addData("Distance", bot.CDSensor.getDistance(DistanceUnit.CM));
 
             // 707 131 357 228 (green)  1019 186 512 327
             // 578 196 165 232 (purple) 515  172 147 206
@@ -154,12 +151,12 @@ public class Qual2Teleop extends LinearOpMode{
         }
         telemetry.addData("outtake_speed_change", outtake_speed_change);
 
-        bot.carousel.getCurrentPosition();
+        bot.transfer.getCurrentPosition();
 
         if (gamepad2.x && !prevDriver2X) {
             // back
             index = (index - 1 + states.length) % states.length;
-            bot.carousel.setTarget(states[index]);
+            bot.transfer.setTarget(states[index]);
             prevDriver2X = true;
         } else if (!gamepad2.x && prevDriver2X) {
             prevDriver2X = false;
@@ -169,7 +166,7 @@ public class Qual2Teleop extends LinearOpMode{
         if (gamepad2.b && !prevDriver2B) {
             // forwards
             index = (index + 1 + states.length) % states.length;
-            bot.carousel.setTarget(states[index]);
+            bot.transfer.setTarget(states[index]);
             prevDriver2B = true;
         } else if (!gamepad2.b && prevDriver2B) {
             prevDriver2B = false;
@@ -205,9 +202,9 @@ public class Qual2Teleop extends LinearOpMode{
         }
 
         if (gamepad2.a){
-            bot.transfer.setTarget(mTransfer.TRANSFER);
+            bot.pusher.setTarget(mPusher.PUSH);
         } else {
-            bot.transfer.setTarget(mTransfer.REST);
+            bot.pusher.setTarget(mPusher.REST);
         }
 
 

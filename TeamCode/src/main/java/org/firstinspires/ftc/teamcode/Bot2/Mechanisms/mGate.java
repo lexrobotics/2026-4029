@@ -4,7 +4,7 @@ import org.firstinspires.ftc.teamcode.Bot2.Mechanisms.AbstractMechanisms.ServoMe
 
 public class mGate extends ServoMechanism {
     public mGate() {super("Transfer");}
-    public static double INIT = 0.2;
-    public static double REST = 0.2;
-    public static double OPEN = 0.4;
+    public static double INIT = 0.68;
+    public static double REST = 0.68;
+    public static double OPEN = 0.83;
 }
