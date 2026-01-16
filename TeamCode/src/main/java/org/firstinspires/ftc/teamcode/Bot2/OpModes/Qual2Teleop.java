@@ -29,6 +29,7 @@ public class Qual2Teleop extends LinearOpMode{
     private Bot bot;
     private Setup setup;
     private ElapsedTime timer;
+//    private final double pusherDelay = 5; //perhaps unnecessary
 
     private double gamepadX;
     private double gamepadY;
@@ -67,6 +68,8 @@ public class Qual2Teleop extends LinearOpMode{
 
         setup = new Setup(hardwareMap, telemetry, true, this, Setup.OpModeType.AUTO, Setup.Team.Q1);
         bot = new Bot(Setup.mechStates, Setup.sensorStates);
+
+        timer = new ElapsedTime();
 
         frontLeftMotor = hardwareMap.dcMotor.get("rightFront");
         backLeftMotor = hardwareMap.dcMotor.get("leftRear");
@@ -136,22 +139,22 @@ public class Qual2Teleop extends LinearOpMode{
 
     private void driver2() {
         // This is for velocity testing
-//        if (gamepad2.dpad_right && !prevDriver2O1){
-//            outtake_speed_change += 0.005;
-//            prevDriver2O1 = true;
-//        } else if (!gamepad2.dpad_right && prevDriver2O1) {
-//            prevDriver2O1 = false;
-//        }
-//
-//        if (gamepad2.dpad_left && !prevDriver2O2){
-//            outtake_speed_change -= 0.005;
-//            prevDriver2O2 = true;
-//        } else if (!gamepad2.dpad_left && prevDriver2O2) {
-//            prevDriver2O2 = false;
-//        }
-//        telemetry.addData("outtake_speed_change", outtake_speed_change);
+        if (gamepad2.dpad_right && !prevDriver2O1){
+            outtake_speed_change += 0.005;
+            prevDriver2O1 = true;
+        } else if (!gamepad2.dpad_right && prevDriver2O1) {
+            prevDriver2O1 = false;
+        }
 
-//        bot.transfer.getCurrentPosition();
+        if (gamepad2.dpad_left && !prevDriver2O2){
+            outtake_speed_change -= 0.005;
+            prevDriver2O2 = true;
+        } else if (!gamepad2.dpad_left && prevDriver2O2) {
+            prevDriver2O2 = false;
+        }
+        telemetry.addData("outtake_speed_change", outtake_speed_change);
+
+        bot.transfer.getCurrentPosition();
 
         if (gamepad2.x && !prevDriver2X) {
 
@@ -198,15 +201,13 @@ public class Qual2Teleop extends LinearOpMode{
 
         if (gamepad2.y) {
             bot.gate.setTarget(mGate.OPEN);
-        } else {
-            bot.gate.setTarget(mGate.REST);
-        }
-
-        if (gamepad2.a){
             bot.pusher.setTarget(mPusher.PUSH);
         } else {
+            bot.gate.setTarget(mGate.REST);
             bot.pusher.setTarget(mPusher.REST);
+
         }
+
 
 
         telemetry.addLine("Transfer Current Position: " + bot.transfer.getCurrentPosition());
