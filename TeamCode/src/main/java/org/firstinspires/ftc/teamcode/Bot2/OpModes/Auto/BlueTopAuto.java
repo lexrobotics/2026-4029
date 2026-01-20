@@ -9,6 +9,7 @@ import com.qualcomm.robotcore.util.ElapsedTime;
 import org.firstinspires.ftc.teamcode.Bot2.Bot;
 import org.firstinspires.ftc.teamcode.Bot2.Mechanisms.mGate;
 import org.firstinspires.ftc.teamcode.Bot2.Mechanisms.mOuttake;
+import org.firstinspires.ftc.teamcode.Bot2.Mechanisms.mIntake;
 import org.firstinspires.ftc.teamcode.Bot2.Setup;
 import org.firstinspires.ftc.teamcode.roadrunner.drive.SampleMecanumDrive;
 
@@ -33,6 +34,7 @@ public class BlueTopAuto extends LinearOpMode{
 
         bot.gate.setTarget(mGate.INIT);
         bot.transfer.setTarget(mTransfer.OUTTAKE2);
+        bot.intake.setTarget((mIntake.REST));
 
         waitForStart();
         if (isStopRequested()) return;
@@ -40,7 +42,7 @@ public class BlueTopAuto extends LinearOpMode{
         bot.outtakeLeft.setVelocity(-(mOuttake.SLOW));
         bot.outtakeRight.setVelocity((mOuttake.SLOW));
         bot.update();
-        drive.setPoseEstimate(new Pose2d(7.75, -30.38, Math.toRadians(0)));
+        drive.setPoseEstimate(new Pose2d(-15, -39, Math.toRadians(0))); //7.5
         Trajectory traj = drive.trajectoryBuilder(drive.getPoseEstimate())
                 .lineToLinearHeading(new Pose2d(-72, -72, Math.toRadians(0)))
                 .build();
@@ -87,12 +89,12 @@ public class BlueTopAuto extends LinearOpMode{
         }
         timer.reset();
 
-        drive.turn(Math.toRadians(45)); // Necessary? - We already have the bot's rotation set to 0 degrees below
+        /*drive.turn(Math.toRadians(45)); // Necessary? - We already have the bot's rotation set to 0 degrees below
         //drive.setPoseEstimate(new Pose2d(0, 0, Math.toRadians(0)));
         Trajectory traj2 = drive.trajectoryBuilder(drive.getPoseEstimate())
                 .lineToLinearHeading(new Pose2d(-110.5, -105, Math.toRadians(0)))
                 .build();
-        drive.followTrajectory(traj2);
+        drive.followTrajectory(traj2);*/
 
         while (opModeIsActive() && timer.milliseconds() < 10000) {
             sleep(5);
