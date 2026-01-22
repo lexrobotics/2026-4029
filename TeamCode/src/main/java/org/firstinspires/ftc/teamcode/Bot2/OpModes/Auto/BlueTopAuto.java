@@ -8,6 +8,7 @@ import com.qualcomm.robotcore.util.ElapsedTime;
 
 import org.firstinspires.ftc.teamcode.Bot2.Bot;
 import org.firstinspires.ftc.teamcode.Bot2.Mechanisms.mGate;
+import org.firstinspires.ftc.teamcode.Bot2.Mechanisms.mPusher;
 import org.firstinspires.ftc.teamcode.Bot2.Mechanisms.mOuttake;
 import org.firstinspires.ftc.teamcode.Bot2.Mechanisms.mIntake;
 import org.firstinspires.ftc.teamcode.Bot2.Setup;
@@ -33,23 +34,29 @@ public class BlueTopAuto extends LinearOpMode{
         SampleMecanumDrive drive = new SampleMecanumDrive(hardwareMap);
 
         bot.gate.setTarget(mGate.INIT);
+        bot.pusher.setTarget(mPusher.INIT);
         bot.transfer.setTarget(mTransfer.OUTTAKE2);
         bot.intake.setTarget((mIntake.REST));
 
         waitForStart();
         if (isStopRequested()) return;
 
-        bot.outtakeLeft.setVelocity(-(mOuttake.SLOW));
-        bot.outtakeRight.setVelocity((mOuttake.SLOW));
+        bot.outtakeLeft.setVelocity(-(mOuttake.SLOWAUTO));
+        bot.outtakeRight.setVelocity((mOuttake.SLOWAUTO));
         bot.update();
-        drive.setPoseEstimate(new Pose2d(-15, -39, Math.toRadians(0))); //7.5
+        drive.setPoseEstimate(new Pose2d(0  , 0, Math.toRadians(0)));
         Trajectory traj = drive.trajectoryBuilder(drive.getPoseEstimate())
-                .lineToLinearHeading(new Pose2d(-72, -72, Math.toRadians(0)))
+                .lineToLinearHeading(new Pose2d(-40.5, -16.5, Math.toRadians(0)))
                 .build();
         drive.followTrajectory(traj);
         drive.turn(Math.toRadians(-45));
 
         bot.gate.setTarget(mGate.OPEN);
+        while (opModeIsActive() && timer.milliseconds() < 1500) {
+            sleep(5);
+        }
+        timer.reset();
+        bot.pusher.setTarget(mPusher.PUSH);
         bot.update();
 
         timer.reset();
@@ -57,7 +64,8 @@ public class BlueTopAuto extends LinearOpMode{
             sleep(5);
         }
 
-        bot.gate.setTarget(mGate.INIT);
+        bot.gate.setTarget(mGate.REST);
+        bot.pusher.setTarget(mPusher.REST);
         bot.transfer.setTarget(mTransfer.OUTTAKE3);
         bot.update();
 
@@ -66,6 +74,11 @@ public class BlueTopAuto extends LinearOpMode{
             sleep(5);
         }
         bot.gate.setTarget(mGate.OPEN);
+        while (opModeIsActive() && timer.milliseconds() < 1500) {
+            sleep(5);
+        }
+        timer.reset();
+        bot.pusher.setTarget(mPusher.PUSH);
         bot.update();
 
         timer.reset();
@@ -73,8 +86,9 @@ public class BlueTopAuto extends LinearOpMode{
             sleep(5);
         }
 
+        bot.gate.setTarget(mGate.REST);
+        bot.pusher.setTarget(mPusher.REST);
         bot.transfer.setTarget(mTransfer.OUTTAKE1);
-        bot.gate.setTarget(mGate.INIT);
         bot.update();
 
         timer.reset();
@@ -82,6 +96,11 @@ public class BlueTopAuto extends LinearOpMode{
             sleep(5);
         }
         bot.gate.setTarget(mGate.OPEN);
+        while (opModeIsActive() && timer.milliseconds() < 1500) {
+            sleep(5);
+        }
+        timer.reset();
+        bot.pusher.setTarget(mPusher.PUSH);
         bot.update();
 
         while (opModeIsActive() && timer.milliseconds() < 4500) {
@@ -89,10 +108,16 @@ public class BlueTopAuto extends LinearOpMode{
         }
         timer.reset();
 
-        /*drive.turn(Math.toRadians(45)); // Necessary? - We already have the bot's rotation set to 0 degrees below
+        bot.outtakeLeft.setVelocity(-(mOuttake.REST));
+        bot.outtakeRight.setVelocity((mOuttake.REST));
+        bot.gate.setTarget(mGate.REST);
+        bot.pusher.setTarget(mPusher.REST);
+        bot.update();
+
+        //drive.turn(Math.toRadians(45)); // Necessary? - We already have the bot's rotation set to 0 degrees below
         //drive.setPoseEstimate(new Pose2d(0, 0, Math.toRadians(0)));
-        Trajectory traj2 = drive.trajectoryBuilder(drive.getPoseEstimate())
-                .lineToLinearHeading(new Pose2d(-110.5, -105, Math.toRadians(0)))
+        /*Trajectory traj2 = drive.trajectoryBuilder(drive.getPoseEstimate())
+                .lineToLinearHeading(new Pose2d(-106, -72, Math.toRadians(0)))
                 .build();
         drive.followTrajectory(traj2);*/
 
