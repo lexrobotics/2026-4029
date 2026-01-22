@@ -165,4 +165,15 @@ public class RedTopCamAuto extends LinearOpMode{
 
         visionPortal = builder.build();
     }
+
+    private double alignAngle() {
+
+        for (AprilTagDetection d : aprilTag.getDetections()) {
+            if (d.metadata != null) {
+                return Math.toRadians(d.ftcPose.bearing);
+            }
+        }
+        return 0.0;
+
+    }
 }
