@@ -63,6 +63,8 @@ public class BlueTopCamAuto extends LinearOpMode{
                 if(d.metadata != null){
                     code = d.id - 20;
                     break;
+                } else {
+                    double a = code1[3];
                 }
             }
         }
