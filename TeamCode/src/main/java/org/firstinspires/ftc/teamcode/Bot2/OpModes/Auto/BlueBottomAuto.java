@@ -22,6 +22,8 @@ public class BlueBottomAuto extends LinearOpMode{
     private Bot bot;
     private ElapsedTime timer;
     private Setup setup;
+    private double[] transfer_pos = {mTransfer.OUTTAKE2, mTransfer.OUTTAKE3, mTransfer.OUTTAKE1};
+
     @Override
     public void runOpMode() throws InterruptedException {
         // Do we need to set the zero power behavior of the motor for auto
@@ -51,54 +53,31 @@ public class BlueBottomAuto extends LinearOpMode{
         drive.followTrajectory(traj);
         drive.turn(Math.toRadians(-45));
 
-        bot.gate.setTarget(mGate.OPEN);
-        bot.pusher.setTarget(mPusher.PUSH);
-        bot.update();
+        for(int i = 0; i < 3; i++){
+            bot.gate.setTarget(mGate.OPEN);
+            bot.update();
 
-        timer.reset();
-        while (opModeIsActive() && timer.milliseconds() < 2000) {
-            sleep(5);
+            timer.reset();
+            while (opModeIsActive() && timer.milliseconds() < 1000) {
+                sleep(5);
+            }
+            bot.pusher.setTarget(mPusher.PUSH);
+            bot.update();
+
+            timer.reset();
+            while (opModeIsActive() && timer.milliseconds() < 2000) {
+                sleep(5);
+            }
+            bot.gate.setTarget(mGate.REST);
+            bot.pusher.setTarget(mPusher.REST);
+            bot.transfer.setTarget(transfer_pos[i]);
+            bot.update();
+
+            timer.reset();
+            while (opModeIsActive() && timer.milliseconds() < 1000) {
+                sleep(5);
+            }
         }
-
-        bot.gate.setTarget(mGate.REST);
-        bot.pusher.setTarget(mPusher.REST);
-        bot.transfer.setTarget(mTransfer.OUTTAKE3);
-        bot.update();
-
-        timer.reset();
-        while (opModeIsActive() && timer.milliseconds() < 2000) {
-            sleep(5);
-        }
-        bot.gate.setTarget(mGate.OPEN);
-        bot.pusher.setTarget(mPusher.PUSH);
-        bot.update();
-
-        timer.reset();
-        while (opModeIsActive() && timer.milliseconds() < 2000) {
-            sleep(5);
-        }
-
-        bot.gate.setTarget(mGate.REST);
-        bot.pusher.setTarget(mPusher.REST);
-        bot.transfer.setTarget(mTransfer.OUTTAKE1);
-        bot.update();
-
-        timer.reset();
-        while (opModeIsActive() && timer.milliseconds() < 2000) {
-            sleep(5);
-        }
-        bot.gate.setTarget(mGate.OPEN);
-        bot.pusher.setTarget(mPusher.PUSH);
-        bot.update();
-
-        while (opModeIsActive() && timer.milliseconds() < 4500) {
-            sleep(5);
-        }
-        timer.reset();
-
-        bot.gate.setTarget(mGate.REST);
-        bot.pusher.setTarget(mPusher.REST);
-        bot.update();
 
         //drive.turn(Math.toRadians(45)); // Necessary? - We already have the bot's rotation set to 0 degrees below
         //drive.setPoseEstimate(new Pose2d(0, 0, Math.toRadians(0)));
@@ -107,10 +86,10 @@ public class BlueBottomAuto extends LinearOpMode{
                 .build();
         drive.followTrajectory(traj2);
 
-        while (opModeIsActive() && timer.milliseconds() < 10000) {
+        timer.reset();
+        while (opModeIsActive() && timer.milliseconds() < 5000) {
             sleep(5);
         }
-        timer.reset();
     }
 }
 
