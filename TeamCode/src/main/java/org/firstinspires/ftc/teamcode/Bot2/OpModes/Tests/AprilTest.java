@@ -41,6 +41,9 @@ public class AprilTest extends LinearOpMode {
         builder.setCamera(hardwareMap.get(WebcamName.class, "Webcam"));
         builder.addProcessor(aprilTag);
 
+        builder.enableLiveView(true);
+        builder.setAutoStopLiveView(false);
+
         visionPortal = builder.build();
     }
 }

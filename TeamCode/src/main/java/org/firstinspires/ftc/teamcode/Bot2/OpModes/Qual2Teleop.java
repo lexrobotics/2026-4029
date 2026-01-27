@@ -157,10 +157,11 @@ public class Qual2Teleop extends LinearOpMode{
         bot.transfer.getCurrentPosition();
 
         if (gamepad2.x && !prevDriver2X) {
-
-            // back
-            index = (index - 1 + states.length) % states.length;
-            bot.transfer.setTarget(states[index]);
+            // intake
+            if(index %2 == 1){index = 0;} else {
+                index = (index + 1) % states.length;
+                bot.transfer.setTarget(states[index]);
+            }
             prevDriver2X = true;
         } else if (!gamepad2.x && prevDriver2X) {
             prevDriver2X = false;
@@ -168,9 +169,11 @@ public class Qual2Teleop extends LinearOpMode{
 
 
         if (gamepad2.b && !prevDriver2B) {
-            // forwards
-            index = (index + 1 + states.length) % states.length;
-            bot.transfer.setTarget(states[index]);
+            // outtake
+            if(index%2 == 0){index = 1;} else {
+                index = (index + 1) % states.length;
+                bot.transfer.setTarget(states[index]);
+            }
             prevDriver2B = true;
         } else if (!gamepad2.b && prevDriver2B) {
             prevDriver2B = false;
