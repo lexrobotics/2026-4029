@@ -7,8 +7,6 @@ import org.firstinspires.ftc.teamcode.Bot2.Setup;
 
 public abstract class MotorMechanism extends Mechanism {
     protected DcMotorEx motor;
-    protected double targetPower;
-    protected double currentPower;
 
     public MotorMechanism(String name) {
         super(name);
@@ -25,7 +23,7 @@ public abstract class MotorMechanism extends Mechanism {
         if(motor != null) {
             motor.setZeroPowerBehavior(zeroPowerBehavior);
             motor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-            motor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+            motor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         }
         setTarget(target);
     }
@@ -50,28 +48,14 @@ public abstract class MotorMechanism extends Mechanism {
         if (motor == null) return; //stops the rest of the update to avoid crash
 
         double actualPower = motor.getPower();
-        double actualVel = 0;
-        try {
-            actualVel = ((DcMotorEx)motor).getVelocity();
-        } catch (Exception ignored) {}
 
-        Setup.telemetry.addData(name + " requestedPower", targetPower);
         Setup.telemetry.addData(name + " actualPower", actualPower);
-        Setup.telemetry.addData(name + " actualVelocityTicksPerSec", actualVel);
         Setup.telemetry.addData(name + " motorMode", motor.getMode());
 
-
-
-
-        targetPower = velocity;
-        currentPower = motor.getPower();
-
         //motor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
-        motor.setPower(targetPower);
+        motor.setVelocity(velocity);
 
         // Telemetry
-        Setup.telemetry.addData(name + " targetPower", targetPower);
-        Setup.telemetry.addData(name + " currentPower", currentPower);
         Setup.telemetry.addData(name + " motor mode", motor.getMode());
 
 //        targetPower = targetPos;
@@ -92,13 +76,13 @@ public abstract class MotorMechanism extends Mechanism {
 
     @Override
     public boolean isBusy(){
-        return targetPower != 0;
+        return velocity != 0;
     }
 
     @Override
     public void telemetry(){
-        Setup.telemetry.addData(name + "currentPower", currentPower);
-        Setup.telemetry.addData(name + "targetPower", targetPower);
-        Setup.telemetry.addData(name + " isBusy", isBusy());
-    }
+        Setup.telemetry.addData(name + " targetVelocity", velocity);
+        Setup.telemetry.addData(name + " actualVelocity", motor.getVelocity());
+        Setup.telemetry.addData(name + " motorMode", motor.getMode());
+        Setup.telemetry.addData(name + " isBusy", isBusy());    }
 }

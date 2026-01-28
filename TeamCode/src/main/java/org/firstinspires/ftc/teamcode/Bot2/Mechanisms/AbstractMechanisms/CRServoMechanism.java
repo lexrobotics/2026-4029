@@ -39,7 +39,6 @@ public abstract class CRServoMechanism extends Mechanism {
 
     }
 
-    @Override
     public double getVelocity(){
         return velocity;
     }
