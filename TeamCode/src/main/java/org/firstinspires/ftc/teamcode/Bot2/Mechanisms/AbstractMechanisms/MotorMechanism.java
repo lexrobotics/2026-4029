@@ -36,6 +36,10 @@ public abstract class MotorMechanism extends Mechanism {
         }
     }
 
+    public double getVelocity(){
+        return motor.getVelocity();
+    }
+
     @Override
     public void reset(){
         motor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);

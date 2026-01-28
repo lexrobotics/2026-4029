@@ -82,7 +82,7 @@ public class Mechanism {
         return initialized;
     }
 
-    public double getVelocity(){
-        return 0;
-    }
+//    public double getVelocity(){
+//        return 0;
+//    }
 }

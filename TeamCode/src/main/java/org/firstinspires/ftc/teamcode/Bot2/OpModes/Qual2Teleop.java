@@ -205,7 +205,6 @@ public class Qual2Teleop extends LinearOpMode{
         if (gamepad2.y) {
             bot.gate.setTarget(mGate.OPEN);
             bot.pusher.setTarget(mPusher.PUSH);
-        } else {
             bot.gate.setTarget(mGate.REST);
             bot.pusher.setTarget(mPusher.REST);
 
@@ -214,5 +213,7 @@ public class Qual2Teleop extends LinearOpMode{
 
 
         telemetry.addLine("Transfer Current Position: " + bot.transfer.getCurrentPosition());
+        telemetry.addLine("OuttakeLeft Current Velocity: "+ bot.outtakeLeft.getVelocity());
+        telemetry.addLine("OuttakeRight Current Velocity: "+ bot.outtakeRight.getVelocity());
     }
 }
