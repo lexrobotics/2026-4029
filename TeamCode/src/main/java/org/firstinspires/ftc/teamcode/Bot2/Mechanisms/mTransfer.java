@@ -10,7 +10,7 @@ public class mTransfer extends ServoMechanism {
     public static double INIT = 0.05;
     public static double REST = 0.05;
     public static final double OUTTAKE1 = 0.032; //  (blue)
-    public static final double OUTTAKE2 = 0.685; //  (green)
+    public static final double OUTTAKE2 = 0.7555; //  (green)
     public static final double OUTTAKE3 = 0.4; //  (red)
     public static final double INTAKE1 = 0.5645; // (blue)
     public static final double INTAKE2 = 0.1915; // (green)

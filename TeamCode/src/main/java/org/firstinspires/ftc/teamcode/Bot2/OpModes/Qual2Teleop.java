@@ -205,7 +205,7 @@ public class Qual2Teleop extends LinearOpMode{
         if (gamepad2.y) {
             bot.gate.setTarget(mGate.OPEN);
             bot.pusher.setTarget(mPusher.PUSH);
-        } else{
+        } else {
             bot.gate.setTarget(mGate.REST);
             bot.pusher.setTarget(mPusher.REST);
         }

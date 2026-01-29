@@ -22,7 +22,7 @@ public class BlueTopAuto extends LinearOpMode{
     private Bot bot;
     private ElapsedTime timer;
     private Setup setup;
-    private double[] transfer_pos = {mTransfer.OUTTAKE2, mTransfer.OUTTAKE3, mTransfer.OUTTAKE1};
+    private double[] transfer_pos = {mTransfer.OUTTAKE3, mTransfer.OUTTAKE1, mTransfer.OUTTAKE2};
 
     @Override
     public void runOpMode() throws InterruptedException {
@@ -48,7 +48,7 @@ public class BlueTopAuto extends LinearOpMode{
         bot.update();
         drive.setPoseEstimate(new Pose2d(0  , 0, Math.toRadians(0)));
         Trajectory traj = drive.trajectoryBuilder(drive.getPoseEstimate())
-                .lineToLinearHeading(new Pose2d(-40.5, -16.5, Math.toRadians(0)))
+                .lineToLinearHeading(new Pose2d(-43.5, -23.5, Math.toRadians(0)))
                 .build();
         drive.followTrajectory(traj);
         drive.turn(Math.toRadians(-45));
