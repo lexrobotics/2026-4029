@@ -8,5 +8,5 @@ public class mOuttake extends MotorMechanism {
     public static double REST = 0;
     public static final double FAST = 0.65;
     public static final double SLOW = 0.48;
-    public static final double SLOWAUTO = 0.53;
+    public static final double SLOWAUTO = 0.50;
 }
