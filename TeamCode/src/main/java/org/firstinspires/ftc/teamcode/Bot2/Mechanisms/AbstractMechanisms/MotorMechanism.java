@@ -24,6 +24,7 @@ public abstract class MotorMechanism extends Mechanism {
             motor.setZeroPowerBehavior(zeroPowerBehavior);
             motor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
             motor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+            motor.setVelocityPIDFCoefficients(2.0, 0.2, 0.0, 12.0);
         }
         setTarget(target);
     }

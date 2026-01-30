@@ -7,8 +7,8 @@ import org.firstinspires.ftc.teamcode.Bot2.Mechanisms.AbstractMechanisms.ServoMe
 @Config
 public class mTransfer extends ServoMechanism {
     public mTransfer() { super("Transfer");}
-    public static double INIT = 0.05;
-    public static double REST = 0.05;
+    public static double INIT = 0.7555;
+    public static double REST = 0.7555;
     public static final double OUTTAKE1 = 0.032; //  (blue)
     public static final double OUTTAKE2 = 0.7555; //  (green)
     public static final double OUTTAKE3 = 0.4; //  (red)
