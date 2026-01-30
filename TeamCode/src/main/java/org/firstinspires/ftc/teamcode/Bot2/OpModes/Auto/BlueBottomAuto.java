@@ -46,9 +46,9 @@ public class BlueBottomAuto extends LinearOpMode{
         bot.outtakeLeft.setVelocity(-(mOuttake.FAST));
         bot.outtakeRight.setVelocity((mOuttake.FAST));
         bot.update();
-        drive.setPoseEstimate(new Pose2d(0, 0, Math.toRadians(0)));
+        drive.setPoseEstimate(new Pose2d(11, 0, Math.toRadians(0)));
         Trajectory traj = drive.trajectoryBuilder(drive.getPoseEstimate())
-                .lineToLinearHeading(new Pose2d(15, -33, Math.toRadians(0)))
+                .lineToLinearHeading(new Pose2d(24, -24, Math.toRadians(0)))
                 .build();
         drive.followTrajectory(traj);
         drive.turn(Math.toRadians(-45));
